@@ -14,12 +14,15 @@ namespace TrueCraft.Client
         [STAThread]
         public static void Main(string[] args)
         {
+            string username = args.Length == 0 ? "" : args[0];
+            string endpoint = args.Length < 2 ? "127.0.0.1" : args[1];
+            
             UserSettings.Local = new UserSettings();
             UserSettings.Local.Load();
 
-            var user = new TrueCraftUser { Username = args[1] };
+            var user = new TrueCraftUser { Username = username };
             var client = new MultiplayerClient(user);
-            var game = new TrueCraftGame(client, ParseEndPoint(args[0]));
+            var game = new TrueCraftGame(client, ParseEndPoint(endpoint));
             game.Run();
             client.Disconnect();
         }
