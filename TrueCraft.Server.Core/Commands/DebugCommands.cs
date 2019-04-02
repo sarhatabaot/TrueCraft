@@ -43,6 +43,10 @@ namespace TrueCraft.Commands
         {
             client.SendMessage("/pos: Shows your position.");
         }
+
+        public PositionCommand(CommandManager commands) : base(commands)
+        {
+        }
     }
 
     public class SaveCommand : Command
@@ -76,6 +80,10 @@ namespace TrueCraft.Commands
         {
             client.SendMessage("/save: Saves the world!");
         }
+
+        public SaveCommand(CommandManager commands) : base(commands)
+        {
+        }
     }
 
     public class SkyLightCommand : Command
@@ -107,6 +115,10 @@ namespace TrueCraft.Commands
         public override void Help(IRemoteClient client, string alias, string[] arguments)
         {
             client.SendMessage("/sl");
+        }
+
+        public SkyLightCommand(CommandManager commands) : base(commands)
+        {
         }
     }
 
@@ -160,6 +172,10 @@ namespace TrueCraft.Commands
         public override void Help(IRemoteClient client, string alias, string[] arguments)
         {
             client.SendMessage("/spawn [type]: Spawns a mob of that type.");
+        }
+
+        public SpawnCommand(CommandManager commands) : base(commands)
+        {
         }
     }
 
@@ -224,6 +240,10 @@ namespace TrueCraft.Commands
         {
             client.SendMessage("/tome [id]: Moves a mob to your position.");
         }
+
+        public ToMeCommand(CommandManager commands) : base(commands)
+        {
+        }
     }
 
     public class EntityInfoCommand : Command
@@ -282,6 +302,10 @@ namespace TrueCraft.Commands
         {
             client.SendMessage("/entity [id]: Shows information about this entity.");
         }
+
+        public EntityInfoCommand(CommandManager commands) : base(commands)
+        {
+        }
     }
 
     public class DestroyCommand : Command
@@ -330,6 +354,10 @@ namespace TrueCraft.Commands
         public override void Help(IRemoteClient client, string alias, string[] arguments)
         {
             client.SendMessage("/destroy [id]: " + Description);
+        }
+
+        public DestroyCommand(CommandManager commands) : base(commands)
+        {
         }
     }
 
@@ -387,6 +415,10 @@ namespace TrueCraft.Commands
         {
             client.SendMessage("Correct usage is /trash <hotbar/all> or leave blank to clear\nselected slot.");
         }
+
+        public TrashCommand(CommandManager commands) : base(commands)
+        {
+        }
     }
 
     public class WhatCommand : Command
@@ -419,6 +451,10 @@ namespace TrueCraft.Commands
         public override void Help(IRemoteClient client, string alias, string[] arguments)
         {
             client.SendMessage("/what: Tells you what you're holding.");
+        }
+
+        public WhatCommand(CommandManager commands) : base(commands)
+        {
         }
     }
 
@@ -453,6 +489,10 @@ namespace TrueCraft.Commands
         {
             client.SendMessage("/pos: Toggles client logging.");
         }
+
+        public LogCommand(CommandManager commands) : base(commands)
+        {
+        }
     }
     
     public class ResendInvCommand : Command
@@ -485,6 +525,10 @@ namespace TrueCraft.Commands
         public override void Help(IRemoteClient client, string alias, string[] arguments)
         {
             client.SendMessage("/reinv: Resends your inventory.");
+        }
+
+        public ResendInvCommand(CommandManager commands) : base(commands)
+        {
         }
     }
 
@@ -526,6 +570,10 @@ namespace TrueCraft.Commands
         public override void Help(IRemoteClient client, string alias, string[] arguments)
         {
             client.SendMessage("/reinv: Resends your inventory.");
+        }
+
+        public RelightCommand(CommandManager commands) : base(commands)
+        {
         }
     }
 }

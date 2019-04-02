@@ -16,15 +16,19 @@ namespace TrueCraft.Launcher.Singleplayer
         public MultiplayerServer Server { get; set; }
         public World World { get; set; }
 
+        private ServerConfiguration _configuration;
+
         public SingleplayerServer(World world)
         {
-            World = world;
-            Server = new MultiplayerServer();
-            TrueCraft.Program.ServerConfiguration = new ServerConfiguration()
+            _configuration = new ServerConfiguration()
             {
                 MOTD = null,
                 Singleplayer = true
             };
+
+            World = world;
+            Server = new MultiplayerServer(_configuration);
+            
             world.BlockRepository = Server.BlockRepository;
             Server.AddWorld(world);
             Server.AddLogProvider(new ConsoleLogProvider());

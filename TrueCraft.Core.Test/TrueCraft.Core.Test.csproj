@@ -78,20 +78,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TrueCraft.API\TrueCraft.API.csproj">
-      <Project>{FEE55B54-91B0-4325-A2C3-D576C0B7A81F}</Project>
-      <Name>TrueCraft.API</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TrueCraft.Core\TrueCraft.Core.csproj">
-      <Project>{FA4BE9A3-DBF0-4380-BA2B-FFAA71C4706D}</Project>
-      <Name>TrueCraft.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\externals\fNbt\fNbt\fNbt.csproj">
-      <Project>{4488498D-976D-4DA3-BF72-109531AF0488}</Project>
-      <Name>fNbt</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="MathHelperTest.cs" />
     <Compile Include="World\ChunkTest.cs" />
     <Compile Include="World\RegionTest.cs" />

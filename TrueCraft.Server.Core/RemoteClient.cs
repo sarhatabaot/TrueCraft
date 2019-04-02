@@ -28,8 +28,11 @@ namespace TrueCraft
 {
     public class RemoteClient : IRemoteClient, IEventSubject, IDisposable
     {
-        public RemoteClient(IMultiplayerServer server, IPacketReader packetReader, PacketHandler[] packetHandlers, Socket connection)
+        private readonly ServerConfiguration _configuration;
+
+        public RemoteClient(IMultiplayerServer server, ServerConfiguration configuration, IPacketReader packetReader, PacketHandler[] packetHandlers, Socket connection)
         {
+            _configuration = configuration;
             LoadedChunks = new HashSet<Coordinates2D>();
             Server = server;
             Inventory = new InventoryWindow(server.CraftingRepository);
@@ -94,7 +97,7 @@ namespace TrueCraft
             {
                 return Interlocked.Read(ref disconnected) == 1;
             }
-            internal set
+            set
             {
                 Interlocked.CompareExchange(ref disconnected, value ? 1 : 0, value ? 0 : 1);
             }
@@ -158,7 +161,7 @@ namespace TrueCraft
         public bool Load()
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "players", Username + ".nbt");
-            if (Program.ServerConfiguration.Singleplayer)
+            if (_configuration.Singleplayer)
                 path = Path.Combine(((World)World).BaseDirectory, "player.nbt");
             if (!File.Exists(path))
                 return false;
@@ -181,7 +184,7 @@ namespace TrueCraft
         public void Save()
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "players", Username + ".nbt");
-            if (Program.ServerConfiguration.Singleplayer)
+            if (_configuration.Singleplayer)
                 path = Path.Combine(((World)World).BaseDirectory, "player.nbt");
             if (!Directory.Exists(Path.GetDirectoryName(path)))
                 Directory.CreateDirectory(Path.GetDirectoryName(path));

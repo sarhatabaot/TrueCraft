@@ -30,7 +30,13 @@
     <ConsolePause>false</ConsolePause>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetZip, Version=1.13.3.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.13.3\lib\net40\DotNetZip.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -38,11 +44,11 @@
     <Reference Include="Xwt">
       <HintPath>..\lib\Xwt.dll</HintPath>
     </Reference>
-    <Reference Include="Ionic.Zip.Reduced">
-      <HintPath>..\lib\Ionic.Zip.Reduced.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\TrueCraft.Server\MultiplayerServer.cs">
+      <Link>Singleplayer\MultiplayerServer.cs</Link>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LauncherWindow.cs" />
@@ -70,27 +76,22 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TrueCraft.API\TrueCraft.API.csproj">
-      <Project>{FEE55B54-91B0-4325-A2C3-D576C0B7A81F}</Project>
+      <Project>{c3895dfa-85c5-4f44-ac19-fcd790a150a3}</Project>
       <Name>TrueCraft.API</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TrueCraft\TrueCraft.csproj">
-      <Project>{C1C47EF5-2D8A-4231-AAA8-F651F52F480E}</Project>
-      <Name>TrueCraft</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TrueCraft.Core\TrueCraft.Core.csproj">
-      <Project>{FA4BE9A3-DBF0-4380-BA2B-FFAA71C4706D}</Project>
+      <Project>{9e5bd0cc-f6dc-4232-8613-0047022d99e7}</Project>
       <Name>TrueCraft.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\externals\fNbt\fNbt\fNbt.csproj">
-      <Project>{4488498D-976D-4DA3-BF72-109531AF0488}</Project>
-      <Name>fNbt</Name>
+    <ProjectReference Include="..\TrueCraft.Profiling\TrueCraft.Profiling.csproj">
+      <Project>{9395b1ea-ed5e-49d7-9abf-42820490e571}</Project>
+      <Name>TrueCraft.Profiling</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TrueCraft.Client\TrueCraft.Client.csproj">
-      <Project>{A6516869-A2FB-4E31-85C8-2285490CB32C}</Project>
-      <Name>TrueCraft.Client</Name>
+    <ProjectReference Include="..\TrueCraft.Server.Core\TrueCraft.Server.Core.csproj">
+      <Project>{394CB01D-9B0D-4CD5-80CF-CE087DF7CE5E}</Project>
+      <Name>TrueCraft.Server.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />

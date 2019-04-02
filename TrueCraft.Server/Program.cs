@@ -25,15 +25,15 @@ namespace TrueCraft
 
         public static void Main(string[] args)
         {
-            Server = new MultiplayerServer();
+            ServerConfiguration = Configuration.LoadConfiguration<ServerConfiguration>("config.yaml");
+
+            Server = new MultiplayerServer(ServerConfiguration);
 
             Server.AddLogProvider(new ConsoleLogProvider(LogCategory.Notice | LogCategory.Warning | LogCategory.Error | LogCategory.Debug));
 #if DEBUG
             Server.AddLogProvider(new FileLogProvider(new StreamWriter("packets.log", false), LogCategory.Packets));
 #endif
-
-            ServerConfiguration = Configuration.LoadConfiguration<ServerConfiguration>("config.yaml");
-
+            
             var buckets = ServerConfiguration.Debug?.Profiler?.Buckets?.Split(',');
             if (buckets != null)
             {

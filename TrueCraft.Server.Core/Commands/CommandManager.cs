@@ -26,7 +26,7 @@ namespace TrueCraft.Commands
                 .Where(t => !t.IsDefined(typeof(DoNotAutoLoadAttribute), true))
                 .Where(t => !t.IsAbstract);
 
-            foreach (var command in types.Select(type => (ICommand)Activator.CreateInstance(type)))
+            foreach (var command in types.Select(type => (ICommand)Activator.CreateInstance(type, new object[] { this })))
             {
                 Commands.Add(command);
             }

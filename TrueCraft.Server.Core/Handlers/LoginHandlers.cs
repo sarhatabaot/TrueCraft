@@ -75,9 +75,9 @@ namespace TrueCraft.Handlers
                 server.Scheduler.ScheduleEvent("remote.keepalive", remoteClient, TimeSpan.FromSeconds(10), remoteClient.SendKeepAlive);
                 server.Scheduler.ScheduleEvent("remote.chunks", remoteClient, TimeSpan.FromSeconds(1), remoteClient.ExpandChunkRadius);
 
-                if (!string.IsNullOrEmpty(Program.ServerConfiguration.MOTD))
-                    remoteClient.SendMessage(Program.ServerConfiguration.MOTD);
-                if (!Program.ServerConfiguration.Singleplayer)
+                if (!string.IsNullOrEmpty(server.ServerConfiguration.MOTD))
+                    remoteClient.SendMessage(server.ServerConfiguration.MOTD);
+                if (!server.ServerConfiguration.Singleplayer)
                     server.SendMessage(ChatColor.Yellow + "{0} joined the server.", remoteClient.Username);
             }
         }

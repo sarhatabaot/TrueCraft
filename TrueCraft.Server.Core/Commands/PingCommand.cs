@@ -23,5 +23,9 @@ namespace TrueCraft.Commands
         {
             client.SendMessage("Correct usage is /" + alias);
         }
+
+        public PingCommand(CommandManager commands) : base(commands)
+        {
+        }
     }
 }

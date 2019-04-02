@@ -36,5 +36,9 @@ namespace TrueCraft.Commands
         {
             client.SendMessage("Correct usage is /" + alias);
         }
+
+        public ListCommand(CommandManager commands) : base(commands)
+        {
+        }
     }
 }

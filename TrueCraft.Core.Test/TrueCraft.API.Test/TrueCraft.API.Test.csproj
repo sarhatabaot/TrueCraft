@@ -40,12 +40,6 @@
     <Compile Include="TestBoundingCylinder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\TrueCraft.API\TrueCraft.API.csproj">
-      <Project>{FEE55B54-91B0-4325-A2C3-D576C0B7A81F}</Project>
-      <Name>TrueCraft.API</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

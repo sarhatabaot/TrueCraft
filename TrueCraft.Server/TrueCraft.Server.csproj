@@ -8,24 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\TrueCraft\**\*.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="..\TrueCraft\obj\Debug\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="..\TrueCraft\Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="DotNetZip" Version="1.13.3" />
     <PackageReference Include="YamlDotNet" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TrueCraft.Core.NetStandard\TrueCraft.Core.NetStandard.csproj" />
+    <ProjectReference Include="..\TrueCraft.Server.Core\TrueCraft.Server.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -45,5 +45,9 @@ namespace TrueCraft.Commands
         {
             client.SendMessage("Correct usage is /" + alias + " <Item ID> [Amount]");
         }
+
+        public GiveMeCommand(CommandManager commands) : base(commands)
+        {
+        }
     }
 }

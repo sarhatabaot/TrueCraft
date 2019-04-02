@@ -31,6 +31,7 @@ namespace TrueCraft
         public event EventHandler<PlayerJoinedQuitEventArgs> PlayerJoined;
         public event EventHandler<PlayerJoinedQuitEventArgs> PlayerQuit;
 
+        public ServerConfiguration ServerConfiguration { get; internal set; }
         public IAccessConfiguration AccessConfiguration { get; internal set; }
 
         public IPacketReader PacketReader { get; private set; }
@@ -77,14 +78,17 @@ namespace TrueCraft
         private IList<ILogProvider> LogProviders;
         private Stopwatch Time;
         private ConcurrentBag<Tuple<IWorld, IChunk>> ChunksToSchedule;
-        internal object ClientLock = new object();
+
+        public object ClientLock { get; } = new object();
         
         private QueryProtocol QueryProtocol;
 
         internal bool ShuttingDown { get; private set; }
         
-        public MultiplayerServer()
+        public MultiplayerServer(ServerConfiguration configuration)
         {
+            ServerConfiguration = configuration;
+
             var reader = new PacketReader();
             PacketReader = reader;
             Clients = new List<IRemoteClient>();
@@ -107,7 +111,7 @@ namespace TrueCraft
             CraftingRepository = craftingRepository;
             PendingBlockUpdates = new Queue<BlockUpdate>();
             EnableClientLogging = false;
-            QueryProtocol = new TrueCraft.QueryProtocol(this);
+            QueryProtocol = new TrueCraft.QueryProtocol(this, configuration);
             WorldLighters = new List<WorldLighting>();
             ChunksToSchedule = new ConcurrentBag<Tuple<IWorld, IChunk>>();
             Time = new Stopwatch();
@@ -126,8 +130,8 @@ namespace TrueCraft
         public void Start(IPEndPoint endPoint)
         {
             Scheduler.DisabledEvents.Clear();
-            if (Program.ServerConfiguration.DisabledEvents != null)
-                Program.ServerConfiguration.DisabledEvents.ToList().ForEach(
+            if (ServerConfiguration.DisabledEvents != null)
+                ServerConfiguration.DisabledEvents.ToList().ForEach(
                     ev => Scheduler.DisabledEvents.Add(ev));
             ShuttingDown = false;
             Time.Reset();
@@ -144,7 +148,7 @@ namespace TrueCraft
             
             Log(LogCategory.Notice, "Running TrueCraft server on {0}", EndPoint);
             EnvironmentWorker.Change(MillisecondsPerTick, Timeout.Infinite);
-            if(Program.ServerConfiguration.Query)
+            if(ServerConfiguration.Query)
                 QueryProtocol.Start();
         }
 
@@ -152,7 +156,7 @@ namespace TrueCraft
         {
             ShuttingDown = true;
             Listener.Stop();
-            if(Program.ServerConfiguration.Query)
+            if(ServerConfiguration.Query)
                 QueryProtocol.Stop();
             foreach (var w in Worlds)
                 w.Save();
@@ -177,9 +181,9 @@ namespace TrueCraft
 
         void HandleChunkLoaded(object sender, ChunkLoadedEventArgs e)
         {
-            if (Program.ServerConfiguration.EnableEventLoading)
+            if (ServerConfiguration.EnableEventLoading)
                 ChunksToSchedule.Add(new Tuple<IWorld, IChunk>(sender as IWorld, e.Chunk));
-            if (Program.ServerConfiguration.EnableLighting)
+            if (ServerConfiguration.EnableLighting)
             {
                 var lighter = WorldLighters.SingleOrDefault(l => l.World == sender);
                 lighter.InitialLighting(e.Chunk, false);
@@ -203,7 +207,7 @@ namespace TrueCraft
                 }
                 PendingBlockUpdates.Enqueue(new BlockUpdate { Coordinates = e.Position, World = sender as IWorld });
                 ProcessBlockUpdates();
-                if (Program.ServerConfiguration.EnableLighting)
+                if (ServerConfiguration.EnableLighting)
                 {
                     var lighter = WorldLighters.SingleOrDefault(l => l.World == sender);
                     if (lighter != null)
@@ -222,7 +226,7 @@ namespace TrueCraft
 
         void HandleChunkGenerated(object sender, ChunkLoadedEventArgs e)
         {
-            if (Program.ServerConfiguration.EnableLighting)
+            if (ServerConfiguration.EnableLighting)
             {
                 var lighter = new WorldLighting(sender as IWorld, BlockRepository);
                 lighter.InitialLighting(e.Chunk, false);
@@ -371,7 +375,7 @@ namespace TrueCraft
         {
             try
             {
-                var client = new RemoteClient(this, PacketReader, PacketHandlers, args.AcceptSocket);
+                var client = new RemoteClient(this, ServerConfiguration, PacketReader, PacketHandlers, args.AcceptSocket);
 
                 lock (ClientLock)
                     Clients.Add(client);
@@ -407,7 +411,7 @@ namespace TrueCraft
             }
             Profiler.Done();
 
-            if (Program.ServerConfiguration.EnableLighting)
+            if (ServerConfiguration.EnableLighting)
             {
                 Profiler.Start("environment.lighting");
                 foreach (var lighter in WorldLighters)
@@ -422,7 +426,7 @@ namespace TrueCraft
                 Profiler.Done();
             }
 
-            if (Program.ServerConfiguration.EnableEventLoading)
+            if (ServerConfiguration.EnableEventLoading)
             {
                 Profiler.Start("environment.chunks");
                 Tuple<IWorld, IChunk> t;

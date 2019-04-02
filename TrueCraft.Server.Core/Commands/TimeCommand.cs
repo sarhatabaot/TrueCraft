@@ -56,5 +56,9 @@ namespace TrueCraft.Commands
         {
             client.SendMessage("/time: Shows the current time.");
         }
+
+        public TimeCommand(CommandManager commands) : base(commands)
+        {
+        }
     }
 }

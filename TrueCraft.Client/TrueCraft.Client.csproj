@@ -68,9 +68,15 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Optimized Debug|x86' ">
     <Optimize>false</Optimize>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ionic.Zip.Reduced">
-      <HintPath>..\lib\Ionic.Zip.Reduced.dll</HintPath>
+    <Reference Include="DotNetZip, Version=1.13.3.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.13.3\lib\net40\DotNetZip.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NVorbis, Version=0.8.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NVorbis.0.8.6\lib\net35\NVorbis.dll</HintPath>
@@ -149,21 +155,21 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\externals\fNbt\fNbt\fNbt.csproj">
-      <Project>{4488498D-976D-4DA3-BF72-109531AF0488}</Project>
-      <Name>fNbt</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TrueCraft.API\TrueCraft.API.csproj">
-      <Project>{FEE55B54-91B0-4325-A2C3-D576C0B7A81F}</Project>
-      <Name>TrueCraft.API</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TrueCraft.Core\TrueCraft.Core.csproj">
-      <Project>{FA4BE9A3-DBF0-4380-BA2B-FFAA71C4706D}</Project>
-      <Name>TrueCraft.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\externals\FNA\FNA.csproj">
       <Project>{35253CE1-C864-4CD3-8249-4D1319748E8F}</Project>
       <Name>FNA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrueCraft.API\TrueCraft.API.csproj">
+      <Project>{C3895DFA-85C5-4F44-AC19-FCD790A150A3}</Project>
+      <Name>TrueCraft.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrueCraft.Core\TrueCraft.Core.csproj">
+      <Project>{9E5BD0CC-F6DC-4232-8613-0047022D99E7}</Project>
+      <Name>TrueCraft.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrueCraft.Profiling\TrueCraft.Profiling.csproj">
+      <Project>{9395b1ea-ed5e-49d7-9abf-42820490e571}</Project>
+      <Name>TrueCraft.Profiling</Name>
     </ProjectReference>
   </ItemGroup>
   <ProjectExtensions>

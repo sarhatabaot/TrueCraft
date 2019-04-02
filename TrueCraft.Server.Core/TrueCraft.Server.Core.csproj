@@ -1,19 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="DotNetZip" Version="1.13.3" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="YamlDotNet" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TrueCraft.API\TrueCraft.API.csproj" />
-    <ProjectReference Include="..\TrueCraft.Profiling\TrueCraft.Profiling.csproj" />
+    <ProjectReference Include="..\TrueCraft.Core\TrueCraft.Core.csproj" />
   </ItemGroup>
 
 </Project>

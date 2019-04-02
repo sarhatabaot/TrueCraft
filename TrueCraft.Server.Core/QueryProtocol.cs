@@ -18,6 +18,7 @@ namespace TrueCraft
         private Timer Timer;
         private Random Rnd;
         private IMultiplayerServer Server;
+        private readonly ServerConfiguration _configuration;
         private CancellationTokenSource CToken;
 
         private readonly byte[] ProtocolVersion = { 0xFE, 0xFD };
@@ -26,14 +27,15 @@ namespace TrueCraft
 
         private ConcurrentDictionary<IPEndPoint, QueryUser> UserList;
 
-        public QueryProtocol(IMultiplayerServer server)
+        public QueryProtocol(IMultiplayerServer server, ServerConfiguration configuration)
         {
             Rnd = new Random();
             Server = server;
+            _configuration = configuration;
         }
         public void Start()
         {
-            Port = Program.ServerConfiguration.QueryPort;
+            Port = _configuration.QueryPort;
             Udp = new UdpClient(Port);
             UserList = new ConcurrentDictionary<IPEndPoint, QueryUser>();
             Timer = new Timer(ResetUserList, null, 0, 30000);
@@ -213,7 +215,7 @@ namespace TrueCraft
         {
             var stats = new Dictionary<string, string>
             {
-                {"hostname", Program.ServerConfiguration.MOTD},
+                {"hostname", _configuration.MOTD},
                 {"gametype", "SMP"},
                 {"game_id", "TRUECRAFT"},
                 {"version", "1.0"},
@@ -221,15 +223,15 @@ namespace TrueCraft
                 {"map", Server.Worlds.First().Name},
                 {"numplayers", Server.Clients.Count.ToString()},
                 {"maxplayers", "64"},
-                {"hostport", Program.ServerConfiguration.ServerPort.ToString()},
-                {"hostip", Program.ServerConfiguration.ServerAddress}
+                {"hostport", _configuration.ServerPort.ToString()},
+                {"hostip", _configuration.ServerAddress}
             };
             return stats;
         }
         private List<string> GetPlayers()
         {
             var names = new List<string>();
-            lock (Program.Server.ClientLock)
+            lock (Server.ClientLock)
                 foreach (var client in Server.Clients)
                     names.Add(client.Username);
             return names;

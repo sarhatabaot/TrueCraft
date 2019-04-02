@@ -65,5 +65,9 @@ namespace TrueCraft.Commands
         {
             client.SendMessage("Correct usage is /" + alias + "<player> <message>");
         }
+
+        public TellCommand(CommandManager commands) : base(commands)
+        {
+        }
     }
 }

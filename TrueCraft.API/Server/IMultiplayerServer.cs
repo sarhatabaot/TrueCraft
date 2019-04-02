@@ -20,6 +20,9 @@ namespace TrueCraft.API.Server
         event EventHandler<PlayerJoinedQuitEventArgs> PlayerJoined;
         event EventHandler<PlayerJoinedQuitEventArgs> PlayerQuit;
 
+        object ClientLock { get; }
+        ServerConfiguration ServerConfiguration { get; }
+
         IAccessConfiguration AccessConfiguration { get; }
         IPacketReader PacketReader { get; }
         IList<IRemoteClient> Clients { get; }
