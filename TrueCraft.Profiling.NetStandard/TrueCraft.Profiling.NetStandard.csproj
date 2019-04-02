@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="..\TrueCraft.Profiling\**\*.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Remove="..\TrueCraft.Profiling\obj\Debug\**" />
+    <Compile Remove="obj\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove="obj\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Remove="..\TrueCraft.Profiling\Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+</Project>

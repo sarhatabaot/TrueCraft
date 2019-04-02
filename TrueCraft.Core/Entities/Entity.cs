@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
+using System.Drawing;
 using TrueCraft.API.Entities;
 using TrueCraft.API;
 using TrueCraft.API.Networking;
 using TrueCraft.API.Server;
 using TrueCraft.API.World;
+using Size = TrueCraft.API.Size;
 
 namespace TrueCraft.Core.Entities
 {

@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Exe</OutputType>
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\TrueCraft\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="..\TrueCraft\obj\Debug\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="..\TrueCraft\Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNetZip" Version="1.13.3" />
+    <PackageReference Include="YamlDotNet" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TrueCraft.Core.NetStandard\TrueCraft.Core.NetStandard.csproj" />
+  </ItemGroup>
+
+</Project>

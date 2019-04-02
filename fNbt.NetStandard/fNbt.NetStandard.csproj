@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="..\externals\fNbt\fNbt\**\*.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Remove="..\externals\fNbt\fNbt\Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+</Project>
