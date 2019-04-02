@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Files\manifest.nbt" />
+    <None Remove="Files\r.-1.-1.mca" />
+    <None Remove="Files\r.-1.0.mca" />
+    <None Remove="Files\r.0.-1.mca" />
+    <None Remove="Files\r.0.0.mca" />
+    <None Remove="Files\TestChunk.nbt" />
     <None Remove="Serialization\TestFiles\bigtest.nbt" />
     <None Remove="Serialization\TestFiles\bigtest.nbt.gz" />
     <None Remove="Serialization\TestFiles\bigtest.nbt.z" />
@@ -16,6 +22,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Files\manifest.nbt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\r.-1.-1.mca">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\r.-1.0.mca">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\r.0.-1.mca">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\r.0.0.mca">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\TestChunk.nbt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Serialization\TestFiles\bigtest.nbt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -37,13 +61,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Moq" Version="4.10.1" />
     <PackageReference Include="nunit" Version="3.11.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TrueCraft.API\TrueCraft.API.csproj" />
+    <ProjectReference Include="..\TrueCraft\TrueCraft.csproj" />
   </ItemGroup>
 
 </Project>

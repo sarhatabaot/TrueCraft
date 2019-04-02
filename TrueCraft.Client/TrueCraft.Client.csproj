@@ -159,13 +159,9 @@
       <Project>{35253CE1-C864-4CD3-8249-4D1319748E8F}</Project>
       <Name>FNA</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TrueCraft.API\TrueCraft.API.csproj">
-      <Project>{C3895DFA-85C5-4F44-AC19-FCD790A150A3}</Project>
-      <Name>TrueCraft.API</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TrueCraft.Core\TrueCraft.Core.csproj">
-      <Project>{9E5BD0CC-F6DC-4232-8613-0047022D99E7}</Project>
-      <Name>TrueCraft.Core</Name>
+    <ProjectReference Include="..\TrueCraft\TrueCraft.csproj">
+      <Project>{77de9b9b-ce8b-4039-9252-510a91076deb}</Project>
+      <Name>TrueCraft</Name>
     </ProjectReference>
   </ItemGroup>
   <ProjectExtensions>

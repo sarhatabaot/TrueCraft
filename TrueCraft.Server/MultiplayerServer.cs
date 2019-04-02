@@ -78,6 +78,7 @@ namespace TrueCraft
         private IList<ILogProvider> LogProviders;
         private Stopwatch Time;
         private ConcurrentBag<Tuple<IWorld, IChunk>> ChunksToSchedule;
+
         public object ClientLock { get; } = new object();
         
         private QueryProtocol QueryProtocol;
