@@ -1,85 +1,56 @@
-using System;
-using TrueCraft.API.Logic;
 using TrueCraft.API;
+using TrueCraft.API.Logic;
 
 namespace TrueCraft.Core.Logic.Blocks
 {
-    public abstract class PressurePlateBlock : BlockProvider
-    {
-        public override double BlastResistance { get { return 2.5; } }
+	public abstract class PressurePlateBlock : BlockProvider
+	{
+		public override double BlastResistance => 2.5;
 
-        public override double Hardness { get { return 0.5; } }
+		public override double Hardness => 0.5;
 
-        public override byte Luminance { get { return 0; } }
+		public override byte Luminance => 0;
 
-        public override bool Opaque { get { return false; } }
-    }
+		public override bool Opaque => false;
+	}
 
-    public class WoodenPressurePlateBlock : PressurePlateBlock, ICraftingRecipe
-    {
-        public static readonly byte BlockID = 0x48;
-        
-        public override byte ID { get { return 0x48; } }
-        
-        public override string DisplayName { get { return "Wooden Pressure Plate"; } }
+	public class WoodenPressurePlateBlock : PressurePlateBlock, ICraftingRecipe
+	{
+		public static readonly byte BlockID = 0x48;
 
-        public override SoundEffectClass SoundEffect
-        {
-            get
-            {
-                return SoundEffectClass.Wood;
-            }
-        }
+		public override byte ID => 0x48;
 
-        public ItemStack[,] Pattern
-        {
-            get
-            {
-                return new[,]
-                {
-                    {new ItemStack(WoodenPlanksBlock.BlockID), new ItemStack(WoodenPlanksBlock.BlockID)}
-                };
-            }
-        }
+		public override string DisplayName => "Wooden Pressure Plate";
 
-        public ItemStack Output
-        {
-            get { return new ItemStack(BlockID); }
-        }
+		public override SoundEffectClass SoundEffect => SoundEffectClass.Wood;
 
-        public bool SignificantMetadata
-        {
-            get { return false; }
-        }
-    }
+		public ItemStack[,] Pattern =>
+			new[,]
+			{
+				{new ItemStack(WoodenPlanksBlock.BlockID), new ItemStack(WoodenPlanksBlock.BlockID)}
+			};
 
-    public class StonePressurePlateBlock : PressurePlateBlock, ICraftingRecipe
-    {
-        public static readonly byte BlockID = 0x46;
+		public ItemStack Output => new ItemStack(BlockID);
 
-        public override byte ID { get { return 0x46; } }
+		public bool SignificantMetadata => false;
+	}
 
-        public override string DisplayName { get { return "Stone Pressure Plate"; } }
+	public class StonePressurePlateBlock : PressurePlateBlock, ICraftingRecipe
+	{
+		public static readonly byte BlockID = 0x46;
 
-        public ItemStack[,] Pattern
-        {
-            get
-            {
-                return new[,]
-                {
-                    {new ItemStack(StoneBlock.BlockID), new ItemStack(StoneBlock.BlockID)}
-                };
-            }
-        }
+		public override byte ID => 0x46;
 
-        public ItemStack Output
-        {
-            get { return new ItemStack(BlockID); }
-        }
+		public override string DisplayName => "Stone Pressure Plate";
 
-        public bool SignificantMetadata
-        {
-            get { return false; }
-        }
-    }
+		public ItemStack[,] Pattern =>
+			new[,]
+			{
+				{new ItemStack(StoneBlock.BlockID), new ItemStack(StoneBlock.BlockID)}
+			};
+
+		public ItemStack Output => new ItemStack(BlockID);
+
+		public bool SignificantMetadata => false;
+	}
 }

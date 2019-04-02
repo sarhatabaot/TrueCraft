@@ -1,50 +1,46 @@
-﻿using System;
-using TrueCraft.API.World;
+﻿using System.Collections.Generic;
 using TrueCraft.API;
-using System.Collections.Generic;
-using TrueCraft.Core.Entities;
-using TrueCraft.Core;
 using TrueCraft.API.AI;
+using TrueCraft.API.World;
+using TrueCraft.Core;
 
 namespace TrueCraft
 {
-    public class MobManager
-    {
-        public EntityManager EntityManager { get; set; }
+	public class MobManager
+	{
+		public MobManager(EntityManager manager)
+		{
+			EntityManager = manager;
+			SpawnRules = new Dictionary<Dimension, List<ISpawnRule>>();
+		}
 
-        private Dictionary<Dimension, List<ISpawnRule>> SpawnRules { get; set; }
+		public EntityManager EntityManager { get; set; }
 
-        public MobManager(EntityManager manager)
-        {
-            EntityManager = manager;
-            SpawnRules = new Dictionary<Dimension, List<ISpawnRule>>();
-        }
+		private Dictionary<Dimension, List<ISpawnRule>> SpawnRules { get; }
 
-        public void AddRules(Dimension dimension, ISpawnRule rules)
-        {
-            if (!SpawnRules.ContainsKey(dimension))
-                SpawnRules[dimension] = new List<ISpawnRule>();
-            SpawnRules[dimension].Add(rules);
-        }
+		public void AddRules(Dimension dimension, ISpawnRule rules)
+		{
+			if (!SpawnRules.ContainsKey(dimension))
+				SpawnRules[dimension] = new List<ISpawnRule>();
+			SpawnRules[dimension].Add(rules);
+		}
 
-        public void SpawnInitialMobs(IChunk chunk, Dimension dimension)
-        {
-            if (!SpawnRules.ContainsKey(dimension))
-                return;
-            var rules = SpawnRules[dimension];
-            foreach (var rule in rules)
-            {
-                if (MathHelper.Random.Next(rule.ChunkSpawnChance) == 0)
-                    rule.GenerateMobs(chunk, EntityManager);
-            }
-        }
+		public void SpawnInitialMobs(IChunk chunk, Dimension dimension)
+		{
+			if (!SpawnRules.ContainsKey(dimension))
+				return;
+			var rules = SpawnRules[dimension];
+			foreach (var rule in rules)
+				if (MathHelper.Random.Next(rule.ChunkSpawnChance) == 0)
+					rule.GenerateMobs(chunk, EntityManager);
+		}
 
-        /// <summary>
-        /// Call at dusk and it'll spawn baddies.
-        /// </summary>
-        public void DayCycleSpawn(IChunk chunk, Dimension dimension)
-        {
-            // TODO
-        }
-    }
+		/// <summary>
+		///  Call at dusk and it'll spawn baddies.
+		/// </summary>
+		public void DayCycleSpawn(IChunk chunk, Dimension dimension)
+		{
+			// TODO
+		}
+	}
 }

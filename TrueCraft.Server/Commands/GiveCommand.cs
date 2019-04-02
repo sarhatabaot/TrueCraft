@@ -1,114 +1,104 @@
 ﻿using System;
 using System.Linq;
-using TrueCraft.Core.Windows;
 using TrueCraft.API;
 using TrueCraft.API.Networking;
+using TrueCraft.Core.Windows;
 
 namespace TrueCraft.Commands
 {
-    public class GiveCommand : Command
-    {
-        public override string Name
-        {
-            get { return "give"; }
-        }
+	public class GiveCommand : Command
+	{
+		public GiveCommand(CommandManager commands) : base(commands)
+		{
+		}
 
-        public override string Description
-        {
-            get { return "Give the specified player an amount of items."; }
-        }
+		public override string Name => "give";
 
-        public override string[] Aliases
-        {
-            get { return new string[1]{ "i" }; }
-        }
+		public override string Description => "Give the specified player an amount of items.";
 
-        public override void Handle(IRemoteClient client, string alias, string[] arguments)
-        {
-            if (arguments.Length < 2)
-            {
-                Help(client, alias, arguments);
-                return;
-            }
+		public override string[] Aliases => new string[1] {"i"};
 
-            string  username    = arguments[0],
-                    itemid      = arguments[1],
-                    amount      = "1";
+		public override void Handle(IRemoteClient client, string alias, string[] arguments)
+		{
+			if (arguments.Length < 2)
+			{
+				Help(client, alias, arguments);
+				return;
+			}
 
-            if(arguments.Length >= 3)
-                    amount = arguments[2];
-            
-            var receivingPlayer = GetPlayerByName(client, username);
+			string username = arguments[0],
+				itemid = arguments[1],
+				amount = "1";
 
-            if (receivingPlayer == null)
-            {
-                client.SendMessage("No client with the username \"" + username + "\" was found.");
-                return;
-            }
+			if (arguments.Length >= 3)
+				amount = arguments[2];
 
-            if (!GiveItem(receivingPlayer, itemid, amount, client))
-            {
-                Help(client, alias, arguments);
-            }
-        }
+			var receivingPlayer = GetPlayerByName(client, username);
 
-        protected static IRemoteClient GetPlayerByName(IRemoteClient client, string username)
-        {
-            var receivingPlayer =
-                client.Server.Clients.FirstOrDefault(
-                    c => String.Equals(c.Username, username, StringComparison.CurrentCultureIgnoreCase));
-            return receivingPlayer;
-        }
+			if (receivingPlayer == null)
+			{
+				client.SendMessage("No client with the username \"" + username + "\" was found.");
+				return;
+			}
 
-        protected static bool GiveItem(IRemoteClient receivingPlayer, string itemid, string amount, IRemoteClient client)
-        {
-            short id;
-            short metadata = 0;
-            int count;
+			if (!GiveItem(receivingPlayer, itemid, amount, client)) Help(client, alias, arguments);
+		}
 
-            if (itemid.Contains(":"))
-            {
-                var parts = itemid.Split(':');
-                if (!short.TryParse(parts[0], out id) || !short.TryParse(parts[1], out metadata) || !Int32.TryParse(amount, out count)) return false;
-            }
-            else
-            {
-                if (!short.TryParse(itemid, out id) || !Int32.TryParse(amount, out count)) return false;
-            }
+		protected static IRemoteClient GetPlayerByName(IRemoteClient client, string username)
+		{
+			var receivingPlayer =
+				client.Server.Clients.FirstOrDefault(
+					c => string.Equals(c.Username, username, StringComparison.CurrentCultureIgnoreCase));
+			return receivingPlayer;
+		}
 
-            if (client.Server.ItemRepository.GetItemProvider(id) == null)
-            {
-                client.SendMessage("Invalid item id \"" + id + "\".");
-                return true;
-            }
+		protected static bool GiveItem(IRemoteClient receivingPlayer, string itemid, string amount,
+			IRemoteClient client)
+		{
+			short id;
+			short metadata = 0;
+			int count;
 
-            string username = receivingPlayer.Username;
-            var inventory = receivingPlayer.Inventory as InventoryWindow;
-            if (inventory == null) return false;
+			if (itemid.Contains(":"))
+			{
+				var parts = itemid.Split(':');
+				if (!short.TryParse(parts[0], out id) || !short.TryParse(parts[1], out metadata) ||
+				    !int.TryParse(amount, out count)) return false;
+			}
+			else
+			{
+				if (!short.TryParse(itemid, out id) || !int.TryParse(amount, out count)) return false;
+			}
 
-            while (count > 0)
-            {
-                sbyte amountToGive;
-                if (count >= 64)
-                    amountToGive = 64;
-                else
-                    amountToGive = (sbyte) count;
+			if (client.Server.ItemRepository.GetItemProvider(id) == null)
+			{
+				client.SendMessage("Invalid item id \"" + id + "\".");
+				return true;
+			}
 
-                count -= amountToGive;
+			var username = receivingPlayer.Username;
+			var inventory = receivingPlayer.Inventory as InventoryWindow;
+			if (inventory == null) return false;
 
-                inventory.PickUpStack(new ItemStack(id, amountToGive, metadata));
-            }
+			while (count > 0)
+			{
+				sbyte amountToGive;
+				if (count >= 64)
+					amountToGive = 64;
+				else
+					amountToGive = (sbyte) count;
 
-            return true;
-        }
+				count -= amountToGive;
 
-        public override void Help(IRemoteClient client, string alias, string[] arguments)
-        {
-            client.SendMessage("Correct usage is /" + alias + " <User> <Item ID> [Amount]");
-        }
+				inventory.PickUpStack(new ItemStack(id, amountToGive, metadata));
+			}
 
-        public GiveCommand(CommandManager commands) : base(commands)
-        {
-        }
-    }
+			return true;
+		}
+
+		public override void Help(IRemoteClient client, string alias, string[] arguments)
+		{
+			client.SendMessage("Correct usage is /" + alias + " <User> <Item ID> [Amount]");
+		}
+	}
 }

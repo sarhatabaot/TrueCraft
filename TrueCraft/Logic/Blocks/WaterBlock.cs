@@ -1,52 +1,45 @@
 using System;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Server;
-using TrueCraft.API.World;
-using TrueCraft.API;
-using TrueCraft.API.Networking;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace TrueCraft.Core.Logic.Blocks
 {
-    public class WaterBlock : FluidBlock
-    {
-        public static readonly byte BlockID = 0x08;
+	public class WaterBlock : FluidBlock
+	{
+		public static readonly byte BlockID = 0x08;
 
-        public override byte ID { get { return 0x08; } }
-        
-        public override double BlastResistance { get { return 500; } }
+		public override byte ID => 0x08;
 
-        public override double Hardness { get { return 100; } }
+		public override double BlastResistance => 500;
 
-        public override byte Luminance { get { return 0; } }
+		public override double Hardness => 100;
 
-        public override bool Opaque { get { return false; } }
+		public override byte Luminance => 0;
 
-        public override byte LightOpacity { get { return 2; } }
-        
-        public override string DisplayName { get { return "Water"; } }
+		public override bool Opaque => false;
 
-        protected override double SecondsBetweenUpdates { get { return 0.25; } }
+		public override byte LightOpacity => 2;
 
-        protected override byte MaximumFluidDepletion { get { return 7; } }
+		public override string DisplayName => "Water";
 
-        protected override byte FlowingID { get { return BlockID; } }
+		protected override double SecondsBetweenUpdates => 0.25;
 
-        protected override byte StillID { get { return StationaryWaterBlock.BlockID; } }
+		protected override byte MaximumFluidDepletion => 7;
 
-        public override Tuple<int, int> GetTextureMap(byte metadata)
-        {
-            return new Tuple<int, int>(13, 12);
-        }
-    }
+		protected override byte FlowingID => BlockID;
 
-    public class StationaryWaterBlock : WaterBlock
-    {
-        public static readonly new byte BlockID = 0x09;
+		protected override byte StillID => StationaryWaterBlock.BlockID;
 
-        public override byte ID { get { return 0x09; } }
+		public override Tuple<int, int> GetTextureMap(byte metadata)
+		{
+			return new Tuple<int, int>(13, 12);
+		}
+	}
 
-        public override string DisplayName { get { return "Water (stationary)"; } }
-    }
+	public class StationaryWaterBlock : WaterBlock
+	{
+		public new static readonly byte BlockID = 0x09;
+
+		public override byte ID => 0x09;
+
+		public override string DisplayName => "Water (stationary)";
+	}
 }

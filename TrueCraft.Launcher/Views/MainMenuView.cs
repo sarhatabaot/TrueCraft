@@ -1,54 +1,53 @@
-﻿using System;
-using Xwt;
+﻿using Xwt;
 
 namespace TrueCraft.Launcher.Views
 {
-    public class MainMenuView : VBox
-    {
-        public LauncherWindow Window { get; set; }
+	public class MainMenuView : VBox
+	{
+		public MainMenuView(LauncherWindow window)
+		{
+			Window = window;
+			MinWidth = 250;
 
-        public Label WelcomeText { get; set; }
-        public Button SingleplayerButton { get; set; }
-        public Button MultiplayerButton { get; set; }
-        public Button OptionsButton { get; set; }
-        public Button QuitButton { get; set; }
+			WelcomeText = new Label("Welcome, " + Window.User.Username)
+			{
+				TextAlignment = Alignment.Center
+			};
+			SingleplayerButton = new Button("Singleplayer");
+			MultiplayerButton = new Button("Multiplayer");
+			OptionsButton = new Button("Options");
+			QuitButton = new Button("Quit Game");
 
-        public MainMenuView(LauncherWindow window)
-        {
-            Window = window;
-            this.MinWidth = 250;
+			SingleplayerButton.Clicked += (sender, e) =>
+			{
+				Window.InteractionBox.Remove(this);
+				Window.InteractionBox.PackEnd(Window.SingleplayerView);
+			};
+			MultiplayerButton.Clicked += (sender, e) =>
+			{
+				Window.InteractionBox.Remove(this);
+				Window.InteractionBox.PackEnd(Window.MultiplayerView);
+			};
+			OptionsButton.Clicked += (sender, e) =>
+			{
+				Window.InteractionBox.Remove(this);
+				window.InteractionBox.PackEnd(Window.OptionView);
+			};
+			QuitButton.Clicked += (sender, e) => Application.Exit();
 
-            WelcomeText = new Label("Welcome, " + Window.User.Username)
-            {
-                TextAlignment = Alignment.Center
-            };
-            SingleplayerButton = new Button("Singleplayer");
-            MultiplayerButton = new Button("Multiplayer");
-            OptionsButton = new Button("Options");
-            QuitButton = new Button("Quit Game");
+			PackStart(WelcomeText);
+			PackStart(SingleplayerButton);
+			PackStart(MultiplayerButton);
+			PackStart(OptionsButton);
+			PackEnd(QuitButton);
+		}
 
-            SingleplayerButton.Clicked += (sender, e) =>
-            {
-                Window.InteractionBox.Remove(this);
-                Window.InteractionBox.PackEnd(Window.SingleplayerView);
-            };
-            MultiplayerButton.Clicked += (sender, e) =>
-            {
-                Window.InteractionBox.Remove(this);
-                Window.InteractionBox.PackEnd(Window.MultiplayerView);
-            };
-            OptionsButton.Clicked += (sender, e) =>
-            {
-                Window.InteractionBox.Remove(this);
-                window.InteractionBox.PackEnd(Window.OptionView);
-            };
-            QuitButton.Clicked += (sender, e) => Application.Exit();
+		public LauncherWindow Window { get; set; }
 
-            this.PackStart(WelcomeText);
-            this.PackStart(SingleplayerButton);
-            this.PackStart(MultiplayerButton);
-            this.PackStart(OptionsButton);
-            this.PackEnd(QuitButton);
-        }
-    }
+		public Label WelcomeText { get; set; }
+		public Button SingleplayerButton { get; set; }
+		public Button MultiplayerButton { get; set; }
+		public Button OptionsButton { get; set; }
+		public Button QuitButton { get; set; }
+	}
 }

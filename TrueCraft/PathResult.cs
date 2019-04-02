@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace TrueCraft.API
 {
-    public class PathResult
-    {
-        public PathResult()
-        {
-            Index = 0;
-        }
+	public class PathResult
+	{
+		public int Index;
 
-        public IList<Coordinates3D> Waypoints;
-        public int Index;
-    }
+		public IList<Coordinates3D> Waypoints;
+
+		public PathResult() => Index = 0;
+	}
 }

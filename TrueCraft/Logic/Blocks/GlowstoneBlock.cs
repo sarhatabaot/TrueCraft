@@ -1,70 +1,54 @@
 using System;
-using TrueCraft.API.Logic;
 using TrueCraft.API;
+using TrueCraft.API.Logic;
 using TrueCraft.Core.Logic.Items;
 
 namespace TrueCraft.Core.Logic.Blocks
 {
-    public class GlowstoneBlock : BlockProvider, ICraftingRecipe
-    {
-        public static readonly byte BlockID = 0x59;
-        
-        public override byte ID { get { return 0x59; } }
-        
-        public override double BlastResistance { get { return 1.5; } }
+	public class GlowstoneBlock : BlockProvider, ICraftingRecipe
+	{
+		public static readonly byte BlockID = 0x59;
 
-        public override double Hardness { get { return 0.3; } }
+		public override byte ID => 0x59;
 
-        public override byte Luminance { get { return 15; } }
+		public override double BlastResistance => 1.5;
 
-        public override bool Opaque { get { return false; } }
-        
-        public override string DisplayName { get { return "Glowstone"; } }
+		public override double Hardness => 0.3;
 
-        public override SoundEffectClass SoundEffect
-        {
-            get
-            {
-                return SoundEffectClass.Glass;
-            }
-        }
+		public override byte Luminance => 15;
 
-        public override Tuple<int, int> GetTextureMap(byte metadata)
-        {
-            return new Tuple<int, int>(9, 6);
-        }
+		public override bool Opaque => false;
 
-        protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
-        {
-            return new[] { new ItemStack(GlowstoneDustItem.ItemID, (sbyte)new Random().Next(2, 4), descriptor.Metadata) };
-        }
+		public override string DisplayName => "Glowstone";
 
-        public ItemStack[,] Pattern
-        {
-            get
-            {
-                return new[,]
-                {
-                    {
-                        new ItemStack(GlowstoneDustItem.ItemID),
-                        new ItemStack(GlowstoneDustItem.ItemID)
-                    },
-                    {
-                        new ItemStack(GlowstoneDustItem.ItemID),
-                        new ItemStack(GlowstoneDustItem.ItemID)
-                    }
-                };
-            }
-        }
+		public override SoundEffectClass SoundEffect => SoundEffectClass.Glass;
 
-        public ItemStack Output
-        {
-            get { return new ItemStack(BlockID); }
-        }
+		public ItemStack[,] Pattern =>
+			new[,]
+			{
+				{
+					new ItemStack(GlowstoneDustItem.ItemID),
+					new ItemStack(GlowstoneDustItem.ItemID)
+				},
+				{
+					new ItemStack(GlowstoneDustItem.ItemID),
+					new ItemStack(GlowstoneDustItem.ItemID)
+				}
+			};
 
-        public bool SignificantMetadata
-        {
-            get { return false; }
-        }
-    }
+		public ItemStack Output => new ItemStack(BlockID);
+
+		public bool SignificantMetadata => false;
+
+		public override Tuple<int, int> GetTextureMap(byte metadata)
+		{
+			return new Tuple<int, int>(9, 6);
+		}
+
+		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
+		{
+			return new[]
+				{new ItemStack(GlowstoneDustItem.ItemID, (sbyte) new Random().Next(2, 4), descriptor.Metadata)};
+		}
+	}
 }

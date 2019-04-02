@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using TrueCraft.API.Entities;
 
 namespace TrueCraft.Core.Entities
 {
-    public class EntityEventArgs : EventArgs
-    {
-        public IEntity Entity { get; set; }
+	public class EntityEventArgs : EventArgs
+	{
+		public EntityEventArgs(IEntity entity) => Entity = entity;
 
-        public EntityEventArgs(IEntity entity)
-        {
-            Entity = entity;
-        }
-    }
+		public IEntity Entity { get; set; }
+	}
 }

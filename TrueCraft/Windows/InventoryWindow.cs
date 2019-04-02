@@ -1,115 +1,80 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TrueCraft.API.Windows;
-using TrueCraft.API.Logic;
 using TrueCraft.API;
+using TrueCraft.API.Logic;
+using TrueCraft.API.Windows;
 
 namespace TrueCraft.Core.Windows
 {
-    public class InventoryWindow : Window
-    {
-        public InventoryWindow(ICraftingRepository craftingRepository)
-        {
-            WindowAreas = new[]
-                {
-                    new CraftingWindowArea(craftingRepository, CraftingOutputIndex),
-                    new ArmorWindowArea(ArmorIndex),
-                    new WindowArea(MainIndex, 27, 9, 3), // Main inventory
-                    new WindowArea(HotbarIndex, 9, 9, 1) // Hotbar
-                };
-            foreach (var area in WindowAreas)
-                area.WindowChange += (s, e) => OnWindowChange(new WindowChangeEventArgs(
-                    (s as WindowArea).StartIndex + e.SlotIndex, e.Value));
-        }
+	public class InventoryWindow : Window
+	{
+		public InventoryWindow(ICraftingRepository craftingRepository)
+		{
+			WindowAreas = new[]
+			{
+				new CraftingWindowArea(craftingRepository, CraftingOutputIndex),
+				new ArmorWindowArea(ArmorIndex),
+				new WindowArea(MainIndex, 27, 9, 3), // Main inventory
+				new WindowArea(HotbarIndex, 9, 9, 1) // Hotbar
+			};
+			foreach (var area in WindowAreas)
+				area.WindowChange += (s, e) => OnWindowChange(new WindowChangeEventArgs(
+					(s as WindowArea).StartIndex + e.SlotIndex, e.Value));
+		}
 
-        #region Variables
+		public override void CopyToInventory(IWindow inventoryWindow)
+		{
+			// This space intentionally left blank
+		}
 
-        public const short HotbarIndex = 36;
-        public const short CraftingGridIndex = 1;
-        public const short CraftingOutputIndex = 0;
-        public const short ArmorIndex = 5;
-        public const short MainIndex = 9;
+		protected override IWindowArea GetLinkedArea(int index, ItemStack slot)
+		{
+			if (index == 0 || index == 1 || index == 3)
+				return MainInventory;
+			return Hotbar;
+		}
 
-        public override string Name
-        {
-            get
-            {
-                return "Inventory";
-            }
-        }
+		public override bool PickUpStack(ItemStack slot)
+		{
+			var area = MainInventory;
+			foreach (var item in Hotbar.Items)
+				if (item.Empty || slot.ID == item.ID && slot.Metadata == item.Metadata)
+					//&& item.Count + slot.Count < Item.GetMaximumStackSize(new ItemDescriptor(item.Id, item.Metadata)))) // TODO
+				{
+					area = Hotbar;
+					break;
+				}
 
-        public override sbyte Type
-        {
-            get
-            {
-                return -1; // NOTE: This window does not have a type
-            }
-        }
+			var index = area.MoveOrMergeItem(-1, slot, null);
+			return index != -1;
+		}
 
-        public override short[] ReadOnlySlots
-        {
-            get
-            {
-                return new[] { CraftingOutputIndex };
-            }
-        }
+		#region Variables
 
-        public override IWindowArea[] WindowAreas { get; protected set; }
+		public const short HotbarIndex = 36;
+		public const short CraftingGridIndex = 1;
+		public const short CraftingOutputIndex = 0;
+		public const short ArmorIndex = 5;
+		public const short MainIndex = 9;
 
-        #region Properties
+		public override string Name => "Inventory";
 
-        public IWindowArea CraftingGrid 
-        {
-            get { return WindowAreas[0]; }
-        }
+		public override sbyte Type => -1;
 
-        public IWindowArea Armor
-        {
-            get { return WindowAreas[1]; }
-        }
+		public override short[] ReadOnlySlots => new[] {CraftingOutputIndex};
 
-        public IWindowArea MainInventory
-        {
-            get { return WindowAreas[2]; }
-        }
+		public override IWindowArea[] WindowAreas { get; protected set; }
 
-        public IWindowArea Hotbar
-        {
-            get { return WindowAreas[3]; }
-        }
+		#region Properties
 
-        #endregion
+		public IWindowArea CraftingGrid => WindowAreas[0];
 
-        #endregion
+		public IWindowArea Armor => WindowAreas[1];
 
-        public override void CopyToInventory(IWindow inventoryWindow)
-        {
-            // This space intentionally left blank
-        }
+		public IWindowArea MainInventory => WindowAreas[2];
 
-        protected override IWindowArea GetLinkedArea(int index, ItemStack slot)
-        {
-            if (index == 0 || index == 1 || index == 3)
-                return MainInventory;
-            return Hotbar;
-        }
+		public IWindowArea Hotbar => WindowAreas[3];
 
-        public override bool PickUpStack(ItemStack slot)
-        {
-            var area = MainInventory;
-            foreach (var item in Hotbar.Items)
-            {
-                if (item.Empty || (slot.ID == item.ID && slot.Metadata == item.Metadata))
-                    //&& item.Count + slot.Count < Item.GetMaximumStackSize(new ItemDescriptor(item.Id, item.Metadata)))) // TODO
-                {
-                    area = Hotbar;
-                    break;
-                }
-            }
-            int index = area.MoveOrMergeItem(-1, slot, null);
-            return index != -1;
-        }
-    }
+		#endregion
+
+		#endregion
+	}
 }

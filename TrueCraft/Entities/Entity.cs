@@ -1,117 +1,122 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Drawing;
-using TrueCraft.API.Entities;
 using TrueCraft.API;
+using TrueCraft.API.Entities;
 using TrueCraft.API.Networking;
 using TrueCraft.API.Server;
 using TrueCraft.API.World;
-using Size = TrueCraft.API.Size;
 
 namespace TrueCraft.Core.Entities
 {
-    public abstract class Entity : IEntity
-    {
-        protected Entity()
-        {
-            EnablePropertyChange = true;
-            EntityID = -1;
-            SpawnTime = DateTime.UtcNow;
-        }
+	public abstract class Entity : IEntity
+	{
+		protected EntityFlags _EntityFlags;
 
-        public DateTime SpawnTime { get; set; }
+		protected float _Pitch;
 
-        public int EntityID { get; set; }
-        public IEntityManager EntityManager { get; set; }
-        public IWorld World { get; set; }
+		protected Vector3 _Position;
 
-        protected Vector3 _Position;
-        public virtual Vector3 Position
-        {
-            get { return _Position; }
-            set
-            {
-                _Position = value;
-                OnPropertyChanged("Position");
-            }
-        }
+		protected Vector3 _Velocity;
 
-        protected Vector3 _Velocity;
-        public virtual Vector3 Velocity
-        {
-            get { return _Velocity; }
-            set
-            {
-                _Velocity = value;
-                OnPropertyChanged("Velocity");
-            }
-        }
+		protected float _Yaw;
 
-        protected float _Yaw;
-        public float Yaw
-        {
-            get { return _Yaw; }
-            set
-            {
-                _Yaw = value;
-                OnPropertyChanged("Yaw");
-            }
-        }
+		protected Entity()
+		{
+			EnablePropertyChange = true;
+			EntityID = -1;
+			SpawnTime = DateTime.UtcNow;
+		}
 
-        protected float _Pitch;
-        public float Pitch
-        {
-            get { return _Pitch; }
-            set
-            {
-                _Pitch = value;
-                OnPropertyChanged("Pitch");
-            }
-        }
+		public virtual Vector3 Velocity
+		{
+			get => _Velocity;
+			set
+			{
+				_Velocity = value;
+				OnPropertyChanged("Velocity");
+			}
+		}
 
-        public bool Despawned { get; set; }
+		public virtual EntityFlags EntityFlags
+		{
+			get => _EntityFlags;
+			set
+			{
+				_EntityFlags = value;
+				OnPropertyChanged("Metadata");
+			}
+		}
 
-        public abstract Size Size { get; }
+		protected bool EnablePropertyChange { get; set; }
 
-        public abstract IPacket SpawnPacket { get; }
+		public DateTime SpawnTime { get; set; }
 
-        public virtual bool SendMetadataToClients { get { return false; } }
+		public int EntityID { get; set; }
+		public IEntityManager EntityManager { get; set; }
+		public IWorld World { get; set; }
 
-        protected EntityFlags _EntityFlags;
-        public virtual EntityFlags EntityFlags
-        {
-            get { return _EntityFlags; }
-            set
-            {
-                _EntityFlags = value;
-                OnPropertyChanged("Metadata");
-            }
-        }
+		public virtual Vector3 Position
+		{
+			get => _Position;
+			set
+			{
+				_Position = value;
+				OnPropertyChanged("Position");
+			}
+		}
 
-        public virtual MetadataDictionary Metadata
-        {
-            get
-            {
-                var dictionary = new MetadataDictionary();
-                dictionary[0] = new MetadataByte((byte)EntityFlags);
-                dictionary[1] = new MetadataShort(300);
-                return dictionary;
-            }
-        }
+		public float Yaw
+		{
+			get => _Yaw;
+			set
+			{
+				_Yaw = value;
+				OnPropertyChanged("Yaw");
+			}
+		}
 
-        public virtual void Update(IEntityManager entityManager)
-        {
-            // TODO: Losing health and all that jazz
-            if (Position.Y < -50)
-                entityManager.DespawnEntity(this);
-        }
+		public float Pitch
+		{
+			get => _Pitch;
+			set
+			{
+				_Pitch = value;
+				OnPropertyChanged("Pitch");
+			}
+		}
 
-        protected bool EnablePropertyChange { get; set; }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected internal virtual void OnPropertyChanged(string property)
-        {
-            if (!EnablePropertyChange) return;
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(property));
-        }
-    }
+		public bool Despawned { get; set; }
+
+		public abstract Size Size { get; }
+
+		public abstract IPacket SpawnPacket { get; }
+
+		public virtual bool SendMetadataToClients => false;
+
+		public virtual MetadataDictionary Metadata
+		{
+			get
+			{
+				var dictionary = new MetadataDictionary();
+				dictionary[0] = new MetadataByte((byte) EntityFlags);
+				dictionary[1] = new MetadataShort(300);
+				return dictionary;
+			}
+		}
+
+		public virtual void Update(IEntityManager entityManager)
+		{
+			// TODO: Losing health and all that jazz
+			if (Position.Y < -50)
+				entityManager.DespawnEntity(this);
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		protected internal virtual void OnPropertyChanged(string property)
+		{
+			if (!EnablePropertyChange) return;
+			if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(property));
+		}
+	}
 }

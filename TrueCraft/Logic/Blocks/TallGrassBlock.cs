@@ -1,69 +1,56 @@
 using System;
+using TrueCraft.API;
 using TrueCraft.API.Logic;
 using TrueCraft.Core.Logic.Items;
-using TrueCraft.API;
 
 namespace TrueCraft.Core.Logic.Blocks
 {
-    public class TallGrassBlock : BlockProvider
-    {
-        public enum TallGrassType
-        {
-            DeadBush = 0,
-            TallGrass = 1,
-            Fern = 2
-        }
+	public class TallGrassBlock : BlockProvider
+	{
+		public enum TallGrassType
+		{
+			DeadBush = 0,
+			TallGrass = 1,
+			Fern = 2
+		}
 
-        public static readonly byte BlockID = 0x1F;
-        
-        public override byte ID { get { return 0x1F; } }
-        
-        public override double BlastResistance { get { return 0; } }
+		public static readonly byte BlockID = 0x1F;
 
-        public override double Hardness { get { return 0; } }
+		public override byte ID => 0x1F;
 
-        public override byte Luminance { get { return 0; } }
+		public override double BlastResistance => 0;
 
-        public override bool Opaque { get { return false; } }
-        
-        public override string DisplayName { get { return "Tall Grass"; } }
+		public override double Hardness => 0;
 
-        public override SoundEffectClass SoundEffect
-        {
-            get
-            {
-                return SoundEffectClass.Grass;
-            }
-        }
+		public override byte Luminance => 0;
 
-        public override bool Flammable { get { return true; } }
+		public override bool Opaque => false;
 
-        public override BoundingBox? BoundingBox { get { return null; } }
+		public override string DisplayName => "Tall Grass";
 
-        public override BoundingBox? InteractiveBoundingBox
-        {
-            get
-            {
-                return new BoundingBox(new Vector3(4 / 16.0), Vector3.One);
-            }
-        }
+		public override SoundEffectClass SoundEffect => SoundEffectClass.Grass;
 
-        public override Coordinates3D GetSupportDirection(BlockDescriptor descriptor)
-        {
-            return Coordinates3D.Down;
-        }
+		public override bool Flammable => true;
 
-        public override Tuple<int, int> GetTextureMap(byte metadata)
-        {
-            return new Tuple<int, int>(7, 2);
-        }
-        
-        protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
-        {
-            if (MathHelper.Random.Next (1, 24) == 1)
-                return new[] { new ItemStack (SeedsItem.ItemID, 1) };
-            else
-                return new[] { ItemStack.EmptyStack };
-        }
-    }
+		public override BoundingBox? BoundingBox => null;
+
+		public override BoundingBox? InteractiveBoundingBox => new BoundingBox(new Vector3(4 / 16.0), Vector3.One);
+
+		public override Coordinates3D GetSupportDirection(BlockDescriptor descriptor)
+		{
+			return Coordinates3D.Down;
+		}
+
+		public override Tuple<int, int> GetTextureMap(byte metadata)
+		{
+			return new Tuple<int, int>(7, 2);
+		}
+
+		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
+		{
+			if (MathHelper.Random.Next(1, 24) == 1)
+				return new[] {new ItemStack(SeedsItem.ItemID, 1)};
+			return new[] {ItemStack.EmptyStack};
+		}
+	}
 }

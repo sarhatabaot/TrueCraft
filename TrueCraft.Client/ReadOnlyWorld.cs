@@ -1,124 +1,118 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+using TrueCraft.API;
 using TrueCraft.API.World;
 using TrueCraft.Core.World;
-using TrueCraft.API;
 
 namespace TrueCraft.Client
 {
-    public class ReadOnlyWorld
-    {
-        private bool UnloadChunks { get; set; }
+	public class ReadOnlyWorld
+	{
+		internal ReadOnlyWorld()
+		{
+			World = new World("default");
+			UnloadChunks = true;
+		}
 
-        internal World World { get; set; }
+		private bool UnloadChunks { get; }
 
-        public long Time { get { return World.Time; } }
+		internal World World { get; set; }
 
-        internal ReadOnlyWorld()
-        {
-            World = new World("default");
-            UnloadChunks = true;
-        }
+		public long Time => World.Time;
 
-        public byte GetBlockID(Coordinates3D coordinates)
-        {
-            return World.GetBlockID(coordinates);
-        }
+		public byte GetBlockID(Coordinates3D coordinates)
+		{
+			return World.GetBlockID(coordinates);
+		}
 
-        internal void SetBlockID(Coordinates3D coordinates, byte value)
-        {
-          World.SetBlockID(coordinates, value);
-        }
+		internal void SetBlockID(Coordinates3D coordinates, byte value)
+		{
+			World.SetBlockID(coordinates, value);
+		}
 
-        internal void SetMetadata(Coordinates3D coordinates, byte value)
-        {
-          World.SetMetadata(coordinates, value);
-        }
+		internal void SetMetadata(Coordinates3D coordinates, byte value)
+		{
+			World.SetMetadata(coordinates, value);
+		}
 
-        public byte GetMetadata(Coordinates3D coordinates)
-        {
-            return World.GetMetadata(coordinates);
-        }
+		public byte GetMetadata(Coordinates3D coordinates)
+		{
+			return World.GetMetadata(coordinates);
+		}
 
-        public byte GetSkyLight(Coordinates3D coordinates)
-        {
-            return World.GetSkyLight(coordinates);
-        }
+		public byte GetSkyLight(Coordinates3D coordinates)
+		{
+			return World.GetSkyLight(coordinates);
+		}
 
-        internal IChunk FindChunk(Coordinates2D coordinates)
-        {
-            try
-            {
-                return World.FindChunk(new Coordinates3D(coordinates.X, 0, coordinates.Z));
-            }
-            catch
-            {
-                return null;
-            }
-        }
+		internal IChunk FindChunk(Coordinates2D coordinates)
+		{
+			try
+			{
+				return World.FindChunk(new Coordinates3D(coordinates.X, 0, coordinates.Z));
+			}
+			catch
+			{
+				return null;
+			}
+		}
 
-        public ReadOnlyChunk GetChunk(Coordinates2D coordinates)
-        {
-            return new ReadOnlyChunk(World.GetChunk(coordinates));
-        }
+		public ReadOnlyChunk GetChunk(Coordinates2D coordinates)
+		{
+			return new ReadOnlyChunk(World.GetChunk(coordinates));
+		}
 
-        internal void SetChunk(Coordinates2D coordinates, Chunk chunk)
-        {
-            World.SetChunk(coordinates, chunk);
-        }
+		internal void SetChunk(Coordinates2D coordinates, Chunk chunk)
+		{
+			World.SetChunk(coordinates, chunk);
+		}
 
-        internal void RemoveChunk(Coordinates2D coordinates)
-        {
-            if (UnloadChunks)
-                World.UnloadChunk(coordinates);
-        }
+		internal void RemoveChunk(Coordinates2D coordinates)
+		{
+			if (UnloadChunks)
+				World.UnloadChunk(coordinates);
+		}
 
-        public bool IsValidPosition(Coordinates3D coords)
-        {
-            return World.IsValidPosition(coords);
-        }
-    }
+		public bool IsValidPosition(Coordinates3D coords)
+		{
+			return World.IsValidPosition(coords);
+		}
+	}
 
-    public class ReadOnlyChunk
-    {
-        internal IChunk Chunk { get; set; }
+	public class ReadOnlyChunk
+	{
+		internal ReadOnlyChunk(IChunk chunk) => Chunk = chunk;
 
-        internal ReadOnlyChunk(IChunk chunk)
-        {
-            Chunk = chunk;
-        }
+		internal IChunk Chunk { get; set; }
 
-        public byte GetBlockId(Coordinates3D coordinates)
-        {
-            return Chunk.GetBlockID(coordinates);
-        }
+		public Coordinates2D Coordinates => Chunk.Coordinates;
 
-        public byte GetMetadata(Coordinates3D coordinates)
-        {
-            return Chunk.GetMetadata(coordinates);
-        }
+		public int X => Chunk.X;
+		public int Z => Chunk.Z;
 
-        public byte GetSkyLight(Coordinates3D coordinates)
-        {
-            return Chunk.GetSkyLight(coordinates);
-        }
+		public ReadOnlyCollection<byte> Blocks => Array.AsReadOnly(Chunk.Data);
+		public ReadOnlyNibbleArray Metadata => new ReadOnlyNibbleArray(Chunk.Metadata);
+		public ReadOnlyNibbleArray BlockLight => new ReadOnlyNibbleArray(Chunk.BlockLight);
+		public ReadOnlyNibbleArray SkyLight => new ReadOnlyNibbleArray(Chunk.SkyLight);
 
-        public byte GetBlockLight(Coordinates3D coordinates)
-        {
-            return Chunk.GetBlockLight(coordinates);
-        }
+		public byte GetBlockId(Coordinates3D coordinates)
+		{
+			return Chunk.GetBlockID(coordinates);
+		}
 
-        public Coordinates2D Coordinates { get { return Chunk.Coordinates; } }
+		public byte GetMetadata(Coordinates3D coordinates)
+		{
+			return Chunk.GetMetadata(coordinates);
+		}
 
-        public int X { get { return Chunk.X; } }
-        public int Z { get { return Chunk.Z; } }
+		public byte GetSkyLight(Coordinates3D coordinates)
+		{
+			return Chunk.GetSkyLight(coordinates);
+		}
 
-        public ReadOnlyCollection<byte> Blocks { get { return Array.AsReadOnly(Chunk.Data); } }
-        public ReadOnlyNibbleArray Metadata { get { return new ReadOnlyNibbleArray(Chunk.Metadata); } }
-        public ReadOnlyNibbleArray BlockLight { get { return new ReadOnlyNibbleArray(Chunk.BlockLight); } }
-        public ReadOnlyNibbleArray SkyLight { get { return new ReadOnlyNibbleArray(Chunk.SkyLight); } }
-    }
+		public byte GetBlockLight(Coordinates3D coordinates)
+		{
+			return Chunk.GetBlockLight(coordinates);
+		}
+	}
 }

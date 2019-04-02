@@ -1,21 +1,16 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace fNbt.Serialization
 {
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Class)]
-    public class TagNameAttribute : Attribute
-    {
-        public string Name { get; set; }
+	[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Class)]
+	public class TagNameAttribute : Attribute
+	{
+		/// <summary>
+		///  Decorates the given property or field with the specified
+		///  NBT tag name.
+		/// </summary>
+		public TagNameAttribute(string name) => Name = name;
 
-        /// <summary>
-        /// Decorates the given property or field with the specified
-        /// NBT tag name.
-        /// </summary>
-        public TagNameAttribute(string name)
-        {
-            Name = name;
-        }
-    }
+		public string Name { get; set; }
+	}
 }

@@ -2,7 +2,7 @@
 
 namespace TrueCraft.Client.Input
 {
-    public class GamePadEventArgs : EventArgs
-    {
-    }
+	public class GamePadEventArgs : EventArgs
+	{
+	}
 }

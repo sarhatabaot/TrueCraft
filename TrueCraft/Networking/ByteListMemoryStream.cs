@@ -2,117 +2,86 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace TrueCraft.Core.Networking
 {
-    public class ByteListMemoryStream : Stream
-    {
-        private long position;
-        private readonly List<byte> buffer;
+	public class ByteListMemoryStream : Stream
+	{
+		private readonly List<byte> buffer;
+		private long position;
 
-        public ByteListMemoryStream() : this(new List<byte>())
-        {
-        }
+		public ByteListMemoryStream() : this(new List<byte>())
+		{
+		}
 
-        public ByteListMemoryStream(List<byte> buffer, int offset = 0)
-        {
-            position = offset;
-            this.buffer = buffer;
-        }
+		public ByteListMemoryStream(List<byte> buffer, int offset = 0)
+		{
+			position = offset;
+			this.buffer = buffer;
+		}
 
-        public override void Flush()
-        {
-        }
+		public override bool CanRead => true;
 
-        public override long Seek(long offset, SeekOrigin origin)
-        {
-            if (origin == SeekOrigin.Begin)
-                position = offset;
-            else if (origin == SeekOrigin.Current)
-                position += offset;
-            else //End
-                position = (buffer.Count - 1) - offset;
+		public override bool CanSeek => true;
 
-            return position;
-        }
+		public override bool CanWrite => true;
 
-        public override void SetLength(long value)
-        {
-            buffer.RemoveRange((int)value, buffer.Count - (int)value);
-        }
+		public override long Length => buffer.Count;
 
-        public override int Read(byte[] buffer, int offset, int count)
-        {
-            if (buffer.Length < offset)
-                throw new ArgumentOutOfRangeException("offset");
+		public override long Position
+		{
+			get => position;
+			set => position = value;
+		}
 
-            if (buffer.Length < count)
-                throw new ArgumentOutOfRangeException("count");
+		public override void Flush()
+		{
+		}
 
-            byte[] buf = this.buffer.Skip((int)position).Take(count).ToArray();
-            
-            Buffer.BlockCopy(buf, 0, buffer, offset, buf.Length);
+		public override long Seek(long offset, SeekOrigin origin)
+		{
+			if (origin == SeekOrigin.Begin)
+				position = offset;
+			else if (origin == SeekOrigin.Current)
+				position += offset;
+			else //End
+				position = buffer.Count - 1 - offset;
 
-            position += Math.Min(count, buf.Length);
-            
-            return Math.Min(count, buf.Length);
-        }
+			return position;
+		}
 
-        public override void Write(byte[] buffer, int offset, int count)
-        {
-            if (buffer.Length < offset)
-                throw new ArgumentOutOfRangeException("offset");
+		public override void SetLength(long value)
+		{
+			buffer.RemoveRange((int) value, buffer.Count - (int) value);
+		}
 
-            if (buffer.Length < count)
-                throw new ArgumentOutOfRangeException("count");
+		public override int Read(byte[] buffer, int offset, int count)
+		{
+			if (buffer.Length < offset)
+				throw new ArgumentOutOfRangeException("offset");
 
-            this.buffer.AddRange(buffer.Skip(offset).Take(count));
-            position += count;
-        }
+			if (buffer.Length < count)
+				throw new ArgumentOutOfRangeException("count");
 
-        public override bool CanRead
-        {
-            get
-            {
-                return true;
-            }
-        }
+			var buf = this.buffer.Skip((int) position).Take(count).ToArray();
 
-        public override bool CanSeek
-        {
-            get
-            {
-                return true;
-            }
-        }
+			Buffer.BlockCopy(buf, 0, buffer, offset, buf.Length);
 
-        public override bool CanWrite
-        {
-            get
-            {
-                return true;
-            }
-        }
+			position += Math.Min(count, buf.Length);
 
-        public override long Length
-        {
-            get
-            {
-                return buffer.Count;
-            }
-        }
+			return Math.Min(count, buf.Length);
+		}
 
-        public override long Position
-        {
-            get
-            {
-                return position;
-            }
-            set
-            {
-                position = value;
-            }
-        }
-    }
+		public override void Write(byte[] buffer, int offset, int count)
+		{
+			if (buffer.Length < offset)
+				throw new ArgumentOutOfRangeException("offset");
+
+			if (buffer.Length < count)
+				throw new ArgumentOutOfRangeException("count");
+
+			this.buffer.AddRange(buffer.Skip(offset).Take(count));
+			position += count;
+		}
+	}
 }

@@ -1,202 +1,191 @@
 ﻿using System;
-using System.Threading;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace TrueCraft.Client.Rendering
 {
-    /// <summary>
-    /// Abstract base class for renderers of meshes.
-    /// </summary>
-    /// <typeparam name="T">The object to render into a mesh.</typeparam>
-    public abstract class Renderer<T> : IDisposable
-    {
-        private readonly object _syncLock =
-            new object();
+	/// <summary>
+	///  Abstract base class for renderers of meshes.
+	/// </summary>
+	/// <typeparam name="T">The object to render into a mesh.</typeparam>
+	public abstract class Renderer<T> : IDisposable
+	{
+		private readonly object _syncLock =
+			new object();
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public event EventHandler<RendererEventArgs<T>> MeshCompleted;
+		private volatile bool _isDisposed;
 
-        private volatile bool _isRunning;
-        private Thread[] _rendererThreads;
-        private volatile bool _isDisposed;
-        protected ConcurrentQueue<T> _items, _priorityItems;
-        private HashSet<T> _pending;
+		private volatile bool _isRunning;
+		protected ConcurrentQueue<T> _items, _priorityItems;
+		private readonly HashSet<T> _pending;
+		private Thread[] _rendererThreads;
 
-        /// <summary>
-        /// Gets whether this renderer is running.
-        /// </summary>
-        public bool IsRunning
-        {
-            get
-            {
-                if (_isDisposed)
-                    throw new ObjectDisposedException(GetType().Name);
-                return _isRunning;
-            }
-        }
+		/// <summary>
+		/// </summary>
+		protected Renderer()
+		{
+			lock (_syncLock)
+			{
+				_isRunning = false;
+				var threads = Environment.ProcessorCount - 2;
+				if (threads < 1)
+					threads = 1;
+				_rendererThreads = new Thread[threads];
+				for (var i = 0; i < _rendererThreads.Length; i++)
+					_rendererThreads[i] = new Thread(DoRendering) {IsBackground = true};
+				_items = new ConcurrentQueue<T>();
+				_priorityItems = new ConcurrentQueue<T>();
+				_pending = new HashSet<T>();
+				_isDisposed = false;
+			}
+		}
 
-        /// <summary>
-        /// Gets whether this renderer is disposed of.
-        /// </summary>
-        public bool IsDisposed
-        {
-            get { return _isDisposed; }
-        }
+		/// <summary>
+		///  Gets whether this renderer is running.
+		/// </summary>
+		public bool IsRunning
+		{
+			get
+			{
+				if (_isDisposed)
+					throw new ObjectDisposedException(GetType().Name);
+				return _isRunning;
+			}
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        protected Renderer()
-        {
-            lock (_syncLock)
-            {
-                _isRunning = false;
-                var threads = Environment.ProcessorCount - 2;
-                if (threads < 1)
-                    threads = 1;
-                _rendererThreads = new Thread[threads];
-                for (int i = 0; i < _rendererThreads.Length; i++)
-                {
-                    _rendererThreads[i] = new Thread(DoRendering) { IsBackground = true };
-                }
-                _items = new ConcurrentQueue<T>(); _priorityItems = new ConcurrentQueue<T>();
-                _pending = new HashSet<T>();
-                _isDisposed = false;
-            }
-        }
+		/// <summary>
+		///  Gets whether this renderer is disposed of.
+		/// </summary>
+		public bool IsDisposed => _isDisposed;
 
-        /// <summary>
-        /// Starts this renderer.
-        /// </summary>
-        public void Start()
-        {
-            if (_isDisposed)
-                throw new ObjectDisposedException(GetType().Name);
+		/// <summary>
+		///  Disposes of this renderer.
+		/// </summary>
+		public void Dispose()
+		{
+			if (_isDisposed)
+				return;
 
-            if (_isRunning) return;
-            lock (_syncLock)
-            {
-                _isRunning = true;
-                for (int i = 0; i < _rendererThreads.Length; i++)
-                    _rendererThreads[i].Start(null);
-            }
-        }
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        private void DoRendering(object obj)
-        {
-            while (_isRunning)
-            {
-                var item = default(T);
-                var result = default(Mesh);
+		/// <summary>
+		/// </summary>
+		public event EventHandler<RendererEventArgs<T>> MeshCompleted;
 
-                lock (_syncLock)
-                {
-                    if (_priorityItems.TryDequeue(out item) && _pending.Remove(item) && TryRender(item, out result))
-                    {
-                        var args = new RendererEventArgs<T>(item, result, true);
-                        if (MeshCompleted != null)
-                            MeshCompleted(this, args);
-                    }
-                    else if (_items.TryDequeue(out item) && _pending.Remove(item) && TryRender(item, out result))
-                    {
-                        var args = new RendererEventArgs<T>(item, result, false);
-                        if (MeshCompleted != null)
-                            MeshCompleted(this, args);
-                    }
-                }
+		/// <summary>
+		///  Starts this renderer.
+		/// </summary>
+		public void Start()
+		{
+			if (_isDisposed)
+				throw new ObjectDisposedException(GetType().Name);
 
-                if (item == null) // We don't have any work, so sleep for a bit.
-                    Thread.Sleep(100);
-            }
-        }
+			if (_isRunning) return;
+			lock (_syncLock)
+			{
+				_isRunning = true;
+				for (var i = 0; i < _rendererThreads.Length; i++)
+					_rendererThreads[i].Start(null);
+			}
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="result"></param>
-        /// <returns></returns>
-        protected abstract bool TryRender(T item, out Mesh result);
+		/// <summary>
+		/// </summary>
+		/// <param name="obj"></param>
+		private void DoRendering(object obj)
+		{
+			while (_isRunning)
+			{
+				var item = default(T);
+				var result = default(Mesh);
 
-        /// <summary>
-        /// Stops this renderer.
-        /// </summary>
-        public void Stop()
-        {
-            if (_isDisposed)
-                throw new ObjectDisposedException(GetType().Name);
+				lock (_syncLock)
+					if (_priorityItems.TryDequeue(out item) && _pending.Remove(item) && TryRender(item, out result))
+					{
+						var args = new RendererEventArgs<T>(item, result, true);
+						if (MeshCompleted != null)
+							MeshCompleted(this, args);
+					}
+					else if (_items.TryDequeue(out item) && _pending.Remove(item) && TryRender(item, out result))
+					{
+						var args = new RendererEventArgs<T>(item, result, false);
+						if (MeshCompleted != null)
+							MeshCompleted(this, args);
+					}
 
-            if (!_isRunning) return;
-            lock (_syncLock)
-            {
-                _isRunning = false;
-                for (int i = 0; i < _rendererThreads.Length; i++)
-                    _rendererThreads[i].Join();
-            }
-        }
+				if (item == null) // We don't have any work, so sleep for a bit.
+					Thread.Sleep(100);
+			}
+		}
 
-        /// <summary>
-        /// Enqueues an item to this renderer for rendering.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="hasPriority"></param>
-        public bool Enqueue(T item, bool hasPriority = false)
-        {
-            if (_isDisposed)
-                throw new ObjectDisposedException(GetType().Name);
+		/// <summary>
+		/// </summary>
+		/// <param name="item"></param>
+		/// <param name="result"></param>
+		/// <returns></returns>
+		protected abstract bool TryRender(T item, out Mesh result);
 
-            if (_pending.Contains(item))
-                return false;
-            _pending.Add(item);
+		/// <summary>
+		///  Stops this renderer.
+		/// </summary>
+		public void Stop()
+		{
+			if (_isDisposed)
+				throw new ObjectDisposedException(GetType().Name);
 
-            if (!_isRunning) return false;
-            if (hasPriority)
-                _priorityItems.Enqueue(item);
-            else
-                _items.Enqueue(item);
-            return true;
-        }
+			if (!_isRunning) return;
+			lock (_syncLock)
+			{
+				_isRunning = false;
+				for (var i = 0; i < _rendererThreads.Length; i++)
+					_rendererThreads[i].Join();
+			}
+		}
 
-        /// <summary>
-        /// Disposes of this renderer.
-        /// </summary>
-        public void Dispose()
-        {
-            if (_isDisposed)
-                return;
+		/// <summary>
+		///  Enqueues an item to this renderer for rendering.
+		/// </summary>
+		/// <param name="item"></param>
+		/// <param name="hasPriority"></param>
+		public bool Enqueue(T item, bool hasPriority = false)
+		{
+			if (_isDisposed)
+				throw new ObjectDisposedException(GetType().Name);
 
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+			if (_pending.Contains(item))
+				return false;
+			_pending.Add(item);
 
-        /// <summary>
-        /// Disposes of this renderer.
-        /// </summary>
-        /// <param name="disposing"></param>
-        protected virtual void Dispose(bool disposing)
-        {
-            Stop();
-            lock (_syncLock)
-            {
-                _rendererThreads = null;
-                _items = null; _priorityItems = null;
-                _isDisposed = true;
-            }
-        }
+			if (!_isRunning) return false;
+			if (hasPriority)
+				_priorityItems.Enqueue(item);
+			else
+				_items.Enqueue(item);
+			return true;
+		}
 
-        /// <summary>
-        /// Finalizes this renderer.
-        /// </summary>
-        ~Renderer()
-        {
-            Dispose(false);
-        }
-    }
+		/// <summary>
+		///  Disposes of this renderer.
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected virtual void Dispose(bool disposing)
+		{
+			Stop();
+			lock (_syncLock)
+			{
+				_rendererThreads = null;
+				_items = null;
+				_priorityItems = null;
+				_isDisposed = true;
+			}
+		}
+
+		/// <summary>
+		///  Finalizes this renderer.
+		/// </summary>
+		~Renderer() => Dispose(false);
+	}
 }

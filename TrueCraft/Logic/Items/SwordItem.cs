@@ -1,172 +1,151 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using TrueCraft.API;
-using TrueCraft.Core.Logic.Blocks;
 using TrueCraft.API.Logic;
+using TrueCraft.Core.Logic.Blocks;
 
 namespace TrueCraft.Core.Logic.Items
 {
-    public abstract class SwordItem : ToolItem, ICraftingRecipe
-    {
-        public abstract float Damage { get; }
+	public abstract class SwordItem : ToolItem, ICraftingRecipe
+	{
+		public abstract float Damage { get; }
 
-        public ItemStack[,] Pattern
-        {
-            get
-            {
-                short baseMaterial = 0;
-                switch (Material)
-                {
-                    case ToolMaterial.Diamond:
-                        baseMaterial = DiamondItem.ItemID;
-                        break;
-                    case ToolMaterial.Gold:
-                        baseMaterial = GoldIngotItem.ItemID;
-                        break;
-                    case ToolMaterial.Iron:
-                        baseMaterial = IronIngotItem.ItemID;
-                        break;
-                    case ToolMaterial.Stone:
-                        baseMaterial = CobblestoneBlock.BlockID;
-                        break;
-                    case ToolMaterial.Wood:
-                        baseMaterial = WoodenPlanksBlock.BlockID;
-                        break;
-                }
+		public override ToolType ToolType => ToolType.Sword;
 
-                return new[,]
-                {
-                    { new ItemStack(baseMaterial) },
-                    { new ItemStack(baseMaterial) },
-                    { new ItemStack(StickItem.ItemID) }
-                };
-            }
-        }
+		public ItemStack[,] Pattern
+		{
+			get
+			{
+				short baseMaterial = 0;
+				switch (Material)
+				{
+					case ToolMaterial.Diamond:
+						baseMaterial = DiamondItem.ItemID;
+						break;
+					case ToolMaterial.Gold:
+						baseMaterial = GoldIngotItem.ItemID;
+						break;
+					case ToolMaterial.Iron:
+						baseMaterial = IronIngotItem.ItemID;
+						break;
+					case ToolMaterial.Stone:
+						baseMaterial = CobblestoneBlock.BlockID;
+						break;
+					case ToolMaterial.Wood:
+						baseMaterial = WoodenPlanksBlock.BlockID;
+						break;
+				}
 
-        public ItemStack Output
-        {
-            get
-            {
-                return new ItemStack(ID);
-            }
-        }
+				return new[,]
+				{
+					{new ItemStack(baseMaterial)},
+					{new ItemStack(baseMaterial)},
+					{new ItemStack(StickItem.ItemID)}
+				};
+			}
+		}
 
-        public bool SignificantMetadata
-        {
-            get
-            {
-                return false;
-            }
-        }
+		public ItemStack Output => new ItemStack(ID);
 
-        public override ToolType ToolType
-        {
-            get
-            {
-                return ToolType.Sword;
-            }
-        }
-    }
+		public bool SignificantMetadata => false;
+	}
 
-    public class WoodenSwordItem : SwordItem
-    {
-        public static readonly short ItemID = 0x10C;
+	public class WoodenSwordItem : SwordItem
+	{
+		public static readonly short ItemID = 0x10C;
 
-        public override short ID { get { return 0x10C; } }
+		public override short ID => 0x10C;
 
-        public override Tuple<int, int> GetIconTexture(byte metadata)
-        {
-            return new Tuple<int, int>(0, 4);
-        }
+		public override ToolMaterial Material => ToolMaterial.Wood;
 
-        public override ToolMaterial Material { get { return ToolMaterial.Wood; } }
+		public override short BaseDurability => 60;
 
-        public override short BaseDurability { get { return 60; } }
+		public override float Damage => 2.5f;
 
-        public override float Damage { get { return 2.5f; } }
+		public override string DisplayName => "Wooden Sword";
 
-        public override string DisplayName { get { return "Wooden Sword"; } }
-    }
+		public override Tuple<int, int> GetIconTexture(byte metadata)
+		{
+			return new Tuple<int, int>(0, 4);
+		}
+	}
 
-    public class StoneSwordItem : SwordItem
-    {
-        public static readonly short ItemID = 0x110;
+	public class StoneSwordItem : SwordItem
+	{
+		public static readonly short ItemID = 0x110;
 
-        public override short ID { get { return 0x110; } }
+		public override short ID => 0x110;
 
-        public override Tuple<int, int> GetIconTexture(byte metadata)
-        {
-            return new Tuple<int, int>(1, 4);
-        }
+		public override ToolMaterial Material => ToolMaterial.Stone;
 
-        public override ToolMaterial Material { get { return ToolMaterial.Stone; } }
+		public override short BaseDurability => 132;
 
-        public override short BaseDurability { get { return 132; } }
+		public override float Damage => 3.5f;
 
-        public override float Damage { get { return 3.5f; } }
+		public override string DisplayName => "Stone Sword";
 
-        public override string DisplayName { get { return "Stone Sword"; } }
-    }
+		public override Tuple<int, int> GetIconTexture(byte metadata)
+		{
+			return new Tuple<int, int>(1, 4);
+		}
+	}
 
-    public class IronSwordItem : SwordItem
-    {
-        public static readonly short ItemID = 0x10B;
+	public class IronSwordItem : SwordItem
+	{
+		public static readonly short ItemID = 0x10B;
 
-        public override short ID { get { return 0x10B; } }
+		public override short ID => 0x10B;
 
-        public override Tuple<int, int> GetIconTexture(byte metadata)
-        {
-            return new Tuple<int, int>(2, 4);
-        }
+		public override ToolMaterial Material => ToolMaterial.Iron;
 
-        public override ToolMaterial Material { get { return ToolMaterial.Iron; } }
+		public override short BaseDurability => 251;
 
-        public override short BaseDurability { get { return 251; } }
+		public override float Damage => 4.5f;
 
-        public override float Damage { get { return 4.5f; } }
+		public override string DisplayName => "Iron Sword";
 
-        public override string DisplayName { get { return "Iron Sword"; } }
-    }
+		public override Tuple<int, int> GetIconTexture(byte metadata)
+		{
+			return new Tuple<int, int>(2, 4);
+		}
+	}
 
-    public class GoldenSwordItem : SwordItem
-    {
-        public static readonly short ItemID = 0x11B;
+	public class GoldenSwordItem : SwordItem
+	{
+		public static readonly short ItemID = 0x11B;
 
-        public override short ID { get { return 0x11B; } }
+		public override short ID => 0x11B;
 
-        public override Tuple<int, int> GetIconTexture(byte metadata)
-        {
-            return new Tuple<int, int>(4, 4);
-        }
+		public override ToolMaterial Material => ToolMaterial.Gold;
 
-        public override ToolMaterial Material { get { return ToolMaterial.Gold; } }
+		public override short BaseDurability => 33;
 
-        public override short BaseDurability { get { return 33; } }
+		public override float Damage => 2.5f;
 
-        public override float Damage { get { return 2.5f; } }
+		public override string DisplayName => "Golden Sword";
 
-        public override string DisplayName { get { return "Golden Sword"; } }
-    }
+		public override Tuple<int, int> GetIconTexture(byte metadata)
+		{
+			return new Tuple<int, int>(4, 4);
+		}
+	}
 
-    public class DiamondSwordItem : SwordItem
-    {
-        public static readonly short ItemID = 0x114;
+	public class DiamondSwordItem : SwordItem
+	{
+		public static readonly short ItemID = 0x114;
 
-        public override short ID { get { return 0x114; } }
+		public override short ID => 0x114;
 
-        public override Tuple<int, int> GetIconTexture(byte metadata)
-        {
-            return new Tuple<int, int>(3, 4);
-        }
+		public override ToolMaterial Material => ToolMaterial.Diamond;
 
-        public override ToolMaterial Material { get { return ToolMaterial.Diamond; } }
+		public override short BaseDurability => 1562;
 
-        public override short BaseDurability { get { return 1562; } }
+		public override float Damage => 5.5f;
 
-        public override float Damage { get { return 5.5f; } }
+		public override string DisplayName => "Diamond Sword";
 
-        public override string DisplayName { get { return "Diamond Sword"; } }
-    }
+		public override Tuple<int, int> GetIconTexture(byte metadata)
+		{
+			return new Tuple<int, int>(3, 4);
+		}
+	}
 }

@@ -1,52 +1,47 @@
 using System;
+using TrueCraft.API;
 using TrueCraft.API.Logic;
+using TrueCraft.API.Networking;
 using TrueCraft.API.Server;
 using TrueCraft.API.World;
-using TrueCraft.API;
 using TrueCraft.Core.Entities;
-using TrueCraft.API.Networking;
 
 namespace TrueCraft.Core.Logic.Blocks
 {
-    public class SandBlock : BlockProvider
-    {
-        public static readonly byte BlockID = 0x0C;
-        
-        public override byte ID { get { return 0x0C; } }
-        
-        public override double BlastResistance { get { return 2.5; } }
+	public class SandBlock : BlockProvider
+	{
+		public static readonly byte BlockID = 0x0C;
 
-        public override double Hardness { get { return 0.5; } }
+		public override byte ID => 0x0C;
 
-        public override byte Luminance { get { return 0; } }
-        
-        public override string DisplayName { get { return "Sand"; } }
+		public override double BlastResistance => 2.5;
 
-        public override SoundEffectClass SoundEffect
-        {
-            get
-            {
-                return SoundEffectClass.Sand;
-            }
-        }
+		public override double Hardness => 0.5;
 
-        public override Tuple<int, int> GetTextureMap(byte metadata)
-        {
-            return new Tuple<int, int>(2, 1);
-        }
+		public override byte Luminance => 0;
 
-        public override void BlockPlaced(BlockDescriptor descriptor, BlockFace face, IWorld world, IRemoteClient user)
-        {
-            BlockUpdate(descriptor, descriptor, user.Server, world);
-        }
+		public override string DisplayName => "Sand";
 
-        public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiplayerServer server, IWorld world)
-        {
-            if (world.GetBlockID(descriptor.Coordinates + Coordinates3D.Down) == AirBlock.BlockID)
-            {
-                world.SetBlockID(descriptor.Coordinates, AirBlock.BlockID);
-                server.GetEntityManagerForWorld(world).SpawnEntity(new FallingSandEntity(descriptor.Coordinates));
-            }
-        }
-    }
+		public override SoundEffectClass SoundEffect => SoundEffectClass.Sand;
+
+		public override Tuple<int, int> GetTextureMap(byte metadata)
+		{
+			return new Tuple<int, int>(2, 1);
+		}
+
+		public override void BlockPlaced(BlockDescriptor descriptor, BlockFace face, IWorld world, IRemoteClient user)
+		{
+			BlockUpdate(descriptor, descriptor, user.Server, world);
+		}
+
+		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiplayerServer server,
+			IWorld world)
+		{
+			if (world.GetBlockID(descriptor.Coordinates + Coordinates3D.Down) == AirBlock.BlockID)
+			{
+				world.SetBlockID(descriptor.Coordinates, AirBlock.BlockID);
+				server.GetEntityManagerForWorld(world).SpawnEntity(new FallingSandEntity(descriptor.Coordinates));
+			}
+		}
+	}
 }

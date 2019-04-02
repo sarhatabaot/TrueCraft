@@ -1,37 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TrueCraft.API;
-using TrueCraft.Core.Logic.Blocks;
-using TrueCraft.API.World;
-using TrueCraft.Core.TerrainGen.Noise;
+﻿using TrueCraft.API;
 
 namespace TrueCraft.Core.TerrainGen.Biomes
 {
-    public class SeasonalForestBiome : BiomeProvider
-    {
-        public override byte ID
-        {
-            get { return (byte)Biome.SeasonalForest; }
-        }
+	public class SeasonalForestBiome : BiomeProvider
+	{
+		public override byte ID => (byte) Biome.SeasonalForest;
 
-        public override double Temperature
-        {
-            get { return 0.7f; }
-        }
+		public override double Temperature => 0.7f;
 
-        public override double Rainfall
-        {
-            get { return 0.8f; }
-        }
+		public override double Rainfall => 0.8f;
 
-        public override PlantSpecies[] Plants
-        {
-            get
-            {
-                return new[] { PlantSpecies.Fern, PlantSpecies.TallGrass };
-            }
-        }
-    }
+		public override PlantSpecies[] Plants => new[] {PlantSpecies.Fern, PlantSpecies.TallGrass};
+	}
 }

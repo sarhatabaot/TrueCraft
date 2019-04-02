@@ -1,43 +1,42 @@
 using System;
-using System.Text;
 using TrueCraft.API.Networking;
 
 namespace TrueCraft.API
 {
-    public class MetadataString : MetadataEntry
-    {
-        public override byte Identifier { get { return 4; } }
-        public override string FriendlyName { get { return "string"; } }
+	public class MetadataString : MetadataEntry
+	{
+		public string Value;
 
-        public string Value;
+		public MetadataString()
+		{
+		}
 
-        public static implicit operator MetadataString(string value)
-        {
-            return new MetadataString(value);
-        }
+		public MetadataString(string value)
+		{
+			if (value.Length > 16)
+				throw new ArgumentOutOfRangeException("value", "Maximum string length is 16 characters");
+			while (value.Length < 16)
+				value = value + "\0";
+			Value = value;
+		}
 
-        public MetadataString()
-        {
-        }
+		public override byte Identifier => 4;
+		public override string FriendlyName => "string";
 
-        public MetadataString(string value)
-        {
-            if (value.Length > 16)
-                throw new ArgumentOutOfRangeException("value", "Maximum string length is 16 characters");
-            while (value.Length < 16)
-                value = value + "\0";
-            Value = value;
-        }
+		public static implicit operator MetadataString(string value)
+		{
+			return new MetadataString(value);
+		}
 
-        public override void FromStream(IMinecraftStream stream)
-        {
-            Value = stream.ReadString();
-        }
+		public override void FromStream(IMinecraftStream stream)
+		{
+			Value = stream.ReadString();
+		}
 
-        public override void WriteTo(IMinecraftStream stream, byte index)
-        {
-            stream.WriteUInt8(GetKey(index));
-            stream.WriteString(Value);
-        }
-    }
+		public override void WriteTo(IMinecraftStream stream, byte index)
+		{
+			stream.WriteUInt8(GetKey(index));
+			stream.WriteString(Value);
+		}
+	}
 }

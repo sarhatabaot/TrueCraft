@@ -2,30 +2,24 @@
 
 namespace TrueCraft.Commands
 {
-    public class PingCommand : Command
-    {
-        public override string Name
-        {
-            get { return "ping"; }
-        }
+	public class PingCommand : Command
+	{
+		public PingCommand(CommandManager commands) : base(commands)
+		{
+		}
 
-        public override string Description
-        {
-            get { return "Ping pong"; }
-        }
+		public override string Name => "ping";
 
-        public override void Handle(IRemoteClient client, string alias, string[] arguments)
-        {
-            client.SendMessage("Pong!");
-        }
+		public override string Description => "Ping pong";
 
-        public override void Help(IRemoteClient client, string alias, string[] arguments)
-        {
-            client.SendMessage("Correct usage is /" + alias);
-        }
+		public override void Handle(IRemoteClient client, string alias, string[] arguments)
+		{
+			client.SendMessage("Pong!");
+		}
 
-        public PingCommand(CommandManager commands) : base(commands)
-        {
-        }
-    }
+		public override void Help(IRemoteClient client, string alias, string[] arguments)
+		{
+			client.SendMessage("Correct usage is /" + alias);
+		}
+	}
 }

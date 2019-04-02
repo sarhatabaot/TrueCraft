@@ -4,59 +4,39 @@ using TrueCraft.API.Logic;
 
 namespace TrueCraft.Core.Logic.Blocks
 {
-    public class WoodenPlanksBlock : BlockProvider, ICraftingRecipe, IBurnableItem
-    {
-        public static readonly byte BlockID = 0x05;
-        
-        public override byte ID { get { return 0x05; } }
-        
-        public override double BlastResistance { get { return 15; } }
+	public class WoodenPlanksBlock : BlockProvider, ICraftingRecipe, IBurnableItem
+	{
+		public static readonly byte BlockID = 0x05;
 
-        public override double Hardness { get { return 2; } }
+		public override byte ID => 0x05;
 
-        public override byte Luminance { get { return 0; } }
-        
-        public override string DisplayName { get { return "Wooden Planks"; } }
+		public override double BlastResistance => 15;
 
-        public override bool Flammable { get { return true; } }
+		public override double Hardness => 2;
 
-        public TimeSpan BurnTime { get { return TimeSpan.FromSeconds(15); } }
+		public override byte Luminance => 0;
 
-        public override SoundEffectClass SoundEffect
-        {
-            get
-            {
-                return SoundEffectClass.Wood;
-            }
-        }
+		public override string DisplayName => "Wooden Planks";
 
-        public override Tuple<int, int> GetTextureMap(byte metadata)
-        {
-            return new Tuple<int, int>(4, 0);
-        }
+		public override bool Flammable => true;
 
-        public ItemStack[,] Pattern
-        {
-            get
-            {
-                return new[,]
-                {
-                    { new ItemStack(WoodBlock.BlockID) }
-                };
-            }
-        }
+		public override SoundEffectClass SoundEffect => SoundEffectClass.Wood;
 
-        public ItemStack Output
-        {
-            get
-            {
-                return new ItemStack(BlockID, 4);
-            }
-        }
+		public TimeSpan BurnTime => TimeSpan.FromSeconds(15);
 
-        public bool SignificantMetadata
-        {
-            get { return false; }
-        }
-    }
+		public ItemStack[,] Pattern =>
+			new[,]
+			{
+				{new ItemStack(WoodBlock.BlockID)}
+			};
+
+		public ItemStack Output => new ItemStack(BlockID, 4);
+
+		public bool SignificantMetadata => false;
+
+		public override Tuple<int, int> GetTextureMap(byte metadata)
+		{
+			return new Tuple<int, int>(4, 0);
+		}
+	}
 }

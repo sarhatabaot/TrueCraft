@@ -1,32 +1,31 @@
-﻿using System;
+﻿using TrueCraft.API;
 using TrueCraft.API.Networking;
-using TrueCraft.API;
 
 namespace TrueCraft.Core.Networking.Packets
 {
-    public struct EntityMetadataPacket : IPacket
-    {
-        public byte ID { get { return 0x28; } }
+	public struct EntityMetadataPacket : IPacket
+	{
+		public byte ID => 0x28;
 
-        public int EntityID;
-        public MetadataDictionary Metadata;
+		public int EntityID;
+		public MetadataDictionary Metadata;
 
-        public EntityMetadataPacket(int entityID, MetadataDictionary metadata)
-        {
-            EntityID = entityID;
-            Metadata = metadata;
-        }
+		public EntityMetadataPacket(int entityID, MetadataDictionary metadata)
+		{
+			EntityID = entityID;
+			Metadata = metadata;
+		}
 
-        public void ReadPacket(IMinecraftStream stream)
-        {
-            EntityID = stream.ReadInt32();
-            Metadata = MetadataDictionary.FromStream(stream);
-        }
+		public void ReadPacket(IMinecraftStream stream)
+		{
+			EntityID = stream.ReadInt32();
+			Metadata = MetadataDictionary.FromStream(stream);
+		}
 
-        public void WritePacket(IMinecraftStream stream)
-        {
-            stream.WriteInt32(EntityID);
-            Metadata.WriteTo(stream);
-        }
-    }
+		public void WritePacket(IMinecraftStream stream)
+		{
+			stream.WriteInt32(EntityID);
+			Metadata.WriteTo(stream);
+		}
+	}
 }

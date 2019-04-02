@@ -1,58 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace TrueCraft.Core.Entities
+﻿namespace TrueCraft.Core.Entities
 {
-    public abstract class LivingEntity : Entity
-    {
-        protected LivingEntity()
-        {
-            Health = MaxHealth;
-        }
+	public abstract class LivingEntity : Entity
+	{
+		protected short _Air;
 
-        protected short _Air;
-        public short Air
-        {
-            get { return _Air; }
-            set
-            {
-                _Air = value;
-                OnPropertyChanged("Air");
-            }
-        }
+		protected float _HeadYaw;
 
-        protected short _Health;
-        public short Health
-        {
-            get { return _Health; }
-            set
-            {
-                _Health = value;
-                OnPropertyChanged("Health");
-            }
-        }
+		protected short _Health;
 
-        protected float _HeadYaw;
-        public float HeadYaw
-        {
-            get { return _HeadYaw; }
-            set
-            {
-                _HeadYaw = value;
-                OnPropertyChanged("HeadYaw");
-            }
-        }
+		protected LivingEntity() => Health = MaxHealth;
 
-        public override bool SendMetadataToClients
-        {
-            get
-            {
-                return true;
-            }
-        }
+		public short Air
+		{
+			get => _Air;
+			set
+			{
+				_Air = value;
+				OnPropertyChanged("Air");
+			}
+		}
 
-        public abstract short MaxHealth { get; }
-    }
+		public short Health
+		{
+			get => _Health;
+			set
+			{
+				_Health = value;
+				OnPropertyChanged("Health");
+			}
+		}
+
+		public float HeadYaw
+		{
+			get => _HeadYaw;
+			set
+			{
+				_HeadYaw = value;
+				OnPropertyChanged("HeadYaw");
+			}
+		}
+
+		public override bool SendMetadataToClients => true;
+
+		public abstract short MaxHealth { get; }
+	}
 }

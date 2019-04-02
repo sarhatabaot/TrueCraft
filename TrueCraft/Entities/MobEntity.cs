@@ -1,147 +1,119 @@
 ﻿using System;
-using TrueCraft.API.Networking;
-using TrueCraft.Core.Networking.Packets;
-using TrueCraft.API.Entities;
 using TrueCraft.API;
-using TrueCraft.API.Server;
-using System.Linq;
 using TrueCraft.API.AI;
-using TrueCraft.Core.AI;
+using TrueCraft.API.Entities;
+using TrueCraft.API.Networking;
 using TrueCraft.API.Physics;
+using TrueCraft.API.Server;
+using TrueCraft.Core.AI;
+using TrueCraft.Core.Networking.Packets;
 
 namespace TrueCraft.Core.Entities
 {
-    public abstract class MobEntity : LivingEntity, IAABBEntity, IMobEntity
-    {
-        protected MobEntity()
-        {
-            Speed = 4;
-            CurrentState = new WanderState();
-        }
+	public abstract class MobEntity : LivingEntity, IAABBEntity, IMobEntity
+	{
+		protected MobEntity()
+		{
+			Speed = 4;
+			CurrentState = new WanderState();
+		}
 
-        public event EventHandler PathComplete;
+		public abstract sbyte MobType { get; }
 
-        public override IPacket SpawnPacket
-        {
-            get
-            {
-                return new SpawnMobPacket(EntityID, MobType,
-                    MathHelper.CreateAbsoluteInt(Position.X),
-                    MathHelper.CreateAbsoluteInt(Position.Y),
-                    MathHelper.CreateAbsoluteInt(Position.Z),
-                    MathHelper.CreateRotationByte(Yaw),
-                    MathHelper.CreateRotationByte(Pitch),
-                    Metadata);
-            }
-        }
+		public virtual bool Friendly => true;
 
-        public abstract sbyte MobType { get; }
+		/// <summary>
+		///  Mob's current speed in m/s.
+		/// </summary>
+		public virtual double Speed { get; set; }
 
-        public virtual bool Friendly { get { return true; } }
+		public virtual void TerrainCollision(Vector3 collisionPoint, Vector3 collisionDirection)
+		{
+			// This space intentionally left blank
+		}
 
-        public virtual void TerrainCollision(Vector3 collisionPoint, Vector3 collisionDirection)
-        {
-            // This space intentionally left blank
-        }
+		public BoundingBox BoundingBox => new BoundingBox(Position, Position + Size);
 
-        public BoundingBox BoundingBox
-        {
-            get
-            {
-                return new BoundingBox(Position, Position + Size);
-            }
-        }
+		public virtual bool BeginUpdate()
+		{
+			EnablePropertyChange = false;
+			return true;
+		}
 
-        public virtual bool BeginUpdate()
-        {
-            EnablePropertyChange = false;
-            return true;
-        }
+		public virtual void EndUpdate(Vector3 newPosition)
+		{
+			EnablePropertyChange = true;
+			Position = newPosition;
+		}
 
-        public virtual void EndUpdate(Vector3 newPosition)
-        {
-            EnablePropertyChange = true;
-            Position = newPosition;
-        }
+		public float AccelerationDueToGravity => 1.6f;
 
-        public float AccelerationDueToGravity
-        {
-            get
-            {
-                return 1.6f;
-            }
-        }
+		public float Drag => 0.40f;
 
-        public float Drag
-        {
-            get
-            {
-                return 0.40f;
-            }
-        }
+		public float TerminalVelocity => 78.4f;
 
-        public float TerminalVelocity
-        {
-            get
-            {
-                return 78.4f;
-            }
-        }
+		public event EventHandler PathComplete;
 
-        public PathResult CurrentPath { get; set; }
+		public override IPacket SpawnPacket =>
+			new SpawnMobPacket(EntityID, MobType,
+				MathHelper.CreateAbsoluteInt(Position.X),
+				MathHelper.CreateAbsoluteInt(Position.Y),
+				MathHelper.CreateAbsoluteInt(Position.Z),
+				MathHelper.CreateRotationByte(Yaw),
+				MathHelper.CreateRotationByte(Pitch),
+				Metadata);
 
-        /// <summary>
-        /// Mob's current speed in m/s.
-        /// </summary>
-        public virtual double Speed { get; set; }
+		public PathResult CurrentPath { get; set; }
 
-        public IMobState CurrentState { get; set; }
+		public IMobState CurrentState { get; set; }
 
-        public void Face(Vector3 target)
-        {
-            var diff = target - Position;
-            Yaw = (float)MathHelper.RadiansToDegrees(-(Math.Atan2(diff.X, diff.Z) - Math.PI) + Math.PI); // "Flip" over the 180 mark
-        }
+		public void Face(Vector3 target)
+		{
+			var diff = target - Position;
+			Yaw = (float) MathHelper.RadiansToDegrees(-(Math.Atan2(diff.X, diff.Z) - Math.PI) +
+			                                          Math.PI); // "Flip" over the 180 mark
+		}
 
-        public bool AdvancePath(TimeSpan time, bool faceRoute = true)
-        {
-            var modifier = time.TotalSeconds * Speed;
-            if (CurrentPath != null)
-            {
-                // Advance along path
-                var target = (Vector3)CurrentPath.Waypoints[CurrentPath.Index];
-                target += new Vector3(Size.Width / 2, 0, Size.Depth / 2); // Center it
-                target.Y = Position.Y; // TODO: Find better way of doing this
-                if (faceRoute)
-                    Face(target);
-                var lookAt = Vector3.Forwards.Transform(Matrix.CreateRotationY(MathHelper.ToRadians(-(Yaw - 180) + 180)));
-                lookAt *= modifier;
-                Velocity = new Vector3(lookAt.X, Velocity.Y, lookAt.Z);
-                if (Position.DistanceTo(target) < Velocity.Distance)
-                {
-                    Position = target;
-                    Velocity = Vector3.Zero;
-                    CurrentPath.Index++;
-                    if (CurrentPath.Index >= CurrentPath.Waypoints.Count)
-                    {
-                        CurrentPath = null;
-                        if (PathComplete != null)
-                            PathComplete(this, null);
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
+		public bool AdvancePath(TimeSpan time, bool faceRoute = true)
+		{
+			var modifier = time.TotalSeconds * Speed;
+			if (CurrentPath != null)
+			{
+				// Advance along path
+				var target = (Vector3) CurrentPath.Waypoints[CurrentPath.Index];
+				target += new Vector3(Size.Width / 2, 0, Size.Depth / 2); // Center it
+				target.Y = Position.Y; // TODO: Find better way of doing this
+				if (faceRoute)
+					Face(target);
+				var lookAt =
+					Vector3.Forwards.Transform(Matrix.CreateRotationY(MathHelper.ToRadians(-(Yaw - 180) + 180)));
+				lookAt *= modifier;
+				Velocity = new Vector3(lookAt.X, Velocity.Y, lookAt.Z);
+				if (Position.DistanceTo(target) < Velocity.Distance)
+				{
+					Position = target;
+					Velocity = Vector3.Zero;
+					CurrentPath.Index++;
+					if (CurrentPath.Index >= CurrentPath.Waypoints.Count)
+					{
+						CurrentPath = null;
+						if (PathComplete != null)
+							PathComplete(this, null);
+						return true;
+					}
+				}
+			}
 
-        public override void Update(IEntityManager entityManager)
-        {
-            if (CurrentState != null)
-                CurrentState.Update(this, entityManager);
-            else
-                AdvancePath(entityManager.TimeSinceLastUpdate);
-            base.Update(entityManager);
-        }
-    }
+			return false;
+		}
+
+		public override void Update(IEntityManager entityManager)
+		{
+			if (CurrentState != null)
+				CurrentState.Update(this, entityManager);
+			else
+				AdvancePath(entityManager.TimeSinceLastUpdate);
+			base.Update(entityManager);
+		}
+	}
 }
-

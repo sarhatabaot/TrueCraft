@@ -2,52 +2,40 @@ using TrueCraft.API.Networking;
 
 namespace TrueCraft.Commands
 {
-    public class GiveMeCommand : GiveCommand
-    {
-        public override string Name
-        {
-            get { return "giveme"; }
-        }
+	public class GiveMeCommand : GiveCommand
+	{
+		public GiveMeCommand(CommandManager commands) : base(commands)
+		{
+		}
 
-        public override string[] Aliases
-        {
-            get { return new string[0]; }
-        }
+		public override string Name => "giveme";
 
-        public override string Description
-        {
-            get { return "Give yourself an amount of items."; }
-        }
+		public override string[] Aliases => new string[0];
 
-        public override void Handle(IRemoteClient client, string alias, string[] arguments)
-        {
-            if (arguments.Length < 1)
-            {
-                Help(client, alias, arguments);
-                return;
-            }
+		public override string Description => "Give yourself an amount of items.";
 
-            string itemid = arguments[0],
-                amount = "1";
+		public override void Handle(IRemoteClient client, string alias, string[] arguments)
+		{
+			if (arguments.Length < 1)
+			{
+				Help(client, alias, arguments);
+				return;
+			}
 
-            if (arguments.Length >= 2)
-                amount = arguments[1];
+			string itemid = arguments[0],
+				amount = "1";
 
-            var receivingPlayer = client;
+			if (arguments.Length >= 2)
+				amount = arguments[1];
 
-            if (!GiveItem(receivingPlayer, itemid, amount, client))
-            {
-                Help(client, alias, arguments);
-            }
-        }
+			var receivingPlayer = client;
 
-        public override void Help(IRemoteClient client, string alias, string[] arguments)
-        {
-            client.SendMessage("Correct usage is /" + alias + " <Item ID> [Amount]");
-        }
+			if (!GiveItem(receivingPlayer, itemid, amount, client)) Help(client, alias, arguments);
+		}
 
-        public GiveMeCommand(CommandManager commands) : base(commands)
-        {
-        }
-    }
+		public override void Help(IRemoteClient client, string alias, string[] arguments)
+		{
+			client.SendMessage("Correct usage is /" + alias + " <Item ID> [Amount]");
+		}
+	}
 }

@@ -1,81 +1,58 @@
 using System;
-using TrueCraft.API.Logic;
 using TrueCraft.API;
+using TrueCraft.API.Logic;
 using TrueCraft.Core.Logic.Items;
 
 namespace TrueCraft.Core.Logic.Blocks
 {
-    public class RedstoneTorchBlock : TorchBlock, ICraftingRecipe
-    {
-        public static readonly new byte BlockID = 0x4C;
-        
-        public override byte ID { get { return 0x4C; } }
-        
-        public override double BlastResistance { get { return 0; } }
+	public class RedstoneTorchBlock : TorchBlock, ICraftingRecipe
+	{
+		public new static readonly byte BlockID = 0x4C;
 
-        public override double Hardness { get { return 0; } }
+		public override byte ID => 0x4C;
 
-        public override byte Luminance { get { return 7; } }
+		public override double BlastResistance => 0;
 
-        public override bool Opaque { get { return false; } }
-        
-        public override string DisplayName { get { return "Redstone Torch"; } }
+		public override double Hardness => 0;
 
-        public override SoundEffectClass SoundEffect
-        {
-            get
-            {
-                return SoundEffectClass.Wood;
-            }
-        }
+		public override byte Luminance => 7;
 
-        public override Tuple<int, int> GetTextureMap(byte metadata)
-        {
-            return new Tuple<int, int>(3, 6);
-        }
+		public override bool Opaque => false;
 
-        public override ItemStack[,] Pattern
-        {
-            get
-            {
-                return new[,]
-                {
-                    { new ItemStack(RedstoneDustBlock.BlockID) },
-                    { new ItemStack(StickItem.ItemID) }
-                };
-            }
-        }
+		public override string DisplayName => "Redstone Torch";
 
-        public override ItemStack Output
-        {
-            get
-            {
-                return new ItemStack(BlockID);
-            }
-        }
+		public override SoundEffectClass SoundEffect => SoundEffectClass.Wood;
 
-        public override bool SignificantMetadata
-        {
-            get
-            {
-                return false;
-            }
-        }
-    }
+		public override ItemStack[,] Pattern =>
+			new[,]
+			{
+				{new ItemStack(RedstoneDustBlock.BlockID)},
+				{new ItemStack(StickItem.ItemID)}
+			};
 
-    public class InactiveRedstoneTorchBlock : RedstoneTorchBlock
-    {
-        public static readonly new byte BlockID = 0x4B;
+		public override ItemStack Output => new ItemStack(BlockID);
 
-        public override byte ID { get { return 0x4B; } }
+		public override bool SignificantMetadata => false;
 
-        public override byte Luminance { get { return 0; } }
+		public override Tuple<int, int> GetTextureMap(byte metadata)
+		{
+			return new Tuple<int, int>(3, 6);
+		}
+	}
 
-        public override string DisplayName { get { return "Redstone Torch (inactive)"; } }
+	public class InactiveRedstoneTorchBlock : RedstoneTorchBlock
+	{
+		public new static readonly byte BlockID = 0x4B;
 
-        public override Tuple<int, int> GetTextureMap(byte metadata)
-        {
-            return new Tuple<int, int>(3, 7);
-        }
-    }
+		public override byte ID => 0x4B;
+
+		public override byte Luminance => 0;
+
+		public override string DisplayName => "Redstone Torch (inactive)";
+
+		public override Tuple<int, int> GetTextureMap(byte metadata)
+		{
+			return new Tuple<int, int>(3, 7);
+		}
+	}
 }

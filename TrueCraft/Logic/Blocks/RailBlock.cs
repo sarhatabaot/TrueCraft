@@ -1,145 +1,121 @@
 using System;
-using TrueCraft.API.Logic;
 using TrueCraft.API;
+using TrueCraft.API.Logic;
 using TrueCraft.Core.Logic.Items;
 
 namespace TrueCraft.Core.Logic.Blocks
 {
-    public class RailBlock : BlockProvider, ICraftingRecipe
-    {
-        public static readonly byte BlockID = 0x42;
-        
-        public override byte ID { get { return 0x42; } }
-        
-        public override double BlastResistance { get { return 3.5; } }
+	public class RailBlock : BlockProvider, ICraftingRecipe
+	{
+		public static readonly byte BlockID = 0x42;
 
-        public override double Hardness { get { return 0.7; } }
+		public override byte ID => 0x42;
 
-        public override byte Luminance { get { return 0; } }
+		public override double BlastResistance => 3.5;
 
-        public override bool Opaque { get { return false; } }
-        
-        public override string DisplayName { get { return "Rail"; } }
+		public override double Hardness => 0.7;
 
-        public override Tuple<int, int> GetTextureMap(byte metadata)
-        {
-            return new Tuple<int, int>(0, 8);
-        }
+		public override byte Luminance => 0;
 
-        public virtual ItemStack[,] Pattern
-        {
-            get
-            {
-                return new[,]
-                {
-                    {
-                        new ItemStack(IronIngotItem.ItemID),
-                        ItemStack.EmptyStack,
-                        new ItemStack(IronIngotItem.ItemID),
-                    },
-                    {
-                        new ItemStack(IronIngotItem.ItemID),
-                        new ItemStack(StickItem.ItemID),
-                        new ItemStack(IronIngotItem.ItemID),
-                    },
-                    {
-                        new ItemStack(IronIngotItem.ItemID),
-                        ItemStack.EmptyStack,
-                        new ItemStack(IronIngotItem.ItemID),
-                    }
-                };
-            }
-        }
+		public override bool Opaque => false;
 
-        public ItemStack Output
-        {
-            get
-            {
-                return new ItemStack(BlockID);
-            }
-        }
+		public override string DisplayName => "Rail";
 
-        public bool SignificantMetadata
-        {
-            get { return false; }
-        }
-    }
+		public virtual ItemStack[,] Pattern =>
+			new[,]
+			{
+				{
+					new ItemStack(IronIngotItem.ItemID),
+					ItemStack.EmptyStack,
+					new ItemStack(IronIngotItem.ItemID)
+				},
+				{
+					new ItemStack(IronIngotItem.ItemID),
+					new ItemStack(StickItem.ItemID),
+					new ItemStack(IronIngotItem.ItemID)
+				},
+				{
+					new ItemStack(IronIngotItem.ItemID),
+					ItemStack.EmptyStack,
+					new ItemStack(IronIngotItem.ItemID)
+				}
+			};
 
-    public class PoweredRailBlock : RailBlock
-    {
-        public static readonly new byte BlockID = 0x1B;
+		public ItemStack Output => new ItemStack(BlockID);
 
-        public override byte ID { get { return 0x1B; } }
+		public bool SignificantMetadata => false;
 
-        public override string DisplayName { get { return "Powered Rail"; } }
+		public override Tuple<int, int> GetTextureMap(byte metadata)
+		{
+			return new Tuple<int, int>(0, 8);
+		}
+	}
 
-        public override Tuple<int, int> GetTextureMap(byte metadata)
-        {
-            return new Tuple<int, int>(3, 11);
-        }
+	public class PoweredRailBlock : RailBlock
+	{
+		public new static readonly byte BlockID = 0x1B;
 
-        public override ItemStack[,] Pattern
-        {
-            get
-            {
-                return new[,]
-                {
-                    {
-                        new ItemStack(IronIngotItem.ItemID),
-                        ItemStack.EmptyStack,
-                        new ItemStack(IronIngotItem.ItemID),
-                    },
-                    {
-                        new ItemStack(IronIngotItem.ItemID),
-                        new ItemStack(StickItem.ItemID),
-                        new ItemStack(IronIngotItem.ItemID),
-                    },
-                    {
-                        new ItemStack(IronIngotItem.ItemID),
-                        new ItemStack(RedstoneDustBlock.BlockID),
-                        new ItemStack(IronIngotItem.ItemID),
-                    }
-                };
-            }
-        }
-    }
+		public override byte ID => 0x1B;
 
-    public class DetectorRailBlock : RailBlock
-    {
-        public static readonly new byte BlockID = 0x1C;
+		public override string DisplayName => "Powered Rail";
 
-        public override byte ID { get { return 0x1C; } }
+		public override ItemStack[,] Pattern =>
+			new[,]
+			{
+				{
+					new ItemStack(IronIngotItem.ItemID),
+					ItemStack.EmptyStack,
+					new ItemStack(IronIngotItem.ItemID)
+				},
+				{
+					new ItemStack(IronIngotItem.ItemID),
+					new ItemStack(StickItem.ItemID),
+					new ItemStack(IronIngotItem.ItemID)
+				},
+				{
+					new ItemStack(IronIngotItem.ItemID),
+					new ItemStack(RedstoneDustBlock.BlockID),
+					new ItemStack(IronIngotItem.ItemID)
+				}
+			};
 
-        public override string DisplayName { get { return "Detector Rail"; } }
+		public override Tuple<int, int> GetTextureMap(byte metadata)
+		{
+			return new Tuple<int, int>(3, 11);
+		}
+	}
 
-        public override Tuple<int, int> GetTextureMap(byte metadata)
-        {
-            return new Tuple<int, int>(3, 12);
-        }
+	public class DetectorRailBlock : RailBlock
+	{
+		public new static readonly byte BlockID = 0x1C;
 
-        public override ItemStack[,] Pattern
-        {
-            get
-            {
-                return new[,]
-                {
-                    {
-                        new ItemStack(IronIngotItem.ItemID),
-                        ItemStack.EmptyStack,
-                        new ItemStack(IronIngotItem.ItemID),
-                    },
-                    {
-                        new ItemStack(IronIngotItem.ItemID),
-                        new ItemStack(StonePressurePlateBlock.BlockID),
-                        new ItemStack(IronIngotItem.ItemID),
-                    },
-                    {
-                        new ItemStack(IronIngotItem.ItemID),
-                        new ItemStack(RedstoneDustBlock.BlockID),
-                        new ItemStack(IronIngotItem.ItemID),
-                    }
-                };
-            }
-        }
-    }
+		public override byte ID => 0x1C;
+
+		public override string DisplayName => "Detector Rail";
+
+		public override ItemStack[,] Pattern =>
+			new[,]
+			{
+				{
+					new ItemStack(IronIngotItem.ItemID),
+					ItemStack.EmptyStack,
+					new ItemStack(IronIngotItem.ItemID)
+				},
+				{
+					new ItemStack(IronIngotItem.ItemID),
+					new ItemStack(StonePressurePlateBlock.BlockID),
+					new ItemStack(IronIngotItem.ItemID)
+				},
+				{
+					new ItemStack(IronIngotItem.ItemID),
+					new ItemStack(RedstoneDustBlock.BlockID),
+					new ItemStack(IronIngotItem.ItemID)
+				}
+			};
+
+		public override Tuple<int, int> GetTextureMap(byte metadata)
+		{
+			return new Tuple<int, int>(3, 12);
+		}
+	}
 }
