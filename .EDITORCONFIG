@@ -73,7 +73,7 @@ dotnet_style_qualification_for_method = false
 dotnet_style_qualification_for_property = false
 
 end_of_line = crlf
-indent_size = 1
+indent_size = 4
 indent_style = tab
 tab_width = 4
 insert_final_newline = false

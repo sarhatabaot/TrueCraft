@@ -20,7 +20,10 @@ namespace TrueCraft.API
 
 			if (File.Exists(configFileName))
 			{
-				var deserializer = new Deserializer();
+				var deserializer = new DeserializerBuilder()
+					.IgnoreUnmatchedProperties()
+					.Build();
+				
 				using (var file = File.OpenText(configFileName))
 					config = deserializer.Deserialize<T>(file);
 			}
