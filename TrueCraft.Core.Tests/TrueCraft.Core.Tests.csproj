@@ -13,6 +13,12 @@
     <None Remove="Files\r.0.-1.mca" />
     <None Remove="Files\r.0.0.mca" />
     <None Remove="Files\TestChunk.nbt" />
+    <None Remove="Serialization\TestFiles\bigtest.nbt" />
+    <None Remove="Serialization\TestFiles\bigtest.nbt.gz" />
+    <None Remove="Serialization\TestFiles\bigtest.nbt.z" />
+    <None Remove="Serialization\TestFiles\test.nbt" />
+    <None Remove="Serialization\TestFiles\test.nbt.gz" />
+    <None Remove="Serialization\TestFiles\test.nbt.z" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +38,24 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Files\TestChunk.nbt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Serialization\TestFiles\bigtest.nbt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Serialization\TestFiles\bigtest.nbt.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Serialization\TestFiles\bigtest.nbt.z">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Serialization\TestFiles\test.nbt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Serialization\TestFiles\test.nbt.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Serialization\TestFiles\test.nbt.z">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
