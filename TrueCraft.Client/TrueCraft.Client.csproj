@@ -379,6 +379,27 @@
     <None Include="Content\sun.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup />
+  </ItemGroup>  
+  <ItemGroup>
+		<Content Include="..\externals\fnalibs\x86\**\*.*" Condition="'$(OS)' == 'Windows_NT' AND '$(Platform)' != 'x64'">
+			<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\externals\fnalibs\x64\**\*.*" Condition="'$(OS)' == 'Windows_NT' AND '$(Platform)' != 'x86'">
+			<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\externals\fnalibs\osx\**\*.*" Condition="'$(OS)' != 'Windows_NT'" >
+			<Link>osx\%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\externals\fnalibs\lib\**\*.*" Condition="'$(OS)' != 'Windows_NT'" >
+			<Link>lib\%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\externals\fnalibs\lib64\**\*.*" Condition="'$(OS)' != 'Windows_NT'" >
+			<Link>lib64\%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 </Project>
