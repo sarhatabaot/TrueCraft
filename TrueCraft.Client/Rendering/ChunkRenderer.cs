@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TrueCraft.API;
 using TrueCraft.API.Logic;
 using TrueCraft.Core.World;
@@ -268,18 +267,5 @@ namespace TrueCraft.Client.Rendering
 			public readonly List<VertexPositionNormalColorTexture> Verticies
 				= new List<VertexPositionNormalColorTexture>();
 		}
-	}
-
-	[Flags]
-	public enum VisibleFaces
-	{
-		None = 0,
-		North = 1,
-		South = 2,
-		East = 4,
-		West = 8,
-		Top = 16,
-		Bottom = 32,
-		All = North | South | East | West | Top | Bottom
 	}
 }

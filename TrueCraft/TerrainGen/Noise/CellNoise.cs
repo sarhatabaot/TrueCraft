@@ -289,21 +289,4 @@ namespace TrueCraft.Core.TerrainGen.Noise
 			return (((OFFSET_BASIS ^ i) * FNV_PRIME) ^ j) * FNV_PRIME;
 		}
 	}
-
-	public enum CombinationFunctions
-	{
-		D1,
-		D2MINUSD1,
-		D3MINUSD1
-	}
-
-	public enum DistanceType
-	{
-		EUCLIDEAN3D,
-		EUCLIDEAN2D,
-		MANHATTAN3D,
-		MANHATTAN2D,
-		CHEBYSHEV3D,
-		CHEBYSHEV2D
-	}
 }

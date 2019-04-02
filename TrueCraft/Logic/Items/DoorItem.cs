@@ -78,36 +78,4 @@ namespace TrueCraft.Core.Logic.Items
 			user.Inventory[user.SelectedSlot] = item;
 		}
 	}
-
-	public class IronDoorItem : DoorItem
-	{
-		public static readonly short ItemID = 0x14A;
-
-		public override short ID => 0x14A;
-
-		public override string DisplayName => "Iron Door";
-
-		protected override byte BlockID => IronDoorBlock.BlockID;
-
-		public override Tuple<int, int> GetIconTexture(byte metadata)
-		{
-			return new Tuple<int, int>(12, 2);
-		}
-	}
-
-	public class WoodenDoorItem : DoorItem
-	{
-		public static readonly short ItemID = 0x144;
-
-		public override short ID => 0x144;
-
-		public override string DisplayName => "Wooden Door";
-
-		protected override byte BlockID => WoodenDoorBlock.BlockID;
-
-		public override Tuple<int, int> GetIconTexture(byte metadata)
-		{
-			return new Tuple<int, int>(11, 2);
-		}
-	}
 }

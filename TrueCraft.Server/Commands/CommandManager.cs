@@ -61,8 +61,4 @@ namespace TrueCraft.Commands
 			return Commands.FirstOrDefault(c => c.Aliases.Contains(alias /*, StringComparer.OrdinalIgnoreCase*/));
 		}
 	}
-
-	public class DoNotAutoLoadAttribute : Attribute
-	{
-	}
 }

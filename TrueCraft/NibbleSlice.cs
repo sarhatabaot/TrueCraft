@@ -1,5 +1,4 @@
 using System;
-using System.Collections.ObjectModel;
 using fNbt;
 using fNbt.Serialization;
 
@@ -59,16 +58,5 @@ namespace TrueCraft.API
 			Buffer.BlockCopy(Data, Offset, array, 0, Length);
 			return array;
 		}
-	}
-
-	public class ReadOnlyNibbleArray
-	{
-		public ReadOnlyNibbleArray(NibbleSlice array) => NibbleArray = array;
-
-		private NibbleSlice NibbleArray { get; }
-
-		public byte this[int index] => NibbleArray[index];
-
-		public ReadOnlyCollection<byte> Data => Array.AsReadOnly(NibbleArray.Data);
 	}
 }

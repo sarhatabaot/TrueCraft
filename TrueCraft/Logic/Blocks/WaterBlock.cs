@@ -33,13 +33,4 @@ namespace TrueCraft.Core.Logic.Blocks
 			return new Tuple<int, int>(13, 12);
 		}
 	}
-
-	public class StationaryWaterBlock : WaterBlock
-	{
-		public new static readonly byte BlockID = 0x09;
-
-		public override byte ID => 0x09;
-
-		public override string DisplayName => "Water (stationary)";
-	}
 }

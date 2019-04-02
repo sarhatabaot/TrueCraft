@@ -20,8 +20,6 @@ using TrueCraft.Core.Windows;
 
 namespace TrueCraft.Client
 {
-	public delegate void PacketHandler(IPacket packet, MultiplayerClient client);
-
 	public class
 		MultiplayerClient : IAABBEntity, INotifyPropertyChanged, IDisposable // TODO: Make IMultiplayerClient and so on
 	{

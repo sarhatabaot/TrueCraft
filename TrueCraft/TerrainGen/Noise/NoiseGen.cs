@@ -70,10 +70,4 @@ namespace TrueCraft.Core.TerrainGen.Noise
 			return LinearInterpolate(Point0, Point1, z);
 		}
 	}
-
-	public enum InterpolateType
-	{
-		COSINE,
-		LINEAR
-	}
 }

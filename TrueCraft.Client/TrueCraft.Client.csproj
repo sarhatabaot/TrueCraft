@@ -85,6 +85,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FontChar.cs" />
+    <Compile Include="FontCommon.cs" />
+    <Compile Include="FontInfo.cs" />
+    <Compile Include="FontKerning.cs" />
+    <Compile Include="FontLoader.cs" />
+    <Compile Include="FontPage.cs" />
     <Compile Include="Input\KeyboardEventArgs.cs" />
     <Compile Include="Input\KeyboardKeyEventArgs.cs" />
     <Compile Include="Input\MouseButton.cs" />
@@ -92,8 +98,10 @@
     <Compile Include="Input\MouseEventArgs.cs" />
     <Compile Include="Input\MouseMoveEventArgs.cs" />
     <Compile Include="Input\MouseScrollEventArgs.cs" />
+    <Compile Include="PacketHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadOnlyChunk.cs" />
     <Compile Include="Rendering\Blocks\CobwebRenderer.cs" />
     <Compile Include="Rendering\Blocks\SlabRenderer.cs" />
     <Compile Include="Rendering\Camera.cs" />
@@ -103,11 +111,12 @@
     <Compile Include="Rendering\Renderer.cs" />
     <Compile Include="Rendering\RendererEventArgs.cs" />
     <Compile Include="Rendering\TextureMapper.cs" />
+    <Compile Include="Rendering\VisibleFaces.cs" />
     <Compile Include="TrueCraftGame.cs" />
     <Compile Include="MultiplayerClient.cs" />
     <Compile Include="Handlers\PacketHandlers.cs" />
     <Compile Include="Events\ChatMessageEventArgs.cs" />
-    <Compile Include="BMFont.cs" />
+    <Compile Include="FontFile.cs" />
     <Compile Include="ReadOnlyWorld.cs" />
     <Compile Include="Events\ChunkEventArgs.cs" />
     <Compile Include="Rendering\Mesh.cs" />

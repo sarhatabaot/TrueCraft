@@ -28,20 +28,4 @@ namespace JetBrains.Annotations
 	internal sealed class CanBeNullAttribute : Attribute
 	{
 	}
-
-
-	/// <summary> Indicates that the value of marked element could never be <c>null</c>. </summary>
-	[AttributeUsage(
-		AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Delegate |
-		AttributeTargets.Field)]
-	internal sealed class NotNullAttribute : Attribute
-	{
-	}
-
-
-	/// <summary> Indicates that method doesn't contain observable side effects. </summary>
-	[AttributeUsage(AttributeTargets.Method)]
-	internal sealed class PureAttribute : Attribute
-	{
-	}
 }
