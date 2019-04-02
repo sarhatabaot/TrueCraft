@@ -238,7 +238,7 @@ namespace TrueCraft.Client
                         PacketHandlers[packet.ID](packet, this);
                 }
                 
-                if (sem != null)
+                if (sem.CurrentCount == 0 && sem != null)
                     sem.Release();
             }
             else
@@ -375,7 +375,8 @@ namespace TrueCraft.Client
             {
                 Disconnect();
 
-                sem.Dispose();
+                if(sem != null)
+                    sem.Dispose();
             }
 
             sem = null;

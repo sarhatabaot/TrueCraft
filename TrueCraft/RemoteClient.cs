@@ -362,7 +362,7 @@ namespace TrueCraft
                     return;
                 }
 
-                if (sem != null)
+                if (sem.CurrentCount == 0 && sem != null)
                     sem.Release();
             }
             else
@@ -563,7 +563,8 @@ namespace TrueCraft
 
                 Disconnect();
 
-                sem.Dispose();
+                if(sem != null)
+                    sem.Dispose();
 
                 if (Disposed != null)
                     Disposed(this, null);
