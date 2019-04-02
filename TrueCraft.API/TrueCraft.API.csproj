@@ -22,10 +22,6 @@
   <ItemGroup>
     <PackageReference Include="YamlDotNet" Version="6.0.0" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <ProjectReference Include="..\fNbt\fNbt.csproj" />
-  </ItemGroup>
 
   <Target Name="MergeLinkedSource" BeforeTargets="Build" Condition="'$(Configuration)'!='Package'">
     <Copy SourceFiles="%(Content.Identity)" DestinationFiles="%(Content.Link)" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" Condition="'%(Content.Link)' != ''" />
