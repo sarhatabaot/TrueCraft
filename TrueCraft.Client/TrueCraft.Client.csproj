@@ -167,10 +167,6 @@
       <Project>{9E5BD0CC-F6DC-4232-8613-0047022D99E7}</Project>
       <Name>TrueCraft.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TrueCraft.Profiling\TrueCraft.Profiling.csproj">
-      <Project>{9395b1ea-ed5e-49d7-9abf-42820490e571}</Project>
-      <Name>TrueCraft.Profiling</Name>
-    </ProjectReference>
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

@@ -19,17 +19,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fNbt.Test", "fNbt.Test\fNbt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fNbt", "fNbt\fNbt.csproj", "{A93F9684-222D-40FB-B477-3D7F9A056714}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueCraft.API.Tests", "TrueCraft.API.Tests\TrueCraft.API.Tests.csproj", "{4C5128BA-FB2E-4978-BB21-11B7F131BD7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrueCraft.API.Tests", "TrueCraft.API.Tests\TrueCraft.API.Tests.csproj", "{4C5128BA-FB2E-4978-BB21-11B7F131BD7D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrueCraft.API", "TrueCraft.API\TrueCraft.API.csproj", "{C3895DFA-85C5-4F44-AC19-FCD790A150A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueCraft.Core.Tests", "TrueCraft.Core.Tests\TrueCraft.Core.Tests.csproj", "{E91CD37D-E4E0-40B6-BF86-A4CF52EEC25F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrueCraft.Core.Tests", "TrueCraft.Core.Tests\TrueCraft.Core.Tests.csproj", "{E91CD37D-E4E0-40B6-BF86-A4CF52EEC25F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrueCraft.Core", "TrueCraft.Core\TrueCraft.Core.csproj", "{9E5BD0CC-F6DC-4232-8613-0047022D99E7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrueCraft.Profiling", "TrueCraft.Profiling\TrueCraft.Profiling.csproj", "{9395B1EA-ED5E-49D7-9ABF-42820490E571}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueCraft.Server.Core", "TrueCraft.Server.Core\TrueCraft.Server.Core.csproj", "{394CB01D-9B0D-4CD5-80CF-CE087DF7CE5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrueCraft.Server.Core", "TrueCraft.Server.Core\TrueCraft.Server.Core.csproj", "{394CB01D-9B0D-4CD5-80CF-CE087DF7CE5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -171,18 +169,6 @@ Global
 		{9E5BD0CC-F6DC-4232-8613-0047022D99E7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9E5BD0CC-F6DC-4232-8613-0047022D99E7}.Release|x64.ActiveCfg = Release|Any CPU
 		{9E5BD0CC-F6DC-4232-8613-0047022D99E7}.Release|x64.Build.0 = Release|Any CPU
-		{9395B1EA-ED5E-49D7-9ABF-42820490E571}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9395B1EA-ED5E-49D7-9ABF-42820490E571}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9395B1EA-ED5E-49D7-9ABF-42820490E571}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{9395B1EA-ED5E-49D7-9ABF-42820490E571}.Debug|x64.Build.0 = Debug|Any CPU
-		{9395B1EA-ED5E-49D7-9ABF-42820490E571}.Optimized Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9395B1EA-ED5E-49D7-9ABF-42820490E571}.Optimized Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9395B1EA-ED5E-49D7-9ABF-42820490E571}.Optimized Debug|x64.ActiveCfg = Debug|Any CPU
-		{9395B1EA-ED5E-49D7-9ABF-42820490E571}.Optimized Debug|x64.Build.0 = Debug|Any CPU
-		{9395B1EA-ED5E-49D7-9ABF-42820490E571}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9395B1EA-ED5E-49D7-9ABF-42820490E571}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9395B1EA-ED5E-49D7-9ABF-42820490E571}.Release|x64.ActiveCfg = Release|Any CPU
-		{9395B1EA-ED5E-49D7-9ABF-42820490E571}.Release|x64.Build.0 = Release|Any CPU
 		{394CB01D-9B0D-4CD5-80CF-CE087DF7CE5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{394CB01D-9B0D-4CD5-80CF-CE087DF7CE5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{394CB01D-9B0D-4CD5-80CF-CE087DF7CE5E}.Debug|x64.ActiveCfg = Debug|Any CPU

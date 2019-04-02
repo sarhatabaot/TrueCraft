@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TrueCraft.API\TrueCraft.API.csproj" />
-    <ProjectReference Include="..\TrueCraft.Profiling\TrueCraft.Profiling.csproj" />
   </ItemGroup>
 
 </Project>

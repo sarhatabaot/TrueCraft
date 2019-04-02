@@ -83,10 +83,6 @@
       <Project>{9e5bd0cc-f6dc-4232-8613-0047022d99e7}</Project>
       <Name>TrueCraft.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TrueCraft.Profiling\TrueCraft.Profiling.csproj">
-      <Project>{9395b1ea-ed5e-49d7-9abf-42820490e571}</Project>
-      <Name>TrueCraft.Profiling</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TrueCraft.Server.Core\TrueCraft.Server.Core.csproj">
       <Project>{394CB01D-9B0D-4CD5-80CF-CE087DF7CE5E}</Project>
       <Name>TrueCraft.Server.Core</Name>
