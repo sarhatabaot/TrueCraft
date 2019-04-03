@@ -43,7 +43,7 @@ namespace TrueCraft.Core.Logic.Blocks
 		{
 			world.SetMetadata(descriptor.Coordinates,
 				(byte) MathHelper.DirectionByRotation(user.Entity.Position, user.Entity.Yaw,
-					descriptor.Coordinates, true));
+					descriptor.Coordinates.AsVector3(), true));
 		}
 	}
 }

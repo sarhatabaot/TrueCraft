@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Logic;
 using TrueCraft.API.Networking;
@@ -17,6 +18,7 @@ using TrueCraft.Core.Networking;
 using TrueCraft.Core.Networking.Packets;
 using TrueCraft.Core.Physics;
 using TrueCraft.Core.Windows;
+using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Client
 {
@@ -294,8 +296,8 @@ namespace TrueCraft.Client
 		{
 			get
 			{
-				var pos = Position - new Vector3(Width / 2, 0, Depth / 2);
-				return new BoundingBox(pos, pos + Size);
+				var pos = Position - new Vector3((float) (Width / 2), 0f, (float) (Depth / 2));
+				return new BoundingBox(pos, pos + Size.AsVector3());
 			}
 		}
 

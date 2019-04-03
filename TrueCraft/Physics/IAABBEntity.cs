@@ -1,4 +1,6 @@
-﻿namespace TrueCraft.API.Physics
+﻿using Microsoft.Xna.Framework;
+
+namespace TrueCraft.API.Physics
 {
 	public interface IAABBEntity : IPhysicsEntity
 	{

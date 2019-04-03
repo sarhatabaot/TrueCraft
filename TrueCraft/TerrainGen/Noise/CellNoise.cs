@@ -18,6 +18,7 @@
  */
 
 using System;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 
 namespace TrueCraft.Core.TerrainGen.Noise
@@ -85,7 +86,7 @@ namespace TrueCraft.Core.TerrainGen.Noise
 					featurePoint = new Vector3(randomDiff.X + cubeX, randomDiff.Y + cubeY, 0);
 					//5. Find the feature point closest to the evaluation point.
 					//This is done by inserting the distances to the feature points into a sorted list
-					insert(Distances, Distance(new Vector3(X, Y, 0), featurePoint));
+					insert(Distances, Distance(new Vector3((float) X, (float) Y, 0), featurePoint));
 				}
 			}
 
@@ -133,7 +134,7 @@ namespace TrueCraft.Core.TerrainGen.Noise
 					featurePoint = new Vector3(randomDiff.X + cubeX, randomDiff.Y + cubeY, randomDiff.Z + cubeZ);
 					//5. Find the feature point closest to the evaluation point.
 					//This is done by inserting the distances to the feature points into a sorted list
-					insert(Distances, Distance(new Vector3(X, Y, Z), featurePoint));
+					insert(Distances, Distance(new Vector3((float) X, (float) Y, (float) Z), featurePoint));
 				}
 
 				//6. Check the neighboring cubes to ensure their are no closer evaluation points.

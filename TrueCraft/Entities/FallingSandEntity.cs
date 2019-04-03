@@ -1,16 +1,18 @@
 ﻿using System.Linq;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Networking;
 using TrueCraft.API.Physics;
 using TrueCraft.Core.Logic;
 using TrueCraft.Core.Logic.Blocks;
 using TrueCraft.Core.Networking.Packets;
+using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Entities
 {
 	public class FallingSandEntity : ObjectEntity, IAABBEntity
 	{
-		public FallingSandEntity(Vector3 position) => _Position = position + new Vector3(0.5);
+		public FallingSandEntity(Vector3 position) => _Position = position + new Vector3(0.5f);
 
 		public override byte EntityType => 70;
 
@@ -36,13 +38,13 @@ namespace TrueCraft.Core.Entities
 				var position = (Coordinates3D) collisionPoint + Coordinates3D.Up;
 				var hit = World.BlockRepository.GetBlockProvider(World.GetBlockID(position));
 				if (hit.BoundingBox == null && !BlockProvider.Overwritable.Any(o => o == hit.ID))
-					EntityManager.SpawnEntity(new ItemEntity(position + new Vector3(0.5), new ItemStack(id)));
+					EntityManager.SpawnEntity(new ItemEntity(position.AsVector3() + new Vector3(0.5f), new ItemStack(id)));
 				else
 					World.SetBlockID(position, id);
 			}
 		}
 
-		public BoundingBox BoundingBox => new BoundingBox(Position - Size / 2, Position + Size / 2);
+		public BoundingBox BoundingBox => new BoundingBox(Position - Size.AsVector3() / 2, Position + Size.AsVector3() / 2);
 
 		public bool BeginUpdate()
 		{

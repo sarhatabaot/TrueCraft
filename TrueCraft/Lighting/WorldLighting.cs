@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Logic;
 using TrueCraft.API.World;
 using TrueCraft.Core.World;
 using TrueCraft.Profiling;
+using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Lighting
 {
@@ -141,7 +143,7 @@ namespace TrueCraft.Core.Lighting
 					return;
 			}
 
-			EnqueueOperation(new BoundingBox(new Vector3(x, y, z), new Vector3(x, y, z) + 1), op.SkyLight, op.Initial);
+			EnqueueOperation(new BoundingBox(new Vector3(x, y, z), new Vector3(x + 1, y + 1, z + 1)), op.SkyLight, op.Initial);
 		}
 
 		/// <summary>

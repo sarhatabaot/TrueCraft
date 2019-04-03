@@ -41,18 +41,18 @@ namespace TrueCraft.Handlers
 				remoteClient.ChunkRadius = 2;
 
 				if (!remoteClient.Load())
-					remoteClient.Entity.Position = remoteClient.World.SpawnPoint;
+					remoteClient.Entity.Position = remoteClient.World.SpawnPoint.AsVector3();
 				// Make sure they don't spawn in the ground
 				var collision = new Func<bool>(() =>
 				{
 					var feet = client.World.GetBlockID((Coordinates3D) client.Entity.Position);
-					var head = client.World.GetBlockID((Coordinates3D) (client.Entity.Position + Vector3.Up));
+					var head = client.World.GetBlockID((Coordinates3D) (client.Entity.Position + Directions.Up));
 					var feetBox = server.BlockRepository.GetBlockProvider(feet).BoundingBox;
 					var headBox = server.BlockRepository.GetBlockProvider(head).BoundingBox;
 					return feetBox != null || headBox != null;
 				});
 				while (collision())
-					client.Entity.Position += Vector3.Up;
+					client.Entity.Position += Directions.Up;
 
 				var entityManager = server.GetEntityManagerForWorld(remoteClient.World);
 				entityManager.SpawnEntity(remoteClient.Entity);

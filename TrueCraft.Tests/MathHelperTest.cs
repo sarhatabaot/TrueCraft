@@ -24,12 +24,12 @@ namespace TrueCraft.Core.Test
 		{
 			var inputs = new[]
 			{
-				Vector3.Down,
-				Vector3.Up,
-				Vector3.Left,
-				Vector3.Right,
-				Vector3.Forwards,
-				Vector3.Backwards
+				Directions.Down,
+				Directions.Up,
+				Directions.Left,
+				Directions.Right,
+				Directions.Forwards,
+				Directions.Backwards
 			};
 			var results = new[]
 			{

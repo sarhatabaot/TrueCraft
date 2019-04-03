@@ -1,6 +1,7 @@
 using System;
-using TrueCraft.API;
+using Microsoft.Xna.Framework;
 using TrueCraft.API.Logic;
+using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Logic.Blocks
 {
@@ -30,7 +31,7 @@ namespace TrueCraft.Core.Logic.Blocks
 		public override BoundingBox? BoundingBox => null;
 
 		public override BoundingBox? InteractiveBoundingBox =>
-			new BoundingBox(new Vector3(1 / 16.0, 0, 1 / 16.0), new Vector3(14 / 16.0));
+			new BoundingBox(new Vector3(1 / 16.0f, 0, 1 / 16.0f), new Vector3(14f / 16.0f));
 
 		public TimeSpan BurnTime => TimeSpan.FromSeconds(5);
 

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Vector3 = TrueCraft.API.Vector3;
 
 namespace TrueCraft.Client.Rendering
 {

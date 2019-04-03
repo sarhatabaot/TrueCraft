@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace TrueCraft.API
 {
@@ -48,8 +49,8 @@ namespace TrueCraft.API
 		/// <param name="b">The bounding box to clone.</param>
 		public BoundingBox(BoundingBox b)
 		{
-			Min = new Vector3(b.Min);
-			Max = new Vector3(b.Max);
+			Min = b.Min;
+			Max = b.Max;
 		}
 
 		#endregion Public Constructors

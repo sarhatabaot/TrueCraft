@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using fNbt;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Logic;
 using TrueCraft.API.Networking;
@@ -165,7 +166,7 @@ namespace TrueCraft.Core.Logic.Blocks
 				{
 					var manager = user.Server.GetEntityManagerForWorld(world);
 					var slot = ItemStack.FromNbt((NbtCompound) item);
-					manager.SpawnEntity(new ItemEntity(descriptor.Coordinates + new Vector3(0.5), slot));
+					manager.SpawnEntity(new ItemEntity(descriptor.Coordinates.AsVector3() + new Vector3(0.5f), slot));
 				}
 
 				world.SetTileEntity(descriptor.Coordinates, null);

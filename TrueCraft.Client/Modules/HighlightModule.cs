@@ -4,8 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using TrueCraft.API;
 using TrueCraft.Client.Rendering;
 using Matrix = Microsoft.Xna.Framework.Matrix;
-using XVector3 = Microsoft.Xna.Framework.Vector3;
-using TVector3 = TrueCraft.API.Vector3;
 using TRay = TrueCraft.API.Ray;
 
 namespace TrueCraft.Client.Modules
@@ -22,14 +20,14 @@ namespace TrueCraft.Client.Modules
 			var color = Color.Black;
 			CubeVerticies = new[]
 			{
-				new VertexPositionColor(new XVector3(0, 0, 1), color),
-				new VertexPositionColor(new XVector3(1, 0, 1), color),
-				new VertexPositionColor(new XVector3(1, 1, 1), color),
-				new VertexPositionColor(new XVector3(0, 1, 1), color),
-				new VertexPositionColor(new XVector3(0, 0, 0), color),
-				new VertexPositionColor(new XVector3(1, 0, 0), color),
-				new VertexPositionColor(new XVector3(1, 1, 0), color),
-				new VertexPositionColor(new XVector3(0, 1, 0), color)
+				new VertexPositionColor(new Vector3(0, 0, 1), color),
+				new VertexPositionColor(new Vector3(1, 0, 1), color),
+				new VertexPositionColor(new Vector3(1, 1, 1), color),
+				new VertexPositionColor(new Vector3(0, 1, 1), color),
+				new VertexPositionColor(new Vector3(0, 0, 0), color),
+				new VertexPositionColor(new Vector3(1, 0, 0), color),
+				new VertexPositionColor(new Vector3(1, 1, 0), color),
+				new VertexPositionColor(new Vector3(0, 1, 0), color)
 			};
 			CubeIndicies = new short[]
 			{
@@ -83,19 +81,19 @@ namespace TrueCraft.Client.Modules
 			};
 			for (var i = 0; i < texture.Length; i++)
 				texture[i] *= new Vector2(16f / 256f);
-			var verticies = BlockRenderer.CreateUniformCube(XVector3.Zero,
+			var verticies = BlockRenderer.CreateUniformCube(Vector3.Zero,
 				texture, VisibleFaces.All, 0, out indicies, Color.White);
 			ProgressMesh = new Mesh(Game, verticies, indicies);
 		}
 
 		public void Update(GameTime gameTime)
 		{
-			var direction = XVector3.Transform(XVector3.UnitZ,
+			var direction = Vector3.Transform(Vector3.UnitZ,
 				Matrix.CreateRotationX(MathHelper.ToRadians(Game.Client.Pitch)) *
 				Matrix.CreateRotationY(MathHelper.ToRadians(-(Game.Client.Yaw - 180) + 180)));
 
 			var cast = VoxelCast.Cast(Game.Client.World,
-				new TRay(Game.Camera.Position, new TVector3(direction.X, direction.Y, direction.Z)),
+				new TRay(Game.Camera.Position, new Vector3(direction.X, direction.Y, direction.Z)),
 				Game.BlockRepository, TrueCraftGame.Reach, TrueCraftGame.Reach + 2);
 
 			if (cast == null)
@@ -112,13 +110,13 @@ namespace TrueCraft.Client.Modules
 
 					DestructionEffect.World = HighlightEffect.World = Matrix.Identity
 					                                                  * Matrix.CreateScale(
-						                                                  new XVector3((float) box.Width,
+						                                                  new Vector3((float) box.Width,
 							                                                  (float) box.Height, (float) box.Depth))
 					                                                  * Matrix.CreateTranslation(
-						                                                  new XVector3((float) box.Min.X,
+						                                                  new Vector3((float) box.Min.X,
 							                                                  (float) box.Min.Y, (float) box.Min.Z))
 					                                                  * Matrix.CreateTranslation(
-						                                                  new XVector3(cast.Item1.X, cast.Item1.Y,
+						                                                  new Vector3(cast.Item1.X, cast.Item1.Y,
 							                                                  cast.Item1.Z));
 				}
 			}

@@ -1,4 +1,5 @@
-﻿using TrueCraft.API;
+﻿using Microsoft.Xna.Framework;
+using TrueCraft.API;
 
 namespace TrueCraft.Core.Entities
 {

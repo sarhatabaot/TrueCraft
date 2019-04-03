@@ -1,7 +1,9 @@
 using System;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Logic;
 using TrueCraft.Core.Logic.Items;
+using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Logic.Blocks
 {
@@ -28,7 +30,7 @@ namespace TrueCraft.Core.Logic.Blocks
 		public override SoundEffectClass SoundEffect => SoundEffectClass.Snow;
 
 		public override BoundingBox? InteractiveBoundingBox =>
-			new BoundingBox(Vector3.Zero, new Vector3(1, 1 / 16.0, 1));
+			new BoundingBox(Vector3.Zero, new Vector3(1, 1 / 16.0f, 1));
 
 		public override ToolType EffectiveTools => ToolType.Shovel;
 

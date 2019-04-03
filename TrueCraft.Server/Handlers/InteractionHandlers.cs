@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Linq;
 using fNbt;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Logic;
 using TrueCraft.API.Networking;
 using TrueCraft.API.Server;
-using TrueCraft.Core;
 using TrueCraft.Core.Entities;
 using TrueCraft.Core.Logic;
 using TrueCraft.Core.Logic.Blocks;
 using TrueCraft.Core.Logic.Items;
 using TrueCraft.Core.Networking.Packets;
 using TrueCraft.Core.Windows;
+using MathHelper = TrueCraft.Core.MathHelper;
 
 namespace TrueCraft.Handlers
 {
@@ -37,9 +38,8 @@ namespace TrueCraft.Handlers
 					spawned.Count = 1;
 					var inventory = client.SelectedItem;
 					inventory.Count--;
-					var item = new ItemEntity(client.Entity.Position + new Vector3(0, PlayerEntity.Height, 0), spawned);
-					item.Velocity =
-						MathHelper.RotateY(Vector3.Forwards, MathHelper.DegreesToRadians(client.Entity.Yaw)) * 0.5;
+					var item = new ItemEntity(client.Entity.Position + new Vector3(0, (float) PlayerEntity.Height, 0), spawned);
+					item.Velocity = MathHelper.RotateY(Directions.Forwards, MathHelper.DegreesToRadians(client.Entity.Yaw)) * (float) 0.5;
 					client.Inventory[client.SelectedSlot] = inventory;
 					server.GetEntityManagerForWorld(client.World).SpawnEntity(item);
 					break;
@@ -199,17 +199,17 @@ namespace TrueCraft.Handlers
 					spawned.Count = 1;
 					var inventory = client.ItemStaging;
 					inventory.Count--;
-					item = new ItemEntity(client.Entity.Position + new Vector3(0, PlayerEntity.Height, 0), spawned);
+					item = new ItemEntity(client.Entity.Position + new Vector3(0, (float) PlayerEntity.Height, 0), spawned);
 					client.ItemStaging = inventory;
 				}
 				else
 				{
-					item = new ItemEntity(client.Entity.Position + new Vector3(0, PlayerEntity.Height, 0),
+					item = new ItemEntity(client.Entity.Position + new Vector3(0, (float) PlayerEntity.Height, 0),
 						client.ItemStaging);
 					client.ItemStaging = ItemStack.EmptyStack;
 				}
 
-				item.Velocity = MathHelper.FowardVector(client.Entity.Yaw) * 0.3;
+				item.Velocity = MathHelper.FowardVector(client.Entity.Yaw) * 0.3f;
 				server.GetEntityManagerForWorld(client.World).SpawnEntity(item);
 				return;
 			}
@@ -274,7 +274,7 @@ namespace TrueCraft.Handlers
 			var packet = (UpdateSignPacket) _packet;
 			var client = (RemoteClient) _client;
 			var coords = new Coordinates3D(packet.X, packet.Y, packet.Z);
-			if (client.Entity.Position.DistanceTo(coords) < 10) // TODO: Reach
+			if (client.Entity.Position.DistanceTo(coords.AsVector3()) < 10) // TODO: Reach
 			{
 				var block = client.World.GetBlockID(coords);
 				if (block == UprightSignBlock.BlockID || block == WallSignBlock.BlockID)

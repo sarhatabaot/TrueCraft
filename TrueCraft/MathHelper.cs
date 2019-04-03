@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.Core.World;
 
@@ -115,13 +116,13 @@ namespace TrueCraft.Core
 			switch (value)
 			{
 				case Direction.East:
-					return Vector3.East;
+					return Directions.East;
 				case Direction.West:
-					return Vector3.West;
+					return Directions.West;
 				case Direction.North:
-					return Vector3.North;
+					return Directions.North;
 				case Direction.South:
-					return Vector3.South;
+					return Directions.South;
 				default:
 					return Vector3.Zero;
 			}
@@ -131,7 +132,7 @@ namespace TrueCraft.Core
 		{
 			var angle = Math.Asin((a.X - b.X) / Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Z - b.Z, 2)));
 			if (a.Z > b.Z) angle += Math.PI;
-			return RotateY(Vector3.Forwards, angle);
+			return RotateY(Directions.Forwards, angle);
 		}
 
 		public static Vector3 RotateX(Vector3 vector, double rotation) // TODO: Matrix
@@ -139,25 +140,25 @@ namespace TrueCraft.Core
 			rotation = -rotation; // the algorithms I found were left-handed
 			return new Vector3(
 				vector.X,
-				vector.Y * Math.Cos(rotation) - vector.Z * Math.Sin(rotation),
-				vector.Y * Math.Sin(rotation) + vector.Z * Math.Cos(rotation));
+				(float) (vector.Y * Math.Cos(rotation) - vector.Z * Math.Sin(rotation)),
+				(float) (vector.Y * Math.Sin(rotation) + vector.Z * Math.Cos(rotation)));
 		}
 
 		public static Vector3 RotateY(Vector3 vector, double rotation)
 		{
 			rotation = -rotation; // the algorithms I found were left-handed
 			return new Vector3(
-				vector.Z * Math.Sin(rotation) + vector.X * Math.Cos(rotation),
+				(float) (vector.Z * Math.Sin(rotation) + vector.X * Math.Cos(rotation)),
 				vector.Y,
-				vector.Z * Math.Cos(rotation) - vector.X * Math.Sin(rotation));
+				(float) (vector.Z * Math.Cos(rotation) - vector.X * Math.Sin(rotation)));
 		}
 
 		public static Vector3 RotateZ(Vector3 vector, double rotation)
 		{
 			rotation = -rotation; // the algorithms I found were left-handed
 			return new Vector3(
-				vector.X * Math.Cos(rotation) - vector.Y * Math.Sin(rotation),
-				vector.X * Math.Sin(rotation) + vector.Y * Math.Cos(rotation),
+				(float) (vector.X * Math.Cos(rotation) - vector.Y * Math.Sin(rotation)),
+				(float) (vector.X * Math.Sin(rotation) + vector.Y * Math.Cos(rotation)),
 				vector.Z);
 		}
 

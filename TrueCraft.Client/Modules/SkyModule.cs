@@ -120,7 +120,7 @@ namespace TrueCraft.Client.Modules
 
 			var position = Game.Camera.Position;
 			var yaw = Game.Camera.Yaw;
-			Game.Camera.Position = API.Vector3.Zero;
+			Game.Camera.Position = Vector3.Zero;
 			Game.Camera.Yaw = 0;
 			Game.Camera.ApplyTo(SkyPlaneEffect);
 			Game.Camera.Yaw = yaw;

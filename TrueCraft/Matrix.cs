@@ -3,6 +3,7 @@
 // file 'LICENSE.txt', which is part of this source code package.
 
 using System;
+using Microsoft.Xna.Framework;
 
 namespace TrueCraft.API
 {
@@ -251,7 +252,7 @@ namespace TrueCraft.API
 		/// </summary>
 		public Vector3 Backward
 		{
-			get { return new Vector3(this.M31, this.M32, this.M33); }
+			get { return new Vector3((float) this.M31, (float) this.M32, (float) this.M33); }
 			set
 			{
 				this.M31 = value.X;
@@ -265,7 +266,7 @@ namespace TrueCraft.API
 		/// </summary>
 		public Vector3 Down
 		{
-			get { return new Vector3(-this.M21, -this.M22, -this.M23); }
+			get { return new Vector3((float) -this.M21, (float) -this.M22, (float) -this.M23); }
 			set
 			{
 				this.M21 = -value.X;
@@ -279,7 +280,7 @@ namespace TrueCraft.API
 		/// </summary>
 		public Vector3 Forward
 		{
-			get { return new Vector3(-this.M31, -this.M32, -this.M33); }
+			get { return new Vector3((float) -this.M31, (float) -this.M32, (float) -this.M33); }
 			set
 			{
 				this.M31 = -value.X;
@@ -301,7 +302,7 @@ namespace TrueCraft.API
 		/// </summary>
 		public Vector3 Left
 		{
-			get { return new Vector3(-this.M11, -this.M12, -this.M13); }
+			get { return new Vector3((float) -this.M11, (float) -this.M12, (float) -this.M13); }
 			set
 			{
 				this.M11 = -value.X;
@@ -315,7 +316,7 @@ namespace TrueCraft.API
 		/// </summary>
 		public Vector3 Right
 		{
-			get { return new Vector3(this.M11, this.M12, this.M13); }
+			get { return new Vector3((float) this.M11, (float) this.M12, (float) this.M13); }
 			set
 			{
 				this.M11 = value.X;
@@ -329,7 +330,7 @@ namespace TrueCraft.API
 		/// </summary>
 		public Vector3 Translation
 		{
-			get { return new Vector3(this.M41, this.M42, this.M43); }
+			get { return new Vector3((float) this.M41, (float) this.M42, (float) this.M43); }
 			set
 			{
 				this.M41 = value.X;
@@ -343,7 +344,7 @@ namespace TrueCraft.API
 		/// </summary>
 		public Vector3 Scale
 		{
-			get { return new Vector3(this.M11, this.M22, this.M33); }
+			get { return new Vector3((float) this.M11, (float) this.M22, (float) this.M33); }
 			set
 			{
 				this.M11 = value.X;
@@ -357,7 +358,7 @@ namespace TrueCraft.API
 		/// </summary>
 		public Vector3 Up
 		{
-			get { return new Vector3(this.M21, this.M22, this.M23); }
+			get { return new Vector3((float) this.M21, (float) this.M22, (float) this.M23); }
 			set
 			{
 				this.M21 = value.X;

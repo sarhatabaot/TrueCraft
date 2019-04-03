@@ -11,8 +11,6 @@ using TrueCraft.Core.Logic.Blocks;
 using TrueCraft.Core.Networking.Packets;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
 using Matrix = Microsoft.Xna.Framework.Matrix;
-using TVector3 = TrueCraft.API.Vector3;
-using XVector3 = Microsoft.Xna.Framework.Vector3;
 
 namespace TrueCraft.Client.Modules
 {
@@ -32,7 +30,7 @@ namespace TrueCraft.Client.Modules
 
 		private TrueCraftGame Game { get; }
 		private DateTime NextAnimation { get; set; }
-		private XVector3 Delta { get; set; }
+		private Vector3 Delta { get; set; }
 		private bool Capture { get; set; }
 		private bool Digging { get; set; }
 		private GamePadState GamePadState { get; set; }
@@ -55,25 +53,25 @@ namespace TrueCraft.Client.Modules
 				// Move to the left.
 				case Keys.A:
 				case Keys.Left:
-					Delta += XVector3.Left;
+					Delta += Vector3.Left;
 					return true;
 
 				// Move to the right.
 				case Keys.D:
 				case Keys.Right:
-					Delta += XVector3.Right;
+					Delta += Vector3.Right;
 					return true;
 
 				// Move forwards.
 				case Keys.W:
 				case Keys.Up:
-					Delta += XVector3.Forward;
+					Delta += Vector3.Forward;
 					return true;
 
 				// Move backwards.
 				case Keys.S:
 				case Keys.Down:
-					Delta += XVector3.Backward;
+					Delta += Vector3.Backward;
 					return true;
 
 				case Keys.I:
@@ -90,7 +88,7 @@ namespace TrueCraft.Client.Modules
 
 				case Keys.Space:
 					if (Math.Floor(Game.Client.Position.Y) == Game.Client.Position.Y)
-						Game.Client.Velocity += TVector3.Up * 0.3;
+						Game.Client.Velocity += Directions.Up * 0.3f;
 					return true;
 
 				case Keys.D1:
@@ -149,25 +147,25 @@ namespace TrueCraft.Client.Modules
 				// Stop moving to the left.
 				case Keys.A:
 				case Keys.Left:
-					Delta -= XVector3.Left;
+					Delta -= Vector3.Left;
 					return true;
 
 				// Stop moving to the right.
 				case Keys.D:
 				case Keys.Right:
-					Delta -= XVector3.Right;
+					Delta -= Vector3.Right;
 					return true;
 
 				// Stop moving forwards.
 				case Keys.W:
 				case Keys.Up:
-					Delta -= XVector3.Forward;
+					Delta -= Vector3.Forward;
 					return true;
 
 				// Stop moving backwards.
 				case Keys.S:
 				case Keys.Down:
-					Delta -= XVector3.Backward;
+					Delta -= Vector3.Backward;
 					return true;
 			}
 
@@ -197,7 +195,7 @@ namespace TrueCraft.Client.Modules
 					break;
 				case Buttons.A:
 					if (Math.Floor(Game.Client.Position.Y) == Game.Client.Position.Y)
-						Game.Client.Velocity += TVector3.Up * 0.3;
+						Game.Client.Velocity += Directions.Up * 0.3f;
 					break;
 			}
 
@@ -318,7 +316,7 @@ namespace TrueCraft.Client.Modules
 			var gamePad =
 				GamePad.GetState(PlayerIndex.One); // TODO: Can this stuff be done effectively in the GamePadHandler?
 			if (gamePad.IsConnected && gamePad.ThumbSticks.Left.Length() != 0)
-				delta = new XVector3(gamePad.ThumbSticks.Left.X, 0, gamePad.ThumbSticks.Left.Y);
+				delta = new Vector3(gamePad.ThumbSticks.Left.X, 0, gamePad.ThumbSticks.Left.Y);
 
 			var digging = Digging;
 
@@ -370,9 +368,9 @@ namespace TrueCraft.Client.Modules
 				Game.TargetBlock = -Coordinates3D.One;
 			}
 
-			if (delta != XVector3.Zero)
+			if (delta != Vector3.Zero)
 			{
-				var lookAt = XVector3.Transform(-delta,
+				var lookAt = Vector3.Transform(-delta,
 					Matrix.CreateRotationY(MathHelper.ToRadians(-(Game.Client.Yaw - 180) + 180)));
 
 				lookAt.X *= (float) (gameTime.ElapsedGameTime.TotalSeconds * 4.3717);
@@ -381,13 +379,13 @@ namespace TrueCraft.Client.Modules
 				var bobbing = Game.Bobbing;
 				Game.Bobbing += Math.Max(Math.Abs(lookAt.X), Math.Abs(lookAt.Z));
 
-				Game.Client.Velocity = new TVector3(lookAt.X, Game.Client.Velocity.Y, lookAt.Z);
+				Game.Client.Velocity = new Vector3(lookAt.X, Game.Client.Velocity.Y, lookAt.Z);
 
 				if ((int) bobbing % 2 == 0 && (int) Game.Bobbing % 2 != 0)
 					PlayFootstep();
 			}
 			else
-				Game.Client.Velocity *= new TVector3(0, 1, 0);
+				Game.Client.Velocity *= new Vector3(0, 1, 0);
 
 			if (Game.EndDigging != DateTime.MaxValue)
 			{

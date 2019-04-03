@@ -1,6 +1,8 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Logic;
+using Ray = TrueCraft.API.Ray;
 
 namespace TrueCraft.Client
 {
@@ -35,7 +37,7 @@ namespace TrueCraft.Client
 					if (box != null)
 					{
 						BlockFace _face;
-						var distance = ray.Intersects(box.Value.OffsetBy(coords), out _face);
+						var distance = ray.Intersects(box.Value.OffsetBy(coords.AsVector3()), out _face);
 						if (distance != null && distance.Value < min)
 						{
 							min = distance.Value;

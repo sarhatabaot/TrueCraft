@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Networking;
 using TrueCraft.Client.Events;
@@ -58,7 +59,7 @@ namespace TrueCraft.Client.Handlers
 		public static void HandlePositionAndLook(IPacket _packet, MultiplayerClient client)
 		{
 			var packet = (SetPlayerPositionPacket) _packet;
-			client._Position = new Vector3(packet.X, packet.Y, packet.Z);
+			client._Position = new Vector3((float) packet.X, (float) packet.Y, (float) packet.Z);
 			client.QueuePacket(packet);
 			client.LoggedIn = true;
 			// TODO: Pitch and yaw

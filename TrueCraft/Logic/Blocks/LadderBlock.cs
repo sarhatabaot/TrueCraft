@@ -1,9 +1,11 @@
 using System;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Logic;
 using TrueCraft.API.Networking;
 using TrueCraft.API.World;
 using TrueCraft.Core.Logic.Items;
+using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Logic.Blocks
 {
@@ -39,7 +41,7 @@ namespace TrueCraft.Core.Logic.Blocks
 		public override BoundingBox? BoundingBox => null;
 
 		public override BoundingBox? InteractiveBoundingBox =>
-			new BoundingBox(new Vector3(0.25, 0, 0.25), new Vector3(0.75, 0.5, 0.75));
+			new BoundingBox(new Vector3(0.25f, 0, 0.25f), new Vector3(0.75f, 0.5f, 0.75f));
 
 		public ItemStack[,] Pattern =>
 			new[,]

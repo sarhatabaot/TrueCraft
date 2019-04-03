@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Entities;
@@ -7,6 +8,7 @@ using TrueCraft.Core.Logic;
 using TrueCraft.Core.Logic.Blocks;
 using TrueCraft.Core.Physics;
 using TrueCraft.Core.TerrainGen;
+using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Test.Physics
 {
@@ -47,7 +49,7 @@ namespace TrueCraft.Core.Test.Physics
 				CollisionOccured = true;
 			}
 
-			public BoundingBox BoundingBox => new BoundingBox(Position, Position + Size);
+			public BoundingBox BoundingBox => new BoundingBox(Position, Position + Size.AsVector3());
 
 			public Size Size { get; set; }
 		}
@@ -217,7 +219,7 @@ namespace TrueCraft.Core.Test.Physics
 			var physics = new PhysicsEngine(world, repository);
 			var entity = new TestEntity();
 			entity.Size = new Size(0.6, 1.8, 0.6);
-			entity.Position = new Vector3(-10.9, 4, -10.9);
+			entity.Position = new Vector3(-10.9f, 4, -10.9f);
 			entity.AccelerationDueToGravity = 1;
 			physics.AddEntity(entity);
 

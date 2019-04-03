@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.Xna.Framework;
+using NUnit.Framework;
 
 namespace TrueCraft.API.Test
 {
@@ -12,7 +13,7 @@ namespace TrueCraft.API.Test
 			//  /
 			// x
 			var cylinder = new BoundingCylinder(Vector3.Zero, Vector3.One * 10, 3);
-			var doesNotIntersect = new BoundingBox(Vector3.One * 10 + 5, Vector3.One * 10 + 5);
+			var doesNotIntersect = new BoundingBox(Vector3.One * 10f + new Vector3(5, 5, 5), Vector3.One * 10f + new Vector3(5, 5, 5));
 			Assert.IsFalse(cylinder.Intersects(doesNotIntersect));
 			var intersects = new BoundingBox(Vector3.Zero, Vector3.One);
 			Assert.IsTrue(cylinder.Intersects(intersects));
@@ -29,7 +30,7 @@ namespace TrueCraft.API.Test
 			Assert.IsTrue(cylinder.Intersects(cylinder.Max));
 			Assert.IsTrue(cylinder.Intersects(cylinder.Min + Vector3.One / 2));
 			Assert.IsTrue(cylinder.Intersects(cylinder.Max - Vector3.One / 2));
-			Assert.IsTrue(cylinder.Intersects(new Vector3(0.25, 0, 0)));
+			Assert.IsTrue(cylinder.Intersects(new Vector3(0.25f, 0, 0)));
 			Assert.IsFalse(cylinder.Intersects(new Vector3(5, 5, 5)));
 		}
 	}

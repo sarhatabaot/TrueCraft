@@ -1,10 +1,12 @@
 using System;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Logic;
 using TrueCraft.API.Networking;
 using TrueCraft.API.Server;
 using TrueCraft.API.World;
 using TrueCraft.Core.Logic.Items;
+using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Logic.Blocks
 {
@@ -32,8 +34,8 @@ namespace TrueCraft.Core.Logic.Blocks
 
 		public override BoundingBox? BoundingBox => null;
 
-		public override BoundingBox? InteractiveBoundingBox => new BoundingBox(new Vector3(2 / 16.0, 0, 2 / 16.0),
-			new Vector3(14 / 16.0, 1.0, 14 / 16.0));
+		public override BoundingBox? InteractiveBoundingBox => new BoundingBox(new Vector3(2 / 16.0f, 0, 2 / 16.0f),
+			new Vector3(14 / 16.0f, 1.0f, 14 / 16.0f));
 
 		public override Tuple<int, int> GetTextureMap(byte metadata)
 		{

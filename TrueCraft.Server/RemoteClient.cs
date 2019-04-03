@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using fNbt;
 using Ionic.Zlib;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Entities;
 using TrueCraft.API.Logging;
@@ -138,9 +139,9 @@ namespace TrueCraft
 			{
 				var nbt = new NbtFile(path);
 				Entity.Position = new Vector3(
-					nbt.RootTag["position"][0].DoubleValue,
-					nbt.RootTag["position"][1].DoubleValue,
-					nbt.RootTag["position"][2].DoubleValue);
+					(float) nbt.RootTag["position"][0].DoubleValue,
+					(float) nbt.RootTag["position"][1].DoubleValue,
+					(float) nbt.RootTag["position"][2].DoubleValue);
 				Inventory.SetSlots(((NbtList) nbt.RootTag["inventory"]).Select(t => ItemStack.FromNbt(t as NbtCompound))
 					.ToArray());
 				(Entity as PlayerEntity).Health = nbt.RootTag["health"].ShortValue;

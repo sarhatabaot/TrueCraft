@@ -286,8 +286,8 @@ namespace TrueCraft
 						posB.Y = World.Height;
 						posB.X++;
 						posB.Z++;
-						lighter.EnqueueOperation(new BoundingBox(posA, posB), true);
-						lighter.EnqueueOperation(new BoundingBox(posA, posB), false);
+						lighter.EnqueueOperation(new BoundingBox(posA.AsVector3(), posB.AsVector3()), true);
+						lighter.EnqueueOperation(new BoundingBox(posA.AsVector3(), posB.AsVector3()), false);
 					}
 				}
 			}

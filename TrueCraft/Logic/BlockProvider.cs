@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using fNbt;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Entities;
 using TrueCraft.API.Logic;
@@ -11,6 +12,7 @@ using TrueCraft.API.World;
 using TrueCraft.Core.Entities;
 using TrueCraft.Core.Logic.Blocks;
 using TrueCraft.Core.Logic.Items;
+using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Logic
 {
@@ -80,7 +82,7 @@ namespace TrueCraft.Core.Logic
 			foreach (var i in items)
 			{
 				if (i.Empty) continue;
-				var entity = new ItemEntity(new Vector3(descriptor.Coordinates) + new Vector3(0.5), i);
+				var entity = new ItemEntity(descriptor.Coordinates.AsVector3() + new Vector3(0.5f), i);
 				entityManager.SpawnEntity(entity);
 			}
 		}
@@ -199,9 +201,9 @@ namespace TrueCraft.Core.Logic
 			if (BoundingBox.HasValue)
 			{
 				var em = user.Server.GetEntityManagerForWorld(world);
-				var entities = em.EntitiesInRange(coordinates, 3);
-				var box = new BoundingBox(BoundingBox.Value.Min + (Vector3) coordinates,
-					BoundingBox.Value.Max + (Vector3) coordinates);
+				var entities = em.EntitiesInRange(coordinates.AsVector3(), 3);
+				var box = new BoundingBox(BoundingBox.Value.Min + (Vector3) coordinates.AsVector3(),
+					BoundingBox.Value.Max + (Vector3) coordinates.AsVector3());
 				foreach (var entity in entities)
 				{
 					var aabb = entity as IAABBEntity;
@@ -210,7 +212,7 @@ namespace TrueCraft.Core.Logic
 							return;
 					var player = entity as PlayerEntity; // Players do not implement IAABBEntity
 					if (player != null)
-						if (new BoundingBox(player.Position, player.Position + player.Size)
+						if (new BoundingBox(player.Position, player.Position + player.Size.AsVector3())
 							.Intersects(box))
 							return;
 				}

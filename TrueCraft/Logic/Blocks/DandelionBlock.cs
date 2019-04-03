@@ -1,6 +1,7 @@
 using System;
-using TrueCraft.API;
+using Microsoft.Xna.Framework;
 using TrueCraft.API.Logic;
+using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Logic.Blocks
 {
@@ -24,8 +25,8 @@ namespace TrueCraft.Core.Logic.Blocks
 
 		public override BoundingBox? BoundingBox => null;
 
-		public override BoundingBox? InteractiveBoundingBox => new BoundingBox(new Vector3(4 / 16.0, 0, 4 / 16.0),
-			new Vector3(12 / 16.0, 8 / 16.0, 12 / 16.0));
+		public override BoundingBox? InteractiveBoundingBox => new BoundingBox(new Vector3(4 / 16.0f, 0, 4 / 16.0f),
+			new Vector3(12 / 16.0f, 8 / 16.0f, 12 / 16.0f));
 
 		public override bool Flammable => true;
 

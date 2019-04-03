@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Networking;
 using TrueCraft.API.Physics;
 using TrueCraft.API.Server;
 using TrueCraft.Core.Networking.Packets;
+using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Entities
 {
@@ -16,8 +18,8 @@ namespace TrueCraft.Core.Entities
 		{
 			Position = position;
 			Item = item;
-			Velocity = new Vector3(MathHelper.Random.NextDouble() * 0.25 - 0.125, 0.25,
-				MathHelper.Random.NextDouble() * 0.25 - 0.125);
+			Velocity = new Vector3((float) (MathHelper.Random.NextDouble() * 0.25 - 0.125), 0.25f,
+				(float) (MathHelper.Random.NextDouble() * 0.25 - 0.125));
 			if (item.Empty)
 				Despawned = true;
 		}
@@ -49,7 +51,7 @@ namespace TrueCraft.Core.Entities
 
 		public override Size Size => new Size(0.25, 0.25, 0.25);
 
-		public BoundingBox BoundingBox => new BoundingBox(Position, Position + Size);
+		public BoundingBox BoundingBox => new BoundingBox(Position, Position + Size.AsVector3());
 
 		public void TerrainCollision(Vector3 collisionPoint, Vector3 collisionDirection)
 		{

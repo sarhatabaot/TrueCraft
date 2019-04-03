@@ -49,7 +49,7 @@ namespace TrueCraft.Core.Logic.Blocks
 			if (world.GetBlockID(descriptor.Coordinates + Coordinates3D.Down) == AirBlock.BlockID)
 			{
 				world.SetBlockID(descriptor.Coordinates, AirBlock.BlockID);
-				server.GetEntityManagerForWorld(world).SpawnEntity(new FallingGravelEntity(descriptor.Coordinates));
+				server.GetEntityManagerForWorld(world).SpawnEntity(new FallingGravelEntity(descriptor.Coordinates.AsVector3()));
 			}
 		}
 	}

@@ -1,4 +1,5 @@
-﻿using TrueCraft.API;
+﻿using Microsoft.Xna.Framework;
+using TrueCraft.API;
 using TrueCraft.API.Networking;
 using TrueCraft.API.Server;
 using TrueCraft.Core.Networking.Packets;
@@ -10,7 +11,7 @@ namespace TrueCraft.Handlers
 		public static void HandlePlayerPositionPacket(IPacket _packet, IRemoteClient _client, IMultiplayerServer server)
 		{
 			var packet = (PlayerPositionPacket) _packet;
-			HandlePlayerMovement(_client, new Vector3(packet.X, packet.Y, packet.Z), _client.Entity.Yaw,
+			HandlePlayerMovement(_client, new Vector3((float) packet.X, (float) packet.Y, (float) packet.Z), _client.Entity.Yaw,
 				_client.Entity.Pitch);
 		}
 
@@ -24,7 +25,7 @@ namespace TrueCraft.Handlers
 			IMultiplayerServer server)
 		{
 			var packet = (PlayerPositionAndLookPacket) _packet;
-			HandlePlayerMovement(_client, new Vector3(packet.X, packet.Y, packet.Z), packet.Yaw, packet.Pitch);
+			HandlePlayerMovement(_client, new Vector3((float) packet.X, (float) packet.Y, (float) packet.Z), packet.Yaw, packet.Pitch);
 		}
 
 		public static void HandlePlayerMovement(IRemoteClient client, Vector3 position, float yaw, float pitch)

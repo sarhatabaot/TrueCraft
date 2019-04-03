@@ -3,18 +3,19 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Entities;
 using TrueCraft.API.Networking;
 using TrueCraft.API.Physics;
 using TrueCraft.API.Server;
 using TrueCraft.API.World;
-using TrueCraft.Core;
 using TrueCraft.Core.Entities;
 using TrueCraft.Core.Logic;
 using TrueCraft.Core.Networking.Packets;
 using TrueCraft.Core.Physics;
 using TrueCraft.Core.World;
+using MathHelper = TrueCraft.Core.MathHelper;
 
 namespace TrueCraft
 {

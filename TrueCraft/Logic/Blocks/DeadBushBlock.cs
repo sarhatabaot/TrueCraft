@@ -1,6 +1,8 @@
 using System;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Logic;
+using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Logic.Blocks
 {
@@ -24,7 +26,7 @@ namespace TrueCraft.Core.Logic.Blocks
 
 		public override BoundingBox? BoundingBox => null;
 
-		public override BoundingBox? InteractiveBoundingBox => new BoundingBox(new Vector3(4 / 16.0), Vector3.One);
+		public override BoundingBox? InteractiveBoundingBox => new BoundingBox(new Vector3(4 / 16.0f), Vector3.One);
 
 		public override Coordinates3D GetSupportDirection(BlockDescriptor descriptor)
 		{

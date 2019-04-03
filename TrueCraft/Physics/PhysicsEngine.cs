@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Entities;
 using TrueCraft.API.Physics;
 using TrueCraft.API.World;
+using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Physics
 {
@@ -50,8 +52,8 @@ namespace TrueCraft.Core.Physics
 					var entity = Entities[i];
 					if (entity.BeginUpdate())
 					{
-						entity.Velocity -= new Vector3(0, entity.AccelerationDueToGravity * multiplier, 0);
-						entity.Velocity *= 1 - entity.Drag * multiplier;
+						entity.Velocity -= new Vector3(0, (float) (entity.AccelerationDueToGravity * multiplier), 0);
+						entity.Velocity *= (float)(1 - entity.Drag * multiplier);
 						TruncateVelocity(entity, multiplier);
 
 						Vector3 collision, before = entity.Velocity;
@@ -65,7 +67,7 @@ namespace TrueCraft.Core.Physics
 								aabbEntity.TerrainCollision(collision, before.X < 0 ? Vector3.Left : Vector3.Right);
 							if (TestTerrainCollisionZ(aabbEntity, out collision))
 								aabbEntity.TerrainCollision(collision,
-									before.Z < 0 ? Vector3.Backwards : Vector3.Forwards);
+									before.Z < 0 ? Directions.Backwards : Directions.Forwards);
 
 							if (TestTerrainCollisionCylinder(aabbEntity, out collision))
 								aabbEntity.TerrainCollision(collision, before);
@@ -141,7 +143,7 @@ namespace TrueCraft.Core.Physics
 				if (_box == null)
 					continue;
 
-				var box = _box.Value.OffsetBy(coords);
+				var box = _box.Value.OffsetBy(coords.AsVector3());
 				if (testCylinder.Intersects(box))
 					if (testBox.Intersects(box))
 					{
@@ -150,7 +152,7 @@ namespace TrueCraft.Core.Physics
 						testBox = GetAABBVelocityBox(entity);
 						testCylinder = new BoundingCylinder(testBox.Min, testBox.Max,
 							entity.BoundingBox.Min.DistanceTo(entity.BoundingBox.Max));
-						collisionPoint = coords;
+						collisionPoint = coords.AsVector3();
 					}
 			}
 
@@ -204,7 +206,7 @@ namespace TrueCraft.Core.Physics
 				if (_box == null)
 					continue;
 
-				var box = _box.Value.OffsetBy(coords);
+				var box = _box.Value.OffsetBy(coords.AsVector3());
 				if (testBox.Intersects(box))
 				{
 					if (negative)
@@ -212,7 +214,7 @@ namespace TrueCraft.Core.Physics
 						if (collisionExtent == null || collisionExtent.Value < box.Max.Y)
 						{
 							collisionExtent = box.Max.Y;
-							collisionPoint = coords;
+							collisionPoint = coords.AsVector3();
 						}
 					}
 					else
@@ -220,7 +222,7 @@ namespace TrueCraft.Core.Physics
 						if (collisionExtent == null || collisionExtent.Value > box.Min.Y)
 						{
 							collisionExtent = box.Min.Y;
-							collisionPoint = coords;
+							collisionPoint = coords.AsVector3();
 						}
 					}
 				}
@@ -234,7 +236,7 @@ namespace TrueCraft.Core.Physics
 					diff = -(entity.BoundingBox.Min.Y - extent);
 				else
 					diff = extent - entity.BoundingBox.Max.Y;
-				entity.Velocity = new Vector3(entity.Velocity.X, diff, entity.Velocity.Z);
+				entity.Velocity = new Vector3(entity.Velocity.X, (float) diff, entity.Velocity.Z);
 				return true;
 			}
 
@@ -290,7 +292,7 @@ namespace TrueCraft.Core.Physics
 				if (_box == null)
 					continue;
 
-				var box = _box.Value.OffsetBy(coords);
+				var box = _box.Value.OffsetBy(coords.AsVector3());
 				if (testBox.Intersects(box))
 				{
 					if (negative)
@@ -298,7 +300,7 @@ namespace TrueCraft.Core.Physics
 						if (collisionExtent == null || collisionExtent.Value < box.Max.X)
 						{
 							collisionExtent = box.Max.X;
-							collisionPoint = coords;
+							collisionPoint = coords.AsVector3();
 						}
 					}
 					else
@@ -306,7 +308,7 @@ namespace TrueCraft.Core.Physics
 						if (collisionExtent == null || collisionExtent.Value > box.Min.X)
 						{
 							collisionExtent = box.Min.X;
-							collisionPoint = coords;
+							collisionPoint = coords.AsVector3();
 						}
 					}
 				}
@@ -320,7 +322,7 @@ namespace TrueCraft.Core.Physics
 					diff = -(entity.BoundingBox.Min.X - extent);
 				else
 					diff = extent - entity.BoundingBox.Max.X;
-				entity.Velocity = new Vector3(diff, entity.Velocity.Y, entity.Velocity.Z);
+				entity.Velocity = new Vector3((float) diff, entity.Velocity.Y, entity.Velocity.Z);
 				return true;
 			}
 
@@ -376,7 +378,7 @@ namespace TrueCraft.Core.Physics
 				if (_box == null)
 					continue;
 
-				var box = _box.Value.OffsetBy(coords);
+				var box = _box.Value.OffsetBy(coords.AsVector3());
 				if (testBox.Intersects(box))
 				{
 					if (negative)
@@ -384,7 +386,7 @@ namespace TrueCraft.Core.Physics
 						if (collisionExtent == null || collisionExtent.Value < box.Max.Z)
 						{
 							collisionExtent = box.Max.Z;
-							collisionPoint = coords;
+							collisionPoint = coords.AsVector3();
 						}
 					}
 					else
@@ -392,7 +394,7 @@ namespace TrueCraft.Core.Physics
 						if (collisionExtent == null || collisionExtent.Value > box.Min.Z)
 						{
 							collisionExtent = box.Min.Z;
-							collisionPoint = coords;
+							collisionPoint = coords.AsVector3();
 						}
 					}
 				}
@@ -406,7 +408,7 @@ namespace TrueCraft.Core.Physics
 					diff = -(entity.BoundingBox.Min.Z - extent);
 				else
 					diff = extent - entity.BoundingBox.Max.Z;
-				entity.Velocity = new Vector3(entity.Velocity.X, entity.Velocity.Y, diff);
+				entity.Velocity = new Vector3(entity.Velocity.X, entity.Velocity.Y, (float) diff);
 				return true;
 			}
 

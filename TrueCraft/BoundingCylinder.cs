@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
 
 namespace TrueCraft.API
 {
@@ -34,20 +35,20 @@ namespace TrueCraft.API
 		// http://answers.unity3d.com/questions/62644/distance-between-a-ray-and-a-point.html
 		public static double DistancePointLine(Vector3 point, Vector3 lineStart, Vector3 lineEnd)
 		{
-			return (ProjectPointLine(point, lineStart, lineEnd) - point).Distance;
+			return (ProjectPointLine(point, lineStart, lineEnd) - point).Distance();
 		}
 
 		public static Vector3 ProjectPointLine(Vector3 point, Vector3 lineStart, Vector3 lineEnd)
 		{
 			var rhs = point - lineStart;
 			var vector2 = lineEnd - lineStart;
-			var magnitude = vector2.Distance;
+			var magnitude = vector2.Distance();
 			var lhs = vector2;
 			if (magnitude > 1E-06f)
-				lhs = lhs / magnitude;
+				lhs = lhs / (float) magnitude;
 			var num2 = Vector3.Dot(lhs, rhs);
 			if (num2 < 0) num2 = 0;
-			if (num2 > magnitude) num2 = magnitude;
+			if (num2 > magnitude) num2 = (float) magnitude;
 			return lineStart + lhs * num2;
 		}
 

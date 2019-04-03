@@ -17,8 +17,6 @@ using TrueCraft.Client.Rendering;
 using TrueCraft.Core;
 using TrueCraft.Core.Logic;
 using TrueCraft.Core.Networking.Packets;
-using TVector3 = TrueCraft.API.Vector3;
-using XVector3 = Microsoft.Xna.Framework.Vector3;
 
 namespace TrueCraft.Client
 {
@@ -379,8 +377,8 @@ namespace TrueCraft.Client
 			var xbob = Math.Cos(bobbing + Math.PI / 2) * bobbingMultiplier;
 			var ybob = Math.Sin(Math.PI / 2 - 2 * bobbing) * bobbingMultiplier;
 
-			Camera.Position = new TVector3(
-				Client.Position.X + xbob, Client.Position.Y + Client.Size.Height + ybob, Client.Position.Z);
+			Camera.Position = new Vector3(
+				(float) (Client.Position.X + xbob), (float) (Client.Position.Y + Client.Size.Height + ybob), Client.Position.Z);
 
 			Camera.Pitch = Client.Pitch;
 			Camera.Yaw = Client.Yaw;

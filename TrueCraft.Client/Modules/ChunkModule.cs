@@ -76,18 +76,20 @@ namespace TrueCraft.Client.Modules
 
 		private void Game_Client_BlockChanged(object sender, BlockChangeEventArgs e)
 		{
+			var position = e.Position.AsVector3();
+
 			WorldLighting.EnqueueOperation(new BoundingBox(
-				e.Position, e.Position + Coordinates3D.One), false);
+				position, position + Coordinates3D.One.AsVector3()), false);
 			WorldLighting.EnqueueOperation(new BoundingBox(
-				e.Position, e.Position + Coordinates3D.One), true);
+				position, position + Coordinates3D.One.AsVector3()), true);
 			var posA = e.Position;
 			posA.Y = 0;
 			var posB = e.Position;
 			posB.Y = World.Height;
 			posB.X++;
 			posB.Z++;
-			WorldLighting.EnqueueOperation(new BoundingBox(posA, posB), true);
-			WorldLighting.EnqueueOperation(new BoundingBox(posA, posB), false);
+			WorldLighting.EnqueueOperation(new BoundingBox(posA.AsVector3(), posB.AsVector3()), true);
+			WorldLighting.EnqueueOperation(new BoundingBox(posA.AsVector3(), posB.AsVector3()), false);
 			for (var i = 0; i < 100; i++)
 				if (!WorldLighting.TryLightNext())
 					break;
