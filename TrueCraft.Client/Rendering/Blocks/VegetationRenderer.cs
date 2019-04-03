@@ -1,27 +1,26 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using TrueCraft.Logic;
 using TrueCraft.Logic.Blocks;
 
 namespace TrueCraft.Client.Rendering.Blocks
 {
-	public class VegitationRenderer : FlatQuadRenderer
+	public class VegetationRenderer : FlatQuadRenderer
 	{
 		protected Vector2[] DandelionTexture, RoseTexture;
 		protected Vector2[] OakSaplingTexture, SpruceSaplingTexture, BirchSaplingTexture;
 		protected Vector2[] TallGrassTexture, DeadBushTexture, FernTexture;
 
-		static VegitationRenderer()
+		static VegetationRenderer()
 		{
-			BlockRenderer.RegisterRenderer(DandelionBlock.BlockID, new VegitationRenderer());
-			BlockRenderer.RegisterRenderer(RoseBlock.BlockID, new VegitationRenderer());
-			BlockRenderer.RegisterRenderer(TallGrassBlock.BlockID, new VegitationRenderer());
-			BlockRenderer.RegisterRenderer(DeadBushBlock.BlockID, new VegitationRenderer());
-			BlockRenderer.RegisterRenderer(SaplingBlock.BlockID, new VegitationRenderer());
+			RegisterRenderer(DandelionBlock.BlockID, new VegetationRenderer());
+			RegisterRenderer(RoseBlock.BlockID, new VegetationRenderer());
+			RegisterRenderer(TallGrassBlock.BlockID, new VegetationRenderer());
+			RegisterRenderer(DeadBushBlock.BlockID, new VegetationRenderer());
+			RegisterRenderer(SaplingBlock.BlockID, new VegetationRenderer());
 		}
 
-		public VegitationRenderer()
+		public VegetationRenderer()
 		{
 			DandelionTexture = new[]
 			{

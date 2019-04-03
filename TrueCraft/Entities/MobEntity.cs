@@ -95,8 +95,7 @@ namespace TrueCraft.Entities
 					if (CurrentPath.Index >= CurrentPath.Waypoints.Count)
 					{
 						CurrentPath = null;
-						if (PathComplete != null)
-							PathComplete(this, null);
+						PathComplete?.Invoke(this, null);
 						return true;
 					}
 				}
