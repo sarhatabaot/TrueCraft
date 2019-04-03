@@ -333,3 +333,4 @@ ASALocalRun/
 config.yaml
 packets.log
 world/manifest.nbt
+server_instance
