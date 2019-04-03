@@ -3,7 +3,7 @@ using TrueCraft.Logging;
 using TrueCraft.Server;
 using TrueCraft.World;
 
-namespace TrueCraft.Launcher.Singleplayer
+namespace TrueCraft.Launcher
 {
 	public class SingleplayerServer
 	{
@@ -36,8 +36,7 @@ namespace TrueCraft.Launcher.Singleplayer
 				for (var z = -5; z < 5; z++)
 					World.GetChunk(new Coordinates2D(x, z));
 				var progress = (int) ((x + 5) / 10.0 * 100);
-				if (progressNotification != null)
-					progressNotification(progress / 100.0, "Generating world...");
+				progressNotification?.Invoke(progress / 100.0, "Generating world...");
 				if (progress % 10 == 0)
 					Server.Log(LogCategory.Notice, "{0}% complete", progress + 10);
 			}

@@ -7,9 +7,9 @@ using Xwt.Drawing;
 
 namespace TrueCraft.Launcher.Views
 {
-	public class MultiplayerView : VBox
+	public class MultiPlayerView : VBox
 	{
-		public MultiplayerView(LauncherWindow window)
+		public MultiPlayerView(LauncherWindow window)
 		{
 			Window = window;
 			MinWidth = 250;

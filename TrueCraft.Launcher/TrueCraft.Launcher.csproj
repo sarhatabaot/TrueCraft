@@ -40,9 +40,6 @@
     <Reference Include="DotNetZip, Version=1.13.3.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetZip.1.13.3\lib\net40\DotNetZip.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="Xwt, Version=0.2.163.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\Xwt.0.2.163\lib\net40\Xwt.dll</HintPath>
@@ -58,13 +55,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LauncherWindow.cs" />
-    <Compile Include="Views\LoginView.cs" />
     <Compile Include="Views\MainMenuView.cs" />
-    <Compile Include="Views\MultiplayerView.cs" />
+    <Compile Include="Views\MultiPlayerView.cs" />
     <Compile Include="Views\OptionView.cs" />
-    <Compile Include="Views\SingleplayerView.cs" />
-    <Compile Include="Singleplayer\Worlds.cs" />
-    <Compile Include="Singleplayer\SingleplayerServer.cs" />
+    <Compile Include="Views\SinglePlayerView.cs" />
+    <Compile Include="Worlds.cs" />
+    <Compile Include="SingleplayerServer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -84,15 +80,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Content\truecraft-logo.png" />
     <EmbeddedResource Include="Content\default-server-icon.png" />
-    <None Include="Content\truecraft_logo.svg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TrueCraft.Client.x86\TrueCraft.Client.x86.csproj">
-      <Project>{a6516869-a2fb-4e31-85c8-2285490cb32c}</Project>
-      <Name>TrueCraft.Client.x86</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TrueCraft.Server\TrueCraft.Server.csproj">
       <Project>{05366ecd-ab34-4b68-a0dc-b444601bc7af}</Project>
       <Name>TrueCraft.Server</Name>
@@ -102,6 +92,7 @@
       <Name>TrueCraft</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Optimized Debug|AnyCPU' ">
     <Optimize>true</Optimize>
     <OutputPath>bin\Optimized Debug</OutputPath>

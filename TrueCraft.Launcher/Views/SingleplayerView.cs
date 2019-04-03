@@ -3,14 +3,13 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using TrueCraft.Launcher.Singleplayer;
 using Xwt;
 
 namespace TrueCraft.Launcher.Views
 {
-	public class SingleplayerView : VBox
+	public class SinglePlayerView : VBox
 	{
-		public SingleplayerView(LauncherWindow window)
+		public SinglePlayerView(LauncherWindow window)
 		{
 			Worlds.Local = new Worlds();
 			Worlds.Local.Load();
@@ -18,7 +17,7 @@ namespace TrueCraft.Launcher.Views
 			Window = window;
 			MinWidth = 250;
 
-			SingleplayerLabel = new Label("Singleplayer")
+			SinglePlayerLabel = new Label("SinglePlayer")
 			{
 				Font = Font.WithSize(16),
 				TextAlignment = Alignment.Center
@@ -88,13 +87,14 @@ namespace TrueCraft.Launcher.Views
 
 			CreateWorldBox.PackStart(NewWorldName);
 			CreateWorldBox.PackStart(NewWorldSeed);
+
 			var newWorldHbox = new HBox();
 			NewWorldCommit.WidthRequest = NewWorldCancel.WidthRequest = 0.5;
 			newWorldHbox.PackStart(NewWorldCommit, true);
 			newWorldHbox.PackStart(NewWorldCancel, true);
 			CreateWorldBox.PackStart(newWorldHbox);
 
-			PackStart(SingleplayerLabel);
+			PackStart(SinglePlayerLabel);
 			PackStart(WorldListView);
 			PackStart(createDeleteHbox);
 			PackStart(PlayButton);
@@ -105,7 +105,7 @@ namespace TrueCraft.Launcher.Views
 		}
 
 		public LauncherWindow Window { get; set; }
-		public Label SingleplayerLabel { get; set; }
+		public Label SinglePlayerLabel { get; set; }
 		public ListView WorldListView { get; set; }
 		public Button CreateWorldButton { get; set; }
 		public Button DeleteWorldButton { get; set; }
@@ -140,15 +140,10 @@ namespace TrueCraft.Launcher.Views
 				Server.Start();
 				Application.Invoke(() =>
 				{
-					PlayButton.Sensitive = BackButton.Sensitive =
-						CreateWorldButton.Sensitive = WorldListView.Sensitive = true;
-					var launchParams = string.Format("{0} {1} {2}", Server.Server.EndPoint, Window.User.Username,
-						Window.User.SessionId);
+					PlayButton.Sensitive = BackButton.Sensitive = CreateWorldButton.Sensitive = WorldListView.Sensitive = true;
+					var launchParams = $"{Server.Server.EndPoint} {Window.User.Username} {Window.User.SessionId}";
 					var process = new Process();
-					if (RuntimeInfo.IsMono)
-						process.StartInfo = new ProcessStartInfo("mono", "TrueCraft.Client.exe " + launchParams);
-					else
-						process.StartInfo = new ProcessStartInfo("TrueCraft.Client.exe", launchParams);
+					process.StartInfo = RuntimeInfo.IsMono ? new ProcessStartInfo("mono", "TrueCraft.Client.exe " + launchParams) : new ProcessStartInfo("TrueCraft.Client.exe", launchParams);
 					process.EnableRaisingEvents = true;
 					process.Exited += (s, a) => Application.Invoke(() =>
 					{

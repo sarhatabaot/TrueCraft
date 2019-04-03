@@ -5,7 +5,7 @@ using System.Linq;
 using TrueCraft.Logic;
 using TrueCraft.TerrainGen;
 
-namespace TrueCraft.Launcher.Singleplayer
+namespace TrueCraft.Launcher
 {
 	public class Worlds
 	{

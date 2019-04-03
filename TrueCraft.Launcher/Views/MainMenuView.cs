@@ -21,12 +21,12 @@ namespace TrueCraft.Launcher.Views
 			SingleplayerButton.Clicked += (sender, e) =>
 			{
 				Window.InteractionBox.Remove(this);
-				Window.InteractionBox.PackEnd(Window.SingleplayerView);
+				Window.InteractionBox.PackEnd(Window.SinglePlayerView);
 			};
 			MultiplayerButton.Clicked += (sender, e) =>
 			{
 				Window.InteractionBox.Remove(this);
-				Window.InteractionBox.PackEnd(Window.MultiplayerView);
+				Window.InteractionBox.PackEnd(Window.MultiPlayerView);
 			};
 			OptionsButton.Clicked += (sender, e) =>
 			{
