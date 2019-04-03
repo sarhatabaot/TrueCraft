@@ -89,9 +89,9 @@
     <None Include="Content\truecraft_logo.svg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TrueCraft.Client\TrueCraft.Client.csproj">
+    <ProjectReference Include="..\TrueCraft.Client.x86\TrueCraft.Client.x86.csproj">
       <Project>{a6516869-a2fb-4e31-85c8-2285490cb32c}</Project>
-      <Name>TrueCraft.Client</Name>
+      <Name>TrueCraft.Client.x86</Name>
     </ProjectReference>
     <ProjectReference Include="..\TrueCraft.Server\TrueCraft.Server.csproj">
       <Project>{05366ecd-ab34-4b68-a0dc-b444601bc7af}</Project>

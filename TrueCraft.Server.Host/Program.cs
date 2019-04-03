@@ -20,7 +20,9 @@ namespace TrueCraft.Server.Host
 
 		public static void Main(string[] args)
 		{
-			ServerConfiguration = Configuration.LoadConfiguration<ServerConfiguration>("config.yaml");
+			ServerConfiguration = 
+				Configuration.LoadConfiguration<ServerConfiguration>("config.yaml")
+				?? new ServerConfiguration();
 
 			Server = new MultiplayerServer(ServerConfiguration);
 
@@ -36,10 +38,11 @@ namespace TrueCraft.Server.Host
 				foreach (var bucket in buckets)
 					Profiler.EnableBucket(bucket.Trim());
 
-			if (ServerConfiguration.Debug.DeleteWorldOnStartup)
+			if (ServerConfiguration.Debug != null && ServerConfiguration.Debug.DeleteWorldOnStartup)
 				if (Directory.Exists("world"))
 					Directory.Delete("world", true);
-			if (ServerConfiguration.Debug.DeletePlayersOnStartup)
+
+			if (ServerConfiguration.Debug != null && ServerConfiguration.Debug.DeletePlayersOnStartup)
 				if (Directory.Exists("players"))
 					Directory.Delete("players", true);
 			IWorld world;
@@ -50,8 +53,10 @@ namespace TrueCraft.Server.Host
 			}
 			catch
 			{
-				world = new World.World("default", new StandardGenerator());
-				world.BlockRepository = Server.BlockRepository;
+				world = new World.World("default", new StandardGenerator())
+				{
+					BlockRepository = Server.BlockRepository
+				};
 				world.Save("world");
 				Server.AddWorld(world);
 				Server.Log(LogCategory.Notice, "Generating world around spawn point...");
@@ -70,11 +75,11 @@ namespace TrueCraft.Server.Host
 					for (var z = -5; z < 5; z++)
 					{
 						var chunk = world.GetChunk(new Coordinates2D(x, z));
-						for (byte _x = 0; _x < Chunk.Width; _x++)
-						for (byte _z = 0; _z < Chunk.Depth; _z++)
-						for (var _y = 0; _y < chunk.GetHeight(_x, _z); _y++)
+						for (byte w = 0; w < Chunk.Width; w++)
+						for (byte d = 0; d < Chunk.Depth; d++)
+						for (int y = 0; y < chunk.GetHeight(w, d); y++)
 						{
-							var coords = new Coordinates3D(x + _x, _y, z + _z);
+							var coords = new Coordinates3D(x + w, y, z + d);
 							var data = world.GetBlockData(coords);
 							var provider = world.BlockRepository.GetBlockProvider(data.ID);
 							provider.BlockUpdate(data, data, Server, world);
@@ -88,8 +93,7 @@ namespace TrueCraft.Server.Host
 
 				Server.Log(LogCategory.Notice, "Lighting the world (this will take a moment)...");
 				foreach (var lighter in Server.WorldLighters)
-					while (lighter.TryLightNext())
-						;
+					while (lighter.TryLightNext()) { }
 			}
 
 			world.Save();

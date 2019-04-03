@@ -1,0 +1,311 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Content\Audio\credits.txt" />
+    <None Remove="Content\Audio\default_break_glass.1.ogg" />
+    <None Remove="Content\Audio\default_break_glass.2.ogg" />
+    <None Remove="Content\Audio\default_break_glass.3.ogg" />
+    <None Remove="Content\Audio\default_cool_lava.1.ogg" />
+    <None Remove="Content\Audio\default_cool_lava.2.ogg" />
+    <None Remove="Content\Audio\default_cool_lava.3.ogg" />
+    <None Remove="Content\Audio\default_dig_choppy.ogg" />
+    <None Remove="Content\Audio\default_dig_cracky.ogg" />
+    <None Remove="Content\Audio\default_dig_crumbly.ogg" />
+    <None Remove="Content\Audio\default_dig_dig_immediate.ogg" />
+    <None Remove="Content\Audio\default_dig_oddly_breakable_by_hand.ogg" />
+    <None Remove="Content\Audio\default_dirt_footstep.1.ogg" />
+    <None Remove="Content\Audio\default_dirt_footstep.2.ogg" />
+    <None Remove="Content\Audio\default_dug_node.1.ogg" />
+    <None Remove="Content\Audio\default_dug_node.2.ogg" />
+    <None Remove="Content\Audio\default_glass_footstep.ogg" />
+    <None Remove="Content\Audio\default_grass_footstep.1.ogg" />
+    <None Remove="Content\Audio\default_grass_footstep.2.ogg" />
+    <None Remove="Content\Audio\default_grass_footstep.3.ogg" />
+    <None Remove="Content\Audio\default_gravel_footstep.1.ogg" />
+    <None Remove="Content\Audio\default_gravel_footstep.2.ogg" />
+    <None Remove="Content\Audio\default_gravel_footstep.3.ogg" />
+    <None Remove="Content\Audio\default_gravel_footstep.4.ogg" />
+    <None Remove="Content\Audio\default_hard_footstep.1.ogg" />
+    <None Remove="Content\Audio\default_hard_footstep.2.ogg" />
+    <None Remove="Content\Audio\default_hard_footstep.3.ogg" />
+    <None Remove="Content\Audio\default_hurt.wav" />
+    <None Remove="Content\Audio\default_place_node.1.ogg" />
+    <None Remove="Content\Audio\default_place_node.2.ogg" />
+    <None Remove="Content\Audio\default_place_node.3.ogg" />
+    <None Remove="Content\Audio\default_place_node_hard.1.ogg" />
+    <None Remove="Content\Audio\default_place_node_hard.2.ogg" />
+    <None Remove="Content\Audio\default_sand_footstep.1.ogg" />
+    <None Remove="Content\Audio\default_sand_footstep.2.ogg" />
+    <None Remove="Content\Audio\default_snow_footstep.1.ogg" />
+    <None Remove="Content\Audio\default_snow_footstep.2.ogg" />
+    <None Remove="Content\Audio\default_snow_footstep.3.ogg" />
+    <None Remove="Content\Audio\default_wood_footstep.1.ogg" />
+    <None Remove="Content\Audio\default_wood_footstep.2.ogg" />
+    <None Remove="Content\crafting.png" />
+    <None Remove="Content\default-pack.png" />
+    <None Remove="Content\default-pack.txt" />
+    <None Remove="Content\Fonts\DejaVu_Bold_0.png" />
+    <None Remove="Content\Fonts\DejaVu_Italic_0.png" />
+    <None Remove="Content\Fonts\DejaVu_Regular_0.png" />
+    <None Remove="Content\Fonts\pixel-license.txt" />
+    <None Remove="Content\Fonts\Pixel_Bold_0.png" />
+    <None Remove="Content\Fonts\Pixel_Italic_0.png" />
+    <None Remove="Content\Fonts\Pixel_Italic_1.png" />
+    <None Remove="Content\Fonts\Pixel_Regular_0.png" />
+    <None Remove="Content\furnace.png" />
+    <None Remove="Content\gui.png" />
+    <None Remove="Content\icons.png" />
+    <None Remove="Content\inventory.png" />
+    <None Remove="Content\items.png" />
+    <None Remove="Content\pack.png" />
+    <None Remove="Content\pack.txt" />
+    <None Remove="Content\terrain.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Content\Audio\credits.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_break_glass.1.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_break_glass.2.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_break_glass.3.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_cool_lava.1.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_cool_lava.2.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_cool_lava.3.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_dig_choppy.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_dig_cracky.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_dig_crumbly.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_dig_dig_immediate.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_dig_oddly_breakable_by_hand.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_dirt_footstep.1.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_dirt_footstep.2.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_dug_node.1.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_dug_node.2.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_glass_footstep.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_grass_footstep.1.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_grass_footstep.2.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_grass_footstep.3.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_gravel_footstep.1.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_gravel_footstep.2.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_gravel_footstep.3.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_gravel_footstep.4.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_hard_footstep.1.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_hard_footstep.2.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_hard_footstep.3.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_hurt.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_place_node.1.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_place_node.2.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_place_node.3.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_place_node_hard.1.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_place_node_hard.2.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_sand_footstep.1.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_sand_footstep.2.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_snow_footstep.1.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_snow_footstep.2.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_snow_footstep.3.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_wood_footstep.1.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\default_wood_footstep.2.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\crafting.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\default-pack.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\default-pack.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\DejaVu_Bold_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\DejaVu_Italic_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\DejaVu_Regular_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\pixel-license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\Pixel_Bold_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\Pixel_Italic_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\Pixel_Italic_1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\Pixel_Regular_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\furnace.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\gui.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\icons.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\inventory.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\items.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\pack.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\pack.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\terrain.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NVorbis" Version="0.8.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\externals\FNA\FNA.Core.csproj" />
+    <ProjectReference Include="..\TrueCraft.Client\TrueCraft.Client.csproj" />
+    <ProjectReference Include="..\TrueCraft\TrueCraft.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Content\Fonts\DejaVu_Bold.fnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Fonts\DejaVu_Italic.fnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Fonts\DejaVu_Regular.fnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Fonts\Pixel_Bold.fnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Fonts\Pixel_Italic.fnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Fonts\Pixel_Regular.fnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\moon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\sun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\externals\fnalibs\x86\**\*.*" Condition="'$(OS)' == 'Windows_NT' AND '$(Platform)' != 'x64'">
+      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\externals\fnalibs\x64\**\*.*" Condition="'$(OS)' == 'Windows_NT' AND '$(Platform)' != 'x86'">
+      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\externals\fnalibs\osx\**\*.*" Condition="'$(OS)' != 'Windows_NT'">
+      <Link>osx\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\externals\fnalibs\lib\**\*.*" Condition="'$(OS)' != 'Windows_NT'">
+      <Link>lib\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\externals\fnalibs\lib64\**\*.*" Condition="'$(OS)' != 'Windows_NT'">
+      <Link>lib64\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

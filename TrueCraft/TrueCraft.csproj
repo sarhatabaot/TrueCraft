@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Platforms>AnyCPU;x86;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,8 +12,12 @@
     <PackageReference Include="YamlDotNet" Version="6.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(Platform)' != 'x86'">
     <ProjectReference Include="..\externals\FNA\FNA.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Platform)' == 'x86'">
+    <ProjectReference Include="..\externals\FNA\FNA.csproj" />
   </ItemGroup>
 
 </Project>

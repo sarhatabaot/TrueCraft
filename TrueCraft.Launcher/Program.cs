@@ -20,7 +20,7 @@ namespace TrueCraft.Launcher
 				Application.Initialize(ToolkitType.Wpf);
 			else
 				// In this case they're probably using some flavor of Unix
-				// which probably has some flavor of GTK availble
+				// which probably has some flavor of GTK available
 				Application.Initialize(ToolkitType.Gtk);
 			UserSettings.Local = new UserSettings();
 			UserSettings.Local.Load();
