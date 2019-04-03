@@ -2,7 +2,6 @@ using System;
 using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Logic;
-using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Logic.Blocks
 {

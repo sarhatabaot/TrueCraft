@@ -6,7 +6,6 @@ using TrueCraft.API.Physics;
 using TrueCraft.Core.Logic;
 using TrueCraft.Core.Logic.Blocks;
 using TrueCraft.Core.Networking.Packets;
-using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Entities
 {

@@ -18,7 +18,6 @@ using TrueCraft.Core.Networking;
 using TrueCraft.Core.Networking.Packets;
 using TrueCraft.Core.Physics;
 using TrueCraft.Core.Windows;
-using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Client
 {

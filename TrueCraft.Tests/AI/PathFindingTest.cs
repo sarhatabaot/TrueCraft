@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Microsoft.Xna.Framework;
 using NUnit.Framework;
 using TrueCraft.API;
 using TrueCraft.API.World;

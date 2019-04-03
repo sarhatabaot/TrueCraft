@@ -5,7 +5,6 @@ using TrueCraft.API.Logic;
 using TrueCraft.API.Networking;
 using TrueCraft.API.World;
 using TrueCraft.Core.Logic.Items;
-using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Logic.Blocks
 {

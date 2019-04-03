@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using TrueCraft.API;
 using TrueCraft.Client.Rendering;
 using Matrix = Microsoft.Xna.Framework.Matrix;
-using TRay = TrueCraft.API.Ray;
 
 namespace TrueCraft.Client.Modules
 {
@@ -93,7 +92,7 @@ namespace TrueCraft.Client.Modules
 				Matrix.CreateRotationY(MathHelper.ToRadians(-(Game.Client.Yaw - 180) + 180)));
 
 			var cast = VoxelCast.Cast(Game.Client.World,
-				new TRay(Game.Camera.Position, new Vector3(direction.X, direction.Y, direction.Z)),
+				new Ray(Game.Camera.Position, new Vector3(direction.X, direction.Y, direction.Z)),
 				Game.BlockRepository, TrueCraftGame.Reach, TrueCraftGame.Reach + 2);
 
 			if (cast == null)
@@ -110,8 +109,8 @@ namespace TrueCraft.Client.Modules
 
 					DestructionEffect.World = HighlightEffect.World = Matrix.Identity
 					                                                  * Matrix.CreateScale(
-						                                                  new Vector3((float) box.Width,
-							                                                  (float) box.Height, (float) box.Depth))
+						                                                  new Vector3((float) box.Width(),
+							                                                  (float) box.Height(), (float) box.Depth()))
 					                                                  * Matrix.CreateTranslation(
 						                                                  new Vector3((float) box.Min.X,
 							                                                  (float) box.Min.Y, (float) box.Min.Z))

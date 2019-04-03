@@ -8,7 +8,6 @@ using TrueCraft.Core.Logic;
 using TrueCraft.Core.Logic.Blocks;
 using TrueCraft.Core.TerrainGen;
 using TrueCraft.Core.World;
-using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Test.Lighting
 {

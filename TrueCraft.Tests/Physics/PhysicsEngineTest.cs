@@ -8,7 +8,6 @@ using TrueCraft.Core.Logic;
 using TrueCraft.Core.Logic.Blocks;
 using TrueCraft.Core.Physics;
 using TrueCraft.Core.TerrainGen;
-using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Test.Physics
 {

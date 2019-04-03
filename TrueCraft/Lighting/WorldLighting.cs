@@ -7,7 +7,6 @@ using TrueCraft.API.Logic;
 using TrueCraft.API.World;
 using TrueCraft.Core.World;
 using TrueCraft.Profiling;
-using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Lighting
 {
@@ -107,7 +106,7 @@ namespace TrueCraft.Core.Lighting
 
 		private void LightBox(LightingOperation op)
 		{
-			var chunk = World.FindChunk((Coordinates3D) op.Box.Center, false);
+			var chunk = World.FindChunk((Coordinates3D) op.Box.Center(), false);
 			if (chunk == null || !chunk.TerrainPopulated)
 				return;
 			Profiler.Start("lighting.box");

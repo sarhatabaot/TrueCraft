@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Logic;
-using Ray = TrueCraft.API.Ray;
 
 namespace TrueCraft.Client
 {

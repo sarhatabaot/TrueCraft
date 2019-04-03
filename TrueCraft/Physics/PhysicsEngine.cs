@@ -5,7 +5,6 @@ using TrueCraft.API;
 using TrueCraft.API.Entities;
 using TrueCraft.API.Physics;
 using TrueCraft.API.World;
-using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Physics
 {

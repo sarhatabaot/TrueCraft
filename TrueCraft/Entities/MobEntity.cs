@@ -8,7 +8,6 @@ using TrueCraft.API.Physics;
 using TrueCraft.API.Server;
 using TrueCraft.Core.AI;
 using TrueCraft.Core.Networking.Packets;
-using BoundingBox = TrueCraft.API.BoundingBox;
 using Matrix = TrueCraft.API.Matrix;
 
 namespace TrueCraft.Core.Entities

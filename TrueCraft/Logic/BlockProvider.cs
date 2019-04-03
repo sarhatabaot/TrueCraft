@@ -12,7 +12,6 @@ using TrueCraft.API.World;
 using TrueCraft.Core.Entities;
 using TrueCraft.Core.Logic.Blocks;
 using TrueCraft.Core.Logic.Items;
-using BoundingBox = TrueCraft.API.BoundingBox;
 
 namespace TrueCraft.Core.Logic
 {

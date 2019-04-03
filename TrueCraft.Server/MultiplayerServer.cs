@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using Microsoft.Xna.Framework;
 using TrueCraft.API;
 using TrueCraft.API.Logging;
 using TrueCraft.API.Logic;

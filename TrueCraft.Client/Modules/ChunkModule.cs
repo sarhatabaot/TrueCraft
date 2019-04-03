@@ -10,7 +10,6 @@ using TrueCraft.Client.Events;
 using TrueCraft.Client.Rendering;
 using TrueCraft.Core.Lighting;
 using TrueCraft.Core.World;
-using BoundingBox = TrueCraft.API.BoundingBox;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
 
 namespace TrueCraft.Client.Modules
