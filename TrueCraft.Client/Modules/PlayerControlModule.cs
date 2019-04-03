@@ -7,8 +7,6 @@ using TrueCraft.Extensions;
 using TrueCraft.Logic;
 using TrueCraft.Logic.Blocks;
 using TrueCraft.Networking.Packets;
-using MathHelper = Microsoft.Xna.Framework.MathHelper;
-using Matrix = Microsoft.Xna.Framework.Matrix;
 
 namespace TrueCraft.Client.Modules
 {
