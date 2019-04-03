@@ -84,7 +84,7 @@ namespace TrueCraft.Entities
 				target.Y = Position.Y; // TODO: Find better way of doing this
 				if (faceRoute)
 					Face(target);
-				var lookAt = Directions.Forwards.Transform(Matrix.CreateRotationY(MathHelper.ToRadians(-(Yaw - 180) + 180)));
+				var lookAt = Directions.Forwards.Transform(Matrix.CreateRotationY((float) MathHelper.ToRadians(-(Yaw - 180) + 180)));
 				lookAt *= (float) modifier;
 				Velocity = new Vector3(lookAt.X, Velocity.Y, lookAt.Z);
 				if (Position.DistanceTo(target) < Velocity.Distance())

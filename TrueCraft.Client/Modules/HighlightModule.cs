@@ -112,8 +112,8 @@ namespace TrueCraft.Client.Modules
 						                                                  new Vector3((float) box.Width(),
 							                                                  (float) box.Height(), (float) box.Depth()))
 					                                                  * Microsoft.Xna.Framework.Matrix.CreateTranslation(
-						                                                  new Vector3((float) box.Min.X,
-							                                                  (float) box.Min.Y, (float) box.Min.Z))
+						                                                  new Vector3(box.Min.X,
+							                                                  box.Min.Y, box.Min.Z))
 					                                                  * Microsoft.Xna.Framework.Matrix.CreateTranslation(
 						                                                  new Vector3(cast.Item1.X, cast.Item1.Y,
 							                                                  cast.Item1.Z));
