@@ -1,4 +1,4 @@
-﻿namespace TrueCraft.Core
+﻿namespace TrueCraft
 {
 	public class FavoriteServer
 	{

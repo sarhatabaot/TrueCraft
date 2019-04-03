@@ -1,4 +1,4 @@
-﻿namespace TrueCraft.API.World
+﻿namespace TrueCraft.World
 {
 	public interface IDecoration
 	{

@@ -2,11 +2,9 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
-using TrueCraft.API;
-using TrueCraft.API.Server;
 using TrueCraft.Profiling;
 
-namespace TrueCraft
+namespace TrueCraft.Server
 {
 	public class EventScheduler : IEventScheduler
 	{

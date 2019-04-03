@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TrueCraft.API
+namespace TrueCraft
 {
 	[Flags]
 	public enum ToolType

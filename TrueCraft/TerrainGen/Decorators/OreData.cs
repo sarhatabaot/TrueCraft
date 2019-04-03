@@ -1,6 +1,4 @@
-﻿using TrueCraft.API;
-
-namespace TrueCraft.Core.TerrainGen.Decorators
+﻿namespace TrueCraft.TerrainGen.Decorators
 {
 	public struct OreData
 	{

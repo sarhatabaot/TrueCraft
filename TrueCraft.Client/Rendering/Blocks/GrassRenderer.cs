@@ -1,9 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.Core.Logic.Blocks;
-using TrueCraft.Core.World;
+using TrueCraft.Logic;
+using TrueCraft.Logic.Blocks;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
 
 namespace TrueCraft.Client.Rendering.Blocks
@@ -98,7 +96,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 			VisibleFaces faces, Tuple<int, int> textureMap, int indiciesOffset, out int[] indicies)
 		{
 			var texture = Texture;
-			if (descriptor.Coordinates.Y < World.Height && descriptor.Chunk != null)
+			if (descriptor.Coordinates.Y < World.World.Height && descriptor.Chunk != null)
 				if (descriptor.Chunk.GetBlockID(descriptor.Coordinates + Coordinates3D.Up) == SnowfallBlock.BlockID)
 					texture = SnowTexture;
 

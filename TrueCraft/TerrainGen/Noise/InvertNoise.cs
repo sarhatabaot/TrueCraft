@@ -1,6 +1,6 @@
-﻿using TrueCraft.API.World;
+﻿using TrueCraft.World;
 
-namespace TrueCraft.Core.TerrainGen.Noise
+namespace TrueCraft.TerrainGen.Noise
 {
 	public class InvertNoise : NoiseGen
 	{

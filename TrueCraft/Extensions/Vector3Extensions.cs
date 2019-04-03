@@ -1,9 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using Matrix = TrueCraft.API.Matrix;
 
-namespace TrueCraft
+namespace TrueCraft.Extensions
 {
 	public static class Vector3Extensions
 	{

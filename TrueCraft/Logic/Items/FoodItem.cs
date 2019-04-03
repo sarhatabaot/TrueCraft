@@ -1,4 +1,4 @@
-﻿namespace TrueCraft.Core.Logic.Items
+﻿namespace TrueCraft.Logic.Items
 {
 	public abstract class FoodItem : ItemProvider
 	{

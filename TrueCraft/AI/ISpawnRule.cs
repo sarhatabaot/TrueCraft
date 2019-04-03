@@ -1,7 +1,7 @@
-﻿using TrueCraft.API.Server;
-using TrueCraft.API.World;
+﻿using TrueCraft.Server;
+using TrueCraft.World;
 
-namespace TrueCraft.API.AI
+namespace TrueCraft.AI
 {
 	public interface ISpawnRule
 	{

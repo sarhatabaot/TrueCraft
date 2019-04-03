@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TrueCraft.API.Logic;
 
-namespace TrueCraft.Core.Logic
+namespace TrueCraft.Logic
 {
 	public class ItemRepository : IItemRepository
 	{

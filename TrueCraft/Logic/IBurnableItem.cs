@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TrueCraft.API.Logic
+namespace TrueCraft.Logic
 {
 	/// <summary>
 	///  Describes an item that can be burnt as fuel in a furnace.

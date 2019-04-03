@@ -1,6 +1,4 @@
-﻿using TrueCraft.API.Networking;
-
-namespace TrueCraft.Core.Networking.Packets
+﻿namespace TrueCraft.Networking.Packets
 {
 	/// <summary>
 	///  Used to attach entities to other entities, i.e. players to minecarts

@@ -1,6 +1,6 @@
-﻿using TrueCraft.API.Networking;
+﻿using TrueCraft.Networking;
 
-namespace TrueCraft.API.Server
+namespace TrueCraft.Server
 {
 	public interface ICommand
 	{

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TrueCraft.Core.Entities
+namespace TrueCraft.Entities
 {
 	[Flags]
 	public enum EntityFlags

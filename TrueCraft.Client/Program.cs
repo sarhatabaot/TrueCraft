@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using TrueCraft.Core;
 
 namespace TrueCraft.Client
 {

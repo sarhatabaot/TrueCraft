@@ -7,20 +7,16 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Logging;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Networking;
-using TrueCraft.API.Server;
-using TrueCraft.API.World;
-using TrueCraft.Core.Lighting;
-using TrueCraft.Core.Logic;
-using TrueCraft.Core.Networking;
-using TrueCraft.Core.Networking.Packets;
-using TrueCraft.Core.World;
+using TrueCraft.Extensions;
+using TrueCraft.Lighting;
+using TrueCraft.Logging;
+using TrueCraft.Logic;
+using TrueCraft.Networking;
+using TrueCraft.Networking.Packets;
 using TrueCraft.Profiling;
+using TrueCraft.World;
 
-namespace TrueCraft
+namespace TrueCraft.Server
 {
 	public class MultiplayerServer : IMultiplayerServer, IDisposable
 	{
@@ -284,7 +280,7 @@ namespace TrueCraft
 						var posA = e.Position;
 						posA.Y = 0;
 						var posB = e.Position;
-						posB.Y = World.Height;
+						posB.Y = World.World.Height;
 						posB.X++;
 						posB.Z++;
 						lighter.EnqueueOperation(new BoundingBox(posA.AsVector3(), posB.AsVector3()), true);

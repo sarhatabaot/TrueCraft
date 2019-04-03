@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
-using JetBrains.Annotations;
+using TrueCraft.Serialization.Tags;
 
-namespace fNbt
+namespace TrueCraft.Serialization
 {
 	/// <summary> Represents a complete NBT file. </summary>
 	public sealed class NbtFile

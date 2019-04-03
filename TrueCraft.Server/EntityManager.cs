@@ -4,20 +4,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Entities;
-using TrueCraft.API.Networking;
-using TrueCraft.API.Physics;
-using TrueCraft.API.Server;
-using TrueCraft.API.World;
-using TrueCraft.Core.Entities;
-using TrueCraft.Core.Logic;
-using TrueCraft.Core.Networking.Packets;
-using TrueCraft.Core.Physics;
-using TrueCraft.Core.World;
-using MathHelper = TrueCraft.Core.MathHelper;
+using TrueCraft.Entities;
+using TrueCraft.Extensions;
+using TrueCraft.Logic;
+using TrueCraft.Networking;
+using TrueCraft.Networking.Packets;
+using TrueCraft.Physics;
+using TrueCraft.World;
 
-namespace TrueCraft
+namespace TrueCraft.Server
 {
 	public class EntityManager : IEntityManager
 	{

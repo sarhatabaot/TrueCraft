@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using NUnit.Framework;
+using TrueCraft.Serialization.Tags;
 
-namespace fNbt.Test
+namespace TrueCraft.Tests.Serialization
 {
 	[TestFixture]
 	public class ShortcutTests

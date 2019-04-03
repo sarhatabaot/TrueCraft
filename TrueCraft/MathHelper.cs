@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.Core.World;
+using TrueCraft.Extensions;
+using TrueCraft.World;
 
-namespace TrueCraft.Core
+namespace TrueCraft
 {
 	public static class MathHelper
 	{

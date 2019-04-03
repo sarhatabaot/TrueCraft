@@ -3,12 +3,10 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using fNbt;
-using TrueCraft.API;
-using TrueCraft.API.World;
-using TrueCraft.Core.Networking;
+using TrueCraft.Networking;
+using TrueCraft.Serialization;
 
-namespace TrueCraft.Core.World
+namespace TrueCraft.World
 {
 	/// <summary>
 	///  Represents a 32x32 area of <see cref="Chunk" /> objects.

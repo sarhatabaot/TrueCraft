@@ -1,7 +1,6 @@
 ﻿using System;
-using TrueCraft.API;
 
-namespace TrueCraft.Core.Logic.Items
+namespace TrueCraft.Logic.Items
 {
 	public class ChainLeggingsItem : ArmorItem // Not HelmentItem because it can't inherit the recipe
 	{

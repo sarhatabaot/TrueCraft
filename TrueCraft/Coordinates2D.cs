@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TrueCraft.API
+namespace TrueCraft
 {
 	/// <summary>
 	///  Represents a tuple of 2D coordinates.

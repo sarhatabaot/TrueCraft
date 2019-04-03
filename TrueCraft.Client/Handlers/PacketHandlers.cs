@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Networking;
 using TrueCraft.Client.Events;
-using TrueCraft.Core.Networking;
-using TrueCraft.Core.Networking.Packets;
+using TrueCraft.Networking;
+using TrueCraft.Networking.Packets;
 
 namespace TrueCraft.Client.Handlers
 {

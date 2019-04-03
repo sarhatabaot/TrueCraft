@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net.Sockets;
 
-namespace TrueCraft.Core.Networking
+namespace TrueCraft.Networking
 {
 	public class BufferManager
 	{

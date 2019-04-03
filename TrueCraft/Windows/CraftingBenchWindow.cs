@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Linq;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Windows;
+using TrueCraft.Logic;
 
-namespace TrueCraft.Core.Windows
+namespace TrueCraft.Windows
 {
 	public class CraftingBenchWindow : Window
 	{

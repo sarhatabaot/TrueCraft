@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using TrueCraft.API.Entities;
-using TrueCraft.API.Networking;
-using TrueCraft.API.World;
+using TrueCraft.Entities;
+using TrueCraft.Networking;
+using TrueCraft.World;
 
-namespace TrueCraft.API.Server
+namespace TrueCraft.Server
 {
 	public interface IEntityManager
 	{

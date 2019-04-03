@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using TrueCraft.API.AI;
-using TrueCraft.API.Physics;
+using TrueCraft.AI;
+using TrueCraft.Physics;
 
-namespace TrueCraft.API.Entities
+namespace TrueCraft.Entities
 {
 	public interface IMobEntity : IEntity, IAABBEntity
 	{

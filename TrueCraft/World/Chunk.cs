@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using fNbt;
-using fNbt.Serialization;
-using TrueCraft.API;
-using TrueCraft.API.World;
-using TrueCraft.Core.Logic.Blocks;
+using TrueCraft.Logic.Blocks;
+using TrueCraft.Serialization;
+using TrueCraft.Serialization.Serialization;
+using TrueCraft.Serialization.Tags;
 
-namespace TrueCraft.Core.World
+namespace TrueCraft.World
 {
 	public class Chunk : INbtSerializable, IChunk
 	{

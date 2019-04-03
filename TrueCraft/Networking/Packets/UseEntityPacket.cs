@@ -1,6 +1,4 @@
-﻿using TrueCraft.API.Networking;
-
-namespace TrueCraft.Core.Networking.Packets
+﻿namespace TrueCraft.Networking.Packets
 {
 	/// <summary>
 	///  Sent by clients upon clicking an entity.

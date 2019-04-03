@@ -1,9 +1,8 @@
 using System;
 using System.IO;
 using System.Text;
-using JetBrains.Annotations;
 
-namespace fNbt
+namespace TrueCraft.Serialization
 {
 	/// <summary>
 	///  BinaryWriter wrapper that takes care of writing primitives to an NBT stream,

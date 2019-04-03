@@ -19,7 +19,7 @@ namespace TrueCraft.Client.Rendering
 
 		// Position/rotation
 		private Vector3 _position;
-		private Matrix _view, _projection;
+		private Microsoft.Xna.Framework.Matrix _view, _projection;
 
 		/// <summary>
 		///  Creates a new camera from the specified values.
@@ -54,8 +54,8 @@ namespace TrueCraft.Client.Rendering
 			Pitch = pitch;
 			Yaw = yaw;
 
-			_frustum = new BoundingFrustum(Matrix.Identity);
-			_view = _projection = Matrix.Identity;
+			_frustum = new BoundingFrustum(Microsoft.Xna.Framework.Matrix.Identity);
+			_view = _projection = Microsoft.Xna.Framework.Matrix.Identity;
 			_isDirty = true;
 		}
 
@@ -181,7 +181,7 @@ namespace TrueCraft.Client.Rendering
 		///  Returns the view matrix calculated for this camera.
 		/// </summary>
 		/// <returns></returns>
-		public Matrix GetViewMatrix()
+		public Microsoft.Xna.Framework.Matrix GetViewMatrix()
 		{
 			if (_isDirty)
 				Recalculate();
@@ -192,7 +192,7 @@ namespace TrueCraft.Client.Rendering
 		///  Gets the projection matrix calculated for this camera.
 		/// </summary>
 		/// <returns></returns>
-		public Matrix GetProjectionMatrix()
+		public Microsoft.Xna.Framework.Matrix GetProjectionMatrix()
 		{
 			if (_isDirty)
 				Recalculate();
@@ -210,11 +210,11 @@ namespace TrueCraft.Client.Rendering
 				(float) _position.Z);
 
 			var direction = Microsoft.Xna.Framework.Vector3.Transform(Microsoft.Xna.Framework.Vector3.UnitZ,
-				Matrix.CreateRotationX(MathHelper.ToRadians(_pitch)) *
-				Matrix.CreateRotationY(MathHelper.ToRadians(-(_yaw - 180) + 180)));
+				Microsoft.Xna.Framework.Matrix.CreateRotationX(Microsoft.Xna.Framework.MathHelper.ToRadians(_pitch)) *
+				Microsoft.Xna.Framework.Matrix.CreateRotationY(Microsoft.Xna.Framework.MathHelper.ToRadians(-(_yaw - 180) + 180)));
 
-			_view = Matrix.CreateLookAt(origin, origin + direction, Microsoft.Xna.Framework.Vector3.Up);
-			_projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(_fov), _aspectRatio, _nearZ, _farZ);
+			_view = Microsoft.Xna.Framework.Matrix.CreateLookAt(origin, origin + direction, Microsoft.Xna.Framework.Vector3.Up);
+			_projection = Microsoft.Xna.Framework.Matrix.CreatePerspectiveFieldOfView(Microsoft.Xna.Framework.MathHelper.ToRadians(_fov), _aspectRatio, _nearZ, _farZ);
 			_frustum.Matrix = _view * _projection;
 			_isDirty = false;
 		}

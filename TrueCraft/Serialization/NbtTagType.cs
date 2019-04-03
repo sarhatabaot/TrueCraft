@@ -1,4 +1,4 @@
-﻿namespace fNbt
+﻿namespace TrueCraft.Serialization
 {
 	/// <summary> Enumeration of named binary tag types, and their corresponding codes. </summary>
 	public enum NbtTagType

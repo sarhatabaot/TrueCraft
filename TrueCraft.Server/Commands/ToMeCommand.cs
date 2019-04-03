@@ -1,11 +1,10 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using TrueCraft.API;
-using TrueCraft.API.Networking;
-using TrueCraft.Core.AI;
-using TrueCraft.Core.Entities;
+using TrueCraft.AI;
+using TrueCraft.Entities;
+using TrueCraft.Networking;
 
-namespace TrueCraft.Commands
+namespace TrueCraft.Server.Commands
 {
 	public class ToMeCommand : Command
 	{

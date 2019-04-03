@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TrueCraft.API
+namespace TrueCraft
 {
 	/// <summary>
 	///  Enumerates the materials tools can be crafted from.

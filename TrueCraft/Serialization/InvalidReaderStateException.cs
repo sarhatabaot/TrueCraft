@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace fNbt
+namespace TrueCraft.Serialization
 {
 	/// <summary>
 	///  Exception thrown when an operation is attempted on an NbtReader that

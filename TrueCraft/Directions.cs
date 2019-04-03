@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace TrueCraft.API
+namespace TrueCraft
 {
 	public static class Directions
 	{

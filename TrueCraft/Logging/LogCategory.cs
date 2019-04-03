@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TrueCraft.API.Logging
+namespace TrueCraft.Logging
 {
 	[Flags]
 	public enum LogCategory

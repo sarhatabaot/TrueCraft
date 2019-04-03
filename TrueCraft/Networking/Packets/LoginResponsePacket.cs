@@ -1,7 +1,4 @@
-﻿using TrueCraft.API;
-using TrueCraft.API.Networking;
-
-namespace TrueCraft.Core.Networking.Packets
+﻿namespace TrueCraft.Networking.Packets
 {
 	/// <summary>
 	///  Sent by the server to allow the player to spawn, with information about the world being spawned into.

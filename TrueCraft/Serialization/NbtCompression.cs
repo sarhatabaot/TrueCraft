@@ -1,4 +1,4 @@
-﻿namespace fNbt
+﻿namespace TrueCraft.Serialization
 {
 	/// <summary> Compression method used for loading/saving NBT files. </summary>
 	public enum NbtCompression

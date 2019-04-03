@@ -1,6 +1,4 @@
-﻿using TrueCraft.API.Networking;
-
-namespace TrueCraft.Core.Networking.Packets
+﻿namespace TrueCraft.Networking.Packets
 {
 	/// <summary>
 	///  Disconnects from a server or kicks a player. This is the last packet sent.

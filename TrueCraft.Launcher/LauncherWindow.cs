@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using TrueCraft.Core;
 using TrueCraft.Launcher.Views;
 using Xwt;
 using Xwt.Drawing;

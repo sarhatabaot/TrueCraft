@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TrueCraft.API
+namespace TrueCraft
 {
 	/// <summary>
 	///  The subject of an event. When it's disposed, it raises an event and the associated

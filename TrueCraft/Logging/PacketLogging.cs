@@ -1,7 +1,6 @@
-﻿using TrueCraft.API.Logging;
-using TrueCraft.API.Networking;
+﻿using TrueCraft.Networking;
 
-namespace TrueCraft.Core.Logging
+namespace TrueCraft.Logging
 {
 	public static class PacketLogging
 	{

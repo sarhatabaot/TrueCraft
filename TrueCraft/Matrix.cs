@@ -5,7 +5,7 @@
 using System;
 using Microsoft.Xna.Framework;
 
-namespace TrueCraft.API
+namespace TrueCraft
 {
 	/// <summary>
 	///  Represents the right-handed 4x4 doubleing point matrix, which can store translation, scale and rotation information.

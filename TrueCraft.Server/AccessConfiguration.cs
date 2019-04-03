@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using TrueCraft.API;
 using YamlDotNet.Serialization;
 
-namespace TrueCraft
+namespace TrueCraft.Server
 {
 	public class AccessConfiguration : Configuration, IAccessConfiguration
 	{

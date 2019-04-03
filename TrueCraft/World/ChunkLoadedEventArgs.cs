@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TrueCraft.API.World
+namespace TrueCraft.World
 {
 	public class ChunkLoadedEventArgs : EventArgs
 	{

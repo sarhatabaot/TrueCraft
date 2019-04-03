@@ -1,17 +1,14 @@
 ﻿using Moq;
 using Moq.Protected;
 using NUnit.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Entities;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Networking;
-using TrueCraft.API.Server;
-using TrueCraft.API.World;
-using TrueCraft.Core.Entities;
-using TrueCraft.Core.Logic;
-using TrueCraft.Core.TerrainGen;
+using TrueCraft.Entities;
+using TrueCraft.Logic;
+using TrueCraft.Networking;
+using TrueCraft.Server;
+using TrueCraft.TerrainGen;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.Test.Logic
+namespace TrueCraft.Tests.Logic
 {
 	[TestFixture]
 	public class BlockProviderTest
@@ -81,7 +78,7 @@ namespace TrueCraft.Core.Test.Logic
 		public void TestSupport()
 		{
 			// We need an actual world for this
-			var world = new Core.World.World("test", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("test", new FlatlandGenerator());
 			world.SetBlockID(Coordinates3D.Zero, 1);
 			world.SetBlockID(Coordinates3D.OneY, 2);
 

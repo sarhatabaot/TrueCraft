@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Linq;
-using fNbt;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Networking;
-using TrueCraft.API.Server;
-using TrueCraft.Core.Entities;
-using TrueCraft.Core.Logic;
-using TrueCraft.Core.Logic.Blocks;
-using TrueCraft.Core.Logic.Items;
-using TrueCraft.Core.Networking.Packets;
-using TrueCraft.Core.Windows;
-using MathHelper = TrueCraft.Core.MathHelper;
+using TrueCraft.Entities;
+using TrueCraft.Extensions;
+using TrueCraft.Logic;
+using TrueCraft.Logic.Blocks;
+using TrueCraft.Logic.Items;
+using TrueCraft.Networking;
+using TrueCraft.Networking.Packets;
+using TrueCraft.Serialization.Tags;
+using TrueCraft.Windows;
 
-namespace TrueCraft.Handlers
+namespace TrueCraft.Server.Handlers
 {
 	public static class InteractionHandlers
 	{

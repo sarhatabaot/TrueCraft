@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Networking;
-using TrueCraft.API.Physics;
-using TrueCraft.Core.Logic;
-using TrueCraft.Core.Logic.Blocks;
-using TrueCraft.Core.Networking.Packets;
+using TrueCraft.Extensions;
+using TrueCraft.Logic;
+using TrueCraft.Logic.Blocks;
+using TrueCraft.Networking;
+using TrueCraft.Networking.Packets;
+using TrueCraft.Physics;
 
-namespace TrueCraft.Core.Entities
+namespace TrueCraft.Entities
 {
 	public class FallingSandEntity : ObjectEntity, IAABBEntity
 	{

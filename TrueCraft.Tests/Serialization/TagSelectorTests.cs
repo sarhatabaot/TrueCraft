@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
+using TrueCraft.Serialization;
 
-namespace fNbt.Test
+namespace TrueCraft.Tests.Serialization
 {
 	[TestFixture]
 	public sealed class TagSelectorTests

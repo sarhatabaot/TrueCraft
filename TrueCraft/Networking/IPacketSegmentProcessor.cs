@@ -1,4 +1,4 @@
-﻿namespace TrueCraft.API.Networking
+﻿namespace TrueCraft.Networking
 {
 	public interface IPacketSegmentProcessor
 	{

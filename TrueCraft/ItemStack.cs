@@ -1,11 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using fNbt;
-using fNbt.Serialization;
-using TrueCraft.API.Networking;
+using TrueCraft.Networking;
+using TrueCraft.Serialization;
+using TrueCraft.Serialization.Serialization;
+using TrueCraft.Serialization.Tags;
 
-namespace TrueCraft.API
+namespace TrueCraft
 {
 	/// <summary>
 	///  Represents a stack of items.

@@ -2,12 +2,11 @@
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-using TrueCraft.API;
-using TrueCraft.API.World;
-using TrueCraft.Core.AI;
-using TrueCraft.Core.TerrainGen;
+using TrueCraft.AI;
+using TrueCraft.TerrainGen;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.Test.AI
+namespace TrueCraft.Tests.AI
 {
 	[TestFixture]
 	public class PathFindingTest
@@ -38,7 +37,7 @@ namespace TrueCraft.Core.Test.AI
 		[Test]
 		public void TestAStarAvoidRoom()
 		{
-			var world = new Core.World.World("default", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("default", new FlatlandGenerator());
 			var astar = new AStarPathFinder();
 			var start = new Coordinates3D(-5, 4, 0);
 			var end = new Coordinates3D(5, 4, 0);
@@ -68,7 +67,7 @@ namespace TrueCraft.Core.Test.AI
 		[Test]
 		public void TestAStarDiagonalPath()
 		{
-			var world = new Core.World.World("default", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("default", new FlatlandGenerator());
 			var astar = new AStarPathFinder();
 			var start = new Coordinates3D(0, 4, 0);
 			var end = new Coordinates3D(5, 4, 5);
@@ -88,7 +87,7 @@ namespace TrueCraft.Core.Test.AI
 		[Test]
 		public void TestAStarExitRoom()
 		{
-			var world = new Core.World.World("default", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("default", new FlatlandGenerator());
 			var astar = new AStarPathFinder();
 			var start = new Coordinates3D(0, 4, 0);
 			var end = new Coordinates3D(5, 4, 0);
@@ -118,7 +117,7 @@ namespace TrueCraft.Core.Test.AI
 		[Test]
 		public void TestAStarImpossible()
 		{
-			var world = new Core.World.World("default", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("default", new FlatlandGenerator());
 			var astar = new AStarPathFinder();
 			var start = new Coordinates3D(0, 4, 0);
 			var end = new Coordinates3D(5, 4, 0);
@@ -140,7 +139,7 @@ namespace TrueCraft.Core.Test.AI
 		[Test]
 		public void TestAStarLinearPath()
 		{
-			var world = new Core.World.World("default", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("default", new FlatlandGenerator());
 			var astar = new AStarPathFinder();
 
 			var watch = new Stopwatch();
@@ -167,7 +166,7 @@ namespace TrueCraft.Core.Test.AI
 		[Test]
 		public void TestAStarObstacle()
 		{
-			var world = new Core.World.World("default", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("default", new FlatlandGenerator());
 			var astar = new AStarPathFinder();
 			var start = new Coordinates3D(0, 4, 0);
 			var end = new Coordinates3D(5, 4, 0);

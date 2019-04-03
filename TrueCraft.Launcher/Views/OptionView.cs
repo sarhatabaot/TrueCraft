@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Ionic.Zip;
-using TrueCraft.Core;
 using Xwt;
 using Xwt.Drawing;
 

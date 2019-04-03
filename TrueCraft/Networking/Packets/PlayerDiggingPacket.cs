@@ -1,7 +1,4 @@
-﻿using TrueCraft.API;
-using TrueCraft.API.Networking;
-
-namespace TrueCraft.Core.Networking.Packets
+﻿namespace TrueCraft.Networking.Packets
 {
 	/// <summary>
 	///  Sent by clients when they start or stop digging. Also used to throw items.

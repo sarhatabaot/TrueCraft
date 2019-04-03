@@ -16,7 +16,7 @@
 
 using System;
 
-namespace JetBrains.Annotations
+namespace TrueCraft.Serialization
 {
 	/// <summary>
 	///  Indicates that the value of marked element could be <c>null</c> sometimes,

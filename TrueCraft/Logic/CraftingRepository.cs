@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Windows;
+using TrueCraft.Windows;
 
-namespace TrueCraft.Core.Logic
+namespace TrueCraft.Logic
 {
 	public class CraftingRepository : ICraftingRepository
 	{

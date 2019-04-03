@@ -1,6 +1,6 @@
-﻿using TrueCraft.API.World;
+﻿using TrueCraft.World;
 
-namespace TrueCraft.API.Logic
+namespace TrueCraft.Logic
 {
 	public struct BlockDescriptor
 	{

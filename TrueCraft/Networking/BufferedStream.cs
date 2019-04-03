@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace TrueCraft.Core.Networking
+namespace TrueCraft.Networking
 {
 	/// <summary>
 	///  Queues all writes until Stream.Flush() is called. This is different than System.IO.BufferedStream.

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using JetBrains.Annotations;
+using TrueCraft.Serialization.Tags;
 
-namespace fNbt
+namespace TrueCraft.Serialization
 {
 	/// <summary> Represents a reader that provides fast, noncached, forward-only access to NBT data. </summary>
 	public class NbtReader

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TrueCraft.Core.Collections
+namespace TrueCraft.Collections
 {
 	public class ByteArraySegment : ICollection<byte>
 	{

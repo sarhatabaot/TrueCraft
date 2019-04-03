@@ -1,8 +1,7 @@
 ﻿using System.Net;
-using TrueCraft.API;
-using TrueCraft.API.Logging;
-using TrueCraft.Core.Logging;
-using TrueCraft.Core.World;
+using TrueCraft.Logging;
+using TrueCraft.Server;
+using TrueCraft.World;
 
 namespace TrueCraft.Launcher.Singleplayer
 {
@@ -10,7 +9,7 @@ namespace TrueCraft.Launcher.Singleplayer
 	{
 		private readonly ServerConfiguration _configuration;
 
-		public SingleplayerServer(World world)
+		public SingleplayerServer(World.World world)
 		{
 			_configuration = new ServerConfiguration
 			{
@@ -27,7 +26,7 @@ namespace TrueCraft.Launcher.Singleplayer
 		}
 
 		public MultiplayerServer Server { get; set; }
-		public World World { get; set; }
+		public World.World World { get; set; }
 
 		public void Initialize(ProgressNotification progressNotification = null)
 		{

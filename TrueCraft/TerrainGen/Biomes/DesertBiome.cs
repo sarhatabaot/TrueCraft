@@ -1,7 +1,6 @@
-﻿using TrueCraft.API;
-using TrueCraft.Core.Logic.Blocks;
+﻿using TrueCraft.Logic.Blocks;
 
-namespace TrueCraft.Core.TerrainGen.Biomes
+namespace TrueCraft.TerrainGen.Biomes
 {
 	public class DesertBiome : BiomeProvider
 	{

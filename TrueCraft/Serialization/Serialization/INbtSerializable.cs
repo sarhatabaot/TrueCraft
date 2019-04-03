@@ -1,4 +1,6 @@
-﻿namespace fNbt.Serialization
+﻿using TrueCraft.Serialization.Tags;
+
+namespace TrueCraft.Serialization.Serialization
 {
 	public interface INbtSerializable
 	{

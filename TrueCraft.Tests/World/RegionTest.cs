@@ -2,10 +2,9 @@
 using System.IO;
 using System.Reflection;
 using NUnit.Framework;
-using TrueCraft.API;
-using TrueCraft.Core.World;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.Test.World
+namespace TrueCraft.Tests.World
 {
 	[TestFixture]
 	public class RegionTest
@@ -15,7 +14,7 @@ namespace TrueCraft.Core.Test.World
 		[OneTimeSetUp]
 		public void SetUp()
 		{
-			var world = new Core.World.World();
+			var world = new TrueCraft.World.World();
 			var assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 			Region = new Region(Coordinates2D.Zero, world,
 				Path.Combine(assemblyDir, "Files", "r.0.0.mca"));

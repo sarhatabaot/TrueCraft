@@ -1,7 +1,6 @@
 ﻿using System;
-using TrueCraft.API;
 
-namespace TrueCraft.Core.Entities
+namespace TrueCraft.Entities
 {
 	public class SlimeEntity : MobEntity
 	{

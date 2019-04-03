@@ -1,7 +1,7 @@
-﻿using TrueCraft.API.Entities;
-using TrueCraft.API.Server;
+﻿using TrueCraft.Entities;
+using TrueCraft.Server;
 
-namespace TrueCraft.API.AI
+namespace TrueCraft.AI
 {
 	public interface IMobState
 	{

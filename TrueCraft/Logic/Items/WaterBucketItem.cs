@@ -1,6 +1,6 @@
-using TrueCraft.Core.Logic.Blocks;
+using TrueCraft.Logic.Blocks;
 
-namespace TrueCraft.Core.Logic.Items
+namespace TrueCraft.Logic.Items
 {
 	public class WaterBucketItem : BucketItem
 	{

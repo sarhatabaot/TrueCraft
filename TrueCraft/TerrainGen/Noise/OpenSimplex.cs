@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TrueCraft.Core.TerrainGen.Noise
+namespace TrueCraft.TerrainGen.Noise
 {
 	/*
 	 * OpenSimplex was originally created by Kurt Spencer.

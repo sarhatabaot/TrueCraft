@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TrueCraft.Core.AI
+namespace TrueCraft.AI
 {
 	// TODO: Replace this with something better eventually
 	// Thanks to www.redblobgames.com/pathfinding/a-star/implementation.html

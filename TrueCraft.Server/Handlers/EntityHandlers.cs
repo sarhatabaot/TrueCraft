@@ -1,10 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Networking;
-using TrueCraft.API.Server;
-using TrueCraft.Core.Networking.Packets;
+using TrueCraft.Extensions;
+using TrueCraft.Networking;
+using TrueCraft.Networking.Packets;
 
-namespace TrueCraft.Handlers
+namespace TrueCraft.Server.Handlers
 {
 	internal static class EntityHandlers
 	{

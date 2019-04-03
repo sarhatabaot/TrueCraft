@@ -1,4 +1,4 @@
-namespace TrueCraft.API
+namespace TrueCraft
 {
 	/// <summary>
 	///  Enumerates the directions of block faces.

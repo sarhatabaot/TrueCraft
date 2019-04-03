@@ -1,7 +1,6 @@
 ﻿using System;
-using TrueCraft.API.Logging;
 
-namespace TrueCraft.Core.Logging
+namespace TrueCraft.Logging
 {
 	public class ConsoleLogProvider : ILogProvider
 	{

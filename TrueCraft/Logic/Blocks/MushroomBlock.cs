@@ -1,6 +1,4 @@
-using TrueCraft.API.Logic;
-
-namespace TrueCraft.Core.Logic.Blocks
+namespace TrueCraft.Logic.Blocks
 {
 	public abstract class MushroomBlock : BlockProvider
 	{

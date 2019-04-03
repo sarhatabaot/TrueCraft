@@ -1,4 +1,4 @@
-﻿namespace TrueCraft.Core.TerrainGen.Noise
+﻿namespace TrueCraft.TerrainGen.Noise
 {
 	public enum NoiseModifier
 	{

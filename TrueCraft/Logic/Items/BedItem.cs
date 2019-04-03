@@ -1,11 +1,9 @@
 using System;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Networking;
-using TrueCraft.API.World;
-using TrueCraft.Core.Logic.Blocks;
+using TrueCraft.Logic.Blocks;
+using TrueCraft.Networking;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.Logic.Items
+namespace TrueCraft.Logic.Items
 {
 	public class BedItem : ItemProvider, ICraftingRecipe
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace TrueCraft.Core
+namespace TrueCraft
 {
 	public static class Paths
 	{

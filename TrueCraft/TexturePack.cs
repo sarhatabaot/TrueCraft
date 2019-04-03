@@ -2,7 +2,7 @@
 using System.IO;
 using Ionic.Zip;
 
-namespace TrueCraft.Core
+namespace TrueCraft
 {
 	/// <summary>
 	///  Represents a Minecraft 1.7.3 texture pack (.zip archive).

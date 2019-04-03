@@ -5,26 +5,21 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
-using fNbt;
 using Ionic.Zlib;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Entities;
-using TrueCraft.API.Logging;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Networking;
-using TrueCraft.API.Server;
-using TrueCraft.API.Windows;
-using TrueCraft.API.World;
-using TrueCraft.Core.Entities;
-using TrueCraft.Core.Networking;
-using TrueCraft.Core.Networking.Packets;
-using TrueCraft.Core.Windows;
-using TrueCraft.Core.World;
-using TrueCraft.Exceptions;
+using TrueCraft.Entities;
+using TrueCraft.Logging;
+using TrueCraft.Logic;
+using TrueCraft.Networking;
+using TrueCraft.Networking.Packets;
 using TrueCraft.Profiling;
+using TrueCraft.Serialization;
+using TrueCraft.Serialization.Tags;
+using TrueCraft.Server.Exceptions;
+using TrueCraft.Windows;
+using TrueCraft.World;
 
-namespace TrueCraft
+namespace TrueCraft.Server
 {
 	public class RemoteClient : IRemoteClient, IEventSubject, IDisposable
 	{
@@ -132,7 +127,7 @@ namespace TrueCraft
 		{
 			var path = Path.Combine(Directory.GetCurrentDirectory(), "players", Username + ".nbt");
 			if (_configuration.Singleplayer)
-				path = Path.Combine(((World) World).BaseDirectory, "player.nbt");
+				path = Path.Combine(((World.World) World).BaseDirectory, "player.nbt");
 			if (!File.Exists(path))
 				return false;
 			try
@@ -160,7 +155,7 @@ namespace TrueCraft
 		{
 			var path = Path.Combine(Directory.GetCurrentDirectory(), "players", Username + ".nbt");
 			if (_configuration.Singleplayer)
-				path = Path.Combine(((World) World).BaseDirectory, "player.nbt");
+				path = Path.Combine(((World.World) World).BaseDirectory, "player.nbt");
 			if (!Directory.Exists(Path.GetDirectoryName(path)))
 				Directory.CreateDirectory(Path.GetDirectoryName(path));
 			if (Entity == null) // I didn't think this could happen but null reference exceptions have been repoted here

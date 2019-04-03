@@ -1,7 +1,7 @@
 ﻿using System;
-using TrueCraft.API.Networking;
+using TrueCraft.Networking;
 
-namespace TrueCraft.API.Server
+namespace TrueCraft.Server
 {
 	public class PlayerJoinedQuitEventArgs : EventArgs
 	{

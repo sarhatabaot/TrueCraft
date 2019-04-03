@@ -1,7 +1,8 @@
 using System;
 using System.Linq;
+using TrueCraft.Serialization.Tags;
 
-namespace fNbt.Serialization
+namespace TrueCraft.Serialization.Serialization
 {
 	public class NbtSerializer
 	{

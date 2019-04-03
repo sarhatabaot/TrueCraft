@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using TrueCraft.API;
-using TrueCraft.API.World;
-using TrueCraft.Core.TerrainGen.Noise;
+using TrueCraft.TerrainGen.Noise;
 
-namespace TrueCraft.Core.World
+namespace TrueCraft.World
 {
 	public class BiomeMap : IBiomeMap
 	{

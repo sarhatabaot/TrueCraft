@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TrueCraft.Commands
+namespace TrueCraft.Server.Commands
 {
 	public class DoNotAutoLoadAttribute : Attribute
 	{

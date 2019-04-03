@@ -1,7 +1,7 @@
 ﻿using System;
-using TrueCraft.API.Networking;
+using TrueCraft.Networking;
 
-namespace TrueCraft.API.Windows
+namespace TrueCraft.Windows
 {
 	public interface IWindow : IDisposable, IEventSubject
 	{

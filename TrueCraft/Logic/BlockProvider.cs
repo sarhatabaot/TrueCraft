@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Linq;
-using fNbt;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Entities;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Networking;
-using TrueCraft.API.Physics;
-using TrueCraft.API.Server;
-using TrueCraft.API.World;
-using TrueCraft.Core.Entities;
-using TrueCraft.Core.Logic.Blocks;
-using TrueCraft.Core.Logic.Items;
+using TrueCraft.Entities;
+using TrueCraft.Extensions;
+using TrueCraft.Logic.Blocks;
+using TrueCraft.Logic.Items;
+using TrueCraft.Networking;
+using TrueCraft.Physics;
+using TrueCraft.Serialization.Tags;
+using TrueCraft.Server;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.Logic
+namespace TrueCraft.Logic
 {
 	/// <summary>
 	///  Provides common implementations of block logic.

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net;
 using System.Threading;
-using TrueCraft.Core;
 using Xwt;
 
 namespace TrueCraft.Launcher

@@ -1,7 +1,6 @@
 using System;
-using TrueCraft.API.Logic;
 
-namespace TrueCraft.Core.Logic.Items
+namespace TrueCraft.Logic.Items
 {
 	public class CoalItem : ItemProvider, IBurnableItem
 	{

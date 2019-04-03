@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TrueCraft.API;
-using TrueCraft.API.Entities;
-using TrueCraft.API.Networking;
-using TrueCraft.Core;
+using TrueCraft.Entities;
+using TrueCraft.Networking;
 
-namespace TrueCraft.Commands
+namespace TrueCraft.Server.Commands
 {
 	public class SpawnCommand : Command
 	{

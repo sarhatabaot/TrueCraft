@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TrueCraft.Exceptions
+namespace TrueCraft.Server.Exceptions
 {
 	public class PlayerDisconnectException : Exception
 	{

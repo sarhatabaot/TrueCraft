@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
-using TrueCraft.API.World;
+using TrueCraft.World;
 
-namespace TrueCraft.API.Entities
+namespace TrueCraft.Entities
 {
 	public interface IBlockPhysicsProvider
 	{

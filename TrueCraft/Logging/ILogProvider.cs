@@ -1,4 +1,4 @@
-﻿namespace TrueCraft.API.Logging
+﻿namespace TrueCraft.Logging
 {
 	public interface ILogProvider
 	{

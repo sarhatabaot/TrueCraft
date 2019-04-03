@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.World;
-using TrueCraft.Core.Logic.Blocks;
-using TrueCraft.Core.TerrainGen.Decorators;
-using TrueCraft.Core.TerrainGen.Noise;
-using TrueCraft.Core.World;
+using TrueCraft.Logic.Blocks;
+using TrueCraft.TerrainGen.Decorators;
+using TrueCraft.TerrainGen.Noise;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.TerrainGen
+namespace TrueCraft.TerrainGen
 {
 	/// <summary>
 	///  This terrain generator is still under heavy development. Use at your own risk.

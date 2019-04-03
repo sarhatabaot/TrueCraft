@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace TrueCraft.API.Networking
+namespace TrueCraft.Networking
 {
 	public interface IMinecraftStream
 	{

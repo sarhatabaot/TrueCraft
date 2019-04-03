@@ -1,10 +1,8 @@
 using System;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.Core.Logic.Items;
+using TrueCraft.Logic.Items;
 
-namespace TrueCraft.Core.Logic.Blocks
+namespace TrueCraft.Logic.Blocks
 {
 	public class SnowfallBlock : BlockProvider
 	{

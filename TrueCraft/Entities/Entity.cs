@@ -1,13 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Entities;
-using TrueCraft.API.Networking;
-using TrueCraft.API.Server;
-using TrueCraft.API.World;
+using TrueCraft.Networking;
+using TrueCraft.Server;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.Entities
+namespace TrueCraft.Entities
 {
 	public abstract class Entity : IEntity
 	{

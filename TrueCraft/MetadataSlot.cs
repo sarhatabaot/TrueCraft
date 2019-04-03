@@ -1,7 +1,7 @@
-using fNbt;
-using TrueCraft.API.Networking;
+using TrueCraft.Networking;
+using TrueCraft.Serialization;
 
-namespace TrueCraft.API
+namespace TrueCraft
 {
 	public class MetadataSlot : MetadataEntry
 	{

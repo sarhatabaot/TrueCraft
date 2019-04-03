@@ -1,8 +1,6 @@
-using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Windows;
+using TrueCraft.Logic;
 
-namespace TrueCraft.Core.Windows
+namespace TrueCraft.Windows
 {
 	public class CraftingWindowArea : WindowArea
 	{

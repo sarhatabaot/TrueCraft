@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace TrueCraft.API
+namespace TrueCraft
 {
 	/// <summary>
 	///  Provides constants and functions for working with chat colors.

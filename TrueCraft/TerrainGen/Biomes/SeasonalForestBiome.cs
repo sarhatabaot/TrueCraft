@@ -1,6 +1,4 @@
-﻿using TrueCraft.API;
-
-namespace TrueCraft.Core.TerrainGen.Biomes
+﻿namespace TrueCraft.TerrainGen.Biomes
 {
 	public class SeasonalForestBiome : BiomeProvider
 	{

@@ -1,10 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.World;
-using TrueCraft.Core.World;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.TerrainGen.Decorations
+namespace TrueCraft.TerrainGen.Decorations
 {
 	public abstract class Decoration : IDecoration
 	{

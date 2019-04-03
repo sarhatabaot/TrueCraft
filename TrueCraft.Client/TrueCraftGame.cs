@@ -8,15 +8,12 @@ using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.API.World;
 using TrueCraft.Client.Input;
 using TrueCraft.Client.Modules;
 using TrueCraft.Client.Rendering;
-using TrueCraft.Core;
-using TrueCraft.Core.Logic;
-using TrueCraft.Core.Networking.Packets;
+using TrueCraft.Logic;
+using TrueCraft.Networking.Packets;
+using TrueCraft.World;
 
 namespace TrueCraft.Client
 {

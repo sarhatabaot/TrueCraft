@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Entities;
-using TrueCraft.API.Logic;
-using TrueCraft.API.World;
+using TrueCraft.Entities;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.Logic
+namespace TrueCraft.Logic
 {
 	public class BlockRepository : IBlockRepository, IBlockPhysicsProvider
 	{

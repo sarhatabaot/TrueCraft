@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 
-namespace fNbt
+namespace TrueCraft.Serialization
 {
 	/// <summary>
 	///  DeflateStream wrapper that calculates Adler32 checksum of the written data,

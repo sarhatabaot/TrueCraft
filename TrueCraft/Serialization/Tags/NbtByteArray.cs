@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Text;
-using JetBrains.Annotations;
 
-namespace fNbt
+namespace TrueCraft.Serialization.Tags
 {
 	/// <summary> A tag containing an array of bytes. </summary>
 	public sealed class NbtByteArray : NbtTag

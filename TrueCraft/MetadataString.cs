@@ -1,7 +1,7 @@
 using System;
-using TrueCraft.API.Networking;
+using TrueCraft.Networking;
 
-namespace TrueCraft.API
+namespace TrueCraft
 {
 	public class MetadataString : MetadataEntry
 	{

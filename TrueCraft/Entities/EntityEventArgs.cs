@@ -1,7 +1,6 @@
 ﻿using System;
-using TrueCraft.API.Entities;
 
-namespace TrueCraft.Core.Entities
+namespace TrueCraft.Entities
 {
 	public class EntityEventArgs : EventArgs
 	{

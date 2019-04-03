@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using TrueCraft.API;
-using TrueCraft.API.AI;
-using TrueCraft.API.World;
-using TrueCraft.Core;
+using TrueCraft.AI;
+using TrueCraft.World;
 
-namespace TrueCraft
+namespace TrueCraft.Server
 {
 	public class MobManager
 	{

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Linq;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Server;
-using TrueCraft.API.Windows;
+using TrueCraft.Logic;
+using TrueCraft.Server;
 
-namespace TrueCraft.Core.Windows
+namespace TrueCraft.Windows
 {
 	public class FurnaceWindow : Window
 	{

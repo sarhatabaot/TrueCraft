@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace fNbt
+namespace TrueCraft.Serialization
 {
 	/// <summary>
 	///  Exception thrown when a format violation is detected while

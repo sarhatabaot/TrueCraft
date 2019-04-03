@@ -1,4 +1,4 @@
-﻿namespace TrueCraft.API
+﻿namespace TrueCraft
 {
 	/// <summary>
 	///  Enumerates the materials armor can be crafted from.

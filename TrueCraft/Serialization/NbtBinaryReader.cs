@@ -1,9 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using JetBrains.Annotations;
 
-namespace fNbt
+namespace TrueCraft.Serialization
 {
 	/// <summary>
 	///  BinaryReader wrapper that takes care of reading primitives from an NBT stream,

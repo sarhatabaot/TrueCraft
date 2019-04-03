@@ -1,8 +1,6 @@
 using System;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
 
-namespace TrueCraft.Core.Logic.Items
+namespace TrueCraft.Logic.Items
 {
 	public class MinecartItem : ItemProvider, ICraftingRecipe
 	{

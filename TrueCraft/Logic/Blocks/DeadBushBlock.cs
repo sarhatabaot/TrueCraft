@@ -1,9 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
 
-namespace TrueCraft.Core.Logic.Blocks
+namespace TrueCraft.Logic.Blocks
 {
 	public class DeadBushBlock : BlockProvider
 	{

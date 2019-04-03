@@ -1,11 +1,11 @@
 ﻿using System;
-using fNbt;
 using Microsoft.Xna.Framework;
-using TrueCraft.API.Networking;
-using TrueCraft.API.Server;
-using TrueCraft.API.World;
+using TrueCraft.Networking;
+using TrueCraft.Serialization.Tags;
+using TrueCraft.Server;
+using TrueCraft.World;
 
-namespace TrueCraft.API.Logic
+namespace TrueCraft.Logic
 {
 	public interface IBlockProvider : IItemProvider
 	{

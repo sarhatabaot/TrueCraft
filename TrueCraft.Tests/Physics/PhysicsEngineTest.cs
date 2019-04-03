@@ -1,15 +1,14 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Entities;
-using TrueCraft.API.Physics;
-using TrueCraft.Core.Logic;
-using TrueCraft.Core.Logic.Blocks;
-using TrueCraft.Core.Physics;
-using TrueCraft.Core.TerrainGen;
+using TrueCraft.Entities;
+using TrueCraft.Extensions;
+using TrueCraft.Logic;
+using TrueCraft.Logic.Blocks;
+using TrueCraft.Physics;
+using TrueCraft.TerrainGen;
 
-namespace TrueCraft.Core.Test.Physics
+namespace TrueCraft.Tests.Physics
 {
 	[TestFixture]
 	public class PhysicsEngineTest
@@ -70,7 +69,7 @@ namespace TrueCraft.Core.Test.Physics
 			// Tests an entity that falls alongside a wall
 
 			var repository = GetBlockRepository();
-			var world = new Core.World.World("default", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("default", new FlatlandGenerator());
 			var physics = new PhysicsEngine(world, repository);
 			var entity = new TestEntity();
 			entity.Position = new Vector3(0, 10, 0);
@@ -92,7 +91,7 @@ namespace TrueCraft.Core.Test.Physics
 		public void TestCollisionPoint()
 		{
 			var repository = GetBlockRepository();
-			var world = new Core.World.World("default", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("default", new FlatlandGenerator());
 			var physics = new PhysicsEngine(world, repository);
 			var entity = new TestEntity();
 			entity.Position = new Vector3(0, 5, 0);
@@ -112,7 +111,7 @@ namespace TrueCraft.Core.Test.Physics
 		public void TestCornerCollision()
 		{
 			var repository = GetBlockRepository();
-			var world = new Core.World.World("default", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("default", new FlatlandGenerator());
 			var physics = new PhysicsEngine(world, repository);
 			var entity = new TestEntity();
 			entity.Position = new Vector3(-1, 10, -1);
@@ -135,7 +134,7 @@ namespace TrueCraft.Core.Test.Physics
 		public void TestDrag()
 		{
 			var repository = GetBlockRepository();
-			var world = new Core.World.World("default", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("default", new FlatlandGenerator());
 			var physics = new PhysicsEngine(world, repository);
 			var entity = new TestEntity();
 			entity.Position = new Vector3(0, 100, 0);
@@ -154,7 +153,7 @@ namespace TrueCraft.Core.Test.Physics
 		public void TestExtremeTerrainCollision()
 		{
 			var repository = GetBlockRepository();
-			var world = new Core.World.World("default", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("default", new FlatlandGenerator());
 			var physics = new PhysicsEngine(world, repository);
 			var entity = new TestEntity();
 			entity.Position = new Vector3(0, 4, 0);
@@ -171,7 +170,7 @@ namespace TrueCraft.Core.Test.Physics
 		public void TestGravity()
 		{
 			var repository = GetBlockRepository();
-			var world = new Core.World.World("default", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("default", new FlatlandGenerator());
 			var physics = new PhysicsEngine(world, repository);
 			var entity = new TestEntity();
 			entity.Position = new Vector3(0, 100, 0);
@@ -193,7 +192,7 @@ namespace TrueCraft.Core.Test.Physics
 		public void TestHorizontalCollision()
 		{
 			var repository = GetBlockRepository();
-			var world = new Core.World.World("default", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("default", new FlatlandGenerator());
 			var physics = new PhysicsEngine(world, repository);
 			var entity = new TestEntity();
 			entity.Position = new Vector3(0, 5, 0);
@@ -214,7 +213,7 @@ namespace TrueCraft.Core.Test.Physics
 		public void TestTerrainCollision()
 		{
 			var repository = GetBlockRepository();
-			var world = new Core.World.World("default", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("default", new FlatlandGenerator());
 			var physics = new PhysicsEngine(world, repository);
 			var entity = new TestEntity();
 			entity.Size = new Size(0.6, 1.8, 0.6);

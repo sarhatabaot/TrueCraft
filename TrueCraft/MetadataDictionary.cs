@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Text;
-using TrueCraft.API.Networking;
+using TrueCraft.Networking;
 
-namespace TrueCraft.API
+namespace TrueCraft
 {
 	/// <summary>
 	///  Used to send metadata with entities

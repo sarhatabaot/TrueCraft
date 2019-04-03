@@ -1,7 +1,6 @@
 using System;
-using TrueCraft.API;
 
-namespace TrueCraft.Core.Logic.Blocks
+namespace TrueCraft.Logic.Blocks
 {
 	public class ObsidianBlock : BlockProvider
 	{

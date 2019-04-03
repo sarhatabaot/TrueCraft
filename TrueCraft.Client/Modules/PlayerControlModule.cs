@@ -2,13 +2,11 @@ using System;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
 using TrueCraft.Client.Input;
-using TrueCraft.Core;
-using TrueCraft.Core.Logic;
-using TrueCraft.Core.Logic.Blocks;
-using TrueCraft.Core.Networking.Packets;
+using TrueCraft.Extensions;
+using TrueCraft.Logic;
+using TrueCraft.Logic.Blocks;
+using TrueCraft.Networking.Packets;
 using MathHelper = Microsoft.Xna.Framework.MathHelper;
 using Matrix = Microsoft.Xna.Framework.Matrix;
 
@@ -243,7 +241,7 @@ namespace TrueCraft.Client.Modules
 			Game.Client.Yaw -= look.X;
 			Game.Client.Pitch -= look.Y;
 			Game.Client.Yaw %= 360;
-			Game.Client.Pitch = MathHelper.Clamp(Game.Client.Pitch, -89.9f, 89.9f);
+			Game.Client.Pitch = Microsoft.Xna.Framework.MathHelper.Clamp(Game.Client.Pitch, -89.9f, 89.9f);
 
 			return true;
 		}
@@ -337,7 +335,7 @@ namespace TrueCraft.Client.Modules
 				Game.Client.Yaw -= look.X;
 				Game.Client.Pitch -= look.Y;
 				Game.Client.Yaw %= 360;
-				Game.Client.Pitch = MathHelper.Clamp(Game.Client.Pitch, -89.9f, 89.9f);
+				Game.Client.Pitch = Microsoft.Xna.Framework.MathHelper.Clamp(Game.Client.Pitch, -89.9f, 89.9f);
 			}
 
 			if (digging)
@@ -371,7 +369,7 @@ namespace TrueCraft.Client.Modules
 			if (delta != Vector3.Zero)
 			{
 				var lookAt = Vector3.Transform(-delta,
-					Matrix.CreateRotationY(MathHelper.ToRadians(-(Game.Client.Yaw - 180) + 180)));
+					Microsoft.Xna.Framework.Matrix.CreateRotationY(Microsoft.Xna.Framework.MathHelper.ToRadians(-(Game.Client.Yaw - 180) + 180)));
 
 				lookAt.X *= (float) (gameTime.ElapsedGameTime.TotalSeconds * 4.3717);
 				lookAt.Z *= (float) (gameTime.ElapsedGameTime.TotalSeconds * 4.3717);

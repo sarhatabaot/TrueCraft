@@ -1,13 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Windows;
 using TrueCraft.Client.Input;
 using TrueCraft.Client.Rendering;
-using TrueCraft.Core.Networking.Packets;
-using TrueCraft.Core.Windows;
+using TrueCraft.Logic;
+using TrueCraft.Networking.Packets;
+using TrueCraft.Windows;
 
 namespace TrueCraft.Client.Modules
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TrueCraft.API.Windows
+namespace TrueCraft.Windows
 {
 	public interface IWindowArea : IDisposable
 	{

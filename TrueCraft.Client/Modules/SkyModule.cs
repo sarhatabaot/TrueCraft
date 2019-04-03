@@ -60,7 +60,7 @@ namespace TrueCraft.Client.Modules
 				var x = Game.Client.World.Time % 24000f / 24000f - 0.25f;
 				if (x < 0) x = 0;
 				if (x > 1) x = 1;
-				return x + (1 - ((float) Math.Cos(x * MathHelper.Pi) + 1) / 2 - x) / 3;
+				return x + (1 - ((float) Math.Cos(x * Microsoft.Xna.Framework.MathHelper.Pi) + 1) / 2 - x) / 3;
 			}
 		}
 
@@ -79,7 +79,7 @@ namespace TrueCraft.Client.Modules
 		{
 			get
 			{
-				var mod = (float) Math.Cos(CelestialAngle * MathHelper.TwoPi) * 2 + 0.5f;
+				var mod = (float) Math.Cos(CelestialAngle * Microsoft.Xna.Framework.MathHelper.TwoPi) * 2 + 0.5f;
 				if (mod < 0) mod = 0;
 				if (mod > 1) mod = 1;
 				return mod;
@@ -92,7 +92,7 @@ namespace TrueCraft.Client.Modules
 		{
 			get
 			{
-				var y = (float) Math.Cos(CelestialAngle * MathHelper.TwoPi) * 2 + 0.5f;
+				var y = (float) Math.Cos(CelestialAngle * Microsoft.Xna.Framework.MathHelper.TwoPi) * 2 + 0.5f;
 				return new Color(0.7529412f * y * 0.94f + 0.06f,
 					0.8470588f * y * 0.94f + 0.06f, 1.0f * y * 0.91f + 0.09f);
 			}
@@ -128,9 +128,9 @@ namespace TrueCraft.Client.Modules
 			Game.Camera.Position = position;
 			// Sky
 			SkyPlaneEffect.FogColor = AtmosphereColor.ToVector3();
-			SkyPlaneEffect.World = Matrix.CreateRotationX(MathHelper.Pi)
-			                       * Matrix.CreateTranslation(0, 100, 0)
-			                       * Matrix.CreateRotationX(MathHelper.TwoPi * CelestialAngle);
+			SkyPlaneEffect.World = Microsoft.Xna.Framework.Matrix.CreateRotationX(Microsoft.Xna.Framework.MathHelper.Pi)
+			                       * Microsoft.Xna.Framework.Matrix.CreateTranslation(0, 100, 0)
+			                       * Microsoft.Xna.Framework.Matrix.CreateRotationX(Microsoft.Xna.Framework.MathHelper.TwoPi * CelestialAngle);
 			SkyPlaneEffect.AmbientLightColor = WorldSkyColor.ToVector3();
 			foreach (var pass in SkyPlaneEffect.CurrentTechnique.Passes)
 			{
@@ -144,9 +144,9 @@ namespace TrueCraft.Client.Modules
 			Game.GraphicsDevice.BlendState = BlendState.Additive;
 			Game.GraphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
 			CelestialPlaneEffect.Texture = Game.TextureMapper.GetTexture("terrain/sun.png");
-			CelestialPlaneEffect.World = Matrix.CreateRotationX(MathHelper.Pi)
-			                             * Matrix.CreateTranslation(0, 100, 0)
-			                             * Matrix.CreateRotationX(MathHelper.TwoPi * CelestialAngle);
+			CelestialPlaneEffect.World = Microsoft.Xna.Framework.Matrix.CreateRotationX(Microsoft.Xna.Framework.MathHelper.Pi)
+			                             * Microsoft.Xna.Framework.Matrix.CreateTranslation(0, 100, 0)
+			                             * Microsoft.Xna.Framework.Matrix.CreateRotationX(Microsoft.Xna.Framework.MathHelper.TwoPi * CelestialAngle);
 			foreach (var pass in CelestialPlaneEffect.CurrentTechnique.Passes)
 			{
 				pass.Apply();
@@ -155,8 +155,8 @@ namespace TrueCraft.Client.Modules
 
 			// Moon
 			CelestialPlaneEffect.Texture = Game.TextureMapper.GetTexture("terrain/moon.png");
-			CelestialPlaneEffect.World = Matrix.CreateTranslation(0, -100, 0)
-			                             * Matrix.CreateRotationX(MathHelper.TwoPi * CelestialAngle);
+			CelestialPlaneEffect.World = Microsoft.Xna.Framework.Matrix.CreateTranslation(0, -100, 0)
+			                             * Microsoft.Xna.Framework.Matrix.CreateRotationX(Microsoft.Xna.Framework.MathHelper.TwoPi * CelestialAngle);
 			foreach (var pass in CelestialPlaneEffect.CurrentTechnique.Passes)
 			{
 				pass.Apply();
@@ -168,7 +168,7 @@ namespace TrueCraft.Client.Modules
 
 			// Void
 			Game.GraphicsDevice.SetVertexBuffer(SkyPlane);
-			SkyPlaneEffect.World = Matrix.CreateTranslation(0, -16, 0);
+			SkyPlaneEffect.World = Microsoft.Xna.Framework.Matrix.CreateTranslation(0, -16, 0);
 			SkyPlaneEffect.AmbientLightColor = WorldSkyColor.ToVector3()
 			                                   * new Vector3(0.2f, 0.2f, 0.6f)
 			                                   + new Vector3(0.04f, 0.04f, 0.1f);

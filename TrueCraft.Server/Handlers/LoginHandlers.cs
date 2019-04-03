@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Linq;
-using TrueCraft.API;
-using TrueCraft.API.Networking;
-using TrueCraft.API.Server;
-using TrueCraft.Core.Entities;
-using TrueCraft.Core.Networking.Packets;
+using TrueCraft.Entities;
+using TrueCraft.Extensions;
+using TrueCraft.Networking;
+using TrueCraft.Networking.Packets;
 
-namespace TrueCraft.Handlers
+namespace TrueCraft.Server.Handlers
 {
 	internal static class LoginHandlers
 	{

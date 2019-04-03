@@ -1,7 +1,7 @@
 ﻿using System;
-using TrueCraft.API.World;
+using TrueCraft.World;
 
-namespace TrueCraft.API.Physics
+namespace TrueCraft.Physics
 {
 	public interface IPhysicsEngine
 	{

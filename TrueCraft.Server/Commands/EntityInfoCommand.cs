@@ -1,9 +1,8 @@
 ﻿using System.Linq;
-using TrueCraft.API;
-using TrueCraft.API.Networking;
-using TrueCraft.Core.Entities;
+using TrueCraft.Entities;
+using TrueCraft.Networking;
 
-namespace TrueCraft.Commands
+namespace TrueCraft.Server.Commands
 {
 	public class EntityInfoCommand : Command
 	{

@@ -1,4 +1,4 @@
-﻿namespace fNbt
+﻿namespace TrueCraft.Serialization
 {
 	internal enum NbtParseState
 	{

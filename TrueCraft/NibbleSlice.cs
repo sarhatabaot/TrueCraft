@@ -1,8 +1,8 @@
 using System;
-using fNbt;
-using fNbt.Serialization;
+using TrueCraft.Serialization.Serialization;
+using TrueCraft.Serialization.Tags;
 
-namespace TrueCraft.API
+namespace TrueCraft
 {
 	/// <summary>
 	///  Represents a slice of an array of 4-bit values.

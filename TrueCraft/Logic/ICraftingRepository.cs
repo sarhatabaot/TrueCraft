@@ -1,6 +1,6 @@
-using TrueCraft.API.Windows;
+using TrueCraft.Windows;
 
-namespace TrueCraft.API.Logic
+namespace TrueCraft.Logic
 {
 	public interface ICraftingRepository
 	{

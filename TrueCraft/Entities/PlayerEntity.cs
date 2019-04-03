@@ -1,10 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Networking;
-using TrueCraft.Core.Networking.Packets;
+using TrueCraft.Networking;
+using TrueCraft.Networking.Packets;
 
-namespace TrueCraft.Core.Entities
+namespace TrueCraft.Entities
 {
 	public class PlayerEntity : LivingEntity
 	{

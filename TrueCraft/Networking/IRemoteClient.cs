@@ -1,10 +1,10 @@
 ﻿using System;
-using TrueCraft.API.Entities;
-using TrueCraft.API.Server;
-using TrueCraft.API.Windows;
-using TrueCraft.API.World;
+using TrueCraft.Entities;
+using TrueCraft.Server;
+using TrueCraft.Windows;
+using TrueCraft.World;
 
-namespace TrueCraft.API.Networking
+namespace TrueCraft.Networking
 {
 	public interface IRemoteClient
 	{

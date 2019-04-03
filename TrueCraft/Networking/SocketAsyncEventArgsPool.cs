@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Net.Sockets;
 
-namespace TrueCraft.Core.Networking
+namespace TrueCraft.Networking
 {
 	public class SocketAsyncEventArgsPool : IDisposable
 	{

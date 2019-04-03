@@ -1,7 +1,6 @@
-﻿using TrueCraft.API;
-using YamlDotNet.Serialization;
+﻿using YamlDotNet.Serialization;
 
-namespace TrueCraft
+namespace TrueCraft.Server
 {
 	public class ServerConfiguration : Configuration
 	{

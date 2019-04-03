@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace TrueCraft.API.Physics
+namespace TrueCraft.Physics
 {
 	public interface IAABBEntity : IPhysicsEntity
 	{

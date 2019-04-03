@@ -1,9 +1,8 @@
 ﻿using NUnit.Framework;
-using TrueCraft.API;
-using TrueCraft.Core.Logic.Blocks;
-using TrueCraft.Core.World;
+using TrueCraft.Logic.Blocks;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.Test.World
+namespace TrueCraft.Tests.World
 {
 	[TestFixture]
 	public class ChunkTest

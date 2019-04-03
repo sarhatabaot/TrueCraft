@@ -49,10 +49,10 @@ namespace TrueCraft.Client.Rendering
 		protected override BoundingBox RecalculateBounds(VertexPositionNormalColorTexture[] vertices)
 		{
 			return new BoundingBox(
-				new Vector3(Chunk.X * Core.World.Chunk.Width, 0, Chunk.Z * Core.World.Chunk.Depth),
-				new Vector3(Chunk.X * Core.World.Chunk.Width
-				            + Core.World.Chunk.Width, Core.World.Chunk.Height,
-					Chunk.Z * Core.World.Chunk.Depth + Core.World.Chunk.Depth));
+				new Vector3(Chunk.X * World.Chunk.Width, 0, Chunk.Z * World.Chunk.Depth),
+				new Vector3(Chunk.X * World.Chunk.Width
+				            + World.Chunk.Width, World.Chunk.Height,
+					Chunk.Z * World.Chunk.Depth + World.Chunk.Depth));
 		}
 	}
 }

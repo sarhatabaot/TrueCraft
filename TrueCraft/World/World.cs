@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using fNbt;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.API.World;
+using TrueCraft.Logic;
+using TrueCraft.Serialization;
+using TrueCraft.Serialization.Tags;
 
-namespace TrueCraft.Core.World
+namespace TrueCraft.World
 {
 	public class World : IDisposable, IWorld, IEnumerable<IChunk>
 	{

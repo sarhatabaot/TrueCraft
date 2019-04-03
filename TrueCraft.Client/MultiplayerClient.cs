@@ -5,19 +5,15 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Networking;
-using TrueCraft.API.Physics;
-using TrueCraft.API.Windows;
-using TrueCraft.API.World;
 using TrueCraft.Client.Events;
-using TrueCraft.Core;
-using TrueCraft.Core.Logic;
-using TrueCraft.Core.Networking;
-using TrueCraft.Core.Networking.Packets;
-using TrueCraft.Core.Physics;
-using TrueCraft.Core.Windows;
+using TrueCraft.Extensions;
+using TrueCraft.Logic;
+using TrueCraft.Networking;
+using TrueCraft.Networking.Packets;
+using TrueCraft.Physics;
+using TrueCraft.TerrainGen;
+using TrueCraft.Windows;
+using TrueCraft.World;
 
 namespace TrueCraft.Client
 {

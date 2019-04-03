@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using TrueCraft.Extensions;
 
-namespace TrueCraft.API
+namespace TrueCraft
 {
 	public struct BoundingCylinder : IEquatable<BoundingCylinder>
 	{

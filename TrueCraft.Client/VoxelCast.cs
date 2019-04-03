@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
+using TrueCraft.Extensions;
+using TrueCraft.Logic;
 
 namespace TrueCraft.Client
 {

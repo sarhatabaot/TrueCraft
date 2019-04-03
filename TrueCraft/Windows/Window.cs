@@ -1,11 +1,9 @@
 using System;
 using System.Linq;
-using TrueCraft.API;
-using TrueCraft.API.Networking;
-using TrueCraft.API.Windows;
-using TrueCraft.Core.Networking.Packets;
+using TrueCraft.Networking;
+using TrueCraft.Networking.Packets;
 
-namespace TrueCraft.Core.Windows
+namespace TrueCraft.Windows
 {
 	public abstract class Window : IWindow, IDisposable, IEventSubject
 	{

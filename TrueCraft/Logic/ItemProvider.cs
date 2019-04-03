@@ -1,11 +1,9 @@
 ﻿using System;
-using TrueCraft.API;
-using TrueCraft.API.Entities;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Networking;
-using TrueCraft.API.World;
+using TrueCraft.Entities;
+using TrueCraft.Networking;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.Logic
+namespace TrueCraft.Logic
 {
 	public abstract class ItemProvider : IItemProvider
 	{

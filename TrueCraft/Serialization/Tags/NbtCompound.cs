@@ -2,9 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using JetBrains.Annotations;
 
-namespace fNbt
+namespace TrueCraft.Serialization.Tags
 {
 	/// <summary> A tag containing a set of other named tags. Order is not guaranteed. </summary>
 	public sealed class NbtCompound : NbtTag, ICollection<NbtTag>, ICollection

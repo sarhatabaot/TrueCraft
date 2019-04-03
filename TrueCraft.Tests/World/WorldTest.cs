@@ -1,21 +1,20 @@
 ﻿using System.IO;
 using System.Reflection;
 using NUnit.Framework;
-using TrueCraft.API;
-using TrueCraft.Core.TerrainGen;
+using TrueCraft.TerrainGen;
 
-namespace TrueCraft.Core.Test.World
+namespace TrueCraft.Tests.World
 {
 	[TestFixture]
 	public class WorldTest
 	{
-		public Core.World.World World { get; set; }
+		public TrueCraft.World.World World { get; set; }
 
 		[OneTimeSetUp]
 		public void SetUp()
 		{
 			var assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-			World = Core.World.World.LoadWorld(Path.Combine(assemblyDir, "Files"));
+			World = TrueCraft.World.World.LoadWorld(Path.Combine(assemblyDir, "Files"));
 		}
 
 		[Test]

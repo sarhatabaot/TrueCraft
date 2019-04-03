@@ -7,9 +7,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using TrueCraft.API.Server;
 
-namespace TrueCraft
+namespace TrueCraft.Server
 {
 	public class QueryProtocol
 	{

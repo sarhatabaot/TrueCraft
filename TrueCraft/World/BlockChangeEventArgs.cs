@@ -1,7 +1,7 @@
 ﻿using System;
-using TrueCraft.API.Logic;
+using TrueCraft.Logic;
 
-namespace TrueCraft.API.World
+namespace TrueCraft.World
 {
 	public class BlockChangeEventArgs : EventArgs
 	{

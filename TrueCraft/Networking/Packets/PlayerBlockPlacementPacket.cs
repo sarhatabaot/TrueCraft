@@ -1,7 +1,4 @@
-﻿using TrueCraft.API;
-using TrueCraft.API.Networking;
-
-namespace TrueCraft.Core.Networking.Packets
+﻿namespace TrueCraft.Networking.Packets
 {
 	/// <summary>
 	///  Sent when the player interacts with a block (generally via right clicking).

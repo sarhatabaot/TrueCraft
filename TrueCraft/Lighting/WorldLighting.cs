@@ -2,13 +2,12 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.API.World;
-using TrueCraft.Core.World;
+using TrueCraft.Extensions;
+using TrueCraft.Logic;
 using TrueCraft.Profiling;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.Lighting
+namespace TrueCraft.Lighting
 {
 	// https://github.com/SirCmpwn/TrueCraft/wiki/Lighting
 

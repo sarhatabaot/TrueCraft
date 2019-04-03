@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 
-namespace TrueCraft.API.Networking
+namespace TrueCraft.Networking
 {
 	public interface IPacketReader
 	{

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
 
-namespace TrueCraft.Core
+namespace TrueCraft
 {
 	public class UserSettings
 	{

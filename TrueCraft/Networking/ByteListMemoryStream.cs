@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace TrueCraft.Core.Networking
+namespace TrueCraft.Networking
 {
 	public class ByteListMemoryStream : Stream
 	{

@@ -1,6 +1,6 @@
 using System;
 
-namespace TrueCraft.Core.Logic.Blocks
+namespace TrueCraft.Logic.Blocks
 {
 	public class WaterBlock : FluidBlock
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TrueCraft.API.Server
+namespace TrueCraft.Server
 {
 	public interface IEventScheduler
 	{

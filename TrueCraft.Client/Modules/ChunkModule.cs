@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using TrueCraft.API;
-using TrueCraft.API.World;
 using TrueCraft.Client.Events;
 using TrueCraft.Client.Rendering;
-using TrueCraft.Core.Lighting;
-using TrueCraft.Core.World;
+using TrueCraft.Extensions;
+using TrueCraft.Lighting;
+using TrueCraft.World;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
 
 namespace TrueCraft.Client.Modules
@@ -84,7 +83,7 @@ namespace TrueCraft.Client.Modules
 			var posA = e.Position;
 			posA.Y = 0;
 			var posB = e.Position;
-			posB.Y = World.Height;
+			posB.Y = World.World.Height;
 			posB.X++;
 			posB.Z++;
 			WorldLighting.EnqueueOperation(new BoundingBox(posA.AsVector3(), posB.AsVector3()), true);

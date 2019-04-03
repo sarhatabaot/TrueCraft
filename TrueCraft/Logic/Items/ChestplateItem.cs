@@ -1,7 +1,4 @@
-﻿using TrueCraft.API;
-using TrueCraft.API.Logic;
-
-namespace TrueCraft.Core.Logic.Items
+﻿namespace TrueCraft.Logic.Items
 {
 	public abstract class ChestplateItem : ArmorItem, ICraftingRecipe
 	{

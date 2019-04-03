@@ -1,9 +1,8 @@
-﻿using TrueCraft.API.Networking;
-using TrueCraft.API.Server;
-using TrueCraft.Core.Networking.Packets;
-using TrueCraft.Exceptions;
+﻿using TrueCraft.Networking;
+using TrueCraft.Networking.Packets;
+using TrueCraft.Server.Exceptions;
 
-namespace TrueCraft.Handlers
+namespace TrueCraft.Server.Handlers
 {
 	public static class PacketHandlers
 	{

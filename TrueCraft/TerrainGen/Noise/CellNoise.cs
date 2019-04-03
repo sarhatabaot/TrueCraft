@@ -19,9 +19,8 @@
 
 using System;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
 
-namespace TrueCraft.Core.TerrainGen.Noise
+namespace TrueCraft.TerrainGen.Noise
 {
 	public class CellNoise : NoiseGen
 	{

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TrueCraft.API.World
+namespace TrueCraft.World
 {
 	public interface IBiomeMap
 	{

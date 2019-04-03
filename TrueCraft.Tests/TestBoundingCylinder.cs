@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using NUnit.Framework;
 
-namespace TrueCraft.API.Test
+namespace TrueCraft.Tests
 {
 	[TestFixture]
 	public class TestBoundingCylinder

@@ -1,4 +1,4 @@
-﻿namespace TrueCraft.Core.TerrainGen.Noise
+﻿namespace TrueCraft.TerrainGen.Noise
 {
 	//Perlin Noise implemented using http://freespace.virgin.net/hugo.elias/models/m_perlin.htm
 	public class Perlin : NoiseGen

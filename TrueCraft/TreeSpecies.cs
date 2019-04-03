@@ -1,4 +1,4 @@
-﻿namespace TrueCraft.API
+﻿namespace TrueCraft
 {
 	/// <summary>
 	///  Enumerates the different species of trees in TrueCraft.

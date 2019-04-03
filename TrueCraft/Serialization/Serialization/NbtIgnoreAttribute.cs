@@ -1,6 +1,6 @@
 using System;
 
-namespace fNbt.Serialization
+namespace TrueCraft.Serialization.Serialization
 {
 	public class NbtIgnoreAttribute : Attribute
 	{

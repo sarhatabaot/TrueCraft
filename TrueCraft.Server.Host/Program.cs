@@ -2,17 +2,13 @@
 using System.IO;
 using System.Net;
 using System.Threading;
-using TrueCraft.API;
-using TrueCraft.API.Logging;
-using TrueCraft.API.Server;
-using TrueCraft.API.World;
-using TrueCraft.Commands;
-using TrueCraft.Core.Logging;
-using TrueCraft.Core.TerrainGen;
-using TrueCraft.Core.World;
+using TrueCraft.Logging;
 using TrueCraft.Profiling;
+using TrueCraft.Server.Commands;
+using TrueCraft.TerrainGen;
+using TrueCraft.World;
 
-namespace TrueCraft
+namespace TrueCraft.Server.Host
 {
 	public class Program
 	{
@@ -49,12 +45,12 @@ namespace TrueCraft
 			IWorld world;
 			try
 			{
-				world = World.LoadWorld("world");
+				world = World.World.LoadWorld("world");
 				Server.AddWorld(world);
 			}
 			catch
 			{
-				world = new World("default", new StandardGenerator());
+				world = new World.World("default", new StandardGenerator());
 				world.BlockRepository = Server.BlockRepository;
 				world.Save("world");
 				Server.AddWorld(world);

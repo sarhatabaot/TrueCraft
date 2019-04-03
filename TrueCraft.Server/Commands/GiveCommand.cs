@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq;
-using TrueCraft.API;
-using TrueCraft.API.Networking;
-using TrueCraft.Core.Windows;
+using TrueCraft.Networking;
+using TrueCraft.Windows;
 
-namespace TrueCraft.Commands
+namespace TrueCraft.Server.Commands
 {
 	public class GiveCommand : Command
 	{

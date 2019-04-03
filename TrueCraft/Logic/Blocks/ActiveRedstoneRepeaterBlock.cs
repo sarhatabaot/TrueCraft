@@ -1,4 +1,4 @@
-namespace TrueCraft.Core.Logic.Blocks
+namespace TrueCraft.Logic.Blocks
 {
 	public class ActiveRedstoneRepeaterBlock : RedstoneRepeaterBlock
 	{

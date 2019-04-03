@@ -1,8 +1,6 @@
-using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace TrueCraft.API
+namespace TrueCraft.Extensions
 {
 	public static class BoundingBoxExtensions
 	{

@@ -1,4 +1,4 @@
-﻿namespace TrueCraft.API.World
+﻿namespace TrueCraft.World
 {
 	/// <summary>
 	///  Used to decorate chunks with "decorations" such as trees, flowers, ores, etc.

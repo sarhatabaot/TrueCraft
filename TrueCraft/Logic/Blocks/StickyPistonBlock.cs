@@ -1,11 +1,10 @@
 using System;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Networking;
-using TrueCraft.API.World;
-using TrueCraft.Core.Logic.Items;
+using TrueCraft.Extensions;
+using TrueCraft.Logic.Items;
+using TrueCraft.Networking;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.Logic.Blocks
+namespace TrueCraft.Logic.Blocks
 {
 	public class StickyPistonBlock : BlockProvider, ICraftingRecipe
 	{

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Entities;
-using TrueCraft.API.Physics;
-using TrueCraft.API.World;
+using TrueCraft.Entities;
+using TrueCraft.Extensions;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.Physics
+namespace TrueCraft.Physics
 {
 	public class PhysicsEngine : IPhysicsEngine
 	{

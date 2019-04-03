@@ -2,9 +2,8 @@
 using System.IO;
 using System.Text;
 using System.Threading;
-using TrueCraft.API.Networking;
 
-namespace TrueCraft.Core.Networking
+namespace TrueCraft.Networking
 {
 	public class MinecraftStream : Stream, IMinecraftStream
 	{

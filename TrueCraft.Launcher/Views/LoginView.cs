@@ -2,7 +2,6 @@
 using System.IO;
 using System.Net;
 using System.Reflection;
-using TrueCraft.Core;
 using Xwt;
 using Xwt.Drawing;
 

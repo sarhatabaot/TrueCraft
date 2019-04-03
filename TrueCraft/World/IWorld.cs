@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using fNbt;
-using TrueCraft.API.Logic;
+using TrueCraft.Logic;
+using TrueCraft.Serialization.Tags;
 
-namespace TrueCraft.API.World
+namespace TrueCraft.World
 {
 	// TODO: Entities
 	/// <summary>

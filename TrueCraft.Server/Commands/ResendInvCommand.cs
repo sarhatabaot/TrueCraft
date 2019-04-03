@@ -1,7 +1,7 @@
-﻿using TrueCraft.API.Networking;
-using TrueCraft.Core.Networking.Packets;
+﻿using TrueCraft.Networking;
+using TrueCraft.Networking.Packets;
 
-namespace TrueCraft.Commands
+namespace TrueCraft.Server.Commands
 {
 	public class ResendInvCommand : Command
 	{

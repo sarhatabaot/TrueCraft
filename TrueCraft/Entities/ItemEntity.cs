@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Networking;
-using TrueCraft.API.Physics;
-using TrueCraft.API.Server;
-using TrueCraft.Core.Networking.Packets;
+using TrueCraft.Extensions;
+using TrueCraft.Networking;
+using TrueCraft.Networking.Packets;
+using TrueCraft.Physics;
+using TrueCraft.Server;
 
-namespace TrueCraft.Core.Entities
+namespace TrueCraft.Entities
 {
 	public class ItemEntity : ObjectEntity, IAABBEntity
 	{

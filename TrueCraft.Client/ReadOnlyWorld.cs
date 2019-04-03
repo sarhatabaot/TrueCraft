@@ -1,6 +1,4 @@
-using TrueCraft.API;
-using TrueCraft.API.World;
-using TrueCraft.Core.World;
+using TrueCraft.World;
 
 namespace TrueCraft.Client
 {
@@ -8,13 +6,13 @@ namespace TrueCraft.Client
 	{
 		internal ReadOnlyWorld()
 		{
-			World = new World("default");
+			World = new World.World("default");
 			UnloadChunks = true;
 		}
 
 		private bool UnloadChunks { get; }
 
-		internal World World { get; set; }
+		internal World.World World { get; set; }
 
 		public long Time => World.Time;
 

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
-using TrueCraft.API;
-using TrueCraft.API.Networking;
+using TrueCraft.Networking;
 
-namespace TrueCraft.Commands
+namespace TrueCraft.Server.Commands
 {
 	public class TellCommand : Command
 	{

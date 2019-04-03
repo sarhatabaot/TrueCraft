@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using TrueCraft.Core;
-using TrueCraft.Core.Logic;
-using TrueCraft.Core.TerrainGen;
-using TrueCraft.Core.World;
+using TrueCraft.Logic;
+using TrueCraft.TerrainGen;
 
 namespace TrueCraft.Launcher.Singleplayer
 {
@@ -14,7 +12,7 @@ namespace TrueCraft.Launcher.Singleplayer
 		public static Worlds Local { get; set; }
 
 		public BlockRepository BlockRepository { get; set; }
-		public World[] Saves { get; set; }
+		public World.World[] Saves { get; set; }
 
 		public void Load()
 		{
@@ -23,11 +21,11 @@ namespace TrueCraft.Launcher.Singleplayer
 			BlockRepository = new BlockRepository();
 			BlockRepository.DiscoverBlockProviders();
 			var directories = Directory.GetDirectories(Paths.Worlds);
-			var saves = new List<World>();
+			var saves = new List<World.World>();
 			foreach (var d in directories)
 				try
 				{
-					var w = World.LoadWorld(d);
+					var w = World.World.LoadWorld(d);
 					saves.Add(w);
 				}
 				catch (Exception e)
@@ -39,11 +37,11 @@ namespace TrueCraft.Launcher.Singleplayer
 			Saves = saves.ToArray();
 		}
 
-		public World CreateNewWorld(string name, string seed)
+		public World.World CreateNewWorld(string name, string seed)
 		{
 			int s;
 			if (!int.TryParse(seed, out s)) s = MathHelper.Random.Next();
-			var world = new World(name, s, new StandardGenerator());
+			var world = new World.World(name, s, new StandardGenerator());
 			world.BlockRepository = BlockRepository;
 			var safeName = name;
 			foreach (var c in Path.GetInvalidFileNameChars())

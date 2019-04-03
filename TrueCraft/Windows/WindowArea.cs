@@ -1,8 +1,6 @@
 using System;
-using TrueCraft.API;
-using TrueCraft.API.Windows;
 
-namespace TrueCraft.Core.Windows
+namespace TrueCraft.Windows
 {
 	public class WindowArea : IWindowArea
 	{

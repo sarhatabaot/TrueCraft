@@ -1,7 +1,6 @@
 ﻿using System.Text;
-using JetBrains.Annotations;
 
-namespace fNbt
+namespace TrueCraft.Serialization.Tags
 {
 	/// <summary> A tag containing a single byte. </summary>
 	public sealed class NbtByte : NbtTag

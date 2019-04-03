@@ -1,4 +1,4 @@
-﻿namespace TrueCraft.API.Logic
+﻿namespace TrueCraft.Logic
 {
 	/// <summary>
 	///  Providers item providers for a server.

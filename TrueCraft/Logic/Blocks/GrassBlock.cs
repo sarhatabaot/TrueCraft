@@ -1,11 +1,9 @@
 using System;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Networking;
-using TrueCraft.API.Server;
-using TrueCraft.API.World;
+using TrueCraft.Networking;
+using TrueCraft.Server;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.Logic.Blocks
+namespace TrueCraft.Logic.Blocks
 {
 	public class GrassBlock : BlockProvider
 	{

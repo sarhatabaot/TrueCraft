@@ -1,11 +1,9 @@
 ﻿using System.Threading.Tasks;
-using TrueCraft.API;
-using TrueCraft.API.AI;
-using TrueCraft.API.Entities;
-using TrueCraft.API.Server;
-using TrueCraft.API.World;
+using TrueCraft.Entities;
+using TrueCraft.Server;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.AI
+namespace TrueCraft.AI
 {
 	public class WanderState : IMobState
 	{

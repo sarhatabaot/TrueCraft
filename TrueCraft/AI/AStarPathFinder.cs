@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.World;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.AI
+namespace TrueCraft.AI
 {
 	public class AStarPathFinder
 	{

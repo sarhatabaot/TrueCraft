@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using TrueCraft.API.Logic;
+using TrueCraft.Logic;
 
 namespace TrueCraft.Client.Rendering
 {
@@ -37,11 +37,11 @@ namespace TrueCraft.Client.Rendering
 			RenderEffect.DirectionalLight0.Direction = new Vector3(10, -10, -0.8f);
 			RenderEffect.DirectionalLight0.DiffuseColor = Color.White.ToVector3();
 			RenderEffect.DirectionalLight0.Enabled = true;
-			RenderEffect.Projection = Matrix.CreateOrthographicOffCenter(
+			RenderEffect.Projection = Microsoft.Xna.Framework.Matrix.CreateOrthographicOffCenter(
 				0, game.GraphicsDevice.Viewport.Width,
 				0, game.GraphicsDevice.Viewport.Height,
 				0.1f, 1000.0f);
-			RenderEffect.View = Matrix.CreateLookAt(Vector3.UnitZ, Vector3.Zero, Vector3.Up);
+			RenderEffect.View = Microsoft.Xna.Framework.Matrix.CreateLookAt(Vector3.UnitZ, Vector3.Zero, Vector3.Up);
 		}
 
 		public static void RenderItemIcon(SpriteBatch spriteBatch, Texture2D texture, IItemProvider provider,
@@ -59,16 +59,16 @@ namespace TrueCraft.Client.Rendering
 			var mesh = BlockMeshes[provider.ID];
 			if (mesh != null)
 			{
-				RenderEffect.World = Matrix.Identity
-				                     * Matrix.CreateScale(0.6f)
-				                     * Matrix.CreateRotationY(-MathHelper.PiOver4)
-				                     * Matrix.CreateRotationX(MathHelper.ToRadians(30))
-				                     * Matrix.CreateScale(new Vector3(destination.Width, destination.Height, 1))
-				                     * Matrix.CreateTranslation(new Vector3(
+				RenderEffect.World = Microsoft.Xna.Framework.Matrix.Identity
+				                     * Microsoft.Xna.Framework.Matrix.CreateScale(0.6f)
+				                     * Microsoft.Xna.Framework.Matrix.CreateRotationY(-Microsoft.Xna.Framework.MathHelper.PiOver4)
+				                     * Microsoft.Xna.Framework.Matrix.CreateRotationX(Microsoft.Xna.Framework.MathHelper.ToRadians(30))
+				                     * Microsoft.Xna.Framework.Matrix.CreateScale(new Vector3(destination.Width, destination.Height, 1))
+				                     * Microsoft.Xna.Framework.Matrix.CreateTranslation(new Vector3(
 					                     destination.X,
 					                     -(destination.Y - game.GraphicsDevice.Viewport.Height / 2) +
 					                     game.GraphicsDevice.Viewport.Height / 2, 0))
-				                     * Matrix.CreateTranslation(new Vector3(destination.Width / 2,
+				                     * Microsoft.Xna.Framework.Matrix.CreateTranslation(new Vector3(destination.Width / 2,
 					                     -destination.Height / 2, 0));
 				mesh.Draw(RenderEffect);
 			}

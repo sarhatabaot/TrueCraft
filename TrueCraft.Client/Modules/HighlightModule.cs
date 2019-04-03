@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using TrueCraft.API;
 using TrueCraft.Client.Rendering;
+using TrueCraft.Extensions;
 using Matrix = Microsoft.Xna.Framework.Matrix;
 
 namespace TrueCraft.Client.Modules
@@ -88,8 +88,8 @@ namespace TrueCraft.Client.Modules
 		public void Update(GameTime gameTime)
 		{
 			var direction = Vector3.Transform(Vector3.UnitZ,
-				Matrix.CreateRotationX(MathHelper.ToRadians(Game.Client.Pitch)) *
-				Matrix.CreateRotationY(MathHelper.ToRadians(-(Game.Client.Yaw - 180) + 180)));
+				Microsoft.Xna.Framework.Matrix.CreateRotationX(Microsoft.Xna.Framework.MathHelper.ToRadians(Game.Client.Pitch)) *
+				Microsoft.Xna.Framework.Matrix.CreateRotationY(Microsoft.Xna.Framework.MathHelper.ToRadians(-(Game.Client.Yaw - 180) + 180)));
 
 			var cast = VoxelCast.Cast(Game.Client.World,
 				new Ray(Game.Camera.Position, new Vector3(direction.X, direction.Y, direction.Z)),
@@ -107,14 +107,14 @@ namespace TrueCraft.Client.Modules
 					Game.HighlightedBlock = cast.Item1;
 					Game.HighlightedBlockFace = cast.Item2;
 
-					DestructionEffect.World = HighlightEffect.World = Matrix.Identity
-					                                                  * Matrix.CreateScale(
+					DestructionEffect.World = HighlightEffect.World = Microsoft.Xna.Framework.Matrix.Identity
+					                                                  * Microsoft.Xna.Framework.Matrix.CreateScale(
 						                                                  new Vector3((float) box.Width(),
 							                                                  (float) box.Height(), (float) box.Depth()))
-					                                                  * Matrix.CreateTranslation(
+					                                                  * Microsoft.Xna.Framework.Matrix.CreateTranslation(
 						                                                  new Vector3((float) box.Min.X,
 							                                                  (float) box.Min.Y, (float) box.Min.Z))
-					                                                  * Matrix.CreateTranslation(
+					                                                  * Microsoft.Xna.Framework.Matrix.CreateTranslation(
 						                                                  new Vector3(cast.Item1.X, cast.Item1.Y,
 							                                                  cast.Item1.Z));
 				}

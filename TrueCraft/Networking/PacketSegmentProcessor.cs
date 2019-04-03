@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using TrueCraft.API.Networking;
-using TrueCraft.Core.Collections;
+using TrueCraft.Collections;
 
-namespace TrueCraft.Core.Networking
+namespace TrueCraft.Networking
 {
 	public class PacketSegmentProcessor : IPacketSegmentProcessor
 	{

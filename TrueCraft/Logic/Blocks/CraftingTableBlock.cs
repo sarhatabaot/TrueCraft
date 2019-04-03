@@ -1,12 +1,11 @@
 using System;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Networking;
-using TrueCraft.API.World;
-using TrueCraft.Core.Entities;
-using TrueCraft.Core.Windows;
+using TrueCraft.Entities;
+using TrueCraft.Extensions;
+using TrueCraft.Networking;
+using TrueCraft.Windows;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.Logic.Blocks
+namespace TrueCraft.Logic.Blocks
 {
 	public class CraftingTableBlock : BlockProvider, ICraftingRecipe, IBurnableItem
 	{

@@ -1,11 +1,9 @@
 ﻿using Moq;
 using NUnit.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Windows;
-using TrueCraft.Core.Windows;
+using TrueCraft.Logic;
+using TrueCraft.Windows;
 
-namespace TrueCraft.Core.Test.Windows
+namespace TrueCraft.Tests.Windows
 {
 	[TestFixture]
 	public class CraftingWindowAreaTest

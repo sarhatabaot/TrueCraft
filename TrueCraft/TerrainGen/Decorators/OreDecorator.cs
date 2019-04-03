@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TrueCraft.API;
-using TrueCraft.API.World;
-using TrueCraft.Core.Logic.Blocks;
-using TrueCraft.Core.TerrainGen.Noise;
-using TrueCraft.Core.World;
+using TrueCraft.Logic.Blocks;
+using TrueCraft.TerrainGen.Noise;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.TerrainGen.Decorators
+namespace TrueCraft.TerrainGen.Decorators
 {
 	public class OreDecorator : IChunkDecorator
 	{

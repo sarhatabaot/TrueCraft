@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace fNbt.Test
+namespace TrueCraft.Tests.Serialization
 {
 	internal class NonSeekableStream : Stream
 	{

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using TrueCraft.API.Logging;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Networking;
-using TrueCraft.API.World;
+using TrueCraft.Logging;
+using TrueCraft.Logic;
+using TrueCraft.Networking;
+using TrueCraft.World;
 
-namespace TrueCraft.API.Server
+namespace TrueCraft.Server
 {
 	public interface IMultiplayerServer
 	{

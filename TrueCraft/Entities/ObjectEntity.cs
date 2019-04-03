@@ -1,4 +1,4 @@
-﻿namespace TrueCraft.Core.Entities
+﻿namespace TrueCraft.Entities
 {
 	public abstract class ObjectEntity : Entity
 	{

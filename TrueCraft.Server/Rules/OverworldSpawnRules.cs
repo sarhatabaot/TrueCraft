@@ -1,8 +1,7 @@
-﻿using TrueCraft.API.AI;
-using TrueCraft.API.Server;
-using TrueCraft.API.World;
+﻿using TrueCraft.AI;
+using TrueCraft.World;
 
-namespace TrueCraft.Rules
+namespace TrueCraft.Server.Rules
 {
 	/// <summary>
 	///  Default rules for spawning mobs in the overworld.

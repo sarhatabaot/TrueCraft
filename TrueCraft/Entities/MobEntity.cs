@@ -1,16 +1,13 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.AI;
-using TrueCraft.API.Entities;
-using TrueCraft.API.Networking;
-using TrueCraft.API.Physics;
-using TrueCraft.API.Server;
-using TrueCraft.Core.AI;
-using TrueCraft.Core.Networking.Packets;
-using Matrix = TrueCraft.API.Matrix;
+using TrueCraft.AI;
+using TrueCraft.Extensions;
+using TrueCraft.Networking;
+using TrueCraft.Networking.Packets;
+using TrueCraft.Physics;
+using TrueCraft.Server;
 
-namespace TrueCraft.Core.Entities
+namespace TrueCraft.Entities
 {
 	public abstract class MobEntity : LivingEntity, IAABBEntity, IMobEntity
 	{

@@ -1,9 +1,8 @@
 ﻿using System;
-using TrueCraft.API.AI;
-using TrueCraft.API.Entities;
-using TrueCraft.API.Server;
+using TrueCraft.Entities;
+using TrueCraft.Server;
 
-namespace TrueCraft.Core.AI
+namespace TrueCraft.AI
 {
 	public class IdleState : IMobState
 	{

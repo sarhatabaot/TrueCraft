@@ -1,8 +1,7 @@
 ﻿using System;
-using TrueCraft.API.Networking;
-using TrueCraft.API.Server;
+using TrueCraft.Networking;
 
-namespace TrueCraft.Commands
+namespace TrueCraft.Server.Commands
 {
 	public class HelpCommand : Command
 	{

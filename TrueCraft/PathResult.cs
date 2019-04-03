@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TrueCraft.API
+namespace TrueCraft
 {
 	public class PathResult
 	{

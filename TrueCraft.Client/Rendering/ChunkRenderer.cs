@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.Core.World;
+using TrueCraft.Logic;
+using TrueCraft.World;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
 
 namespace TrueCraft.Client.Rendering

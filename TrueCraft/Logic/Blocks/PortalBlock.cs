@@ -1,7 +1,6 @@
 using System;
-using TrueCraft.API.Logic;
 
-namespace TrueCraft.Core.Logic.Blocks
+namespace TrueCraft.Logic.Blocks
 {
 	public class PortalBlock : BlockProvider
 	{

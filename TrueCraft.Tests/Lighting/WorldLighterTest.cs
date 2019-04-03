@@ -2,14 +2,13 @@
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using NUnit.Framework;
-using TrueCraft.API;
-using TrueCraft.Core.Lighting;
-using TrueCraft.Core.Logic;
-using TrueCraft.Core.Logic.Blocks;
-using TrueCraft.Core.TerrainGen;
-using TrueCraft.Core.World;
+using TrueCraft.Lighting;
+using TrueCraft.Logic;
+using TrueCraft.Logic.Blocks;
+using TrueCraft.TerrainGen;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.Test.Lighting
+namespace TrueCraft.Tests.Lighting
 {
 	[TestFixture]
 	public class WorldLighterTest
@@ -22,7 +21,7 @@ namespace TrueCraft.Core.Test.Lighting
 			repository.RegisterBlockProvider(new DirtBlock());
 			repository.RegisterBlockProvider(new AirBlock());
 			repository.RegisterBlockProvider(new BedrockBlock());
-			var world = new Core.World.World("TEST", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("TEST", new FlatlandGenerator());
 			world.BlockRepository = repository;
 			var lighter = new WorldLighting(world, repository);
 			world.GetBlockID(Coordinates3D.Zero); // Generate a chunk
@@ -58,7 +57,7 @@ namespace TrueCraft.Core.Test.Lighting
 			repository.RegisterBlockProvider(new DirtBlock());
 			repository.RegisterBlockProvider(new AirBlock());
 			repository.RegisterBlockProvider(new BedrockBlock());
-			var world = new Core.World.World("TEST", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("TEST", new FlatlandGenerator());
 			world.BlockRepository = repository;
 			var lighter = new WorldLighting(world, repository);
 			world.GetBlockID(Coordinates3D.Zero); // Generate a chunk
@@ -106,7 +105,7 @@ namespace TrueCraft.Core.Test.Lighting
 			repository.RegisterBlockProvider(new DirtBlock());
 			repository.RegisterBlockProvider(new AirBlock());
 			repository.RegisterBlockProvider(new BedrockBlock());
-			var world = new Core.World.World("TEST", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("TEST", new FlatlandGenerator());
 			world.BlockRepository = repository;
 			var lighter = new WorldLighting(world, repository);
 			world.GetBlockID(Coordinates3D.Zero); // Generate a chunk
@@ -192,7 +191,7 @@ namespace TrueCraft.Core.Test.Lighting
 			repository.RegisterBlockProvider(new AirBlock());
 			repository.RegisterBlockProvider(new BedrockBlock());
 			repository.RegisterBlockProvider(new LeavesBlock());
-			var world = new Core.World.World("TEST", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("TEST", new FlatlandGenerator());
 			world.BlockRepository = repository;
 			var lighter = new WorldLighting(world, repository);
 			world.GetBlockID(Coordinates3D.Zero); // Generate a chunk
@@ -273,7 +272,7 @@ namespace TrueCraft.Core.Test.Lighting
 			repository.RegisterBlockProvider(new DirtBlock());
 			repository.RegisterBlockProvider(new AirBlock());
 			repository.RegisterBlockProvider(new BedrockBlock());
-			var world = new Core.World.World("TEST", new FlatlandGenerator());
+			var world = new TrueCraft.World.World("TEST", new FlatlandGenerator());
 			world.BlockRepository = repository;
 			var lighter = new WorldLighting(world, repository);
 			world.GetBlockID(Coordinates3D.Zero); // Generate a chunk

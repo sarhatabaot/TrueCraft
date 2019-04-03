@@ -1,12 +1,10 @@
 ﻿using System;
 using Ionic.Zlib;
-using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.API.Networking;
-using TrueCraft.API.World;
 using TrueCraft.Client.Events;
-using TrueCraft.Core.Networking.Packets;
-using TrueCraft.Core.World;
+using TrueCraft.Logic;
+using TrueCraft.Networking;
+using TrueCraft.Networking.Packets;
+using TrueCraft.World;
 
 namespace TrueCraft.Client.Handlers
 {

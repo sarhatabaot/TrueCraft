@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JetBrains.Annotations
+namespace TrueCraft.Serialization
 {
 	/// <summary> Indicates that method doesn't contain observable side effects. </summary>
 	[AttributeUsage(AttributeTargets.Method)]

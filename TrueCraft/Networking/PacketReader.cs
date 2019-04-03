@@ -2,10 +2,9 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using TrueCraft.API.Networking;
-using TrueCraft.Core.Networking.Packets;
+using TrueCraft.Networking.Packets;
 
-namespace TrueCraft.Core.Networking
+namespace TrueCraft.Networking
 {
 	public class PacketReader : IPacketReader
 	{

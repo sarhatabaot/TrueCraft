@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using fNbt;
+using TrueCraft.Serialization.Tags;
 
-namespace TrueCraft.API.World
+namespace TrueCraft.World
 {
 	public interface IChunk : IEventSubject, IDisposable
 	{

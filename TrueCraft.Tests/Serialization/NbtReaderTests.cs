@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
 using NUnit.Framework;
+using TrueCraft.Serialization;
+using TrueCraft.Serialization.Tags;
 
-namespace fNbt.Test
+namespace TrueCraft.Tests.Serialization
 {
 	[TestFixture]
 	public sealed class NbtReaderTests

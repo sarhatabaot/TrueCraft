@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TrueCraft.API.World;
-using TrueCraft.Core.TerrainGen.Biomes;
+using TrueCraft.TerrainGen.Biomes;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.TerrainGen
+namespace TrueCraft.TerrainGen
 {
 	public class BiomeRepository : IBiomeRepository
 	{

@@ -1,8 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using TrueCraft.API;
-using TrueCraft.API.Networking;
+using TrueCraft.Networking;
 
-namespace TrueCraft.Commands
+namespace TrueCraft.Server.Commands
 {
 	public class SkyLightCommand : Command
 	{

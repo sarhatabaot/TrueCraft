@@ -1,6 +1,6 @@
-using JetBrains.Annotations;
+using TrueCraft.Serialization.Tags;
 
-namespace fNbt
+namespace TrueCraft.Serialization
 {
 	/// <summary>
 	///  Delegate used to skip loading certain tags of an NBT stream/file.

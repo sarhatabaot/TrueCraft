@@ -1,6 +1,6 @@
 using System;
 
-namespace fNbt.Serialization
+namespace TrueCraft.Serialization.Serialization
 {
 	[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
 	public sealed class IgnoreOnNullAttribute : Attribute

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 
-namespace TrueCraft.API
+namespace TrueCraft
 {
 	public class ReadOnlyNibbleArray
 	{

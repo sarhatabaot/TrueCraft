@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using TrueCraft.API;
-using TrueCraft.API.World;
-using TrueCraft.Core.World;
+using TrueCraft.World;
 
-namespace TrueCraft.Core.TerrainGen
+namespace TrueCraft.TerrainGen
 {
 	public class FlatlandGenerator : IChunkProvider
 	{

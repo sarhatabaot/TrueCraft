@@ -1,8 +1,7 @@
 ﻿using NUnit.Framework;
-using TrueCraft.API;
-using TrueCraft.Core.Windows;
+using TrueCraft.Windows;
 
-namespace TrueCraft.Core.Test.Windows
+namespace TrueCraft.Tests.Windows
 {
 	[TestFixture]
 	public class WindowAreaTest

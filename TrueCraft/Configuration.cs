@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using YamlDotNet.Serialization;
 
-namespace TrueCraft.API
+namespace TrueCraft
 {
 	/// <summary>
 	///  Abstract base class for configurations read from YAML files.

@@ -1,8 +1,6 @@
-﻿using TrueCraft.API;
-using TrueCraft.API.Logic;
-using TrueCraft.Core.Logic.Blocks;
+﻿using TrueCraft.Logic.Blocks;
 
-namespace TrueCraft.Core.Logic.Items
+namespace TrueCraft.Logic.Items
 {
 	public abstract class AxeItem : ToolItem, ICraftingRecipe
 	{
