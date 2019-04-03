@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using TrueCraft.Entities;
 using TrueCraft.Extensions;
@@ -41,14 +42,27 @@ namespace TrueCraft.Server.Handlers
 
 				if (!remoteClient.Load())
 					remoteClient.Entity.Position = remoteClient.World.SpawnPoint.AsVector3();
+
 				// Make sure they don't spawn in the ground
 				var collision = new Func<bool>(() =>
 				{
-					var feet = client.World.GetBlockID((Coordinates3D) client.Entity.Position);
-					var head = client.World.GetBlockID((Coordinates3D) (client.Entity.Position + Directions.Up));
-					var feetBox = server.BlockRepository.GetBlockProvider(feet).BoundingBox;
+					var position = client.Entity.Position;
+
+					byte blockId;
+					try
+					{
+						blockId = client.World.GetBlockID((Coordinates3D) position);
+					}
+					catch (Exception ex)
+					{
+						Trace.TraceError($"Client received bad starting player position: {ex}");
+						return true; // colliding
+					}
+
+					var head = client.World.GetBlockID((Coordinates3D) (position + Directions.Up));
+					var feetBox = server.BlockRepository.GetBlockProvider(blockId).BoundingBox;
 					var headBox = server.BlockRepository.GetBlockProvider(head).BoundingBox;
-					return feetBox != null || headBox != null;
+					return feetBox != null || headBox != null; // colliding
 				});
 				while (collision())
 					client.Entity.Position += Directions.Up;

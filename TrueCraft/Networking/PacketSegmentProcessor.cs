@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using TrueCraft.Collections;
 
@@ -42,29 +43,35 @@ namespace TrueCraft.Networking
 				else
 					createPacket = PacketReader.ClientboundPackets[packetId];
 
-				if (createPacket == null)
-					throw new NotSupportedException("Unable to read packet type 0x" + packetId.ToString("X2"));
-
-				CurrentPacket = createPacket();
+				
+				if (createPacket != null)
+					CurrentPacket = createPacket();
+				else
+				{
+					Trace.TraceError("Unable to read packet type 0x" + packetId.ToString("X2"));
+				}
 			}
 
-			using (var listStream = new ByteListMemoryStream(PacketBuffer, 1))
+			if (CurrentPacket != null)
 			{
-				using (var ms = new MinecraftStream(listStream))
-					try
-					{
-						CurrentPacket.ReadPacket(ms);
-					}
-					catch (EndOfStreamException)
-					{
-						return false;
-					}
+				using (var listStream = new ByteListMemoryStream(PacketBuffer, 1))
+				{
+					using (var ms = new MinecraftStream(listStream))
+						try
+						{
+							CurrentPacket.ReadPacket(ms);
+						}
+						catch (EndOfStreamException)
+						{
+							return false;
+						}
 
-				PacketBuffer.RemoveRange(0, (int) listStream.Position);
+					PacketBuffer.RemoveRange(0, (int) listStream.Position);
+				}
+
+				packet = CurrentPacket;
+				CurrentPacket = null;
 			}
-
-			packet = CurrentPacket;
-			CurrentPacket = null;
 
 			return PacketBuffer.Count > 0;
 		}
