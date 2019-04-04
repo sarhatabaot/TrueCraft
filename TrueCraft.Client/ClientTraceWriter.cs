@@ -106,7 +106,8 @@ namespace TrueCraft.Client
 		
 		public string GetPendingText()
 		{
-			return _buffer.ToString();
+			lock(_buffer)
+				return _buffer.ToString();
 		}
 
 		private static string GetTimestamp(bool utc = true, string timeFormat = "yyyy-MM-dd H:mm:ss")
