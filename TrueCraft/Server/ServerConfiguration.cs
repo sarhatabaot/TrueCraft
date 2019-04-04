@@ -41,7 +41,11 @@ namespace TrueCraft.Server
 		[YamlMember(Alias = "enable-event-loading")]
 		public bool EnableEventLoading { get; set; }
 
-		[YamlMember(Alias = "disable-events")] public string[] DisabledEvents { get; set; }
+		[YamlMember(Alias = "disable-events")]
+		public string[] DisabledEvents { get; set; }
+
+		[YamlMember(Alias = "enable-client-logging")]
+		public bool EnableClientLogging { get; set; }
 
 		public class DebugConfiguration
 		{
