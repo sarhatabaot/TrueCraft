@@ -39,6 +39,9 @@ namespace TrueCraft.Client.Input
 		/// </summary>
 		public override void Initialize()
 		{
+			if (!Game.IsActive)
+				return;
+
 			State = Keyboard.GetState();
 
 			base.Initialize();

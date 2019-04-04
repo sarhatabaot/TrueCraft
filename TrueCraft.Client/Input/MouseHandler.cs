@@ -59,6 +59,9 @@ namespace TrueCraft.Client.Input
 		/// <param name="gameTime">The game time for the update.</param>
 		public override void Update(GameTime gameTime)
 		{
+			if (!Game.IsActive)
+				return;
+
 			var newState = Mouse.GetState();
 			Process(newState, State);
 			State = newState;
@@ -78,8 +81,7 @@ namespace TrueCraft.Client.Input
 			{
 				var args = new MouseMoveEventArgs(newState.X, newState.Y, newState.X - oldState.X,
 					newState.Y - oldState.Y);
-				if (Move != null)
-					Move(this, args);
+				Move?.Invoke(this, args);
 			}
 
 			// Scrolling.
@@ -87,8 +89,7 @@ namespace TrueCraft.Client.Input
 			{
 				var args = new MouseScrollEventArgs(newState.X, newState.Y, newState.ScrollWheelValue,
 					newState.ScrollWheelValue - oldState.ScrollWheelValue);
-				if (Scroll != null)
-					Scroll(this, args);
+				Scroll?.Invoke(this, args);
 			}
 
 			// A bit of code duplication here, shame XNA doesn't expose button state through an enumeration...
@@ -100,13 +101,11 @@ namespace TrueCraft.Client.Input
 					newState.LeftButton == ButtonState.Pressed);
 				if (args.IsPressed)
 				{
-					if (ButtonDown != null)
-						ButtonDown(this, args);
+					ButtonDown?.Invoke(this, args);
 				}
 				else
 				{
-					if (ButtonUp != null)
-						ButtonUp(this, args);
+					ButtonUp?.Invoke(this, args);
 				}
 			}
 
@@ -117,13 +116,11 @@ namespace TrueCraft.Client.Input
 					newState.RightButton == ButtonState.Pressed);
 				if (args.IsPressed)
 				{
-					if (ButtonDown != null)
-						ButtonDown(this, args);
+					ButtonDown?.Invoke(this, args);
 				}
 				else
 				{
-					if (ButtonUp != null)
-						ButtonUp(this, args);
+					ButtonUp?.Invoke(this, args);
 				}
 			}
 
@@ -134,13 +131,11 @@ namespace TrueCraft.Client.Input
 					newState.MiddleButton == ButtonState.Pressed);
 				if (args.IsPressed)
 				{
-					if (ButtonDown != null)
-						ButtonDown(this, args);
+					ButtonDown?.Invoke(this, args);
 				}
 				else
 				{
-					if (ButtonUp != null)
-						ButtonUp(this, args);
+					ButtonUp?.Invoke(this, args);
 				}
 			}
 		}

@@ -356,8 +356,13 @@ namespace TrueCraft.Client
 				NextPhysicsUpdate = DateTime.UtcNow.AddMilliseconds(50);
 			}
 
-			foreach (var module in InputModules)
-				module.Update(gameTime);
+			if (IsActive)
+			{
+				foreach (var module in InputModules)
+					module.Update(gameTime);
+			}
+
+
 			foreach (var module in GraphicalModules)
 				module.Update(gameTime);
 

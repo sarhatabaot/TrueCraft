@@ -24,6 +24,9 @@ namespace TrueCraft.Client.Input
 
 		public override void Update(GameTime gameTime)
 		{
+			if (!Game.IsActive)
+				return;
+
 			var newState = GamePad.GetState(PlayerIndex);
 			Process(newState, State);
 			State = newState;
