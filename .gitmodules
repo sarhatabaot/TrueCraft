@@ -4,3 +4,6 @@
 [submodule "externals/fnalibs"]
 	path = externals/fnalibs
 	url = https://github.com/conatuscreative/fnalibs
+[submodule "externals/cimguilibs"]
+	path = externals/cimguilibs
+	url = git@github.com:butter-cat-games/cimguilibs.git
