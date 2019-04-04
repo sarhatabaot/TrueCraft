@@ -83,8 +83,7 @@ namespace TrueCraft.Networking
 			RegisterPacketType<HandshakeResponsePacket>(serverbound: false, clientbound: true); // 0x02
 			RegisterPacketType<ChatMessagePacket>(); // 0x03
 			RegisterPacketType<TimeUpdatePacket>(serverbound: false, clientbound: true); // 0x04
-			RegisterPacketType<EntityEquipmentPacket>(serverbound: false,
-				clientbound: true); // 0x05 // NOTE: serverbound not confirmed
+			RegisterPacketType<EntityEquipmentPacket>(serverbound: false, clientbound: true); // 0x05 // NOTE: serverbound not confirmed
 			RegisterPacketType<SpawnPositionPacket>(serverbound: false, clientbound: true); // 0x06
 			RegisterPacketType<UseEntityPacket>(serverbound: true, clientbound: false); // 0x07
 			RegisterPacketType<UpdateHealthPacket>(serverbound: false, clientbound: true); // 0x08

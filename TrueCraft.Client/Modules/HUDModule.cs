@@ -153,7 +153,7 @@ namespace TrueCraft.Client.Modules
 				var position = origin + new Point((int) Scale(i * 20), 0);
 				var rect = new Rectangle(position.X, position.Y, scale.X, scale.Y);
 				IconRenderer.RenderItemIcon(SpriteBatch, Items, provider,
-					(byte) item.Metadata, rect, Color.White); // TODO: Fuck, metadata was supposed to be a short
+					(byte) item.Metadata, rect, Color.White); // TODO: metadata was supposed to be a short
 			}
 		}
 

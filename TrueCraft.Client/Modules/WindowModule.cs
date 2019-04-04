@@ -52,7 +52,7 @@ namespace TrueCraft.Client.Modules
 
 				SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp,
 					DepthStencilState.None, RasterizerState.CullCounterClockwise);
-				SpriteBatch.Draw(Game.White1x1, new Rectangle(0, 0,
+				SpriteBatch.Draw(Game.WhitePixel, new Rectangle(0, 0,
 						Game.GraphicsDevice.Viewport.Width, Game.GraphicsDevice.Viewport.Height),
 					new Color(Color.Black, 180));
 				switch (Game.Client.CurrentWindow.Type)
@@ -124,7 +124,7 @@ namespace TrueCraft.Client.Modules
 						var size = Font.MeasureText(p.DisplayName);
 						mouse.X = state.X + 10;
 						mouse.Y = state.Y + 10;
-						SpriteBatch.Draw(Game.White1x1, new Rectangle(mouse.X, mouse.Y,
+						SpriteBatch.Draw(Game.WhitePixel, new Rectangle(mouse.X, mouse.Y,
 								size.X + 10, size.Y + 15),
 							new Color(Color.Black, 200));
 						Font.DrawText(SpriteBatch, mouse.X + 5, mouse.Y, p.DisplayName);
@@ -227,7 +227,7 @@ namespace TrueCraft.Client.Modules
 				var y = (int) (i / area.Width * Scale(18));
 				if (area is CraftingWindowArea)
 				{
-					// yes I know this is a crappy hack, bite me
+					// hack
 					if (i == 0)
 					{
 						if (area.Width == 2)
@@ -255,7 +255,7 @@ namespace TrueCraft.Client.Modules
 				if (stage == RenderStage.Sprites && rect.Contains(mouse))
 				{
 					SelectedSlot = (short) (area.StartIndex + i);
-					SpriteBatch.Draw(Game.White1x1, rect, new Color(Color.White, 150));
+					SpriteBatch.Draw(Game.WhitePixel, rect, new Color(Color.White, 150));
 				}
 
 				if (item.Empty)

@@ -68,7 +68,7 @@ namespace TrueCraft.Client
 		public DateTime EndDigging { get; set; }
 		public Coordinates3D TargetBlock { get; set; }
 		public AudioManager Audio { get; set; }
-		public Texture2D White1x1 { get; set; }
+		public Texture2D WhitePixel { get; set; }
 		public PlayerControlModule ControlModule { get; set; }
 		public SkyModule SkyModule { get; set; }
 
@@ -79,7 +79,7 @@ namespace TrueCraft.Client
 		private MouseHandler MouseComponent { get; }
 		private GamePadHandler GamePadComponent { get; }
 		private RenderTarget2D RenderTarget { get; set; }
-		private int ThreadID { get; set; }
+		private int ThreadId { get; set; }
 
 		private FontRenderer Pixel { get; set; }
 		private IPEndPoint EndPoint { get; }
@@ -133,8 +133,8 @@ namespace TrueCraft.Client
 			Camera = new Camera(GraphicsDevice.Viewport.AspectRatio, 70.0f, 0.1f, 1000.0f);
 			UpdateCamera();
 
-			White1x1 = new Texture2D(GraphicsDevice, 1, 1);
-			White1x1.SetData(new[] {Color.White});
+			WhitePixel = new Texture2D(GraphicsDevice, 1, 1);
+			WhitePixel.SetData(new[] {Color.White});
 
 			Audio = new AudioManager();
 			Audio.LoadDefaultPacks(Content);
@@ -186,12 +186,12 @@ namespace TrueCraft.Client
 
 			CreateRenderTarget();
 			SpriteBatch = new SpriteBatch(GraphicsDevice);
-			ThreadID = Thread.CurrentThread.ManagedThreadId;
+			ThreadId = Thread.CurrentThread.ManagedThreadId;
 		}
 
 		public void Invoke(Action action)
 		{
-			if (ThreadID == Thread.CurrentThread.ManagedThreadId)
+			if (ThreadId == Thread.CurrentThread.ManagedThreadId)
 				action();
 			else
 				PendingMainThreadActions.Add(action);

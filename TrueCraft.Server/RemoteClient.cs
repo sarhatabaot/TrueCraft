@@ -187,8 +187,7 @@ namespace TrueCraft.Server
 			window.Client = this;
 			window.ID = NextWindowID++;
 			if (NextWindowID < 0) NextWindowID = 1;
-			QueuePacket(new OpenWindowPacket(window.ID, window.Type, window.Name,
-				(sbyte) window.MinecraftWasWrittenByFuckingIdiotsLength));
+			QueuePacket(new OpenWindowPacket(window.ID, window.Type, window.Name, 0));
 			QueuePacket(new WindowItemsPacket(window.ID, window.GetSlots()));
 			window.WindowChange += HandleWindowChange;
 		}
@@ -196,7 +195,9 @@ namespace TrueCraft.Server
 		public void Log(string message, params object[] parameters)
 		{
 			if (EnableLogging)
-				SendMessage(ChatColor.Gray + string.Format("[" + DateTime.UtcNow.ToShortTimeString() + "] " + message, parameters));
+			{
+				SendMessage(ChatColor.Gray + string.Format(message, parameters));
+			}
 		}
 
 		public void QueuePacket(IPacket packet)
