@@ -39,7 +39,7 @@ namespace TrueCraft.AI
 
 		private bool CanOccupyVoxel(IWorld world, BoundingBox box, Coordinates3D voxel)
 		{
-			var id = world.GetBlockID(voxel);
+			var id = world.GetBlockId(voxel);
 			if (world.BlockRepository == null)
 				return id == 0;
 			var provider = world.BlockRepository.GetBlockProvider(id);

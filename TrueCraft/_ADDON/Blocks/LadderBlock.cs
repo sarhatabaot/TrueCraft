@@ -111,7 +111,7 @@ namespace TrueCraft.Logic.Blocks
 			descriptor.Metadata = (byte) direction;
 			if (IsSupported(descriptor, user.Server, world))
 			{
-				world.SetBlockID(descriptor.Coordinates, BlockID);
+				world.SetBlockId(descriptor.Coordinates, BlockID);
 				world.SetMetadata(descriptor.Coordinates, (byte) direction);
 				item.Count--;
 				user.Inventory[user.SelectedSlot] = item;

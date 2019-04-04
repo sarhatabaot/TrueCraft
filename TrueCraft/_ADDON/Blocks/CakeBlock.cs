@@ -56,7 +56,7 @@ namespace TrueCraft.Logic.Blocks
 			IRemoteClient user)
 		{
 			if (descriptor.Metadata == 5)
-				world.SetBlockID(descriptor.Coordinates, AirBlock.BlockID);
+				world.SetBlockId(descriptor.Coordinates, AirBlock.BlockID);
 			else
 				world.SetMetadata(descriptor.Coordinates, (byte) (descriptor.Metadata + 1));
 			return false;

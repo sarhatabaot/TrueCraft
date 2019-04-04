@@ -35,7 +35,7 @@ namespace TrueCraft.Server
 		void RegisterPacketHandler(byte packetId, PacketHandler handler);
 		void AddWorld(IWorld world);
 		IEntityManager GetEntityManagerForWorld(IWorld world);
-		void SendMessage(string message, params object[] parameters);
+		void SendMessage(string message, params object[] args);
 
 		void DisconnectClient(IRemoteClient client);
 

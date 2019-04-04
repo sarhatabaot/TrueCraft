@@ -23,11 +23,11 @@ namespace TrueCraft.Logic.Items
 		{
 			coordinates += MathHelper.BlockFaceToCoordinates(face);
 			var supportingBlock =
-				world.BlockRepository.GetBlockProvider(world.GetBlockID(coordinates + Coordinates3D.Down));
+				world.BlockRepository.GetBlockProvider(world.GetBlockId(coordinates + Coordinates3D.Down));
 
 			if (supportingBlock.Opaque)
 			{
-				world.SetBlockID(coordinates, RedstoneDustBlock.BlockID);
+				world.SetBlockId(coordinates, RedstoneDustBlock.BlockID);
 				item.Count--;
 				user.Inventory[user.SelectedSlot] = item;
 			}

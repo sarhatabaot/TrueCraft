@@ -126,7 +126,6 @@ namespace TrueCraft.Client
 				Interlocked.CompareExchange(ref connected, 1, 0);
 
 				Physics.AddEntity(this);
-
 				StartReceive();
 				QueuePacket(new HandshakePacket(User.Username));
 			}
@@ -155,6 +154,8 @@ namespace TrueCraft.Client
 		{
 			if (!Connected || Client != null && !Client.Connected)
 				return;
+
+			Trace.TraceData(TraceEventType.Verbose, 0, $"queuing packet {packet.GetType().Name}");
 
 			using (var writeStream = new MemoryStream())
 			{
@@ -193,7 +194,6 @@ namespace TrueCraft.Client
 			{
 				case SocketAsyncOperation.Receive:
 					ProcessNetwork(e);
-
 					SocketPool.Add(e);
 					break;
 				case SocketAsyncOperation.Send:
@@ -206,7 +206,6 @@ namespace TrueCraft.Client
 
 						cancel.Cancel();
 					}
-
 					e.SetBuffer(null, 0, 0);
 					break;
 			}
@@ -226,15 +225,28 @@ namespace TrueCraft.Client
 				{
 					sem.Wait(cancel.Token);
 				}
-				catch (OperationCanceledException)
+				catch (OperationCanceledException ex)
 				{
+					Trace.TraceData(TraceEventType.Error, 0, ex);
+
 					return;
 				}
 
 				var packets = PacketReader.ReadPackets(this, e.Buffer, e.Offset, e.BytesTransferred, false);
 
 				foreach (var packet in packets)
-					PacketHandlers[packet.ID]?.Invoke(packet, this);
+				{
+					Trace.TraceEvent(TraceEventType.Verbose, 0, $"received {packet.GetType().Name}");
+
+					var handler = PacketHandlers[packet.ID];
+					if (handler == null)
+					{
+						Trace.TraceEvent(TraceEventType.Warning, 0, $"no handler found for packet {packet.GetType().Name}");
+						continue;
+					}
+
+					handler.Invoke(packet, this);
+				}
 
 				if (sem.CurrentCount == 0)
 					sem?.Release();
@@ -332,8 +344,7 @@ namespace TrueCraft.Client
 				{
 					QueuePacket(new PlayerPositionAndLookPacket(value.X, value.Y, value.Y + Height,
 						value.Z, Yaw, Pitch, false));
-					if (PropertyChanged != null)
-						PropertyChanged(this, new PropertyChangedEventArgs("Position"));
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Position"));
 				}
 
 				_Position = value;

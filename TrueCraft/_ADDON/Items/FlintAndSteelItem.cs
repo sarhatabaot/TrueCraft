@@ -32,9 +32,9 @@ namespace TrueCraft.Logic.Items
 			IRemoteClient user)
 		{
 			coordinates += MathHelper.BlockFaceToCoordinates(face);
-			if (world.GetBlockID(coordinates) == AirBlock.BlockID)
+			if (world.GetBlockId(coordinates) == AirBlock.BlockID)
 			{
-				world.SetBlockID(coordinates, FireBlock.BlockID);
+				world.SetBlockId(coordinates, FireBlock.BlockID);
 				world.BlockRepository.GetBlockProvider(FireBlock.BlockID)
 					.BlockPlaced(world.GetBlockData(coordinates), face, world, user);
 

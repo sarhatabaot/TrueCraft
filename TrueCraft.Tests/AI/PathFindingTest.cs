@@ -22,7 +22,7 @@ namespace TrueCraft.Tests.AI
 						Console.Write("o");
 					else
 					{
-						var id = world.GetBlockID(coords);
+						var id = world.GetBlockId(coords);
 						if (id != 0)
 							Console.Write("x");
 						else
@@ -44,13 +44,13 @@ namespace TrueCraft.Tests.AI
 
 			// North wall
 			for (var x = -4; x < 4; x++)
-				world.SetBlockID(new Coordinates3D(x, 4, -4), 1);
+				world.SetBlockId(new Coordinates3D(x, 4, -4), 1);
 			// East wall
 			for (var z = -4; z < 4; z++)
-				world.SetBlockID(new Coordinates3D(3, 4, z), 1);
+				world.SetBlockId(new Coordinates3D(3, 4, z), 1);
 			// South wall
 			for (var x = -4; x < 4; x++)
-				world.SetBlockID(new Coordinates3D(x, 4, 4), 1);
+				world.SetBlockId(new Coordinates3D(x, 4, 4), 1);
 
 			var watch = new Stopwatch();
 			watch.Start();
@@ -94,13 +94,13 @@ namespace TrueCraft.Tests.AI
 
 			// North wall
 			for (var x = -4; x < 4; x++)
-				world.SetBlockID(new Coordinates3D(x, 4, -4), 1);
+				world.SetBlockId(new Coordinates3D(x, 4, -4), 1);
 			// East wall
 			for (var z = -4; z < 4; z++)
-				world.SetBlockID(new Coordinates3D(3, 4, z), 1);
+				world.SetBlockId(new Coordinates3D(3, 4, z), 1);
 			// South wall
 			for (var x = -4; x < 4; x++)
-				world.SetBlockID(new Coordinates3D(x, 4, 4), 1);
+				world.SetBlockId(new Coordinates3D(x, 4, 4), 1);
 
 			var watch = new Stopwatch();
 			watch.Start();
@@ -122,10 +122,10 @@ namespace TrueCraft.Tests.AI
 			var start = new Coordinates3D(0, 4, 0);
 			var end = new Coordinates3D(5, 4, 0);
 
-			world.SetBlockID(start + Coordinates3D.East, 1);
-			world.SetBlockID(start + Coordinates3D.West, 1);
-			world.SetBlockID(start + Coordinates3D.North, 1);
-			world.SetBlockID(start + Coordinates3D.South, 1);
+			world.SetBlockId(start + Coordinates3D.East, 1);
+			world.SetBlockId(start + Coordinates3D.West, 1);
+			world.SetBlockId(start + Coordinates3D.North, 1);
+			world.SetBlockId(start + Coordinates3D.South, 1);
 
 			var watch = new Stopwatch();
 			watch.Start();
@@ -170,7 +170,7 @@ namespace TrueCraft.Tests.AI
 			var astar = new AStarPathFinder();
 			var start = new Coordinates3D(0, 4, 0);
 			var end = new Coordinates3D(5, 4, 0);
-			world.SetBlockID(new Coordinates3D(3, 4, 0), 1); // Obstacle
+			world.SetBlockId(new Coordinates3D(3, 4, 0), 1); // Obstacle
 
 			var watch = new Stopwatch();
 			watch.Start();

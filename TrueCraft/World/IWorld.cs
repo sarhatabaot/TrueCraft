@@ -25,15 +25,17 @@ namespace TrueCraft.World
 
 		IChunk GetChunk(Coordinates2D coordinates, bool generate = true);
 		IChunk FindChunk(Coordinates3D coordinates, bool generate = true);
-		byte GetBlockID(Coordinates3D coordinates);
+		bool TryGetBlockId(Coordinates3D coordinates, out byte id);
+		byte GetBlockId(Coordinates3D coordinates);
 		byte GetMetadata(Coordinates3D coordinates);
 		byte GetBlockLight(Coordinates3D coordinates);
 		byte GetSkyLight(Coordinates3D coordinates);
 		Coordinates3D FindBlockPosition(Coordinates3D coordinates, out IChunk chunk, bool generate = true);
+		bool FindBlockPosition(Coordinates3D coordinates, out IChunk chunk, out Coordinates3D position, bool generate = true);
 		NbtCompound GetTileEntity(Coordinates3D coordinates);
 		BlockDescriptor GetBlockData(Coordinates3D coordinates);
 		void SetBlockData(Coordinates3D coordinates, BlockDescriptor block);
-		void SetBlockID(Coordinates3D coordinates, byte value);
+		void SetBlockId(Coordinates3D coordinates, byte value);
 		void SetMetadata(Coordinates3D coordinates, byte value);
 		void SetSkyLight(Coordinates3D coordinates, byte value);
 		void SetBlockLight(Coordinates3D coordinates, byte value);

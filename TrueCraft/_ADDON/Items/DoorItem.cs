@@ -47,7 +47,7 @@ namespace TrueCraft.Logic.Items
 		{
 			var bottom = coordinates + MathHelper.BlockFaceToCoordinates(face);
 			var top = bottom + Coordinates3D.Up;
-			if (world.GetBlockID(top) != 0 || world.GetBlockID(bottom) != 0)
+			if (world.GetBlockId(top) != 0 || world.GetBlockId(bottom) != 0)
 				return;
 			DoorFlags direction;
 			switch (MathHelper.DirectionByRotationFlat(user.Entity.Yaw))
@@ -67,9 +67,9 @@ namespace TrueCraft.Logic.Items
 			}
 
 			user.Server.BlockUpdatesEnabled = false;
-			world.SetBlockID(bottom, BlockID);
+			world.SetBlockId(bottom, BlockID);
 			world.SetMetadata(bottom, (byte) direction);
-			world.SetBlockID(top, BlockID);
+			world.SetBlockId(top, BlockID);
 			world.SetMetadata(top, (byte) (direction | DoorFlags.Upper));
 			user.Server.BlockUpdatesEnabled = true;
 			item.Count--;

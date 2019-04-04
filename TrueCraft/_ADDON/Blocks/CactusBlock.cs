@@ -48,14 +48,14 @@ namespace TrueCraft.Logic.Blocks
 				};
 
 				foreach (var coords in adjacent)
-					if (world.GetBlockID(coords) != AirBlock.BlockID)
+					if (world.GetBlockId(coords) != AirBlock.BlockID)
 						return false;
 			}
 
 			if (checkSupport)
 			{
 				var supportingBlock =
-					repository.GetBlockProvider(world.GetBlockID(descriptor.Coordinates + Coordinates3D.Down));
+					repository.GetBlockProvider(world.GetBlockId(descriptor.Coordinates + Coordinates3D.Down));
 				if (supportingBlock.ID != BlockID && supportingBlock.ID != SandBlock.BlockID)
 					return false;
 			}
@@ -65,12 +65,12 @@ namespace TrueCraft.Logic.Blocks
 
 		private void TryGrowth(IMultiplayerServer server, Coordinates3D coords, IWorld world)
 		{
-			if (world.GetBlockID(coords) != BlockID)
+			if (world.GetBlockId(coords) != BlockID)
 				return;
 			// Find current height of stalk
 			var height = 0;
 			for (var y = -MaxGrowHeight; y <= MaxGrowHeight; y++)
-				if (world.GetBlockID(coords + Coordinates3D.Down * y) == BlockID)
+				if (world.GetBlockId(coords + Coordinates3D.Down * y) == BlockID)
 					height++;
 			if (height < MaxGrowHeight)
 			{
@@ -80,9 +80,9 @@ namespace TrueCraft.Logic.Blocks
 				var chunk = world.FindChunk(coords);
 				if (meta == 15)
 				{
-					if (world.GetBlockID(coords + Coordinates3D.Up) == 0)
+					if (world.GetBlockId(coords + Coordinates3D.Up) == 0)
 					{
-						world.SetBlockID(coords + Coordinates3D.Up, BlockID);
+						world.SetBlockId(coords + Coordinates3D.Up, BlockID);
 						server.Scheduler.ScheduleEvent("cactus", chunk,
 							TimeSpan.FromSeconds(MathHelper.Random.Next(MinGrowthSeconds, MaxGrowthSeconds)),
 							_server => TryGrowth(_server, coords + Coordinates3D.Up, world));
@@ -103,9 +103,9 @@ namespace TrueCraft.Logic.Blocks
 			for (var y = descriptor.Coordinates.Y; y < 127; y++)
 			{
 				var coordinates = new Coordinates3D(descriptor.Coordinates.X, y, descriptor.Coordinates.Z);
-				if (world.GetBlockID(coordinates) == BlockID)
+				if (world.GetBlockId(coordinates) == BlockID)
 				{
-					world.SetBlockID(coordinates, AirBlock.BlockID);
+					world.SetBlockId(coordinates, AirBlock.BlockID);
 					toDrop++;
 				}
 			}
@@ -114,9 +114,9 @@ namespace TrueCraft.Logic.Blocks
 			for (var y = descriptor.Coordinates.Y - 1; y > 0; y--)
 			{
 				var coordinates = new Coordinates3D(descriptor.Coordinates.X, y, descriptor.Coordinates.Z);
-				if (world.GetBlockID(coordinates) == BlockID)
+				if (world.GetBlockId(coordinates) == BlockID)
 				{
-					world.SetBlockID(coordinates, AirBlock.BlockID);
+					world.SetBlockId(coordinates, AirBlock.BlockID);
 					toDrop++;
 				}
 			}
@@ -133,7 +133,7 @@ namespace TrueCraft.Logic.Blocks
 				base.BlockPlaced(descriptor, face, world, user);
 			else
 			{
-				world.SetBlockID(descriptor.Coordinates, AirBlock.BlockID);
+				world.SetBlockId(descriptor.Coordinates, AirBlock.BlockID);
 
 				var manager = user.Server.GetEntityManagerForWorld(world);
 				manager.SpawnEntity(

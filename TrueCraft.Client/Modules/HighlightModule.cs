@@ -99,7 +99,7 @@ namespace TrueCraft.Client.Modules
 				Game.HighlightedBlock = -Coordinates3D.One;
 			else
 			{
-				var provider = Game.BlockRepository.GetBlockProvider(Game.Client.World.GetBlockID(cast.Item1));
+				var provider = Game.BlockRepository.GetBlockProvider(Game.Client.World.GetBlockId(cast.Item1));
 				if (provider.InteractiveBoundingBox != null)
 				{
 					var box = provider.InteractiveBoundingBox.Value;

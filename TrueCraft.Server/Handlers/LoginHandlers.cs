@@ -30,13 +30,17 @@ namespace TrueCraft.Server.Handlers
 				remoteClient.QueuePacket(new DisconnectPacket("Server has no worlds configured."));
 			else if (!server.PlayerIsWhitelisted(remoteClient.Username) &&
 			         server.PlayerIsBlacklisted(remoteClient.Username))
-				remoteClient.QueuePacket(new DisconnectPacket("You're banned from this server"));
+				remoteClient.QueuePacket(new DisconnectPacket("You're banned from this server."));
 			else if (server.Clients.Count(c => c.Username == client.Username) > 1)
-				remoteClient.QueuePacket(new DisconnectPacket("The player with this username is already logged in"));
+				remoteClient.QueuePacket(new DisconnectPacket("The player with this username is already logged in."));
 			else
 			{
+				var username = remoteClient.Username ?? "<NO_USERNAME>";
+
+				server.Trace.TraceData(TraceEventType.Start, 0, $"{username} is logging in with reported position {remoteClient.Entity?.Position}");
+
 				remoteClient.LoggedIn = true;
-				remoteClient.Entity = new PlayerEntity(remoteClient.Username);
+				remoteClient.Entity = new PlayerEntity(username);
 				remoteClient.World = server.Worlds[0];
 				remoteClient.ChunkRadius = 2;
 
@@ -48,24 +52,24 @@ namespace TrueCraft.Server.Handlers
 				{
 					var position = client.Entity.Position;
 
-					byte blockId;
-					try
+					if (!client.World.TryGetBlockId((Coordinates3D) position, out var blockId))
 					{
-						blockId = client.World.GetBlockID((Coordinates3D) position);
-					}
-					catch (Exception ex)
-					{
-						Trace.TraceError($"Client received bad starting player position: {ex}");
+						client.Entity.Position = remoteClient.World.SpawnPoint.AsVector3(); // fall back to world spawn point
+						server.Trace.TraceData(TraceEventType.Error, 0, $"client gave a bad starting position: {position}, falling back to spawn point at {client.Entity.Position}");
 						return true; // colliding
 					}
 
-					var head = client.World.GetBlockID((Coordinates3D) (position + Directions.Up));
+					var head = client.World.GetBlockId((Coordinates3D) (position + Directions.Up));
 					var feetBox = server.BlockRepository.GetBlockProvider(blockId).BoundingBox;
 					var headBox = server.BlockRepository.GetBlockProvider(head).BoundingBox;
 					return feetBox != null || headBox != null; // colliding
 				});
+
 				while (collision())
+				{
+					server.Trace.TraceData(TraceEventType.Warning, 0, "spawn point is in the ground");
 					client.Entity.Position += Directions.Up;
+				}
 
 				var entityManager = server.GetEntityManagerForWorld(remoteClient.World);
 				entityManager.SpawnEntity(remoteClient.Entity);

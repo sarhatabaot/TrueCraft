@@ -46,8 +46,7 @@ namespace TrueCraft.Networking
 
 			var processor = Processors[key];
 
-			IPacket packet;
-			processor.ProcessNextSegment(buffer, offset, length, out packet);
+			processor.ProcessNextSegment(buffer, offset, length, out var packet);
 
 			if (packet == null)
 				yield break;

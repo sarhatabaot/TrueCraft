@@ -40,7 +40,7 @@ namespace TrueCraft.Logic.Blocks
 
 		public void ScheduleNextEvent(Coordinates3D coords, IWorld world, IMultiplayerServer server)
 		{
-			if (world.GetBlockID(coords) == StillID)
+			if (world.GetBlockId(coords) == StillID)
 				return;
 			var chunk = world.FindChunk(coords);
 			server.Scheduler.ScheduleEvent("fluid", chunk,
@@ -63,7 +63,7 @@ namespace TrueCraft.Logic.Blocks
 				var inward = DetermineInwardFlow(world, descriptor.Coordinates);
 				if (outward.Length != 0 || inward != descriptor.Metadata)
 				{
-					world.SetBlockID(descriptor.Coordinates, FlowingID);
+					world.SetBlockId(descriptor.Coordinates, FlowingID);
 					ScheduleNextEvent(descriptor.Coordinates, world, server);
 				}
 			}
@@ -76,7 +76,7 @@ namespace TrueCraft.Logic.Blocks
 
 		private void AutomataUpdate(IMultiplayerServer server, IWorld world, Coordinates3D coords)
 		{
-			if (world.GetBlockID(coords) != FlowingID && world.GetBlockID(coords) != StillID)
+			if (world.GetBlockId(coords) != FlowingID && world.GetBlockId(coords) != StillID)
 				return;
 			server.BlockUpdatesEnabled = false;
 			var again = DoAutomata(server, world, coords);
@@ -108,7 +108,7 @@ namespace TrueCraft.Logic.Blocks
 			// Process inward flow
 			if (inward > MaximumFluidDepletion)
 			{
-				world.SetBlockID(coords, 0);
+				world.SetBlockId(coords, 0);
 				return true;
 			}
 
@@ -121,7 +121,7 @@ namespace TrueCraft.Logic.Blocks
 			// Set our block to still fluid if we are done spreading.
 			if (outward.Length == 0 && inward == previousLevel)
 			{
-				world.SetBlockID(coords, StillID);
+				world.SetBlockId(coords, StillID);
 				return false;
 			}
 
@@ -131,11 +131,11 @@ namespace TrueCraft.Logic.Blocks
 		private void FlowOutward(IWorld world, LiquidFlow target, IMultiplayerServer server)
 		{
 			// For each block we can flow into, generate an item entity if appropriate
-			var provider = world.BlockRepository.GetBlockProvider(world.GetBlockID(target.TargetBlock));
+			var provider = world.BlockRepository.GetBlockProvider(world.GetBlockId(target.TargetBlock));
 			provider.GenerateDropEntity(new BlockDescriptor {Coordinates = target.TargetBlock, ID = provider.ID}, world,
 				server, ItemStack.EmptyStack);
 			// And overwrite the block with a new fluid block.
-			world.SetBlockID(target.TargetBlock, FlowingID);
+			world.SetBlockId(target.TargetBlock, FlowingID);
 			world.SetMetadata(target.TargetBlock, target.Level);
 			var chunk = world.FindChunk(target.TargetBlock);
 			server.Scheduler.ScheduleEvent("fluid", chunk,
@@ -152,7 +152,7 @@ namespace TrueCraft.Logic.Blocks
 		protected byte DetermineInwardFlow(IWorld world, Coordinates3D coords)
 		{
 			var currentLevel = world.GetMetadata(coords);
-			var up = world.GetBlockID(coords + Coordinates3D.Up);
+			var up = world.GetBlockId(coords + Coordinates3D.Up);
 			if (up == FlowingID || up == StillID) // Check for fluid above us
 				return currentLevel;
 			if (currentLevel != 0)
@@ -161,7 +161,7 @@ namespace TrueCraft.Logic.Blocks
 				var neighboringSourceBlocks = 0;
 				for (var i = 0; i < Neighbors.Length; i++)
 				{
-					var nId = world.GetBlockID(coords + Neighbors[i]);
+					var nId = world.GetBlockId(coords + Neighbors[i]);
 					if (nId == FlowingID || nId == StillID)
 					{
 						var neighborLevel = world.GetMetadata(coords + Neighbors[i]);
@@ -192,7 +192,7 @@ namespace TrueCraft.Logic.Blocks
 			var outwardFlow = new List<LiquidFlow>(5);
 
 			var currentLevel = world.GetMetadata(coords);
-			var blockBelow = world.BlockRepository.GetBlockProvider(world.GetBlockID(coords + Coordinates3D.Down));
+			var blockBelow = world.BlockRepository.GetBlockProvider(world.GetBlockId(coords + Coordinates3D.Down));
 			if (blockBelow.Hardness == 0 && blockBelow.ID != FlowingID && blockBelow.ID != StillID)
 			{
 				outwardFlow.Add(new LiquidFlow(coords + Coordinates3D.Down, 1));
@@ -218,7 +218,7 @@ namespace TrueCraft.Logic.Blocks
 					if (Math.Abs(z) + Math.Abs(x) > dropCheckDistance)
 						continue;
 					var check = new Coordinates3D(x, z: z) + Coordinates3D.Down;
-					var c = world.BlockRepository.GetBlockProvider(world.GetBlockID(check + coords));
+					var c = world.BlockRepository.GetBlockProvider(world.GetBlockId(check + coords));
 					if (c.Hardness == 0)
 					{
 						if (!LineOfSight(world, check + coords, coords))
@@ -256,8 +256,8 @@ namespace TrueCraft.Logic.Blocks
 					var xCoordinateCheck = new Coordinates3D(x: location.X) + coords;
 					var zCoordinateCheck = new Coordinates3D(z: location.Z) + coords;
 
-					var xID = world.BlockRepository.GetBlockProvider(world.GetBlockID(xCoordinateCheck));
-					var zID = world.BlockRepository.GetBlockProvider(world.GetBlockID(zCoordinateCheck));
+					var xID = world.BlockRepository.GetBlockProvider(world.GetBlockId(xCoordinateCheck));
+					var zID = world.BlockRepository.GetBlockProvider(world.GetBlockId(zCoordinateCheck));
 
 					if (xID.Hardness == 0 && xID.ID != FlowingID && xID.ID != StillID)
 						if (outwardFlow.All(f => f.TargetBlock != xCoordinateCheck))
@@ -273,7 +273,7 @@ namespace TrueCraft.Logic.Blocks
 				if (outwardFlow.Count == 0 && blockBelow.ID != FlowingID && blockBelow.ID != StillID)
 					for (var i = 0; i < Neighbors.Length; i++)
 					{
-						var b = world.BlockRepository.GetBlockProvider(world.GetBlockID(coords + Neighbors[i]));
+						var b = world.BlockRepository.GetBlockProvider(world.GetBlockId(coords + Neighbors[i]));
 						if (b.Hardness == 0 && b.ID != StillID && b.ID != FlowingID)
 							outwardFlow.Add(new LiquidFlow(Neighbors[i] + coords, (byte) (currentLevel + 1)));
 					}
@@ -295,7 +295,7 @@ namespace TrueCraft.Logic.Blocks
 				var z = candidate.Z;
 				do
 				{
-					var p = world.BlockRepository.GetBlockProvider(world.GetBlockID(candidate));
+					var p = world.BlockRepository.GetBlockProvider(world.GetBlockId(candidate));
 					if (p.Hardness != 0)
 						return false;
 					candidate.Z += direction.Z;

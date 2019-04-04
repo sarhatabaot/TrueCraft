@@ -10,27 +10,13 @@ namespace TrueCraft.Client
 			UnloadChunks = true;
 		}
 
-		private bool UnloadChunks { get; }
-
-		internal World.World World { get; set; }
-
 		public long Time => World.Time;
 
-		public byte GetBlockID(Coordinates3D coordinates)
+		public byte GetBlockId(Coordinates3D coordinates)
 		{
-			return World.GetBlockID(coordinates);
+			return World.GetBlockId(coordinates);
 		}
-
-		internal void SetBlockID(Coordinates3D coordinates, byte value)
-		{
-			World.SetBlockID(coordinates, value);
-		}
-
-		internal void SetMetadata(Coordinates3D coordinates, byte value)
-		{
-			World.SetMetadata(coordinates, value);
-		}
-
+		
 		public byte GetMetadata(Coordinates3D coordinates)
 		{
 			return World.GetMetadata(coordinates);
@@ -58,6 +44,22 @@ namespace TrueCraft.Client
 			return new ReadOnlyChunk(World.GetChunk(coordinates));
 		}
 
+		public bool IsValidPosition(Coordinates3D coords)
+		{
+			return World.IsValidPosition(coords);
+		}
+
+
+		internal void SetBlockId(Coordinates3D coordinates, byte value)
+		{
+			World.SetBlockId(coordinates, value);
+		}
+
+		internal void SetMetadata(Coordinates3D coordinates, byte value)
+		{
+			World.SetMetadata(coordinates, value);
+		}
+
 		internal void SetChunk(Coordinates2D coordinates, Chunk chunk)
 		{
 			World.SetChunk(coordinates, chunk);
@@ -69,9 +71,8 @@ namespace TrueCraft.Client
 				World.UnloadChunk(coordinates);
 		}
 
-		public bool IsValidPosition(Coordinates3D coords)
-		{
-			return World.IsValidPosition(coords);
-		}
+		private bool UnloadChunks { get; }
+
+		internal World.World World { get; set; }
 	}
 }

@@ -131,7 +131,7 @@ namespace TrueCraft.Lighting
 			var current = op.SkyLight ? World.GetSkyLight(coords) : World.GetBlockLight(coords);
 			if (value == current)
 				return;
-			var provider = BlockRepository.GetBlockProvider(World.GetBlockID(coords));
+			var provider = BlockRepository.GetBlockProvider(World.GetBlockId(coords));
 			if (op.Initial)
 			{
 				var emissiveness = provider.Luminance;
@@ -159,7 +159,7 @@ namespace TrueCraft.Lighting
 
 			Profiler.Start("lighting.voxel");
 
-			var id = World.GetBlockID(coords);
+			var id = World.GetBlockId(coords);
 			var provider = BlockRepository.GetBlockProvider(id);
 
 			// The opacity of the block determines the amount of light it receives from

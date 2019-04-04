@@ -73,14 +73,14 @@ namespace TrueCraft.Logic.Blocks
 
 				if ((descriptor.Metadata & (byte) BedType.Head) == (byte) BedType.Head)
 					other = -other;
-				if (world.GetBlockID(descriptor.Coordinates + other) != BlockID)
+				if (world.GetBlockId(descriptor.Coordinates + other) != BlockID)
 					return false;
 			}
 
 			if (checkSupport)
 			{
 				var supportingBlock =
-					repository.GetBlockProvider(world.GetBlockID(descriptor.Coordinates + Coordinates3D.Down));
+					repository.GetBlockProvider(world.GetBlockId(descriptor.Coordinates + Coordinates3D.Down));
 				if (!supportingBlock.Opaque)
 					return false;
 			}
@@ -92,7 +92,7 @@ namespace TrueCraft.Logic.Blocks
 			IWorld world)
 		{
 			if (!ValidBedPosition(descriptor, server.BlockRepository, world))
-				world.SetBlockID(descriptor.Coordinates, 0);
+				world.SetBlockId(descriptor.Coordinates, 0);
 			base.BlockUpdate(descriptor, source, server, world);
 		}
 	}

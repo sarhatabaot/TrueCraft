@@ -110,11 +110,22 @@ namespace TrueCraft.World
 				generate);
 		}
 
-		public byte GetBlockID(Coordinates3D coordinates)
+		public byte GetBlockId(Coordinates3D coordinates)
 		{
 			IChunk chunk;
 			coordinates = FindBlockPosition(coordinates, out chunk);
 			return chunk.GetBlockID(coordinates);
+		}
+
+		public bool TryGetBlockId(Coordinates3D coordinates, out byte id)
+		{
+			if (!FindBlockPosition(coordinates, out var chunk, out var position))
+			{
+				id = default;
+				return false;
+			}
+			id = chunk.GetBlockID(position);
+			return true;
 		}
 
 		public byte GetMetadata(Coordinates3D coordinates)
@@ -165,7 +176,7 @@ namespace TrueCraft.World
 						GetBlockDataFromChunk(adjustedCoordinates, chunk, coordinates)));
 		}
 
-		public void SetBlockID(Coordinates3D coordinates, byte value)
+		public void SetBlockId(Coordinates3D coordinates, byte value)
 		{
 			IChunk chunk;
 			var adjustedCoordinates = FindBlockPosition(coordinates, out chunk);
@@ -257,7 +268,20 @@ namespace TrueCraft.World
 		public Coordinates3D FindBlockPosition(Coordinates3D coordinates, out IChunk chunk, bool generate = true)
 		{
 			if (coordinates.Y < 0 || coordinates.Y >= Chunk.Height)
-				throw new ArgumentOutOfRangeException("coordinates", "Coordinates are out of range");
+				throw new ArgumentOutOfRangeException(nameof(coordinates), "Coordinates are out of range");
+
+			FindBlockPosition(coordinates, out chunk, out var position, generate);
+			return position;
+		}
+
+		public bool FindBlockPosition(Coordinates3D coordinates, out IChunk chunk, out Coordinates3D position, bool generate = true)
+		{
+			if (coordinates.Y < 0 || coordinates.Y >= Chunk.Height)
+			{
+				chunk = default;
+				position = default;
+				return false;
+			}
 
 			var chunkX = coordinates.X / Chunk.Width;
 			var chunkZ = coordinates.Z / Chunk.Depth;
@@ -267,30 +291,32 @@ namespace TrueCraft.World
 			if (coordinates.Z < 0)
 				chunkZ = (coordinates.Z + 1) / Chunk.Depth - 1;
 
-			if (ChunkCache.ContainsKey(Thread.CurrentThread))
+			lock (ChunkCacheLock)
 			{
-				var cache = ChunkCache[Thread.CurrentThread];
-				if (cache != null && chunkX == cache.Coordinates.X && chunkZ == cache.Coordinates.Z)
-					chunk = cache;
+				if (ChunkCache.ContainsKey(Thread.CurrentThread))
+				{
+					var cache = ChunkCache[Thread.CurrentThread];
+					if (cache != null && chunkX == cache.Coordinates.X && chunkZ == cache.Coordinates.Z)
+						chunk = cache;
+					else
+					{
+						cache = GetChunk(new Coordinates2D(chunkX, chunkZ), generate);
+						ChunkCache[Thread.CurrentThread] = cache;
+					}
+				}
 				else
 				{
-					cache = GetChunk(new Coordinates2D(chunkX, chunkZ), generate);
-					lock (ChunkCacheLock)
-						ChunkCache[Thread.CurrentThread] = cache;
-				}
-			}
-			else
-			{
-				var cache = GetChunk(new Coordinates2D(chunkX, chunkZ), generate);
-				lock (ChunkCacheLock)
+					var cache = GetChunk(new Coordinates2D(chunkX, chunkZ), generate);
 					ChunkCache[Thread.CurrentThread] = cache;
+				}
 			}
 
 			chunk = GetChunk(new Coordinates2D(chunkX, chunkZ), generate);
-			return new Coordinates3D(
+			position = new Coordinates3D(
 				(coordinates.X % Chunk.Width + Chunk.Width) % Chunk.Width,
 				coordinates.Y,
 				(coordinates.Z % Chunk.Depth + Chunk.Depth) % Chunk.Depth);
+			return true;
 		}
 
 		public bool IsValidPosition(Coordinates3D position)

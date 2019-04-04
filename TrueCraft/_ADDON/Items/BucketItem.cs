@@ -26,14 +26,14 @@ namespace TrueCraft.Logic.Items
 			coordinates += MathHelper.BlockFaceToCoordinates(face);
 			if (item.ID == ItemID) // Empty bucket
 			{
-				var block = world.GetBlockID(coordinates);
+				var block = world.GetBlockId(coordinates);
 				if (block == WaterBlock.BlockID || block == StationaryWaterBlock.BlockID)
 				{
 					var meta = world.GetMetadata(coordinates);
 					if (meta == 0) // Is source block?
 					{
 						user.Inventory[user.SelectedSlot] = new ItemStack(WaterBucketItem.ItemID);
-						world.SetBlockID(coordinates, 0);
+						world.SetBlockId(coordinates, 0);
 					}
 				}
 				else if (block == LavaBlock.BlockID || block == StationaryLavaBlock.BlockID)
@@ -42,20 +42,20 @@ namespace TrueCraft.Logic.Items
 					if (meta == 0) // Is source block?
 					{
 						user.Inventory[user.SelectedSlot] = new ItemStack(LavaBucketItem.ItemID);
-						world.SetBlockID(coordinates, 0);
+						world.SetBlockId(coordinates, 0);
 					}
 				}
 			}
 			else
 			{
-				var provider = user.Server.BlockRepository.GetBlockProvider(world.GetBlockID(coordinates));
+				var provider = user.Server.BlockRepository.GetBlockProvider(world.GetBlockId(coordinates));
 				if (!provider.Opaque)
 				{
 					if (RelevantBlockType != null)
 					{
 						var blockType = RelevantBlockType.Value;
 						user.Server.BlockUpdatesEnabled = false;
-						world.SetBlockID(coordinates, blockType);
+						world.SetBlockId(coordinates, blockType);
 						world.SetMetadata(coordinates, 0); // Source block
 						user.Server.BlockUpdatesEnabled = true;
 						var liquidProvider = world.BlockRepository.GetBlockProvider(blockType);

@@ -63,7 +63,7 @@ namespace TrueCraft.Logic.Blocks
 		{
 			var down = descriptor.Coordinates + Coordinates3D.Down;
 
-			var current = world.GetBlockID(descriptor.Coordinates);
+			var current = world.GetBlockId(descriptor.Coordinates);
 			if (current != BlockID && current != LavaBlock.BlockID && current != StationaryLavaBlock.BlockID)
 				return;
 
@@ -71,9 +71,9 @@ namespace TrueCraft.Logic.Blocks
 			var meta = world.GetMetadata(descriptor.Coordinates);
 			meta++;
 			if (meta == 0xE)
-				if (!world.IsValidPosition(down) || world.GetBlockID(down) != NetherrackBlock.BlockID)
+				if (!world.IsValidPosition(down) || world.GetBlockId(down) != NetherrackBlock.BlockID)
 				{
-					world.SetBlockID(descriptor.Coordinates, AirBlock.BlockID);
+					world.SetBlockId(descriptor.Coordinates, AirBlock.BlockID);
 					return;
 				}
 
@@ -83,9 +83,9 @@ namespace TrueCraft.Logic.Blocks
 			{
 				var pick = AdjacentBlocks[meta % AdjacentBlocks.Length];
 				var provider = BlockRepository
-					.GetBlockProvider(world.GetBlockID(pick + descriptor.Coordinates));
+					.GetBlockProvider(world.GetBlockId(pick + descriptor.Coordinates));
 				if (provider.Flammable)
-					world.SetBlockID(pick + descriptor.Coordinates, AirBlock.BlockID);
+					world.SetBlockId(pick + descriptor.Coordinates, AirBlock.BlockID);
 			}
 
 			// Spread
@@ -100,18 +100,18 @@ namespace TrueCraft.Logic.Blocks
 			foreach (var coord in SpreadableBlocks)
 			{
 				var check = descriptor.Coordinates + coord;
-				if (world.GetBlockID(check) == AirBlock.BlockID)
+				if (world.GetBlockId(check) == AirBlock.BlockID)
 					foreach (var adj in AdjacentBlocks)
 					{
 						var provider = BlockRepository.GetBlockProvider(
-							world.GetBlockID(check + adj));
+							world.GetBlockId(check + adj));
 						if (provider.Flammable)
 						{
 							if (provider.Hardness == 0)
 								check = check + adj;
 
 							// Spread to this block
-							world.SetBlockID(check, BlockID);
+							world.SetBlockId(check, BlockID);
 							ScheduleUpdate(server, world, world.GetBlockData(check));
 							break;
 						}

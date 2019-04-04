@@ -56,7 +56,7 @@ namespace TrueCraft.Logic.Blocks
 				y++) // TODO: This does not check one above the farmland block for some reason
 			for (var z = min.Z; z < max.Z; z++)
 			{
-				var id = world.GetBlockID(new Coordinates3D(x, y, z));
+				var id = world.GetBlockId(new Coordinates3D(x, y, z));
 				if (id == WaterBlock.BlockID || id == StationaryWaterBlock.BlockID)
 					return true;
 			}
@@ -66,7 +66,7 @@ namespace TrueCraft.Logic.Blocks
 
 		private void HydrationCheckEvent(IMultiplayerServer server, Coordinates3D coords, IWorld world)
 		{
-			if (world.GetBlockID(coords) != BlockID)
+			if (world.GetBlockId(coords) != BlockID)
 				return;
 			if (MathHelper.Random.Next(3) == 0)
 			{
@@ -78,7 +78,7 @@ namespace TrueCraft.Logic.Blocks
 					meta--;
 					if (meta == 0)
 					{
-						world.SetBlockID(coords, BlockID);
+						world.SetBlockId(coords, BlockID);
 						return;
 					}
 				}

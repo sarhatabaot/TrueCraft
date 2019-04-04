@@ -151,7 +151,7 @@ namespace TrueCraft.Server.Handlers
 				if (!provider.BlockRightClicked(block.Value, packet.Face, client.World, client))
 				{
 					position += MathHelper.BlockFaceToCoordinates(packet.Face);
-					var oldID = client.World.GetBlockID(position);
+					var oldID = client.World.GetBlockId(position);
 					var oldMeta = client.World.GetMetadata(position);
 					client.QueuePacket(new BlockChangePacket(position.X, (sbyte) position.Y, position.Z, (sbyte) oldID,
 						(sbyte) oldMeta));
@@ -273,7 +273,7 @@ namespace TrueCraft.Server.Handlers
 			var coords = new Coordinates3D(packet.X, packet.Y, packet.Z);
 			if (client.Entity.Position.DistanceTo(coords.AsVector3()) < 10) // TODO: Reach
 			{
-				var block = client.World.GetBlockID(coords);
+				var block = client.World.GetBlockId(coords);
 				if (block == UprightSignBlock.BlockID || block == WallSignBlock.BlockID)
 				{
 					client.World.SetTileEntity(coords, new NbtCompound(new[]

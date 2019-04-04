@@ -21,7 +21,7 @@ using TrueCraft.World;
 
 namespace TrueCraft.Server
 {
-	public class RemoteClient : IRemoteClient, IEventSubject, IDisposable
+	public class RemoteClient : IRemoteClient, IEventSubject
 	{
 		private readonly ServerConfiguration _configuration;
 
@@ -109,8 +109,7 @@ namespace TrueCraft.Server
 			get => _Entity;
 			internal set
 			{
-				var player = _Entity as PlayerEntity;
-				if (player != null)
+				if (_Entity is PlayerEntity player)
 					player.PickUpItem -= HandlePickUpItem;
 				_Entity = value;
 				player = _Entity as PlayerEntity;
@@ -125,27 +124,31 @@ namespace TrueCraft.Server
 
 		public bool Load()
 		{
-			var path = Path.Combine(Directory.GetCurrentDirectory(), "players", Username + ".nbt");
-			if (_configuration.Singleplayer)
-				path = Path.Combine(((World.World) World).BaseDirectory, "player.nbt");
-			if (!File.Exists(path))
-				return false;
 			try
 			{
+				var path = Path.Combine(Directory.GetCurrentDirectory(), "players", $"{Username}.nbt");
+				if (_configuration.Singleplayer)
+					path = Path.Combine(((World.World) World).BaseDirectory, "player.nbt");
+
+				if (!File.Exists(path))
+					return false;
+
+				Server.Trace.TraceInformation($"Loading {path}...");
+
 				var nbt = new NbtFile(path);
 				Entity.Position = new Vector3(
 					(float) nbt.RootTag["position"][0].DoubleValue,
 					(float) nbt.RootTag["position"][1].DoubleValue,
 					(float) nbt.RootTag["position"][2].DoubleValue);
-				Inventory.SetSlots(((NbtList) nbt.RootTag["inventory"]).Select(t => ItemStack.FromNbt(t as NbtCompound))
-					.ToArray());
-				(Entity as PlayerEntity).Health = nbt.RootTag["health"].ShortValue;
+
+				Inventory.SetSlots(((NbtList) nbt.RootTag["inventory"]).Select(t => ItemStack.FromNbt(t as NbtCompound)).ToArray());
+				((PlayerEntity) Entity).Health = nbt.RootTag["health"].ShortValue;
 				Entity.Yaw = nbt.RootTag["yaw"].FloatValue;
 				Entity.Pitch = nbt.RootTag["pitch"].FloatValue;
 			}
-			catch
+			catch(Exception ex)
 			{
-				/* Who cares */
+				Server.Trace.TraceData(TraceEventType.Critical, 0, "Error loading player", ex);
 			}
 
 			return true;
@@ -200,6 +203,8 @@ namespace TrueCraft.Server
 		{
 			if (Disconnected || Connection != null && !Connection.Connected)
 				return;
+
+			Server.Trace.TraceData(TraceEventType.Verbose, 0, $"queuing packet {packet.GetType().Name}");
 
 			using (var writeStream = new MemoryStream())
 			{

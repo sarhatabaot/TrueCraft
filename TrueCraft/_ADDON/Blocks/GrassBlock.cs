@@ -53,10 +53,10 @@ namespace TrueCraft.Logic.Blocks
 		{
 			if (world.IsValidPosition(coords + Coordinates3D.Up))
 			{
-				var id = world.GetBlockID(coords + Coordinates3D.Up);
+				var id = world.GetBlockId(coords + Coordinates3D.Up);
 				var provider = world.BlockRepository.GetBlockProvider(id);
 				if (provider.Opaque)
-					world.SetBlockID(coords, DirtBlock.BlockID);
+					world.SetBlockId(coords, DirtBlock.BlockID);
 			}
 		}
 
@@ -89,7 +89,7 @@ namespace TrueCraft.Logic.Blocks
 				var candidate = GrowthCandidates[j % GrowthCandidates.Length] + coords;
 				if (!world.IsValidPosition(candidate) || !world.IsValidPosition(candidate + Coordinates3D.Up))
 					continue;
-				var id = world.GetBlockID(candidate);
+				var id = world.GetBlockId(candidate);
 				if (id == DirtBlock.BlockID)
 				{
 					var _sky = world.GetSkyLight(candidate + Coordinates3D.Up);
@@ -101,7 +101,7 @@ namespace TrueCraft.Logic.Blocks
 					var grow = true;
 					for (var y = candidate.Y; y < chunk.GetHeight((byte) _candidate.X, (byte) _candidate.Z); y++)
 					{
-						var b = world.GetBlockID(new Coordinates3D(candidate.X, y, candidate.Z));
+						var b = world.GetBlockId(new Coordinates3D(candidate.X, y, candidate.Z));
 						var p = world.BlockRepository.GetBlockProvider(b);
 						if (p.LightOpacity >= 2)
 						{
@@ -112,7 +112,7 @@ namespace TrueCraft.Logic.Blocks
 
 					if (grow)
 					{
-						world.SetBlockID(candidate, BlockID);
+						world.SetBlockId(candidate, BlockID);
 						server.Scheduler.ScheduleEvent("grass", chunk,
 							TimeSpan.FromSeconds(MathHelper.Random.Next(MinGrowthTime, MaxGrowthTime)),
 							s => TrySpread(candidate, world, server));

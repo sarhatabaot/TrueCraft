@@ -21,9 +21,9 @@ namespace TrueCraft.Logic.Items
 		public override void ItemUsedOnBlock(Coordinates3D coordinates, ItemStack item, BlockFace face, IWorld world,
 			IRemoteClient user)
 		{
-			if (world.GetBlockID(coordinates) == FarmlandBlock.BlockID)
+			if (world.GetBlockId(coordinates) == FarmlandBlock.BlockID)
 			{
-				world.SetBlockID(coordinates + MathHelper.BlockFaceToCoordinates(face), CropsBlock.BlockID);
+				world.SetBlockId(coordinates + MathHelper.BlockFaceToCoordinates(face), CropsBlock.BlockID);
 				world.BlockRepository.GetBlockProvider(CropsBlock.BlockID).BlockPlaced(
 					new BlockDescriptor {Coordinates = coordinates}, face, world, user);
 			}

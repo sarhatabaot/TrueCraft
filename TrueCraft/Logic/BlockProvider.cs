@@ -35,8 +35,8 @@ namespace TrueCraft.Logic
 			IRemoteClient user)
 		{
 			var coords = descriptor.Coordinates + MathHelper.BlockFaceToCoordinates(face);
-			if (world.IsValidPosition(coords) && world.GetBlockID(coords) == FireBlock.BlockID)
-				world.SetBlockID(coords, 0);
+			if (world.IsValidPosition(coords) && world.GetBlockId(coords) == FireBlock.BlockID)
+				world.SetBlockId(coords, 0);
 		}
 
 		public virtual bool BlockRightClicked(BlockDescriptor descriptor, BlockFace face, IWorld world,
@@ -53,7 +53,7 @@ namespace TrueCraft.Logic
 		public virtual void BlockMined(BlockDescriptor descriptor, BlockFace face, IWorld world, IRemoteClient user)
 		{
 			GenerateDropEntity(descriptor, world, user.Server, user.SelectedItem);
-			world.SetBlockID(descriptor.Coordinates, 0);
+			world.SetBlockId(descriptor.Coordinates, 0);
 		}
 
 		public void GenerateDropEntity(BlockDescriptor descriptor, IWorld world, IMultiplayerServer server,
@@ -90,7 +90,7 @@ namespace TrueCraft.Logic
 			if (!IsSupported(descriptor, server, world))
 			{
 				GenerateDropEntity(descriptor, world, server, ItemStack.EmptyStack);
-				world.SetBlockID(descriptor.Coordinates, 0);
+				world.SetBlockId(descriptor.Coordinates, 0);
 			}
 		}
 
@@ -216,7 +216,7 @@ namespace TrueCraft.Logic
 			}
 
 			// Place block
-			world.SetBlockID(coordinates, ID);
+			world.SetBlockId(coordinates, ID);
 			world.SetMetadata(coordinates, (byte) item.Metadata);
 
 			BlockPlaced(world.GetBlockData(coordinates), face, world, user);
@@ -253,7 +253,7 @@ namespace TrueCraft.Logic
 			if (support != Coordinates3D.Zero)
 			{
 				var supportingBlock =
-					server.BlockRepository.GetBlockProvider(world.GetBlockID(descriptor.Coordinates + support));
+					server.BlockRepository.GetBlockProvider(world.GetBlockId(descriptor.Coordinates + support));
 				if (!supportingBlock.Opaque)
 					return false;
 			}

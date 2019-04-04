@@ -78,7 +78,7 @@ namespace TrueCraft.Tests.Physics
 
 			// Create a wall
 			for (var y = 0; y < 12; y++)
-				world.SetBlockID(new Coordinates3D(1, y, 0), StoneBlock.BlockID);
+				world.SetBlockId(new Coordinates3D(1, y, 0), StoneBlock.BlockID);
 
 			// Test
 			physics.Update(TimeSpan.FromSeconds(1));
@@ -99,7 +99,7 @@ namespace TrueCraft.Tests.Physics
 			entity.Drag = 0;
 			physics.AddEntity(entity);
 
-			world.SetBlockID(new Coordinates3D(0, 4, 0), StoneBlock.BlockID);
+			world.SetBlockId(new Coordinates3D(0, 4, 0), StoneBlock.BlockID);
 
 			// Test
 			physics.Update(TimeSpan.FromSeconds(1));
@@ -119,7 +119,7 @@ namespace TrueCraft.Tests.Physics
 			entity.Drag = 0;
 			entity.Velocity = new Vector3(1, 0, 1);
 			physics.AddEntity(entity);
-			world.SetBlockID(new Coordinates3D(0, 10, 0), StoneBlock.BlockID);
+			world.SetBlockId(new Coordinates3D(0, 10, 0), StoneBlock.BlockID);
 
 			// Test
 			physics.Update(TimeSpan.FromSeconds(1));
@@ -200,7 +200,7 @@ namespace TrueCraft.Tests.Physics
 			entity.Drag = 0;
 			entity.Velocity = new Vector3(1, 0, 0);
 			physics.AddEntity(entity);
-			world.SetBlockID(new Coordinates3D(1, 5, 0), StoneBlock.BlockID);
+			world.SetBlockId(new Coordinates3D(1, 5, 0), StoneBlock.BlockID);
 
 			// Test
 			physics.Update(TimeSpan.FromSeconds(1));

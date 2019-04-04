@@ -46,7 +46,7 @@ namespace TrueCraft.Logic.Blocks
 
 		public static bool ValidPlacement(BlockDescriptor descriptor, IWorld world)
 		{
-			var below = world.GetBlockID(descriptor.Coordinates + Coordinates3D.Down);
+			var below = world.GetBlockId(descriptor.Coordinates + Coordinates3D.Down);
 			if (below != BlockID && below != GrassBlock.BlockID && below != DirtBlock.BlockID)
 				return false;
 			var toCheck = new[]
@@ -61,7 +61,7 @@ namespace TrueCraft.Logic.Blocks
 				var foundWater = false;
 				for (var i = 0; i < toCheck.Length; i++)
 				{
-					var id = world.GetBlockID(descriptor.Coordinates + toCheck[i]);
+					var id = world.GetBlockId(descriptor.Coordinates + toCheck[i]);
 					if (id == WaterBlock.BlockID || id == StationaryWaterBlock.BlockID)
 					{
 						foundWater = true;
@@ -81,19 +81,19 @@ namespace TrueCraft.Logic.Blocks
 			if (!ValidPlacement(descriptor, world))
 			{
 				// Destroy self
-				world.SetBlockID(descriptor.Coordinates, 0);
+				world.SetBlockId(descriptor.Coordinates, 0);
 				GenerateDropEntity(descriptor, world, server, ItemStack.EmptyStack);
 			}
 		}
 
 		private void TryGrowth(IMultiplayerServer server, Coordinates3D coords, IWorld world)
 		{
-			if (world.GetBlockID(coords) != BlockID)
+			if (world.GetBlockId(coords) != BlockID)
 				return;
 			// Find current height of stalk
 			var height = 0;
 			for (var y = -MaxGrowHeight; y <= MaxGrowHeight; y++)
-				if (world.GetBlockID(coords + Coordinates3D.Down * y) == BlockID)
+				if (world.GetBlockId(coords + Coordinates3D.Down * y) == BlockID)
 					height++;
 			if (height < MaxGrowHeight)
 			{
@@ -103,9 +103,9 @@ namespace TrueCraft.Logic.Blocks
 				var chunk = world.FindChunk(coords);
 				if (meta == 15)
 				{
-					if (world.GetBlockID(coords + Coordinates3D.Up) == 0)
+					if (world.GetBlockId(coords + Coordinates3D.Up) == 0)
 					{
-						world.SetBlockID(coords + Coordinates3D.Up, BlockID);
+						world.SetBlockId(coords + Coordinates3D.Up, BlockID);
 						server.Scheduler.ScheduleEvent("sugarcane", chunk,
 							TimeSpan.FromSeconds(MathHelper.Random.Next(MinGrowthSeconds, MaxGrowthSeconds)),
 							_server => TryGrowth(_server, coords + Coordinates3D.Up, world));

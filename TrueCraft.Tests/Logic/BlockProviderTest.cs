@@ -34,7 +34,7 @@ namespace TrueCraft.Tests.Logic
 			User.SetupGet(u => u.World).Returns(World.Object);
 			User.SetupGet(u => u.Server).Returns(Server.Object);
 
-			World.Setup(w => w.SetBlockID(It.IsAny<Coordinates3D>(), It.IsAny<byte>()));
+			World.Setup(w => w.SetBlockId(It.IsAny<Coordinates3D>(), It.IsAny<byte>()));
 
 			Server.Setup(s => s.GetEntityManagerForWorld(It.IsAny<IWorld>()))
 				.Returns<IWorld>(w => EntityManager.Object);
@@ -64,14 +64,14 @@ namespace TrueCraft.Tests.Logic
 
 			blockProvider.Object.BlockMined(descriptor, BlockFace.PositiveY, World.Object, User.Object);
 			EntityManager.Verify(m => m.SpawnEntity(It.Is<ItemEntity>(e => e.Item.ID == 10)));
-			World.Verify(w => w.SetBlockID(Coordinates3D.Zero, 0));
+			World.Verify(w => w.SetBlockId(Coordinates3D.Zero, 0));
 
 			blockProvider.Protected()
 				.Setup<ItemStack[]>("GetDrop", ItExpr.IsAny<BlockDescriptor>(), ItExpr.IsAny<ItemStack>())
 				.Returns(() => new[] {new ItemStack(12)});
 			blockProvider.Object.BlockMined(descriptor, BlockFace.PositiveY, World.Object, User.Object);
 			EntityManager.Verify(m => m.SpawnEntity(It.Is<ItemEntity>(e => e.Item.ID == 12)));
-			World.Verify(w => w.SetBlockID(Coordinates3D.Zero, 0));
+			World.Verify(w => w.SetBlockId(Coordinates3D.Zero, 0));
 		}
 
 		[Test]
@@ -79,8 +79,8 @@ namespace TrueCraft.Tests.Logic
 		{
 			// We need an actual world for this
 			var world = new TrueCraft.World.World("test", new FlatlandGenerator());
-			world.SetBlockID(Coordinates3D.Zero, 1);
-			world.SetBlockID(Coordinates3D.OneY, 2);
+			world.SetBlockId(Coordinates3D.Zero, 1);
+			world.SetBlockId(Coordinates3D.OneY, 2);
 
 			var blockProvider = new Mock<BlockProvider> {CallBase = true};
 			var updated = new BlockDescriptor {ID = 2, Coordinates = Coordinates3D.Up};
@@ -96,12 +96,12 @@ namespace TrueCraft.Tests.Logic
 			BlockRepository.Setup(r => r.GetBlockProvider(It.Is<byte>(b => b == 3))).Returns(unsupportive.Object);
 
 			blockProvider.Object.BlockUpdate(updated, source, Server.Object, world);
-			World.Verify(w => w.SetBlockID(Coordinates3D.OneY, 0), Times.Never);
+			World.Verify(w => w.SetBlockId(Coordinates3D.OneY, 0), Times.Never);
 
-			world.SetBlockID(Coordinates3D.Zero, 3);
+			world.SetBlockId(Coordinates3D.Zero, 3);
 
 			blockProvider.Object.BlockUpdate(updated, source, Server.Object, world);
-			Assert.AreEqual(0, world.GetBlockID(Coordinates3D.OneY));
+			Assert.AreEqual(0, world.GetBlockId(Coordinates3D.OneY));
 			EntityManager.Verify(m => m.SpawnEntity(It.Is<ItemEntity>(e => e.Item.ID == 2)));
 		}
 	}

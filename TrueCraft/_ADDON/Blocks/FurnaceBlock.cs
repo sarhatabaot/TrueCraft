@@ -263,7 +263,7 @@ namespace TrueCraft.Logic.Blocks
 					state.CookTime = 0;
 					state.Items[FurnaceWindow.FuelIndex].Count--;
 					SetState(world, coords, state);
-					world.SetBlockID(coords, LitFurnaceBlock.BlockID);
+					world.SetBlockId(coords, LitFurnaceBlock.BlockID);
 					var subject = new FurnaceEventSubject();
 					TrackedFurnaces[coords] = subject;
 					scheduler.ScheduleEvent("smelting", subject, TimeSpan.FromSeconds(1),
@@ -277,7 +277,7 @@ namespace TrueCraft.Logic.Blocks
 			if (TrackedFurnaces.ContainsKey(coords))
 				TrackedFurnaces.Remove(coords);
 
-			if (world.GetBlockID(coords) != BlockID && world.GetBlockID(coords) != LitFurnaceBlock.BlockID) return;
+			if (world.GetBlockId(coords) != BlockID && world.GetBlockId(coords) != LitFurnaceBlock.BlockID) return;
 
 			var state = GetState(world, coords);
 
@@ -295,7 +295,7 @@ namespace TrueCraft.Logic.Blocks
 				{
 					state.BurnTimeRemaining = 0;
 					state.BurnTimeTotal = 0;
-					world.SetBlockID(coords, BlockID);
+					world.SetBlockId(coords, BlockID);
 				}
 			}
 

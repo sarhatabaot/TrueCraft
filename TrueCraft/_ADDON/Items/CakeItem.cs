@@ -37,10 +37,10 @@ namespace TrueCraft.Logic.Items
 			IRemoteClient user)
 		{
 			coordinates += MathHelper.BlockFaceToCoordinates(face);
-			var old = world.BlockRepository.GetBlockProvider(world.GetBlockID(coordinates));
+			var old = world.BlockRepository.GetBlockProvider(world.GetBlockId(coordinates));
 			if (old.Hardness == 0)
 			{
-				world.SetBlockID(coordinates, CakeBlock.BlockID);
+				world.SetBlockId(coordinates, CakeBlock.BlockID);
 				item.Count--;
 				user.Inventory[user.SelectedSlot] = item;
 			}

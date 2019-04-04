@@ -47,7 +47,7 @@ namespace TrueCraft.Logic.Blocks
 
 		private void GrowBlock(IMultiplayerServer server, IWorld world, Coordinates3D coords)
 		{
-			if (world.GetBlockID(coords) != BlockID)
+			if (world.GetBlockId(coords) != BlockID)
 				return;
 			var meta = world.GetMetadata(coords);
 			meta++;
@@ -64,10 +64,10 @@ namespace TrueCraft.Logic.Blocks
 		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiplayerServer server,
 			IWorld world)
 		{
-			if (world.GetBlockID(descriptor.Coordinates + Coordinates3D.Down) != FarmlandBlock.BlockID)
+			if (world.GetBlockId(descriptor.Coordinates + Coordinates3D.Down) != FarmlandBlock.BlockID)
 			{
 				GenerateDropEntity(descriptor, world, server, ItemStack.EmptyStack);
-				world.SetBlockID(descriptor.Coordinates, 0);
+				world.SetBlockId(descriptor.Coordinates, 0);
 			}
 		}
 

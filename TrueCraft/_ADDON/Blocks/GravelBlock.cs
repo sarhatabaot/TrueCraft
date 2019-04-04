@@ -45,9 +45,9 @@ namespace TrueCraft.Logic.Blocks
 		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiplayerServer server,
 			IWorld world)
 		{
-			if (world.GetBlockID(descriptor.Coordinates + Coordinates3D.Down) == AirBlock.BlockID)
+			if (world.GetBlockId(descriptor.Coordinates + Coordinates3D.Down) == AirBlock.BlockID)
 			{
-				world.SetBlockID(descriptor.Coordinates, AirBlock.BlockID);
+				world.SetBlockId(descriptor.Coordinates, AirBlock.BlockID);
 				server.GetEntityManagerForWorld(world).SpawnEntity(new FallingGravelEntity(descriptor.Coordinates.AsVector3()));
 			}
 		}

@@ -265,7 +265,7 @@ namespace TrueCraft.Client.Modules
 		private void BeginDigging(Coordinates3D target)
 		{
 			// TODO: Adjust digging time to compensate for latency
-			var block = Game.Client.World.GetBlockID(target);
+			var block = Game.Client.World.GetBlockId(target);
 			Game.TargetBlock = target;
 			Game.StartDigging = DateTime.UtcNow;
 			short damage;
@@ -294,9 +294,9 @@ namespace TrueCraft.Client.Modules
 		private void PlayFootstep()
 		{
 			var coords = (Coordinates3D) Game.Client.BoundingBox.Min.Floor();
-			var target = Game.Client.World.GetBlockID(coords);
+			var target = Game.Client.World.GetBlockId(coords);
 			if (target == AirBlock.BlockID)
-				target = Game.Client.World.GetBlockID(coords + Coordinates3D.Down);
+				target = Game.Client.World.GetBlockId(coords + Coordinates3D.Down);
 			var provider = Game.BlockRepository.GetBlockProvider(target);
 			if (provider.SoundEffect == SoundEffectClass.None)
 				return;

@@ -62,7 +62,7 @@ namespace TrueCraft.Server
 			craftingRepository.DiscoverRecipes();
 			CraftingRepository = craftingRepository;
 			PendingBlockUpdates = new Queue<BlockUpdate>();
-			EnableClientLogging = false;
+			EnableClientLogging = configuration.EnableClientLogging;
 			QueryProtocol = new QueryProtocol(this, configuration);
 			WorldLighters = new List<WorldLighting>();
 			ChunksToSchedule = new ConcurrentBag<Tuple<IWorld, IChunk>>();
@@ -185,9 +185,9 @@ namespace TrueCraft.Server
 			return null;
 		}
 
-		public void SendMessage(string message, params object[] parameters)
+		public void SendMessage(string message, params object[] args)
 		{
-			var compiled = string.Format(message, parameters);
+			var compiled = string.Format(message, args);
 			var parts = compiled.Split('\n');
 			foreach (var client in Clients)
 			foreach (var part in parts)

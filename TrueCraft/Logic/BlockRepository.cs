@@ -14,7 +14,7 @@ namespace TrueCraft.Logic
 		public BoundingBox? GetBoundingBox(IWorld world, Coordinates3D coordinates)
 		{
 			// TODO: Block-specific bounding boxes
-			var id = world.GetBlockID(coordinates);
+			var id = world.GetBlockId(coordinates);
 			if (id == 0) return null;
 			var provider = BlockProviders[id];
 			return provider.BoundingBox;

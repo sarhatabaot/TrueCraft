@@ -24,13 +24,13 @@ namespace TrueCraft.Tests.Lighting
 			var world = new TrueCraft.World.World("TEST", new FlatlandGenerator());
 			world.BlockRepository = repository;
 			var lighter = new WorldLighting(world, repository);
-			world.GetBlockID(Coordinates3D.Zero); // Generate a chunk
+			world.GetBlockId(Coordinates3D.Zero); // Generate a chunk
 			lighter.InitialLighting(world.GetChunk(Coordinates2D.Zero));
 
 			for (var y = 5; y >= 0; y--)
 			{
 				Console.Write("Y: {0} ", y);
-				Console.Write(world.GetBlockID(new Coordinates3D(0, y, 0)));
+				Console.Write(world.GetBlockId(new Coordinates3D(0, y, 0)));
 				Console.Write(" -> ");
 				Console.WriteLine(world.GetSkyLight(new Coordinates3D(0, y, 0)));
 			}
@@ -60,16 +60,16 @@ namespace TrueCraft.Tests.Lighting
 			var world = new TrueCraft.World.World("TEST", new FlatlandGenerator());
 			world.BlockRepository = repository;
 			var lighter = new WorldLighting(world, repository);
-			world.GetBlockID(Coordinates3D.Zero); // Generate a chunk
+			world.GetBlockId(Coordinates3D.Zero); // Generate a chunk
 			lighter.InitialLighting(world.GetChunk(Coordinates2D.Zero));
 
-			world.SetBlockID(new Coordinates3D(5, 3, 5), 0); // Create area that looks like so:
-			world.SetBlockID(new Coordinates3D(5, 2, 5), 0); // x x  Light goes like so: |
-			world.SetBlockID(new Coordinates3D(5, 1, 5), 0); // x x                      |
-			world.SetBlockID(new Coordinates3D(4, 1, 5), 0); //   x                     -/
+			world.SetBlockId(new Coordinates3D(5, 3, 5), 0); // Create area that looks like so:
+			world.SetBlockId(new Coordinates3D(5, 2, 5), 0); // x x  Light goes like so: |
+			world.SetBlockId(new Coordinates3D(5, 1, 5), 0); // x x                      |
+			world.SetBlockId(new Coordinates3D(4, 1, 5), 0); //   x                     -/
 
 			for (var x = 0; x < 4; x++)
-				world.SetBlockID(new Coordinates3D(x, 1, 5), 0); // Dig a tunnel
+				world.SetBlockId(new Coordinates3D(x, 1, 5), 0); // Dig a tunnel
 			// xxxxx x ish
 			// x     x
 			// xxxxxxx
@@ -108,7 +108,7 @@ namespace TrueCraft.Tests.Lighting
 			var world = new TrueCraft.World.World("TEST", new FlatlandGenerator());
 			world.BlockRepository = repository;
 			var lighter = new WorldLighting(world, repository);
-			world.GetBlockID(Coordinates3D.Zero); // Generate a chunk
+			world.GetBlockId(Coordinates3D.Zero); // Generate a chunk
 			lighter.InitialLighting(world.GetChunk(Coordinates2D.Zero));
 
 			// Test this layout:
@@ -120,12 +120,12 @@ namespace TrueCraft.Tests.Lighting
 			//    ^ x,z = 5
 
 			for (var y = 1; y <= 3; y++) // Dig hole
-				world.SetBlockID(new Coordinates3D(5, y, 5), 0);
+				world.SetBlockId(new Coordinates3D(5, y, 5), 0);
 
 			for (var x = 0; x <= 4; x++) // Dig outwards
 			{
-				world.SetBlockID(new Coordinates3D(x, 2, 5), 0); // Dig a tunnel
-				world.SetBlockID(new Coordinates3D(x, 1, 5), 0); // Dig a tunnel
+				world.SetBlockId(new Coordinates3D(x, 2, 5), 0); // Dig a tunnel
+				world.SetBlockId(new Coordinates3D(x, 1, 5), 0); // Dig a tunnel
 			}
 
 			var watch = new Stopwatch();
@@ -144,7 +144,7 @@ namespace TrueCraft.Tests.Lighting
 			for (var y = 3; y >= 0; y--)
 			{
 				for (var x = 0; x <= 5; x++)
-					Console.Write(world.GetBlockID(new Coordinates3D(x, y, 5)).ToString("D2") + " ");
+					Console.Write(world.GetBlockId(new Coordinates3D(x, y, 5)).ToString("D2") + " ");
 				Console.WriteLine();
 			}
 
@@ -194,16 +194,16 @@ namespace TrueCraft.Tests.Lighting
 			var world = new TrueCraft.World.World("TEST", new FlatlandGenerator());
 			world.BlockRepository = repository;
 			var lighter = new WorldLighting(world, repository);
-			world.GetBlockID(Coordinates3D.Zero); // Generate a chunk
+			world.GetBlockId(Coordinates3D.Zero); // Generate a chunk
 
 			for (var y = 1; y <= 16; y++)
 			{
 				var coords = new Coordinates3D(5, y, 5);
-				world.SetBlockID(coords, 0);
-				world.SetBlockID(coords + Coordinates3D.East, DirtBlock.BlockID);
-				world.SetBlockID(coords + Coordinates3D.West, DirtBlock.BlockID);
-				world.SetBlockID(coords + Coordinates3D.North, DirtBlock.BlockID);
-				world.SetBlockID(coords + Coordinates3D.South, DirtBlock.BlockID);
+				world.SetBlockId(coords, 0);
+				world.SetBlockId(coords + Coordinates3D.East, DirtBlock.BlockID);
+				world.SetBlockId(coords + Coordinates3D.West, DirtBlock.BlockID);
+				world.SetBlockId(coords + Coordinates3D.North, DirtBlock.BlockID);
+				world.SetBlockId(coords + Coordinates3D.South, DirtBlock.BlockID);
 			}
 
 			world.GetChunk(Coordinates2D.Zero).UpdateHeightMap();
@@ -219,7 +219,7 @@ namespace TrueCraft.Tests.Lighting
 
 			for (var y = 1; y <= 16; y++)
 				if (y % 2 == 1)
-					world.SetBlockID(new Coordinates3D(5, y, 5), LeavesBlock.BlockID);
+					world.SetBlockId(new Coordinates3D(5, y, 5), LeavesBlock.BlockID);
 			world.GetChunk(Coordinates2D.Zero).UpdateHeightMap();
 
 			lighter.EnqueueOperation(new BoundingBox(new Vector3(5, 0, 5),
@@ -232,7 +232,7 @@ namespace TrueCraft.Tests.Lighting
 			// Output lighting
 			for (var y = 16; y >= 0; y--)
 			{
-				Console.Write(world.GetBlockID(new Coordinates3D(5, y, 5)).ToString("D2"));
+				Console.Write(world.GetBlockId(new Coordinates3D(5, y, 5)).ToString("D2"));
 				Console.Write(" " + world.GetSkyLight(new Coordinates3D(5, y, 5)).ToString("D2"));
 				Console.WriteLine("   Y={0}", y);
 			}
@@ -275,13 +275,13 @@ namespace TrueCraft.Tests.Lighting
 			var world = new TrueCraft.World.World("TEST", new FlatlandGenerator());
 			world.BlockRepository = repository;
 			var lighter = new WorldLighting(world, repository);
-			world.GetBlockID(Coordinates3D.Zero); // Generate a chunk
+			world.GetBlockId(Coordinates3D.Zero); // Generate a chunk
 			lighter.InitialLighting(world.GetChunk(Coordinates2D.Zero));
 
-			world.SetBlockID(new Coordinates3D(5, 3, 5), 0); // Create area that looks like so:
-			world.SetBlockID(new Coordinates3D(5, 2, 5), 0); // x x  Light goes like so: |
-			world.SetBlockID(new Coordinates3D(5, 1, 5), 0); // x x                      |
-			world.SetBlockID(new Coordinates3D(4, 1, 5), 0); //   x                     -/
+			world.SetBlockId(new Coordinates3D(5, 3, 5), 0); // Create area that looks like so:
+			world.SetBlockId(new Coordinates3D(5, 2, 5), 0); // x x  Light goes like so: |
+			world.SetBlockId(new Coordinates3D(5, 1, 5), 0); // x x                      |
+			world.SetBlockId(new Coordinates3D(4, 1, 5), 0); //   x                     -/
 
 			lighter.EnqueueOperation(new BoundingBox(new Vector3(5, 2, 5),
 				new Vector3(6, 4, 6)), true);

@@ -75,7 +75,7 @@ namespace TrueCraft.Logic.Blocks
 			var _ = Coordinates3D.Down;
 			// Check for adjacent chests. We can only allow one adjacent check block.
 			for (var i = 0; i < AdjacentBlocks.Length; i++)
-				if (world.GetBlockID(coords + AdjacentBlocks[i]) == BlockID)
+				if (world.GetBlockId(coords + AdjacentBlocks[i]) == BlockID)
 				{
 					_ = coords + AdjacentBlocks[i];
 					adjacent++;
@@ -85,7 +85,7 @@ namespace TrueCraft.Logic.Blocks
 			{
 				if (_ != Coordinates3D.Down)
 					for (var i = 0; i < AdjacentBlocks.Length; i++)
-						if (world.GetBlockID(_ + AdjacentBlocks[i]) == BlockID)
+						if (world.GetBlockId(_ + AdjacentBlocks[i]) == BlockID)
 							adjacent++;
 				if (adjacent <= 1)
 					base.ItemUsedOnBlock(coordinates, item, face, world, user);
@@ -105,17 +105,17 @@ namespace TrueCraft.Logic.Blocks
 			for (var i = 0; i < AdjacentBlocks.Length; i++)
 			{
 				var test = self + AdjacentBlocks[i];
-				if (world.GetBlockID(test) == BlockID)
+				if (world.GetBlockId(test) == BlockID)
 				{
 					adjacent = test;
-					var up = world.BlockRepository.GetBlockProvider(world.GetBlockID(test + Coordinates3D.Up));
+					var up = world.BlockRepository.GetBlockProvider(world.GetBlockId(test + Coordinates3D.Up));
 					if (up.Opaque && !(up is WallSignBlock)) // Wall sign blocks are an exception
 						return false; // Obstructed
 					break;
 				}
 			}
 
-			var upSelf = world.BlockRepository.GetBlockProvider(world.GetBlockID(self + Coordinates3D.Up));
+			var upSelf = world.BlockRepository.GetBlockProvider(world.GetBlockId(self + Coordinates3D.Up));
 			if (upSelf.Opaque && !(upSelf is WallSignBlock))
 				return false; // Obstructed
 

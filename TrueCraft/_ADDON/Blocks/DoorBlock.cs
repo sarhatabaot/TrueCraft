@@ -14,8 +14,8 @@ namespace TrueCraft.Logic.Blocks
 			var upper = ((DoorItem.DoorFlags) descriptor.Metadata & DoorItem.DoorFlags.Upper) ==
 			            DoorItem.DoorFlags.Upper;
 			var other = upper ? Coordinates3D.Down : Coordinates3D.Up;
-			if (world.GetBlockID(descriptor.Coordinates + other) != ID)
-				world.SetBlockID(descriptor.Coordinates, 0);
+			if (world.GetBlockId(descriptor.Coordinates + other) != ID)
+				world.SetBlockId(descriptor.Coordinates, 0);
 		}
 
 		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)

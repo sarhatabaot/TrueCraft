@@ -99,32 +99,32 @@ namespace TrueCraft.Server
 
 		private static ConsoleColor GetConsoleColor(string category)
 		{
-			if (Enum.TryParse(category, true, out TraceEventType type))
+			if (!Enum.TryParse(category, true, out TraceEventType type))
+				return ConsoleColor.Gray;
+
+			switch (type)
 			{
-				switch (type)
-				{
-					case TraceEventType.Critical:
-						return ConsoleColor.Red;
-					case TraceEventType.Error:
-						return ConsoleColor.DarkRed;
-					case TraceEventType.Information:
-						return ConsoleColor.White;
-					case TraceEventType.Verbose:
-						return ConsoleColor.Cyan;
-					case TraceEventType.Warning:
-						return ConsoleColor.Yellow;
+				case TraceEventType.Critical:
+					return ConsoleColor.Red;
+				case TraceEventType.Error:
+					return ConsoleColor.DarkRed;
+				case TraceEventType.Information:
+					return ConsoleColor.White;
+				case TraceEventType.Verbose:
+					return ConsoleColor.Cyan;
+				case TraceEventType.Warning:
+					return ConsoleColor.Yellow;
 
-					case TraceEventType.Resume:
-					case TraceEventType.Start:
-					case TraceEventType.Stop:
-					case TraceEventType.Suspend:
-					case TraceEventType.Transfer:
-					default:
-						return ConsoleColor.Gray;
-				}
+				case TraceEventType.Start:
+				case TraceEventType.Resume:
+				case TraceEventType.Stop:
+				case TraceEventType.Suspend:
+				case TraceEventType.Transfer:
+					return ConsoleColor.Green;
+
+				default:
+					return ConsoleColor.Gray;
 			}
-
-			return ConsoleColor.Gray;
 		}
 	}
 }

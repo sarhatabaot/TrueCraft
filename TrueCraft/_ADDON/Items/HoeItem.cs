@@ -48,10 +48,10 @@ namespace TrueCraft.Logic.Items
 		public override void ItemUsedOnBlock(Coordinates3D coordinates, ItemStack item, BlockFace face, IWorld world,
 			IRemoteClient user)
 		{
-			var id = world.GetBlockID(coordinates);
+			var id = world.GetBlockId(coordinates);
 			if (id == DirtBlock.BlockID || id == GrassBlock.BlockID)
 			{
-				world.SetBlockID(coordinates, FarmlandBlock.BlockID);
+				world.SetBlockId(coordinates, FarmlandBlock.BlockID);
 				user.Server.BlockRepository.GetBlockProvider(FarmlandBlock.BlockID).BlockPlaced(
 					new BlockDescriptor {Coordinates = coordinates}, face, world, user);
 			}
