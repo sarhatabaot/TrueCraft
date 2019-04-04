@@ -11,7 +11,6 @@ namespace TrueCraft.Windows
 		string Name { get; }
 		sbyte Type { get; }
 		int Length { get; }
-		int MinecraftWasWrittenByFuckingIdiotsLength { get; }
 		ItemStack this[int index] { get; set; }
 		bool Empty { get; }
 		short[] ReadOnlySlots { get; }

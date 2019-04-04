@@ -33,9 +33,7 @@ namespace TrueCraft.Windows
 		public abstract void CopyToInventory(IWindow inventoryWindow);
 
 		public virtual int Length => WindowAreas.Sum(a => a.Length);
-
-		public virtual int MinecraftWasWrittenByFuckingIdiotsLength => Length;
-
+		
 		public bool Empty => !WindowAreas.Any(a => a.Items.Any(i => !i.Empty));
 
 		public virtual ItemStack[] GetSlots()

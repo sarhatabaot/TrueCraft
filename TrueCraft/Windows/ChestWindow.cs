@@ -68,8 +68,6 @@
 
 		public IWindowArea Hotbar => WindowAreas[2];
 
-		public override int MinecraftWasWrittenByFuckingIdiotsLength => ChestInventory.Length;
-
 		public override void CopyToInventory(IWindow inventoryWindow)
 		{
 			var window = (InventoryWindow) inventoryWindow;
