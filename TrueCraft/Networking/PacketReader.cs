@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq.Expressions;
 using TrueCraft.Networking.Packets;
 
@@ -8,6 +9,7 @@ namespace TrueCraft.Networking
 {
 	public class PacketReader : IPacketReader
 	{
+		private readonly TraceSource _trace;
 		public static readonly int Version = 14;
 
 		private static readonly byte[] EmptyBuffer = new byte[0];
@@ -15,7 +17,11 @@ namespace TrueCraft.Networking
 		internal Func<IPacket>[] ClientboundPackets = new Func<IPacket>[0x100];
 		internal Func<IPacket>[] ServerboundPackets = new Func<IPacket>[0x100];
 
-		public PacketReader() => Processors = new ConcurrentDictionary<object, IPacketSegmentProcessor>();
+		public PacketReader(TraceSource trace)
+		{
+			_trace = trace;
+			Processors = new ConcurrentDictionary<object, IPacketSegmentProcessor>();
+		}
 
 		public int ProtocolVersion => Version;
 
@@ -33,11 +39,10 @@ namespace TrueCraft.Networking
 				ServerboundPackets[packet.ID] = func;
 		}
 
-		public IEnumerable<IPacket> ReadPackets(object key, byte[] buffer, int offset, int length,
-			bool serverbound = true)
+		public IEnumerable<IPacket> ReadPackets(object key, byte[] buffer, int offset, int length, bool serverbound = true)
 		{
 			if (!Processors.ContainsKey(key))
-				Processors[key] = new PacketSegmentProcessor(this, serverbound);
+				Processors[key] = new PacketSegmentProcessor(this, serverbound, _trace);
 
 			var processor = Processors[key];
 

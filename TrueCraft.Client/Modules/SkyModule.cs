@@ -103,15 +103,15 @@ namespace TrueCraft.Client.Modules
 			get
 			{
 				const float blendFactor = 0.29f; // TODO: Compute based on view distance
-				Func<float, float, float> blend = (source, destination) =>
-					destination + (source - destination) * blendFactor;
 				var fog = WorldFogColor.ToVector3();
 				var sky = WorldSkyColor.ToVector3();
-				var color = new Vector3(blend(sky.X, fog.X), blend(sky.Y, fog.Y), blend(sky.Z, fog.Z));
+				var color = new Vector3(Blend(sky.X, fog.X, blendFactor), Blend(sky.Y, fog.Y, blendFactor), Blend(sky.Z, fog.Z, blendFactor));
 				// TODO: more stuff
 				return new Color(color);
 			}
 		}
+
+		private static float Blend(float source, float destination, float blendFactor) => destination + (source - destination) * blendFactor;
 
 		public void Draw(GameTime gameTime)
 		{

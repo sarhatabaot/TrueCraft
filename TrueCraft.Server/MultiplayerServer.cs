@@ -5,11 +5,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using Microsoft.Xna.Framework;
 using TrueCraft.Extensions;
 using TrueCraft.Lighting;
-using TrueCraft.Logging;
 using TrueCraft.Logic;
 using TrueCraft.Networking;
 using TrueCraft.Networking.Packets;
@@ -28,23 +28,27 @@ namespace TrueCraft.Server
 
 		private readonly Timer EnvironmentWorker;
 		private TcpListener Listener;
-		private readonly IList<ILogProvider> LogProviders;
 
 		private readonly QueryProtocol QueryProtocol;
 		private readonly Stopwatch Time;
 
+		public TraceSource Trace { get; }
+
 		public MultiplayerServer(ServerConfiguration configuration)
 		{
+			Trace = new TraceSource(configuration.ServerAddress);
+			Trace.Switch.Level = SourceLevels.All;
+			Trace.Listeners.Add(new ServerTraceWriter());
+
 			ServerConfiguration = configuration;
 
-			var reader = new PacketReader();
+			var reader = new PacketReader(Trace);
 			PacketReader = reader;
 			Clients = new List<IRemoteClient>();
 			EnvironmentWorker = new Timer(DoEnvironment);
 			PacketHandlers = new PacketHandler[0x100];
 			Worlds = new List<IWorld>();
 			EntityManagers = new List<IEntityManager>();
-			LogProviders = new List<ILogProvider>();
 			Scheduler = new EventScheduler(this);
 			var blockRepository = new BlockRepository();
 			blockRepository.DiscoverBlockProviders();
@@ -136,7 +140,7 @@ namespace TrueCraft.Server
 			if (!Listener.Server.AcceptAsync(args))
 				AcceptClient(this, args);
 
-			Log(LogCategory.Notice, "Running TrueCraft server on {0}", EndPoint);
+			Trace.TraceEvent(TraceEventType.Information, 0, $"Running TrueCraft server on {EndPoint}");
 			EnvironmentWorker.Change(MillisecondsPerTick, Timeout.Infinite);
 			if (ServerConfiguration.Query)
 				QueryProtocol.Start();
@@ -169,20 +173,6 @@ namespace TrueCraft.Server
 				HandleChunkLoaded(world, new ChunkLoadedEventArgs(chunk));
 		}
 
-		public void AddLogProvider(ILogProvider provider)
-		{
-			LogProviders.Add(provider);
-		}
-
-		public void Log(LogCategory category, string text, params object[] parameters)
-		{
-			for (int i = 0, LogProvidersCount = LogProviders.Count; i < LogProvidersCount; i++)
-			{
-				var provider = LogProviders[i];
-				provider.Log(category, text, parameters);
-			}
-		}
-
 		public IEntityManager GetEntityManagerForWorld(IWorld world)
 		{
 			for (var i = 0; i < EntityManagers.Count; i++)
@@ -202,19 +192,18 @@ namespace TrueCraft.Server
 			foreach (var client in Clients)
 			foreach (var part in parts)
 				client.SendMessage(part);
-			Log(LogCategory.Notice, ChatColor.RemoveColors(compiled));
+
+			Trace.TraceEvent(TraceEventType.Information, 0, ChatColor.RemoveColors(compiled));
 		}
 
-		public void DisconnectClient(IRemoteClient _client)
+		public void DisconnectClient(IRemoteClient client)
 		{
-			var client = (RemoteClient) _client;
-
 			lock (ClientLock) Clients.Remove(client);
 
 			if (client.Disconnected)
 				return;
 
-			client.Disconnected = true;
+			client.Disconnect();
 
 			if (client.LoggedIn)
 			{
@@ -258,7 +247,7 @@ namespace TrueCraft.Server
 
 		private void HandleBlockChanged(object sender, BlockChangeEventArgs e)
 		{
-			// TODO: Propegate lighting changes to client (not possible with beta 1.7.3 protocol)
+			// TODO: Propagate lighting changes to client (not possible with beta 1.7.3 protocol)
 			if (e.NewBlock.ID != e.OldBlock.ID || e.NewBlock.Metadata != e.OldBlock.Metadata)
 			{
 				for (int i = 0, ClientsCount = Clients.Count; i < ClientsCount; i++)
@@ -309,17 +298,19 @@ namespace TrueCraft.Server
 			chunk.UpdateHeightMap();
 			var _x = chunk.Coordinates.X * Chunk.Width;
 			var _z = chunk.Coordinates.Z * Chunk.Depth;
-			Coordinates3D coords, _coords;
+
 			for (byte x = 0; x < Chunk.Width; x++)
 			for (byte z = 0; z < Chunk.Depth; z++)
 			for (var y = 0; y < chunk.GetHeight(x, z); y++)
 			{
+				Coordinates3D _coords;
 				_coords.X = x;
 				_coords.Y = y;
 				_coords.Z = z;
 				var id = chunk.GetBlockID(_coords);
 				if (id == 0)
 					continue;
+				Coordinates3D coords;
 				coords.X = _x + x;
 				coords.Y = y;
 				coords.Z = _z + z;
@@ -346,28 +337,24 @@ namespace TrueCraft.Server
 				{
 					var descriptor = update.World.GetBlockData(update.Coordinates + offset);
 					var provider = BlockRepository.GetBlockProvider(descriptor.ID);
-					if (provider != null)
-						provider.BlockUpdate(descriptor, source, this, update.World);
+					provider?.BlockUpdate(descriptor, source, this, update.World);
 				}
 			}
 		}
 
 		protected internal void OnChatMessageReceived(ChatMessageEventArgs e)
 		{
-			if (ChatMessageReceived != null)
-				ChatMessageReceived(this, e);
+			ChatMessageReceived?.Invoke(this, e);
 		}
 
 		protected internal void OnPlayerJoined(PlayerJoinedQuitEventArgs e)
 		{
-			if (PlayerJoined != null)
-				PlayerJoined(this, e);
+			PlayerJoined?.Invoke(this, e);
 		}
 
 		protected internal void OnPlayerQuit(PlayerJoinedQuitEventArgs e)
 		{
-			if (PlayerQuit != null)
-				PlayerQuit(this, e);
+			PlayerQuit?.Invoke(this, e);
 		}
 
 		private void AcceptClient(object sender, SocketAsyncEventArgs args)
@@ -419,7 +406,9 @@ namespace TrueCraft.Server
 					}
 
 					if (Time.ElapsedMilliseconds >= limit)
-						Log(LogCategory.Warning, "Lighting queue is backed up");
+					{
+						Trace.TraceEvent(TraceEventType.Warning, 0, ChatColor.RemoveColors("Lighting queue is backed up"));
+					}
 				}
 
 				Profiler.Done();

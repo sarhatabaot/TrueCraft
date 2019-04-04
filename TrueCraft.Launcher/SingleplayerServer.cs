@@ -1,5 +1,5 @@
-﻿using System.Net;
-using TrueCraft.Logging;
+﻿using System.Diagnostics;
+using System.Net;
 using TrueCraft.Server;
 using TrueCraft.World;
 
@@ -22,7 +22,6 @@ namespace TrueCraft.Launcher
 
 			world.BlockRepository = Server.BlockRepository;
 			Server.AddWorld(world);
-			Server.AddLogProvider(new ConsoleLogProvider());
 		}
 
 		public MultiplayerServer Server { get; set; }
@@ -30,7 +29,7 @@ namespace TrueCraft.Launcher
 
 		public void Initialize(ProgressNotification progressNotification = null)
 		{
-			Server.Log(LogCategory.Notice, "Generating world around spawn point...");
+			Server.Trace.TraceEvent(TraceEventType.Information, 0, "Generating world around spawn point...");
 			for (var x = -5; x < 5; x++)
 			{
 				for (var z = -5; z < 5; z++)
@@ -38,10 +37,10 @@ namespace TrueCraft.Launcher
 				var progress = (int) ((x + 5) / 10.0 * 100);
 				progressNotification?.Invoke(progress / 100.0, "Generating world...");
 				if (progress % 10 == 0)
-					Server.Log(LogCategory.Notice, "{0}% complete", progress + 10);
+					Server.Trace.TraceEvent(TraceEventType.Information, 0, "{0}% complete", progress + 10);
 			}
 
-			Server.Log(LogCategory.Notice, "Simulating the world for a moment...");
+			Server.Trace.TraceEvent(TraceEventType.Information, 0, "Simulating the world for a moment...");
 			for (var x = -5; x < 5; x++)
 			{
 				for (var z = -5; z < 5; z++)
@@ -59,10 +58,9 @@ namespace TrueCraft.Launcher
 				}
 
 				var progress = (int) ((x + 5) / 10.0 * 100);
-				if (progressNotification != null)
-					progressNotification(progress / 100.0, "Simulating world...");
+				progressNotification?.Invoke(progress / 100.0, "Simulating world...");
 				if (progress % 10 == 0)
-					Server.Log(LogCategory.Notice, "{0}% complete", progress + 10);
+					Server.Trace.TraceEvent(TraceEventType.Information, 0, "{0}% complete", progress + 10);
 			}
 
 			World.Save();

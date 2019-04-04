@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -8,7 +9,6 @@ using System.Threading.Tasks;
 using Ionic.Zlib;
 using Microsoft.Xna.Framework;
 using TrueCraft.Entities;
-using TrueCraft.Logging;
 using TrueCraft.Logic;
 using TrueCraft.Networking;
 using TrueCraft.Networking.Packets;
@@ -193,8 +193,7 @@ namespace TrueCraft.Server
 		public void Log(string message, params object[] parameters)
 		{
 			if (EnableLogging)
-				SendMessage(ChatColor.Gray +
-				            string.Format("[" + DateTime.UtcNow.ToShortTimeString() + "] " + message, parameters));
+				SendMessage(ChatColor.Gray + string.Format("[" + DateTime.UtcNow.ToShortTimeString() + "] " + message, parameters));
 		}
 
 		public void QueuePacket(IPacket packet)
@@ -217,9 +216,11 @@ namespace TrueCraft.Server
 				args.Completed += OperationCompleted;
 				args.SetBuffer(buffer, 0, buffer.Length);
 
-				if (Connection != null)
-					if (!Connection.SendAsync(args))
-						OperationCompleted(this, args);
+				if (Connection == null)
+					return;
+
+				if (!Connection.SendAsync(args))
+					OperationCompleted(this, args);
 			}
 		}
 
@@ -253,7 +254,7 @@ namespace TrueCraft.Server
 			var manager = Server.GetEntityManagerForWorld(World);
 			foreach (var client in manager.ClientsForEntity(Entity))
 				client.QueuePacket(packet);
-			Inventory.PickUpStack((e.Entity as ItemEntity).Item);
+			Inventory.PickUpStack(((ItemEntity) e.Entity).Item);
 		}
 
 		public void CloseWindow(bool clientInitiated = false)
@@ -348,23 +349,22 @@ namespace TrueCraft.Server
 							}
 							catch (Exception ex)
 							{
-								Server.Log(LogCategory.Debug,
-									"Disconnecting client due to exception in network worker");
-								Server.Log(LogCategory.Debug, ex.ToString());
-
+								Server.Trace.TraceData(TraceEventType.Error, 0, "Disconnecting client due to exception in network worker", ex);
 								Server.DisconnectClient(this);
 							}
 						else
+						{
 							Log("Unhandled packet {0}", packet.GetType().Name);
+						}
 				}
 				catch (NotSupportedException)
 				{
-					Server.Log(LogCategory.Debug, "Disconnecting client due to unsupported packet received.");
+					Server.Trace.TraceEvent(TraceEventType.Error, 0, "Disconnecting client due to unsupported packet received.");
 					return;
 				}
 
-				if (sem.CurrentCount == 0 && sem != null)
-					sem.Release();
+				if (sem.CurrentCount == 0)
+					sem?.Release();
 			}
 			else
 				Server.DisconnectClient(this);
@@ -479,7 +479,7 @@ namespace TrueCraft.Server
 		{
 			if (!(sender is InventoryWindow))
 			{
-				QueuePacket(new SetSlotPacket((sender as IWindow).ID, (short) e.SlotIndex, e.Value.ID, e.Value.Count,
+				QueuePacket(new SetSlotPacket(((IWindow) sender).ID, (short) e.SlotIndex, e.Value.ID, e.Value.Count,
 					e.Value.Metadata));
 				return;
 			}
@@ -530,17 +530,14 @@ namespace TrueCraft.Server
 		{
 			if (disposing)
 			{
-				IPacketSegmentProcessor processor;
-				while (!PacketReader.Processors.TryRemove(this, out processor))
+				while (!PacketReader.Processors.TryRemove(this, out var processor))
 					Thread.Sleep(1);
 
 				Disconnect();
 
-				if (sem != null)
-					sem.Dispose();
+				sem?.Dispose();
 
-				if (Disposed != null)
-					Disposed(this, null);
+				Disposed?.Invoke(this, null);
 				sem = null;
 			}
 		}

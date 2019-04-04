@@ -5,15 +5,16 @@ using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Threading;
+using ImGuiNET;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using TrueCraft.Client.Input;
 using TrueCraft.Client.Modules;
 using TrueCraft.Client.Rendering;
+using TrueCraft.Client.UI;
 using TrueCraft.Logic;
 using TrueCraft.Networking.Packets;
-using TrueCraft.World;
 
 namespace TrueCraft.Client
 {
@@ -92,7 +93,7 @@ namespace TrueCraft.Client
 
 		public IItemRepository ItemRepository { get; set; }
 
-		private void PrepareDeviceSettings(object sender, PreparingDeviceSettingsEventArgs e)
+		private static void PrepareDeviceSettings(object sender, PreparingDeviceSettingsEventArgs e)
 		{
 			e.GraphicsDeviceInformation.PresentationParameters.RenderTargetUsage = RenderTargetUsage.PreserveContents;
 		}
@@ -110,13 +111,18 @@ namespace TrueCraft.Client
 			CreateRenderTarget();
 		}
 
+		private ImGuiRenderer _imgui;
+
 		protected override void Initialize()
 		{
-			InputModules = new List<IGameplayModule>();
-			GraphicalModules = new List<IGameplayModule>();
-
 			base.Initialize(); // (calls LoadContent)
 
+			_imgui = new ImGuiRenderer(this);
+			_imgui.RebuildFontAtlas();
+
+			InputModules = new List<IGameplayModule>();
+			GraphicalModules = new List<IGameplayModule>();
+			
 			if (GraphicsDevice.Viewport.Width < 640 || GraphicsDevice.Viewport.Height < 480)
 				ScaleFactor = 0.5f;
 			else if (GraphicsDevice.Viewport.Width < 978 || GraphicsDevice.Viewport.Height < 720)
@@ -232,8 +238,7 @@ namespace TrueCraft.Client
 		{
 			foreach (var module in InputModules)
 			{
-				var input = module as IInputModule;
-				if (input != null)
+				if (module is IInputModule input)
 					if (input.KeyDown(GameTime, e))
 						break;
 			}
@@ -243,8 +248,7 @@ namespace TrueCraft.Client
 		{
 			foreach (var module in InputModules)
 			{
-				var input = module as IInputModule;
-				if (input != null)
+				if (module is IInputModule input)
 					if (input.KeyUp(GameTime, e))
 						break;
 			}
@@ -254,8 +258,7 @@ namespace TrueCraft.Client
 		{
 			foreach (var module in InputModules)
 			{
-				var input = module as IInputModule;
-				if (input != null)
+				if (module is IInputModule input)
 					if (input.GamePadButtonUp(GameTime, e))
 						break;
 			}
@@ -265,8 +268,7 @@ namespace TrueCraft.Client
 		{
 			foreach (var module in InputModules)
 			{
-				var input = module as IInputModule;
-				if (input != null)
+				if (module is IInputModule input)
 					if (input.GamePadButtonDown(GameTime, e))
 						break;
 			}
@@ -276,8 +278,7 @@ namespace TrueCraft.Client
 		{
 			foreach (var module in InputModules)
 			{
-				var input = module as IInputModule;
-				if (input != null)
+				if (module is IInputModule input)
 					if (input.MouseScroll(GameTime, e))
 						break;
 			}
@@ -287,8 +288,7 @@ namespace TrueCraft.Client
 		{
 			foreach (var module in InputModules)
 			{
-				var input = module as IInputModule;
-				if (input != null)
+				if (module is IInputModule input)
 					if (input.MouseButtonDown(GameTime, e))
 						break;
 			}
@@ -298,8 +298,7 @@ namespace TrueCraft.Client
 		{
 			foreach (var module in InputModules)
 			{
-				var input = module as IInputModule;
-				if (input != null)
+				if (module is IInputModule input)
 					if (input.MouseButtonUp(GameTime, e))
 						break;
 			}
@@ -309,27 +308,27 @@ namespace TrueCraft.Client
 		{
 			foreach (var module in InputModules)
 			{
-				var input = module as IInputModule;
-				if (input != null)
+				if (module is IInputModule input)
 					if (input.MouseMove(GameTime, e))
 						break;
 			}
 		}
 
-		public void TakeScreenshot()
+		public void TakeScreenShot()
 		{
 			var path = Path.Combine(Paths.Screenshots, DateTime.Now.ToString("yyyy-MM-dd_H.mm.ss") + ".png");
-			if (!Directory.Exists(Path.GetDirectoryName(path)))
-				Directory.CreateDirectory(Path.GetDirectoryName(path));
+			var directoryName = Path.GetDirectoryName(path);
+			Directory.CreateDirectory(directoryName ?? throw new InvalidOperationException());
+
 			using (var stream = File.OpenWrite(path))
 				RenderTarget.SaveAsPng(stream, RenderTarget.Width, RenderTarget.Height);
-			ChatModule.AddMessage("Screenshot saved to " + Path.GetFileName(path));
+
+			ChatModule.AddMessage($"Screen shot saved to {Path.GetFileName(path)}");
 		}
 
 		public void FlushMainThreadActions()
 		{
-			Action action;
-			while (PendingMainThreadActions.TryTake(out action))
+			while (PendingMainThreadActions.TryTake(out var action))
 				action();
 		}
 
@@ -337,20 +336,18 @@ namespace TrueCraft.Client
 		{
 			GameTime = gameTime;
 
-			Action action;
-			if (PendingMainThreadActions.TryTake(out action))
+			if (PendingMainThreadActions.TryTake(out var action))
 				action();
 
-			IChunk chunk;
 			var adjusted = Client.World.World.FindBlockPosition(
-				new Coordinates3D((int) Client.Position.X, 0, (int) Client.Position.Z), out chunk);
+				new Coordinates3D((int) Client.Position.X, 0, (int) Client.Position.Z), out var chunk);
 			if (chunk != null && Client.LoggedIn)
 				if (chunk.GetHeight((byte) adjusted.X, (byte) adjusted.Z) != 0)
 					Client.Physics.Update(gameTime.ElapsedGameTime);
 			if (NextPhysicsUpdate < DateTime.UtcNow && Client.LoggedIn)
 			{
 				// NOTE: This is to make the vanilla server send us chunk packets
-				// We should eventually make some means of detecing that we're on a vanilla server to enable this
+				// We should eventually make some means of detecting that we're on a vanilla server to enable this
 				// It's a waste of bandwidth to do it on a TrueCraft server
 				Client.QueuePacket(new PlayerGroundedPacket {OnGround = true});
 				NextPhysicsUpdate = DateTime.UtcNow.AddMilliseconds(50);
@@ -361,7 +358,6 @@ namespace TrueCraft.Client
 				foreach (var module in InputModules)
 					module.Update(gameTime);
 			}
-
 
 			foreach (var module in GraphicalModules)
 				module.Update(gameTime);
@@ -390,25 +386,57 @@ namespace TrueCraft.Client
 		{
 			GraphicsDevice.SetRenderTarget(RenderTarget);
 			GraphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
-
 			GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
 			GraphicsDevice.SamplerStates[1] = SamplerState.PointClamp;
 
 			Mesh.ResetStats();
+
 			foreach (var module in GraphicalModules)
 			{
-				var drawable = module as IGraphicalModule;
-				if (drawable != null)
+				if (module is IGraphicalModule drawable)
 					drawable.Draw(gameTime);
 			}
 
-			GraphicsDevice.SetRenderTarget(null);
+			_imgui.BeforeLayout(gameTime);
+			ImGuiLayout();
+			_imgui.AfterLayout();
 
+			GraphicsDevice.SetRenderTarget(null);
 			SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque);
 			SpriteBatch.Draw(RenderTarget, Vector2.Zero, Color.White);
 			SpriteBatch.End();
-
+			
 			base.Draw(gameTime);
+		}
+
+		private bool show_test_window = false;
+
+		
+		protected virtual void ImGuiLayout()
+		{
+			ImGui.SetNextWindowSize(new System.Numerics.Vector2(500, 400), ImGuiCond.Always);
+			ImGui.Begin("Trace");
+			{
+				if (ImGui.Button("Clear"))
+					Client.TraceListener.Clear();
+				ImGui.Separator();
+				ImGui.BeginChild("scrolling");
+				ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new System.Numerics.Vector2(0, 1));
+				if (Client.TraceListener.Length > 0)
+					ImGui.TextUnformatted(Client.TraceListener.GetPendingText());
+				if (Client.TraceListener.Tail)
+					ImGui.SetScrollHereY(1.0f);
+				Client.TraceListener.Tail = false;
+				ImGui.PopStyleVar();
+				ImGui.EndChild();
+			}
+			ImGui.End();
+			
+			if (show_test_window)
+			{
+				ImGui.SetNextWindowPos(new System.Numerics.Vector2(650, 20), ImGuiCond.FirstUseEver);
+				ImGui.ShowDemoWindow(ref show_test_window);
+			}
 		}
 
 		protected override void Dispose(bool disposing)

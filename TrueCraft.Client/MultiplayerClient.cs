@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -17,8 +18,7 @@ using TrueCraft.World;
 
 namespace TrueCraft.Client
 {
-	public class
-		MultiplayerClient : IAABBEntity, INotifyPropertyChanged, IDisposable // TODO: Make IMultiplayerClient and so on
+	public class MultiplayerClient : IAABBEntity, INotifyPropertyChanged, IDisposable 
 	{
 		private readonly CancellationTokenSource cancel;
 
@@ -29,11 +29,19 @@ namespace TrueCraft.Client
 
 		private SemaphoreSlim sem = new SemaphoreSlim(1, 1);
 
+		public TraceSource Trace { get; }
+		public ClientTraceWriter TraceListener { get; }
+
 		public MultiplayerClient(TrueCraftUser user)
 		{
+			TraceListener = new ClientTraceWriter();
+			Trace = new TraceSource(nameof(MultiplayerClient));
+			Trace.Switch.Level = SourceLevels.All;
+			Trace.Listeners.Add(TraceListener);
+
 			User = user;
 			Client = new TcpClient();
-			PacketReader = new PacketReader();
+			PacketReader = new PacketReader(Trace);
 			PacketReader.RegisterCorePackets();
 			PacketHandlers = new PacketHandler[0x100];
 			Handlers.PacketHandlers.RegisterHandlers(this);
@@ -226,11 +234,10 @@ namespace TrueCraft.Client
 				var packets = PacketReader.ReadPackets(this, e.Buffer, e.Offset, e.BytesTransferred, false);
 
 				foreach (var packet in packets)
-					if (PacketHandlers[packet.ID] != null)
-						PacketHandlers[packet.ID](packet, this);
+					PacketHandlers[packet.ID]?.Invoke(packet, this);
 
-				if (sem.CurrentCount == 0 && sem != null)
-					sem.Release();
+				if (sem.CurrentCount == 0)
+					sem?.Release();
 			}
 			else
 				Disconnect();
@@ -238,27 +245,27 @@ namespace TrueCraft.Client
 
 		protected internal void OnChatMessage(ChatMessageEventArgs e)
 		{
-			if (ChatMessage != null) ChatMessage(this, e);
+			ChatMessage?.Invoke(this, e);
 		}
 
 		protected internal void OnChunkLoaded(ChunkEventArgs e)
 		{
-			if (ChunkLoaded != null) ChunkLoaded(this, e);
+			ChunkLoaded?.Invoke(this, e);
 		}
 
 		protected internal void OnChunkUnloaded(ChunkEventArgs e)
 		{
-			if (ChunkUnloaded != null) ChunkUnloaded(this, e);
+			ChunkUnloaded?.Invoke(this, e);
 		}
 
 		protected internal void OnChunkModified(ChunkEventArgs e)
 		{
-			if (ChunkModified != null) ChunkModified(this, e);
+			ChunkModified?.Invoke(this, e);
 		}
 
 		protected internal void OnBlockChanged(BlockChangeEventArgs e)
 		{
-			if (BlockChanged != null) BlockChanged(this, e);
+			BlockChanged?.Invoke(this, e);
 		}
 
 		protected virtual void Dispose(bool disposing)
@@ -267,8 +274,7 @@ namespace TrueCraft.Client
 			{
 				Disconnect();
 
-				if (sem != null)
-					sem.Dispose();
+				sem?.Dispose();
 			}
 
 			sem = null;

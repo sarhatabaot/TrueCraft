@@ -6,7 +6,7 @@ using TrueCraft.World;
 
 namespace TrueCraft.Networking
 {
-	public interface IRemoteClient
+	public interface IRemoteClient : IDisposable
 	{
 		/// <summary>
 		///  Minecraft stream used to communicate with this client.
@@ -70,6 +70,8 @@ namespace TrueCraft.Networking
 		///  so on, this client is just waiting to be reaped.
 		/// </summary>
 		bool Disconnected { get; }
+
+		bool LoggedIn { get; }
 
 		/// <summary>
 		///  Loads player data from disk for this client.

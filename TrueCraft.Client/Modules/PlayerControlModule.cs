@@ -43,7 +43,7 @@ namespace TrueCraft.Client.Modules
 
 				// Take a screenshot.
 				case Keys.F2:
-					Game.TakeScreenshot();
+					Game.TakeScreenShot();
 					return true;
 
 				// Move to the left.

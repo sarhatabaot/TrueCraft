@@ -8,8 +8,11 @@ namespace TrueCraft.Networking
 {
 	public class PacketSegmentProcessor : IPacketSegmentProcessor
 	{
-		public PacketSegmentProcessor(PacketReader packetReader, bool serverBound)
+		private readonly TraceSource _trace;
+
+		public PacketSegmentProcessor(PacketReader packetReader, bool serverBound, TraceSource trace)
 		{
+			_trace = trace;
 			PacketBuffer = new List<byte>();
 			PacketReader = packetReader;
 			ServerBound = serverBound;
@@ -43,12 +46,11 @@ namespace TrueCraft.Networking
 				else
 					createPacket = PacketReader.ClientboundPackets[packetId];
 
-				
 				if (createPacket != null)
 					CurrentPacket = createPacket();
 				else
 				{
-					Trace.TraceError("Unable to read packet type 0x" + packetId.ToString("X2"));
+					_trace.TraceData(TraceEventType.Error, 0, $"Unable to read packet type 0x{packetId:X2}");
 				}
 			}
 
@@ -57,6 +59,7 @@ namespace TrueCraft.Networking
 				using (var listStream = new ByteListMemoryStream(PacketBuffer, 1))
 				{
 					using (var ms = new MinecraftStream(listStream))
+					{
 						try
 						{
 							CurrentPacket.ReadPacket(ms);
@@ -65,6 +68,7 @@ namespace TrueCraft.Networking
 						{
 							return false;
 						}
+					}
 
 					PacketBuffer.RemoveRange(0, (int) listStream.Position);
 				}

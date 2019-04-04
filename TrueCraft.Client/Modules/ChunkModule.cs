@@ -179,7 +179,9 @@ namespace TrueCraft.Client.Modules
 					chunks++;
 					ChunkMeshes[i].Draw(OpaqueEffect, 0);
 					if (!ChunkMeshes[i].IsReady || ChunkMeshes[i].Submeshes != 2)
+					{
 						Console.WriteLine("Warning: rendered chunk that was not ready");
+					}
 				}
 
 			Game.GraphicsDevice.BlendState = ColorWriteDisable;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
-using TrueCraft.Logging;
 using TrueCraft.Logic;
 using TrueCraft.Networking;
 using TrueCraft.World;
@@ -13,6 +13,7 @@ namespace TrueCraft.Server
 		object ClientLock { get; }
 		ServerConfiguration ServerConfiguration { get; }
 
+		TraceSource Trace { get; }
 		IAccessConfiguration AccessConfiguration { get; }
 		IPacketReader PacketReader { get; }
 		IList<IRemoteClient> Clients { get; }
@@ -24,6 +25,7 @@ namespace TrueCraft.Server
 		IPEndPoint EndPoint { get; }
 		bool BlockUpdatesEnabled { get; set; }
 		bool EnableClientLogging { get; set; }
+		
 		event EventHandler<ChatMessageEventArgs> ChatMessageReceived;
 		event EventHandler<PlayerJoinedQuitEventArgs> PlayerJoined;
 		event EventHandler<PlayerJoinedQuitEventArgs> PlayerQuit;
@@ -32,8 +34,6 @@ namespace TrueCraft.Server
 		void Stop();
 		void RegisterPacketHandler(byte packetId, PacketHandler handler);
 		void AddWorld(IWorld world);
-		void AddLogProvider(ILogProvider provider);
-		void Log(LogCategory category, string text, params object[] parameters);
 		IEntityManager GetEntityManagerForWorld(IWorld world);
 		void SendMessage(string message, params object[] parameters);
 
