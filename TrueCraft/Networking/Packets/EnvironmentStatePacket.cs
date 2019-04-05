@@ -16,12 +16,12 @@
 
 		public EnvironmentState State;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			State = (EnvironmentState) stream.ReadInt8();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt8((sbyte) State);
 		}

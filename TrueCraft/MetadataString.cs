@@ -28,12 +28,12 @@ namespace TrueCraft
 			return new MetadataString(value);
 		}
 
-		public override void FromStream(IMinecraftStream stream)
+		public override void FromStream(IMcStream stream)
 		{
 			Value = stream.ReadString();
 		}
 
-		public override void WriteTo(IMinecraftStream stream, byte index)
+		public override void WriteTo(IMcStream stream, byte index)
 		{
 			stream.WriteUInt8(GetKey(index));
 			stream.WriteString(Value);

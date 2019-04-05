@@ -24,7 +24,7 @@
 		public short Width, Height, Depth;
 		public byte[] CompressedData;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			X = stream.ReadInt32();
 			Y = stream.ReadInt16();
@@ -36,7 +36,7 @@
 			CompressedData = stream.ReadUInt8Array(len);
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(X);
 			stream.WriteInt16(Y);

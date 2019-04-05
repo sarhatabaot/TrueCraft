@@ -21,7 +21,7 @@
 			Pitch = pitch;
 		}
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			EntityID = stream.ReadInt32();
 			X = stream.ReadInt32();
@@ -31,7 +31,7 @@
 			Pitch = stream.ReadInt8();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(EntityID);
 			stream.WriteInt32(X);

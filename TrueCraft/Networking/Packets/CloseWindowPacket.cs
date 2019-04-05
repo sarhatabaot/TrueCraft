@@ -11,12 +11,12 @@
 
 		public sbyte WindowID;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			WindowID = stream.ReadInt8();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt8(WindowID);
 		}

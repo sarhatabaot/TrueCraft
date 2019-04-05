@@ -10,14 +10,14 @@
 		public float Yaw, Pitch;
 		public bool OnGround;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			Yaw = stream.ReadSingle();
 			Pitch = stream.ReadSingle();
 			OnGround = stream.ReadBoolean();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteSingle(Yaw);
 			stream.WriteSingle(Pitch);

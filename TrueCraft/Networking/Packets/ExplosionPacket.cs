@@ -10,7 +10,7 @@ namespace TrueCraft.Networking.Packets
 		public float Radius;
 		public Tuple<sbyte, sbyte, sbyte>[] AffectedBlocks;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			X = stream.ReadDouble();
 			Y = stream.ReadDouble();
@@ -24,7 +24,7 @@ namespace TrueCraft.Networking.Packets
 					stream.ReadInt8());
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteDouble(X);
 			stream.WriteDouble(Y);

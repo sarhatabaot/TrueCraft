@@ -5,9 +5,9 @@ using System.Threading;
 
 namespace TrueCraft.Networking
 {
-	public class MinecraftStream : Stream, IMinecraftStream
+	public class McStream : Stream, IMcStream
 	{
-		public MinecraftStream(Stream baseStream)
+		public McStream(Stream baseStream)
 		{
 			BaseStream = baseStream;
 			StringEncoding = Encoding.BigEndianUnicode;

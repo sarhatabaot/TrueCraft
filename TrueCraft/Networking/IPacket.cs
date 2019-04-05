@@ -3,7 +3,7 @@
 	public interface IPacket
 	{
 		byte ID { get; }
-		void ReadPacket(IMinecraftStream stream);
-		void WritePacket(IMinecraftStream stream);
+		void ReadPacket(IMcStream stream);
+		void WritePacket(IMcStream stream);
 	}
 }

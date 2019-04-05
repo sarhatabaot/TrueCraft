@@ -16,13 +16,13 @@
 			CollectorID = collectorID;
 		}
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			CollectedItemID = stream.ReadInt32();
 			CollectorID = stream.ReadInt32();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(CollectedItemID);
 			stream.WriteInt32(CollectorID);

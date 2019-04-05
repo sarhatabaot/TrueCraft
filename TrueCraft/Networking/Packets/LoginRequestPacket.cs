@@ -16,7 +16,7 @@
 		public int ProtocolVersion;
 		public string Username;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			ProtocolVersion = stream.ReadInt32();
 			Username = stream.ReadString();
@@ -24,7 +24,7 @@
 			stream.ReadInt8(); // Unused
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(ProtocolVersion);
 			stream.WriteString(Username);

@@ -14,12 +14,12 @@
 		/// </summary>
 		public string ConnectionHash;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			ConnectionHash = stream.ReadString();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteString(ConnectionHash);
 		}

@@ -20,12 +20,12 @@ namespace TrueCraft
 			return new MetadataFloat(value);
 		}
 
-		public override void FromStream(IMinecraftStream stream)
+		public override void FromStream(IMcStream stream)
 		{
 			Value = stream.ReadSingle();
 		}
 
-		public override void WriteTo(IMinecraftStream stream, byte index)
+		public override void WriteTo(IMcStream stream, byte index)
 		{
 			stream.WriteUInt8(GetKey(index));
 			stream.WriteSingle(Value);

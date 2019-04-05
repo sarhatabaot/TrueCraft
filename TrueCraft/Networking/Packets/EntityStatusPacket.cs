@@ -20,13 +20,13 @@
 		public int EntityID;
 		public EntityStatus Status;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			EntityID = stream.ReadInt32();
 			Status = (EntityStatus) stream.ReadInt8();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(EntityID);
 			stream.WriteInt8((sbyte) Status);

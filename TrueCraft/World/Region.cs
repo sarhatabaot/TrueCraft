@@ -110,7 +110,7 @@ namespace TrueCraft.World
 					{
 						regionFile.Seek(chunkData.Item1, SeekOrigin.Begin);
 						/*int length = */
-						new MinecraftStream(regionFile)
+						new McStream(regionFile)
 							.ReadInt32(); // TODO: Avoid making new objects here, and in the WriteInt32
 						var compressionMode = regionFile.ReadByte();
 						switch (compressionMode)
@@ -211,7 +211,7 @@ namespace TrueCraft.World
 							header = AllocateNewChunks(coords, raw.Length);
 
 						regionFile.Seek(header.Item1, SeekOrigin.Begin);
-						new MinecraftStream(regionFile).WriteInt32(raw.Length);
+						new McStream(regionFile).WriteInt32(raw.Length);
 						regionFile.WriteByte(2); // Compressed with zlib
 						regionFile.Write(raw, 0, raw.Length);
 

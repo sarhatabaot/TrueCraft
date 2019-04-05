@@ -11,7 +11,7 @@ namespace TrueCraft.Networking
 		/// <summary>
 		///  Minecraft stream used to communicate with this client.
 		/// </summary>
-		IMinecraftStream MinecraftStream { get; }
+		IMcStream McStream { get; }
 
 		/// <summary>
 		///  Returns true if this client has data pending in the network stream.
@@ -108,5 +108,8 @@ namespace TrueCraft.Networking
 		///  this window as the currently open window.
 		/// </summary>
 		void OpenWindow(IWindow window);
+
+		int ChunkRadius { get; }
+		void UpdateChunks(bool block = false);
 	}
 }

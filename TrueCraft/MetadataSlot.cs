@@ -21,12 +21,12 @@ namespace TrueCraft
 			return new MetadataSlot(value);
 		}
 
-		public override void FromStream(IMinecraftStream stream)
+		public override void FromStream(IMcStream stream)
 		{
 			Value = ItemStack.FromStream(stream);
 		}
 
-		public override void WriteTo(IMinecraftStream stream, byte index)
+		public override void WriteTo(IMcStream stream, byte index)
 		{
 			stream.WriteUInt8(GetKey(index));
 			stream.WriteInt16(Value.ID);

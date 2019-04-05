@@ -13,7 +13,7 @@ namespace TrueCraft.Profiling
 			Stopwatch = new Stopwatch();
 			EnabledBuckets = new List<string>();
 			ActiveTimers = new Stack<ActiveTimer>();
-			LogLag = false;
+			LogLag = true;
 			Stopwatch.Start();
 		}
 

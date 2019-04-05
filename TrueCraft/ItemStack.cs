@@ -91,7 +91,7 @@ namespace TrueCraft
 		/// </summary>
 		/// <param name="stream">The stream to read from.</param>
 		/// <returns></returns>
-		public static ItemStack FromStream(IMinecraftStream stream)
+		public static ItemStack FromStream(IMcStream stream)
 		{
 			var slot = EmptyStack;
 			slot.ID = stream.ReadInt16();
@@ -114,7 +114,7 @@ namespace TrueCraft
 		///  Writes this item stack to a Minecraft stream.
 		/// </summary>
 		/// <param name="stream">The stream to write to.</param>
-		public void WriteTo(IMinecraftStream stream)
+		public void WriteTo(IMcStream stream)
 		{
 			stream.WriteInt16(ID);
 			if (Empty)

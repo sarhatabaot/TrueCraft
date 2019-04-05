@@ -29,7 +29,7 @@
 		/// </summary>
 		public int Data;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			Effect = (EffectType) stream.ReadInt32();
 			X = stream.ReadInt32();
@@ -38,7 +38,7 @@
 			Data = stream.ReadInt32();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32((int) Effect);
 			stream.WriteInt32(X);

@@ -48,7 +48,7 @@ namespace TrueCraft.Server
 			if (string.IsNullOrEmpty(message))
 				return;
 
-			var value = $"{GetTimestamp()} [{category}] {string.Format(message)}";
+			var value = $"{GetTimestamp()} [{category}] {message}";
 
 			var foreground = Console.ForegroundColor;
 			Console.ForegroundColor = GetConsoleColor(category);

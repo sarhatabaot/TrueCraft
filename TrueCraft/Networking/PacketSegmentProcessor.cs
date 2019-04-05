@@ -50,7 +50,7 @@ namespace TrueCraft.Networking
 					CurrentPacket = createPacket();
 				else
 				{
-					_trace.TraceData(TraceEventType.Error, 0, $"Unable to read packet type 0x{packetId:X2}");
+					_trace.TraceData(TraceEventType.Error, 0, $"Unable to read packet type with ID {packetId:X2}");
 				}
 			}
 
@@ -58,7 +58,7 @@ namespace TrueCraft.Networking
 			{
 				using (var listStream = new ByteListMemoryStream(PacketBuffer, 1))
 				{
-					using (var ms = new MinecraftStream(listStream))
+					using (var ms = new McStream(listStream))
 					{
 						try
 						{

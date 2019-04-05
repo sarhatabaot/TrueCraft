@@ -7,7 +7,7 @@
 		public int EntityID;
 		public sbyte DeltaX, DeltaY, DeltaZ;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			EntityID = stream.ReadInt32();
 			DeltaX = stream.ReadInt8();
@@ -15,7 +15,7 @@
 			DeltaZ = stream.ReadInt8();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(EntityID);
 			stream.WriteInt8(DeltaX);

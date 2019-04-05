@@ -10,13 +10,13 @@
 		public int EntityID;
 		public int VehicleID;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			EntityID = stream.ReadInt32();
 			VehicleID = stream.ReadInt32();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(EntityID);
 			stream.WriteInt32(VehicleID);

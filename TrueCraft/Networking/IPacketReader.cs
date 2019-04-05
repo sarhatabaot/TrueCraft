@@ -10,6 +10,6 @@ namespace TrueCraft.Networking
 		ConcurrentDictionary<object, IPacketSegmentProcessor> Processors { get; }
 		void RegisterPacketType<T>(bool clientbound = true, bool serverbound = true) where T : IPacket;
 		IEnumerable<IPacket> ReadPackets(object key, byte[] buffer, int offset, int length, bool serverbound = true);
-		void WritePacket(IMinecraftStream stream, IPacket packet);
+		void WritePacket(IMcStream stream, IPacket packet);
 	}
 }

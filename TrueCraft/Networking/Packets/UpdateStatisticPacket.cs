@@ -10,13 +10,13 @@
 		public int StatisticID;
 		public sbyte Delta;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			StatisticID = stream.ReadInt32();
 			Delta = stream.ReadInt8();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(StatisticID);
 			stream.WriteInt8(Delta);

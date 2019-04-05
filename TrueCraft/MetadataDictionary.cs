@@ -31,7 +31,7 @@ namespace TrueCraft
 			set => entries[index] = value;
 		}
 
-		public static MetadataDictionary FromStream(IMinecraftStream stream)
+		public static MetadataDictionary FromStream(IMcStream stream)
 		{
 			var value = new MetadataDictionary();
 			while (true)
@@ -52,7 +52,7 @@ namespace TrueCraft
 			return value;
 		}
 
-		public void WriteTo(IMinecraftStream stream)
+		public void WriteTo(IMcStream stream)
 		{
 			foreach (var entry in entries)
 				entry.Value.WriteTo(stream, entry.Key);

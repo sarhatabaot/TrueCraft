@@ -78,7 +78,7 @@ namespace TrueCraft.Server
 
 		public InventoryWindow InventoryWindow => Inventory as InventoryWindow;
 
-		internal int ChunkRadius { get; set; }
+		public int ChunkRadius { get; set; }
 		internal HashSet<Coordinates2D> LoadedChunks { get; set; }
 
 		public event EventHandler Disposed;
@@ -89,7 +89,7 @@ namespace TrueCraft.Server
 		}
 
 		//public NetworkStream NetworkStream { get; set; }
-		public IMinecraftStream MinecraftStream { get; internal set; }
+		public IMcStream McStream { get; internal set; }
 		public string Username { get; internal set; }
 		public IMultiPlayerServer Server { get; set; }
 		public IWorld World { get; internal set; }
@@ -209,7 +209,7 @@ namespace TrueCraft.Server
 
 			using (var writeStream = new MemoryStream())
 			{
-				using (var ms = new MinecraftStream(writeStream))
+				using (var ms = new McStream(writeStream))
 				{
 					writeStream.WriteByte(packet.ID);
 					packet.WritePacket(ms);
@@ -401,9 +401,12 @@ namespace TrueCraft.Server
 			server.Scheduler.ScheduleEvent("remote.keepalive", this, TimeSpan.FromSeconds(10), SendKeepAlive);
 		}
 
-		internal void UpdateChunks(bool block = false)
+		public void UpdateChunks(bool block = false)
 		{
 			var newChunks = new HashSet<Coordinates2D>();
+
+			Server.Trace.TraceEvent(TraceEventType.Start, 0, "\t loading new chunks");
+
 			var toLoad = new List<Tuple<Coordinates2D, IChunk>>();
 			Profiler.Start("client.new-chunks");
 			for (var x = -ChunkRadius; x < ChunkRadius; x++)
@@ -419,30 +422,30 @@ namespace TrueCraft.Server
 			}
 
 			Profiler.Done();
-			var encode = new Action(() =>
-			{
-				Profiler.Start("client.encode-chunks");
-				foreach (var tup in toLoad)
-				{
-					var coords = tup.Item1;
-					var chunk = tup.Item2;
-					if (chunk == null)
-						chunk = World.GetChunk(coords);
-					chunk.LastAccessed = DateTime.UtcNow;
-					LoadChunk(chunk);
-				}
 
-				Profiler.Done();
-			});
+			Server.Trace.TraceEvent(TraceEventType.Start, 0, "\t encoding chunks");
 			if (block)
-				encode();
+				EncodeChunks(toLoad);
 			else
-				Task.Factory.StartNew(encode);
+				Task.Factory.StartNew(()=> EncodeChunks(toLoad));
+
 			Profiler.Start("client.old-chunks");
 			LoadedChunks.IntersectWith(newChunks);
 			Profiler.Done();
 			Profiler.Start("client.update-entities");
 			((EntityManager) Server.GetEntityManagerForWorld(World)).UpdateClientEntities(this);
+			Profiler.Done();
+		}
+
+		private void EncodeChunks(IEnumerable<Tuple<Coordinates2D, IChunk>> map)
+		{
+			Profiler.Start("client.encode-chunks");
+			foreach (var (coords, maybeChunk) in map)
+			{
+				var chunk = maybeChunk ?? World.GetChunk(coords);
+				chunk.LastAccessed = DateTime.UtcNow;
+				LoadChunk(chunk);
+			}
 			Profiler.Done();
 		}
 
@@ -455,26 +458,23 @@ namespace TrueCraft.Server
 		{
 			QueuePacket(new ChunkPreamblePacket(chunk.Coordinates.X, chunk.Coordinates.Z));
 			QueuePacket(CreatePacket(chunk));
-			Server.Scheduler.ScheduleEvent("client.finalize-chunks", this,
-				TimeSpan.Zero, server =>
+			Server.Scheduler.ScheduleEvent("client.finalize-chunks", this, TimeSpan.Zero, server =>
+			{
+				LoadedChunks.Add(chunk.Coordinates);
+				foreach (var kvp in chunk.TileEntities)
 				{
-					return;
-					LoadedChunks.Add(chunk.Coordinates);
-					foreach (var kvp in chunk.TileEntities)
+					var coords = kvp.Key;
+					var descriptor = new BlockDescriptor
 					{
-						var coords = kvp.Key;
-						var descriptor = new BlockDescriptor
-						{
-							Coordinates = coords + new Coordinates3D(chunk.X, 0, chunk.Z),
-							Metadata = chunk.GetMetadata(coords),
-							ID = chunk.GetBlockID(coords),
-							BlockLight = chunk.GetBlockLight(coords),
-							SkyLight = chunk.GetSkyLight(coords)
-						};
-						var provider = Server.BlockRepository.GetBlockProvider(descriptor.ID);
-						provider.TileEntityLoadedForClient(descriptor, World, kvp.Value, this);
-					}
-				});
+						Coordinates = coords + new Coordinates3D(chunk.X, 0, chunk.Z),
+						Metadata = chunk.GetMetadata(coords),
+						ID = chunk.GetBlockID(coords),
+						BlockLight = chunk.GetBlockLight(coords),
+						SkyLight = chunk.GetSkyLight(coords)
+					};
+					var provider = Server.BlockRepository.GetBlockProvider(descriptor.ID);
+					provider.TileEntityLoadedForClient(descriptor, World, kvp.Value, this);
+				}});
 		}
 
 		internal void UnloadChunk(Coordinates2D position)
@@ -514,8 +514,8 @@ namespace TrueCraft.Server
 
 		private static ChunkDataPacket CreatePacket(IChunk chunk)
 		{
-			var X = chunk.Coordinates.X;
-			var Z = chunk.Coordinates.Z;
+			var x = chunk.Coordinates.X;
+			var z = chunk.Coordinates.Z;
 
 			Profiler.Start("client.encode-chunks.compress");
 			byte[] result;
@@ -527,10 +527,9 @@ namespace TrueCraft.Server
 					deflate.CopyTo(ms);
 				result = ms.ToArray();
 			}
-
 			Profiler.Done();
 
-			return new ChunkDataPacket(X * Chunk.Width, 0, Z * Chunk.Depth,
+			return new ChunkDataPacket(x * Chunk.Width, 0, z * Chunk.Depth,
 				Chunk.Width, Chunk.Height, Chunk.Depth, result);
 		}
 

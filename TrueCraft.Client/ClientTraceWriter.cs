@@ -60,7 +60,8 @@ namespace TrueCraft.Client
 			Console.WriteLine(value);
 			Console.ForegroundColor = foreground;
 
-			_buffer.AppendLine(value);
+			lock (_buffer)
+				_buffer.AppendLine(value);
 		}
 
 		public override void TraceData(TraceEventCache eventCache, string source, TraceEventType eventType, int id, object data)
@@ -101,7 +102,8 @@ namespace TrueCraft.Client
 
 		public void Clear()
 		{
-			_buffer.Clear();
+			lock (_buffer)
+				_buffer.Clear();
 		}
 		
 		public string GetPendingText()

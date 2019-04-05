@@ -28,14 +28,14 @@
 		/// </summary>
 		public short Value;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			WindowID = stream.ReadInt8();
 			Target = (ProgressTarget) stream.ReadInt16();
 			Value = stream.ReadInt16();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt8(WindowID);
 			stream.WriteInt16((short) Target);

@@ -64,7 +64,7 @@ namespace TrueCraft.Networking
 			}
 		}
 
-		public void WritePacket(IMinecraftStream stream, IPacket packet)
+		public void WritePacket(IMcStream stream, IPacket packet)
 		{
 			stream.WriteUInt8(packet.ID);
 			packet.WritePacket(stream);

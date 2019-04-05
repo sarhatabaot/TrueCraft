@@ -22,7 +22,7 @@
 		public sbyte Count;
 		public short Metadata;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			WindowID = stream.ReadInt8();
 			SlotIndex = stream.ReadInt16();
@@ -34,7 +34,7 @@
 			}
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt8(WindowID);
 			stream.WriteInt16(SlotIndex);

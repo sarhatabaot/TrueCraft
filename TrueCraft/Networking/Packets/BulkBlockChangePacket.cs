@@ -9,7 +9,7 @@
 		public sbyte[] BlockIDs;
 		public sbyte[] Metadata;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			ChunkX = stream.ReadInt32();
 			ChunkZ = stream.ReadInt32();
@@ -28,7 +28,7 @@
 			Metadata = stream.ReadInt8Array(length);
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(ChunkX);
 			stream.WriteInt32(ChunkZ);

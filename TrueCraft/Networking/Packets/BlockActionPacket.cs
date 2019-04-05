@@ -22,7 +22,7 @@
 		/// </summary>
 		public sbyte Data;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			X = stream.ReadInt32();
 			Y = stream.ReadInt16();
@@ -31,7 +31,7 @@
 			Data = stream.ReadInt8();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(X);
 			stream.WriteInt32(Y);

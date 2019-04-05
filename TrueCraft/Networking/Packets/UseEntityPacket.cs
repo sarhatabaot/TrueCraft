@@ -11,14 +11,14 @@
 		public int TargetID;
 		public bool LeftClick;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			UserID = stream.ReadInt32();
 			TargetID = stream.ReadInt32();
 			LeftClick = stream.ReadBoolean();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(UserID);
 			stream.WriteInt32(TargetID);

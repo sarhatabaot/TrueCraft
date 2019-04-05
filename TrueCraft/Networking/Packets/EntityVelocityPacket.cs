@@ -13,7 +13,7 @@
 		public short YVelocity;
 		public short ZVelocity;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			EntityID = stream.ReadInt32();
 			XVelocity = stream.ReadInt16();
@@ -21,7 +21,7 @@
 			ZVelocity = stream.ReadInt16();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(EntityID);
 			stream.WriteInt16(XVelocity);

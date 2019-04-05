@@ -21,14 +21,14 @@
 		/// </summary>
 		public bool Load;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			X = stream.ReadInt32();
 			Z = stream.ReadInt32();
 			Load = stream.ReadBoolean();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(X);
 			stream.WriteInt32(Z);

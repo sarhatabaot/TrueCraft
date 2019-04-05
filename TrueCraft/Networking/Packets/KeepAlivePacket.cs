@@ -8,12 +8,12 @@
 	{
 		public byte ID => 0x00;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			// This space intentionally left blank
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			// This space intentionally left blank
 		}

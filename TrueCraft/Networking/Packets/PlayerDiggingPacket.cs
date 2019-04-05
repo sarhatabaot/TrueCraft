@@ -30,7 +30,7 @@
 		public int Z;
 		public BlockFace Face;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			PlayerAction = (Action) stream.ReadInt8();
 			X = stream.ReadInt32();
@@ -39,7 +39,7 @@
 			Face = (BlockFace) stream.ReadInt8();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt8((sbyte) PlayerAction);
 			stream.WriteInt32(X);

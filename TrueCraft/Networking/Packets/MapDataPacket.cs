@@ -8,7 +8,7 @@
 		public short Metadata;
 		public byte[] Data;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			ItemID = stream.ReadInt16();
 			Metadata = stream.ReadInt16();
@@ -16,7 +16,7 @@
 			Data = stream.ReadUInt8Array(length);
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt16(ItemID);
 			stream.WriteInt16(Metadata);

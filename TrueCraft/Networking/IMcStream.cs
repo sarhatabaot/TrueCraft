@@ -2,7 +2,7 @@
 
 namespace TrueCraft.Networking
 {
-	public interface IMinecraftStream
+	public interface IMcStream
 	{
 		Stream BaseStream { get; }
 

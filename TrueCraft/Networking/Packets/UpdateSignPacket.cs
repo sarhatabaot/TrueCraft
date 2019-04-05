@@ -12,7 +12,7 @@
 		public int Z;
 		public string[] Text;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			X = stream.ReadInt32();
 			Y = stream.ReadInt16();
@@ -24,7 +24,7 @@
 			Text[3] = stream.ReadString();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(X);
 			stream.WriteInt16(Y);

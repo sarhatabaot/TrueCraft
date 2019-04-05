@@ -20,7 +20,7 @@
 		public int X, Y, Z;
 		public PaintingDirection Direction;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			EntityID = stream.ReadInt32();
 			PaintingName = stream.ReadString();
@@ -30,7 +30,7 @@
 			Direction = (PaintingDirection) stream.ReadInt32();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(EntityID);
 			stream.WriteString(PaintingName);

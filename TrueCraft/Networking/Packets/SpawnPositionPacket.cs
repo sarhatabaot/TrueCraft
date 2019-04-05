@@ -17,14 +17,14 @@
 
 		public int X, Y, Z;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			X = stream.ReadInt32();
 			Y = stream.ReadInt32();
 			Z = stream.ReadInt32();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(X);
 			stream.WriteInt32(Y);

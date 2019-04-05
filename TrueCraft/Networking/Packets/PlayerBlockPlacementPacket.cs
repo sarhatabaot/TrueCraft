@@ -40,7 +40,7 @@
 		/// </summary>
 		public short? Metadata;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			X = stream.ReadInt32();
 			Y = stream.ReadInt8();
@@ -54,7 +54,7 @@
 			}
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(X);
 			stream.WriteInt8(Y);

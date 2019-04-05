@@ -16,7 +16,7 @@
 
 		public bool OnGround;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			X = stream.ReadDouble();
 			Y = stream.ReadDouble();
@@ -25,7 +25,7 @@
 			OnGround = stream.ReadBoolean();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteDouble(X);
 			stream.WriteDouble(Y);

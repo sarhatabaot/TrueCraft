@@ -13,13 +13,13 @@
 			Metadata = metadata;
 		}
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			EntityID = stream.ReadInt32();
 			Metadata = MetadataDictionary.FromStream(stream);
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(EntityID);
 			Metadata.WriteTo(stream);

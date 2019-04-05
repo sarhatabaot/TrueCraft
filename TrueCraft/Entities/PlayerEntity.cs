@@ -73,7 +73,7 @@ namespace TrueCraft.Entities
 
 		public void OnPickUpItem(ItemEntity item)
 		{
-			if (PickUpItem != null) PickUpItem(this, new EntityEventArgs(item));
+			PickUpItem?.Invoke(this, new EntityEventArgs(item));
 		}
 	}
 }

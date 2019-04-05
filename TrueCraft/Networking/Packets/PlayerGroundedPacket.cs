@@ -1,8 +1,7 @@
 ﻿namespace TrueCraft.Networking.Packets
 {
 	/// <summary>
-	///  Sent by clients to update whether or not the player is on the ground.
-	///  Probably best to just ignore this.
+	///  Sent by clients to update whether or not the player is on the ground. Probably best to just ignore this.
 	/// </summary>
 	public struct PlayerGroundedPacket : IPacket
 	{
@@ -10,12 +9,12 @@
 
 		public bool OnGround;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			OnGround = stream.ReadBoolean();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteBoolean(OnGround);
 		}

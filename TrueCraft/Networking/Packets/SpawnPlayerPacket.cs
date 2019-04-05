@@ -27,7 +27,7 @@
 			CurrentItem = currentItem;
 		}
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			EntityID = stream.ReadInt32();
 			PlayerName = stream.ReadString();
@@ -39,7 +39,7 @@
 			CurrentItem = stream.ReadInt16();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(EntityID);
 			stream.WriteString(PlayerName);

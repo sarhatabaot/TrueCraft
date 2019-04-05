@@ -27,7 +27,7 @@
 		public int Data;
 		public short? XVelocity, YVelocity, ZVelocity;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			EntityID = stream.ReadInt32();
 			EntityType = stream.ReadInt8();
@@ -43,7 +43,7 @@
 			}
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(EntityID);
 			stream.WriteInt8(EntityType);

@@ -85,7 +85,7 @@ namespace TrueCraft.Client
 		}
 
 		private TcpClient Client { get; }
-		private IMinecraftStream Stream { get; set; }
+		private IMcStream Stream { get; set; }
 		private PacketReader PacketReader { get; }
 
 		private SocketAsyncEventArgsPool SocketPool { get; }
@@ -155,11 +155,12 @@ namespace TrueCraft.Client
 			if (!Connected || Client != null && !Client.Connected)
 				return;
 
-			Trace.TraceData(TraceEventType.Verbose, 0, $"queuing packet #{packet.ID:X2} ({packet.GetType().Name})");
+			if (packet.ID != Ids.PlayerGrounded) // prevents noise, as this is emitted constantly
+				Trace.TraceData(TraceEventType.Verbose, 0, $"queuing packet #{packet.ID:X2} ({packet.GetType().Name})");
 
 			using (var writeStream = new MemoryStream())
 			{
-				using (var ms = new MinecraftStream(writeStream))
+				using (var ms = new McStream(writeStream))
 				{
 					ms.WriteUInt8(packet.ID);
 					packet.WritePacket(ms);
@@ -203,7 +204,6 @@ namespace TrueCraft.Client
 					{
 						Client.Client.Shutdown(SocketShutdown.Send);
 						Client.Close();
-
 						cancel.Cancel();
 					}
 					e.SetBuffer(null, 0, 0);
@@ -228,7 +228,6 @@ namespace TrueCraft.Client
 				catch (OperationCanceledException ex)
 				{
 					Trace.TraceData(TraceEventType.Error, 0, ex);
-
 					return;
 				}
 

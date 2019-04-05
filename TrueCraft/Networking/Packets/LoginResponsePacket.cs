@@ -18,7 +18,7 @@
 		public long Seed;
 		public Dimension Dimension;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			EntityID = stream.ReadInt32();
 			stream.ReadString(); // Unused
@@ -26,7 +26,7 @@
 			Dimension = (Dimension) stream.ReadInt8();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(EntityID);
 			stream.WriteString(""); // Unused

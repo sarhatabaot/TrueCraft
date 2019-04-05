@@ -6,12 +6,12 @@
 
 		public short Slot;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			Slot = stream.ReadInt16();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt16(Slot);
 		}

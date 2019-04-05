@@ -9,8 +9,8 @@ namespace TrueCraft
 
 		internal byte Index { get; set; }
 
-		public abstract void FromStream(IMinecraftStream stream);
-		public abstract void WriteTo(IMinecraftStream stream, byte index);
+		public abstract void FromStream(IMcStream stream);
+		public abstract void WriteTo(IMcStream stream, byte index);
 
 		public static implicit operator MetadataEntry(byte value)
 		{

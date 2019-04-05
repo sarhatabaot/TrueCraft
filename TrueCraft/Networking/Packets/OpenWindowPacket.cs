@@ -20,7 +20,7 @@
 		public string Title;
 		public sbyte TotalSlots;
 
-		public void ReadPacket(IMinecraftStream stream)
+		public void ReadPacket(IMcStream stream)
 		{
 			WindowID = stream.ReadInt8();
 			Type = stream.ReadInt8();
@@ -28,7 +28,7 @@
 			TotalSlots = stream.ReadInt8();
 		}
 
-		public void WritePacket(IMinecraftStream stream)
+		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt8(WindowID);
 			stream.WriteInt8(Type);
