@@ -7,7 +7,7 @@ using TrueCraft.World;
 
 namespace TrueCraft.Physics
 {
-	public class PhysicsEngine : IPhysicsEngine
+	public class PhysicsEngine
 	{
 		public PhysicsEngine(IWorld world, IBlockPhysicsProvider physicsProvider)
 		{
