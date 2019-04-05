@@ -18,24 +18,20 @@ using TrueCraft.World;
 
 namespace TrueCraft.Client
 {
-	public class MultiplayerClient : IAABBEntity, INotifyPropertyChanged, IDisposable 
+	public class MultiPlayerClient : IAABBEntity, INotifyPropertyChanged, IDisposable 
 	{
-		private readonly CancellationTokenSource cancel;
-
-		private readonly PacketHandler[] PacketHandlers;
-
-		private long connected;
-		private int hotbarSelection;
-
-		private SemaphoreSlim sem = new SemaphoreSlim(1, 1);
-
+		private readonly CancellationTokenSource _cancel;
+		private readonly PacketHandler[] _packetHandlers;
+		private long _connected;
+		private int _hotBarSelection;
+		
 		public TraceSource Trace { get; }
 		public ClientTraceWriter TraceListener { get; }
 
-		public MultiplayerClient(TrueCraftUser user)
+		public MultiPlayerClient(TrueCraftUser user)
 		{
 			TraceListener = new ClientTraceWriter();
-			Trace = new TraceSource(nameof(MultiplayerClient));
+			Trace = new TraceSource(nameof(MultiPlayerClient));
 			Trace.Switch.Level = SourceLevels.All;
 			Trace.Listeners.Add(TraceListener);
 
@@ -43,7 +39,7 @@ namespace TrueCraft.Client
 			Client = new TcpClient();
 			PacketReader = new PacketReader(Trace);
 			PacketReader.RegisterCorePackets();
-			PacketHandlers = new PacketHandler[0x100];
+			_packetHandlers = new PacketHandler[0x100];
 			Handlers.PacketHandlers.RegisterHandlers(this);
 			World = new ReadOnlyWorld();
 			Inventory = new InventoryWindow(null);
@@ -53,8 +49,8 @@ namespace TrueCraft.Client
 			World.World.ChunkProvider = new EmptyGenerator();
 			Physics = new PhysicsEngine(World.World, repo);
 			SocketPool = new SocketAsyncEventArgsPool(100, 200, 65536);
-			connected = 0;
-			cancel = new CancellationTokenSource();
+			_connected = 0;
+			_cancel = new CancellationTokenSource();
 			Health = 20;
 			var crafting = new CraftingRepository();
 			CraftingRepository = crafting;
@@ -65,27 +61,26 @@ namespace TrueCraft.Client
 		public ReadOnlyWorld World { get; }
 		public PhysicsEngine Physics { get; set; }
 		public bool LoggedIn { get; internal set; }
-		public int EntityID { get; internal set; }
+		public int EntityId { get; internal set; }
 		public InventoryWindow Inventory { get; set; }
 		public int Health { get; set; }
 		public IWindow CurrentWindow { get; set; }
 		public ICraftingRepository CraftingRepository { get; set; }
 
-		public bool Connected => Interlocked.Read(ref connected) == 1;
+		public bool Connected => Interlocked.Read(ref _connected) == 1;
 
-		public int HotbarSelection
+		public int HotBarSelection
 		{
-			get => hotbarSelection;
+			get => _hotBarSelection;
 			set
 			{
-				hotbarSelection = value;
+				_hotBarSelection = value;
 				QueuePacket(new ChangeHeldItemPacket
 					{Slot = (short) value});
 			}
 		}
 
 		private TcpClient Client { get; }
-		private IMcStream Stream { get; set; }
 		private PacketReader PacketReader { get; }
 
 		private SocketAsyncEventArgsPool SocketPool { get; }
@@ -106,7 +101,10 @@ namespace TrueCraft.Client
 
 		public void RegisterPacketHandler(byte packetId, PacketHandler handler)
 		{
-			PacketHandlers[packetId] = handler;
+			lock (this)
+			{
+				_packetHandlers[packetId] = handler;
+			}
 		}
 
 		public void Connect(IPEndPoint endPoint)
@@ -123,7 +121,7 @@ namespace TrueCraft.Client
 		{
 			if (e.SocketError == SocketError.Success)
 			{
-				Interlocked.CompareExchange(ref connected, 1, 0);
+				Interlocked.CompareExchange(ref _connected, 1, 0);
 
 				Physics.AddEntity(this);
 				StartReceive();
@@ -140,7 +138,7 @@ namespace TrueCraft.Client
 
 			QueuePacket(new DisconnectPacket("Disconnecting"));
 
-			Interlocked.CompareExchange(ref connected, 0, 1);
+			Interlocked.CompareExchange(ref _connected, 0, 1);
 		}
 
 		public void SendMessage(string message)
@@ -155,7 +153,7 @@ namespace TrueCraft.Client
 			if (!Connected || Client != null && !Client.Connected)
 				return;
 
-			if (packet.ID != Ids.PlayerGrounded) // prevents noise, as this is emitted constantly
+			if (packet.ID != Constants.PacketIds.PlayerGrounded) // prevents noise, as this is emitted constantly
 				Trace.TraceData(TraceEventType.Verbose, 0, $"queuing packet #{packet.ID:X2} ({packet.GetType().Name})");
 
 			using (var writeStream = new MemoryStream())
@@ -173,8 +171,15 @@ namespace TrueCraft.Client
 				args.Completed += OperationCompleted;
 				args.SetBuffer(buffer, 0, buffer.Length);
 
-				if (Client != null && !Client.Client.SendAsync(args))
-					OperationCompleted(this, args);
+				if (Client != null)
+				{
+					var socket = Client.Client;
+					var pending = socket.SendAsync(args);
+					if (!pending)
+					{
+						OperationCompleted(this, args);
+					}
+				}
 			}
 		}
 
@@ -198,13 +203,21 @@ namespace TrueCraft.Client
 					SocketPool.Add(e);
 					break;
 				case SocketAsyncOperation.Send:
-					var packet = e.UserToken as IPacket;
+					if (!(e.UserToken is IPacket packet))
+					{
+						Trace.TraceEvent(TraceEventType.Error, 0, $"socket returned a non-packet {e.UserToken}");
+						e.SetBuffer(null, 0, 0);
+						break;
+					}
+
+					if (!Constants.IgnoredPacketIds.Contains(packet.ID))
+						Trace.TraceEvent(TraceEventType.Verbose, 0, $"sent packet #{packet.ID:X2}");
 
 					if (packet is DisconnectPacket)
 					{
 						Client.Client.Shutdown(SocketShutdown.Send);
 						Client.Close();
-						cancel.Cancel();
+						_cancel.Cancel();
 					}
 					e.SetBuffer(null, 0, 0);
 					break;
@@ -221,34 +234,24 @@ namespace TrueCraft.Client
 				if (Client != null && !Client.Client.ReceiveAsync(newArgs))
 					OperationCompleted(this, newArgs);
 
-				try
+				lock (this)
 				{
-					sem.Wait(cancel.Token);
-				}
-				catch (OperationCanceledException ex)
-				{
-					Trace.TraceData(TraceEventType.Error, 0, ex);
-					return;
-				}
+					var packets = PacketReader.ReadPackets(this, e.Buffer, e.Offset, e.BytesTransferred, false);
 
-				var packets = PacketReader.ReadPackets(this, e.Buffer, e.Offset, e.BytesTransferred, false);
-
-				foreach (var packet in packets)
-				{
-					Trace.TraceEvent(TraceEventType.Verbose, 0, $"received {packet.GetType().Name}");
-
-					var handler = PacketHandlers[packet.ID];
-					if (handler == null)
+					foreach (var packet in packets)
 					{
-						Trace.TraceEvent(TraceEventType.Warning, 0, $"no handler found for packet {packet.ID:X2} ({packet.GetType().Name})");
-						continue;
+						Trace.TraceEvent(TraceEventType.Verbose, 0, $"received packet #{packet.ID:X2} ({packet.GetType().Name})");
+
+						var handler = _packetHandlers[packet.ID];
+						if (handler == null)
+						{
+							Trace.TraceEvent(TraceEventType.Error, 0, $"no handler found for packet #{packet.ID:X2} ({packet.GetType().Name})");
+							continue;
+						}
+
+						handler.Invoke(packet, this);
 					}
-
-					handler.Invoke(packet, this);
 				}
-
-				if (sem.CurrentCount == 0)
-					sem?.Release();
 			}
 			else
 				Disconnect();
@@ -284,14 +287,10 @@ namespace TrueCraft.Client
 			if (disposing)
 			{
 				Disconnect();
-
-				sem?.Dispose();
 			}
-
-			sem = null;
 		}
 
-		~MultiplayerClient() => Dispose(false);
+		~MultiPlayerClient() => Dispose(false);
 
 		#region IAABBEntity implementation
 

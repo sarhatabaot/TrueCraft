@@ -21,18 +21,24 @@ namespace TrueCraft.Server.Handlers
 		public static void HandleLoginRequestPacket(IPacket packet, IRemoteClient client, IMultiPlayerServer server)
 		{
 			var loginRequestPacket = (LoginRequestPacket) packet;
-			
+
+			DisconnectPacket error = default;
+
 			if (loginRequestPacket.ProtocolVersion < server.PacketReader.ProtocolVersion)
-				client.QueuePacket(new DisconnectPacket("Client outdated! Use beta 1.7.3."));
+				error = new DisconnectPacket("Client outdated! Use beta 1.7.3.");
 			else if (loginRequestPacket.ProtocolVersion > server.PacketReader.ProtocolVersion)
-				client.QueuePacket(new DisconnectPacket("Server outdated! Use beta 1.7.3."));
+				error = new DisconnectPacket("Server outdated! Use beta 1.7.3.");
 			else if (server.Worlds.Count == 0)
-				client.QueuePacket(new DisconnectPacket("Server has no worlds configured."));
-			else if (!server.PlayerIsWhitelisted(client.Username) &&
-			         server.PlayerIsBlacklisted(client.Username))
-				client.QueuePacket(new DisconnectPacket("You're banned from this server."));
+				error = new DisconnectPacket("Server has no worlds configured.");
+			else if (!server.PlayerIsWhitelisted(client.Username) && server.PlayerIsBlacklisted(client.Username))
+				error = new DisconnectPacket("You are banned from this server.");
 			else if (server.Clients.Count(c => c.Username == client.Username) > 1)
-				client.QueuePacket(new DisconnectPacket("The player with this username is already logged in."));
+				error = new DisconnectPacket("The player with this username is already logged in.");
+
+			if (error.Reason != null)
+			{
+				server.Trace.TraceData(TraceEventType.Start, 0, $"sending disconnect for reason: " + error.Reason);
+			}
 			else
 			{
 				Login(server, (RemoteClient) client);
@@ -50,16 +56,13 @@ namespace TrueCraft.Server.Handlers
 			client.World = server.Worlds[0];
 			client.ChunkRadius = 2;
 
-			server.Trace.TraceData(TraceEventType.Start, 0,
-				$"{username} is logging in with reported position {client.Entity?.Position.ToString() ?? "<NO_ENTITY>"}");
+			server.Trace.TraceData(TraceEventType.Start, 0, $"{username} is logging in with reported position {client.Entity?.Position.ToString()}");
 
 			if (!client.Load())
 				client.Entity.Position = client.World.SpawnPoint.AsVector3();
 
-			// Make sure they don't spawn in the ground
-			var collision = new Func<bool>(() => ClientCollidesWithGround(client, server, client));
-
-			while (collision())
+			// Make sure player doesn't spawn in the ground
+			while (ClientCollidesWithGround(client, server, client))
 			{
 				server.Trace.TraceData(TraceEventType.Warning, 0, "spawn point is in the ground");
 				client.Entity.Position += Directions.Up;
@@ -68,28 +71,29 @@ namespace TrueCraft.Server.Handlers
 			var entityManager = server.GetEntityManagerForWorld(client.World);
 			entityManager.SpawnEntity(client.Entity);
 
-			// Send setup packets
-			client.QueuePacket(new LoginResponsePacket(client.Entity.EntityID, 0, Dimension.Overworld));
+			var position = client.Entity.Position;
 
-			server.Trace.TraceData(TraceEventType.Start, 0, "updating chunks");
+			server.Trace.TraceData(TraceEventType.Start, 0, "updating initial chunks");
 			client.UpdateChunks(true);
+			server.Trace.TraceData(TraceEventType.Start, 0, "done");
 
+			// Send setup packets
 			server.Trace.TraceData(TraceEventType.Start, 0, "sending setup packets");
+			client.QueuePacket(new LoginResponsePacket(client.Entity.EntityID, 0, Dimension.Overworld));
 			client.QueuePacket(new WindowItemsPacket(0, client.Inventory.GetSlots()));
 			client.QueuePacket(new UpdateHealthPacket(((PlayerEntity) client.Entity).Health));
-			client.QueuePacket(new SpawnPositionPacket((int) client.Entity.Position.X, (int) client.Entity.Position.Y, (int) client.Entity.Position.Z));
-			client.QueuePacket(new SetPlayerPositionPacket(client.Entity.Position.X,
-				client.Entity.Position.Y + 1,
-				client.Entity.Position.Y + client.Entity.Size.Height + 1,
-				client.Entity.Position.Z, client.Entity.Yaw, client.Entity.Pitch, true));
+			client.QueuePacket(new SpawnPositionPacket((int) position.X, (int) position.Y, (int) position.Z));
+			client.QueuePacket(new SetPlayerPositionPacket(position.X,
+				position.Y + 1,
+				position.Y + client.Entity.Size.Height + 1,
+				position.Z, client.Entity.Yaw, client.Entity.Pitch, true));
 			client.QueuePacket(new TimeUpdatePacket(client.World.Time));
 
 			// Start housekeeping for this client
+			server.Trace.TraceData(TraceEventType.Start, 0, "starting housekeeping");
 			entityManager.SendEntitiesToClient(client);
-			server.Scheduler.ScheduleEvent("remote.keepalive", client, TimeSpan.FromSeconds(10),
-				client.SendKeepAlive);
-			server.Scheduler.ScheduleEvent("remote.chunks", client, TimeSpan.FromSeconds(1),
-				client.ExpandChunkRadius);
+			server.Scheduler.ScheduleEvent(Constants.Events.RemoteKeepAlive, client, TimeSpan.FromSeconds(10), client.SendKeepAlive);
+			server.Scheduler.ScheduleEvent(Constants.Events.RemoteChunks, client, TimeSpan.FromSeconds(1), client.ExpandChunkRadius);
 
 			if (!string.IsNullOrEmpty(server.ServerConfiguration.MOTD))
 				client.SendMessage(server.ServerConfiguration.MOTD);
@@ -118,15 +122,10 @@ namespace TrueCraft.Server.Handlers
 				return true; // colliding
 			}
 
-			if (position != null)
-			{
-				var head = client.World.GetBlockId((Coordinates3D) (position + Directions.Up));
-				var feetBox = server.BlockRepository.GetBlockProvider(blockId).BoundingBox;
-				var headBox = server.BlockRepository.GetBlockProvider(head).BoundingBox;
-				return feetBox != null || headBox != null; // colliding
-			}
-
-			return false;
+			var head = client.World.GetBlockId((Coordinates3D) (position + Directions.Up));
+			var feetBox = server.BlockRepository.GetBlockProvider(blockId).BoundingBox;
+			var headBox = server.BlockRepository.GetBlockProvider(head).BoundingBox;
+			return feetBox != null || headBox != null; // colliding
 		}
 	}
 }

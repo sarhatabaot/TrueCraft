@@ -24,19 +24,16 @@ namespace TrueCraft.Server
 	public class RemoteClient : IRemoteClient, IEventSubject
 	{
 		private readonly ServerConfiguration _configuration;
-
-		private readonly CancellationTokenSource cancel;
-
-		private IEntity _Entity;
-
-		private long disconnected;
-
-		private SemaphoreSlim sem = new SemaphoreSlim(1, 1);
+		private readonly CancellationTokenSource _cancel;
+		private IEntity _entity;
+		private long _disconnected;
 
 		public RemoteClient(IMultiPlayerServer server, ServerConfiguration configuration, IPacketReader packetReader,
 			PacketHandler[] packetHandlers, Socket connection)
 		{
 			_configuration = configuration;
+			_cancel = new CancellationTokenSource();
+
 			LoadedChunks = new HashSet<Coordinates2D>();
 			Server = server;
 			Inventory = new InventoryWindow(server.CraftingRepository);
@@ -52,8 +49,6 @@ namespace TrueCraft.Server
 			SocketPool = new SocketAsyncEventArgsPool(100, 200, 65536);
 			PacketReader = packetReader;
 			PacketHandlers = packetHandlers;
-
-			cancel = new CancellationTokenSource();
 
 			StartReceive();
 		}
@@ -88,7 +83,6 @@ namespace TrueCraft.Server
 			Dispose(true);
 		}
 
-		//public NetworkStream NetworkStream { get; set; }
 		public IMcStream McStream { get; internal set; }
 		public string Username { get; internal set; }
 		public IMultiPlayerServer Server { get; set; }
@@ -100,19 +94,19 @@ namespace TrueCraft.Server
 
 		public bool Disconnected
 		{
-			get => Interlocked.Read(ref disconnected) == 1;
-			set => Interlocked.CompareExchange(ref disconnected, value ? 1 : 0, value ? 0 : 1);
+			get => Interlocked.Read(ref _disconnected) == 1;
+			set => Interlocked.CompareExchange(ref _disconnected, value ? 1 : 0, value ? 0 : 1);
 		}
 
 		public IEntity Entity
 		{
-			get => _Entity;
+			get => _entity;
 			internal set
 			{
-				if (_Entity is PlayerEntity player)
+				if (_entity is PlayerEntity player)
 					player.PickUpItem -= HandlePickUpItem;
-				_Entity = value;
-				player = _Entity as PlayerEntity;
+				_entity = value;
+				player = _entity as PlayerEntity;
 				if (player != null)
 					player.PickUpItem += HandlePickUpItem;
 			}
@@ -126,9 +120,9 @@ namespace TrueCraft.Server
 		{
 			try
 			{
-				var path = Path.Combine(Directory.GetCurrentDirectory(), "players", $"{Username}.nbt");
+				var path = Bootstrap.ResolvePath(Path.Combine(Directory.GetCurrentDirectory(), "players", $"{Username}.nbt"));
 				if (_configuration.Singleplayer)
-					path = Path.Combine(((World.World) World).BaseDirectory, "player.nbt");
+					path = Bootstrap.ResolvePath(Path.Combine(((World.World) World).BaseDirectory, "player.nbt"));
 
 				if (!File.Exists(path))
 					return false;
@@ -156,13 +150,14 @@ namespace TrueCraft.Server
 
 		public void Save()
 		{
-			var path = Path.Combine(Directory.GetCurrentDirectory(), "players", Username + ".nbt");
+			var path = Bootstrap.ResolvePath(Path.Combine(Directory.GetCurrentDirectory(), "players", Username + ".nbt"));
 			if (_configuration.Singleplayer)
-				path = Path.Combine(((World.World) World).BaseDirectory, "player.nbt");
-			if (!Directory.Exists(Path.GetDirectoryName(path)))
-				Directory.CreateDirectory(Path.GetDirectoryName(path));
-			if (Entity == null) // I didn't think this could happen but null reference exceptions have been repoted here
+				path = Bootstrap.ResolvePath(Path.Combine(((World.World) World).BaseDirectory, "player.nbt"));
+			Directory.CreateDirectory(Path.GetDirectoryName(path));
+
+			if (Entity == null) // I didn't think this could happen but null reference exceptions have been reported here
 				return;
+
 			var nbt = new NbtFile(new NbtCompound("player", new NbtTag[]
 				{
 					new NbtString("username", Username),
@@ -178,6 +173,7 @@ namespace TrueCraft.Server
 					new NbtFloat("pitch", Entity.Pitch)
 				}
 			));
+
 			nbt.SaveToFile(path, NbtCompression.ZLib);
 		}
 
@@ -192,7 +188,7 @@ namespace TrueCraft.Server
 			window.WindowChange += HandleWindowChange;
 		}
 
-		public void Log(string message, params object[] parameters)
+		public void MaybeEchoToClient(string message, params object[] parameters)
 		{
 			if (EnableLogging)
 			{
@@ -237,7 +233,7 @@ namespace TrueCraft.Server
 
 			Disconnected = true;
 
-			cancel.Cancel();
+			_cancel.Cancel();
 
 			Connection.Shutdown(SocketShutdown.Send);
 
@@ -289,20 +285,16 @@ namespace TrueCraft.Server
 			{
 				case SocketAsyncOperation.Receive:
 					ProcessNetwork(e);
-
 					SocketPool.Add(e);
 					break;
 				case SocketAsyncOperation.Send:
 					var packet = e.UserToken as IPacket;
-
 					if (packet is DisconnectPacket)
 						Server.DisconnectClient(this);
-
 					e.SetBuffer(null, 0, 0);
 					break;
 				case SocketAsyncOperation.Disconnect:
 					Connection.Close();
-
 					break;
 			}
 
@@ -316,66 +308,64 @@ namespace TrueCraft.Server
 			if (Connection == null || !Connection.Connected)
 				return;
 
-			if (e.SocketError == SocketError.Success && e.BytesTransferred > 0)
+			lock (this)
 			{
-				var newArgs = SocketPool.Get();
-				newArgs.Completed += OperationCompleted;
+				// Server.Trace.TraceData(TraceEventType.Verbose, 0, "entered socket monitor");
 
-				if (!Connection.ReceiveAsync(newArgs))
-					OperationCompleted(this, newArgs);
+				if (e.SocketError == SocketError.Success && e.BytesTransferred > 0)
+				{
+					var newArgs = SocketPool.Get();
+					newArgs.Completed += OperationCompleted;
 
-				try
-				{
-					sem.Wait(500, cancel.Token);
-				}
-				catch (OperationCanceledException)
-				{
-				}
-				catch (NullReferenceException)
-				{
-				}
-				catch (TimeoutException)
-				{
-					Server.DisconnectClient(this);
-					return;
-				}
-
-				var packets = PacketReader.ReadPackets(this, e.Buffer, e.Offset, e.BytesTransferred);
-				try
-				{
-					foreach (var packet in packets)
+					if (!Connection.ReceiveAsync(newArgs))
 					{
-						if (PacketHandlers[packet.ID] != null)
-							try
-							{
-								PacketHandlers[packet.ID](packet, this, Server);
-							}
-							catch (PlayerDisconnectException)
-							{
-								Server.DisconnectClient(this);
-							}
-							catch (Exception ex)
-							{
-								Server.Trace.TraceData(TraceEventType.Error, 0, "Disconnecting client due to exception in network worker", ex);
-								Server.DisconnectClient(this);
-							}
-						else
+						OperationCompleted(this, newArgs);
+					}
+
+					var packets = PacketReader.ReadPackets(this, e.Buffer, e.Offset, e.BytesTransferred);
+					try
+					{
+						foreach (var packet in packets)
 						{
-							Log("Unhandled packet {0}", packet.GetType().Name);
+							if(!Constants.IgnoredPacketIds.Contains(packet.ID))
+								Server.Trace.TraceData(TraceEventType.Verbose, 0, $"received packet {packet.ID:X2} ({packet.GetType().Name})");
+
+							if (PacketHandlers[packet.ID] != null)
+							{
+								try
+								{
+									PacketHandlers[packet.ID](packet, this, Server);
+								}
+								catch (PlayerDisconnectException)
+								{
+									Server.DisconnectClient(this);
+								}
+								catch (Exception ex)
+								{
+									Server.Trace.TraceData(TraceEventType.Error, 0, "Disconnecting client due to exception in network worker", ex);
+									Server.DisconnectClient(this);
+								}
+							}
+							else
+							{
+								var message = $"Unhandled packet {packet.ID:X2} ({packet.GetType().Name})";
+								MaybeEchoToClient(message);
+								Server.Trace.TraceData(TraceEventType.Error, 0, message);
+							}
 						}
 					}
+					catch (NotSupportedException)
+					{
+						Server.Trace.TraceEvent(TraceEventType.Error, 0, "Disconnecting client due to unsupported packet received.");
+					}
 				}
-				catch (NotSupportedException)
+				else
 				{
-					Server.Trace.TraceEvent(TraceEventType.Error, 0, "Disconnecting client due to unsupported packet received.");
-					return;
+					Server.DisconnectClient(this);
 				}
-
-				if (sem.CurrentCount == 0)
-					sem?.Release();
 			}
-			else
-				Server.DisconnectClient(this);
+
+			// Server.Trace.TraceData(TraceEventType.Verbose, 0, "exited socket monitor");
 		}
 
 		internal void ExpandChunkRadius(IMultiPlayerServer server)
@@ -387,10 +377,8 @@ namespace TrueCraft.Server
 				if (ChunkRadius < 8) // TODO: Allow customization of this number
 				{
 					ChunkRadius++;
-					server.Scheduler.ScheduleEvent("client.update-chunks", this,
-						TimeSpan.Zero, s => UpdateChunks());
-					server.Scheduler.ScheduleEvent("remote.chunks", this,
-						TimeSpan.FromSeconds(1), ExpandChunkRadius);
+					server.Scheduler.ScheduleEvent(Constants.Events.ClientUpdateChunks, this, TimeSpan.Zero, s => UpdateChunks());
+					server.Scheduler.ScheduleEvent(Constants.Events.RemoteChunks, this, TimeSpan.FromSeconds(1), ExpandChunkRadius);
 				}
 			});
 		}
@@ -398,43 +386,75 @@ namespace TrueCraft.Server
 		internal void SendKeepAlive(IMultiPlayerServer server)
 		{
 			QueuePacket(new KeepAlivePacket());
-			server.Scheduler.ScheduleEvent("remote.keepalive", this, TimeSpan.FromSeconds(10), SendKeepAlive);
+			server.Scheduler.ScheduleEvent(Constants.Events.RemoteKeepAlive, this, TimeSpan.FromSeconds(10), SendKeepAlive);
 		}
 
-		public void UpdateChunks(bool block = false)
+		public void UpdateChunks(bool blockingCall = false)
 		{
-			var newChunks = new HashSet<Coordinates2D>();
-
-			Server.Trace.TraceEvent(TraceEventType.Start, 0, "\t loading new chunks");
-
-			var toLoad = new List<Tuple<Coordinates2D, IChunk>>();
-			Profiler.Start("client.new-chunks");
-			for (var x = -ChunkRadius; x < ChunkRadius; x++)
-			for (var z = -ChunkRadius; z < ChunkRadius; z++)
+			lock (this)
 			{
-				var coords = new Coordinates2D(
-					((int) Entity.Position.X >> 4) + x,
-					((int) Entity.Position.Z >> 4) + z);
-				newChunks.Add(coords);
-				if (!LoadedChunks.Contains(coords))
-					toLoad.Add(new Tuple<Coordinates2D, IChunk>(
-						coords, World.GetChunk(coords, block)));
+				var toLoad = new List<Tuple<Coordinates2D, IChunk>>();
+
+				var count = ChunkRadius * 2 * ChunkRadius * 2;
+				Server.Trace.TraceEvent(TraceEventType.Verbose, 0, $"... counted {count} total chunks");
+
+				Profiler.Start("client.new-chunks");
+				var newChunks = new HashSet<Coordinates2D>();
+				for (var x = -ChunkRadius; x < ChunkRadius; x++)
+				{
+					for (var z = -ChunkRadius; z < ChunkRadius; z++)
+					{
+						if (Entity == null)
+						{
+							Server.Trace.TraceEvent(TraceEventType.Error, 0, "aborting chunk update, entity not set");
+							return;
+						}
+
+						var coords = new Coordinates2D(((int) Entity.Position.X >> 4) + x, ((int) Entity.Position.Z >> 4) + z);
+						newChunks.Add(coords);
+
+						if (!LoadedChunks.Contains(coords))
+						{
+							Server.Trace.TraceEvent(TraceEventType.Verbose, 0, $"... loading new chunk");
+
+							var chunk = World.GetChunk(coords, blockingCall);
+							if (chunk == null)
+							{
+								Server.Trace.TraceEvent(TraceEventType.Warning, 0, $"no chunk found at {coords}");
+							}
+							else
+							{
+								Server.Trace.TraceEvent(TraceEventType.Verbose, 0, $"\t@({chunk.X}, {chunk.Z})");
+								toLoad.Add(new Tuple<Coordinates2D, IChunk>(coords, chunk));
+							}
+						}
+
+						count--;
+						if (count > 0 && count % 100 == 0)
+							Server.Trace.TraceEvent(TraceEventType.Start, 0, $"... {count} remaining");
+					}
+				}
+
+				Profiler.Done();
+
+				Server.Trace.TraceEvent(TraceEventType.Start, 0, "... encoding chunks");
+				if (blockingCall)
+					EncodeChunks(toLoad);
+				else
+					Task.Factory.StartNew(() => EncodeChunks(toLoad));
+
+				Server.Trace.TraceEvent(TraceEventType.Start, 0, "... interleaving old chunks with new");
+				Profiler.Start("client.old-chunks");
+				LoadedChunks.IntersectWith(newChunks);
+				Profiler.Done();
+
+				Server.Trace.TraceEvent(TraceEventType.Start, 0, "... updating client entities");
+				Profiler.Start("client.update-entities");
+				((EntityManager) Server.GetEntityManagerForWorld(World)).UpdateClientEntities(this);
+				Profiler.Done();
+
+				Server.Trace.TraceEvent(TraceEventType.Start, 0, "done.");
 			}
-
-			Profiler.Done();
-
-			Server.Trace.TraceEvent(TraceEventType.Start, 0, "\t encoding chunks");
-			if (block)
-				EncodeChunks(toLoad);
-			else
-				Task.Factory.StartNew(()=> EncodeChunks(toLoad));
-
-			Profiler.Start("client.old-chunks");
-			LoadedChunks.IntersectWith(newChunks);
-			Profiler.Done();
-			Profiler.Start("client.update-entities");
-			((EntityManager) Server.GetEntityManagerForWorld(World)).UpdateClientEntities(this);
-			Profiler.Done();
 		}
 
 		private void EncodeChunks(IEnumerable<Tuple<Coordinates2D, IChunk>> map)
@@ -541,11 +561,7 @@ namespace TrueCraft.Server
 					Thread.Sleep(1);
 
 				Disconnect();
-
-				sem?.Dispose();
-
 				Disposed?.Invoke(this, null);
-				sem = null;
 			}
 		}
 	}

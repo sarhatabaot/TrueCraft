@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using TrueCraft.Profiling;
 
 namespace TrueCraft.Server
@@ -32,11 +33,19 @@ namespace TrueCraft.Server
 		private ConcurrentQueue<IEventSubject> DisposedSubjects { get; }
 		public HashSet<string> DisabledEvents { get; }
 
-		public void ScheduleEvent(string name, IEventSubject subject, TimeSpan when, Action<IMultiPlayerServer> action)
+		public void ScheduleEvent(string name, IEventSubject subject, TimeSpan when, Action<IMultiPlayerServer> action, [CallerMemberName] string source = null)
 		{
+			if (!Constants.IgnoredEvents.Contains(name))
+			{
+				var subjectLine = subject != null ? $" on subject {subject?.GetType().Name}" : string.Empty;
+				var sourceLine = source != null ? $" from '{source}'" : string.Empty;
+				Server.Trace.TraceEvent(TraceEventType.Verbose, 0, $"scheduling event '{name}'{subjectLine}{sourceLine}");
+			}
+			
 			if (DisabledEvents.Contains(name))
 				return;
-			var _when = Stopwatch.ElapsedTicks + when.Ticks;
+
+			var due = Stopwatch.ElapsedTicks + when.Ticks;
 			if (subject != null && !Subjects.Contains(subject))
 			{
 				Subjects.Add(subject);
@@ -48,7 +57,7 @@ namespace TrueCraft.Server
 			{
 				Name = name,
 				Subject = subject,
-				When = _when,
+				When = due,
 				Action = action
 			});
 		}
@@ -62,9 +71,10 @@ namespace TrueCraft.Server
 			while (ImmediateEventQueue.Count > 0 && Stopwatch.ElapsedMilliseconds < limit)
 			{
 				ScheduledEvent e;
-				var dequeued = false;
+				bool dequeued;
 				while (!(dequeued = ImmediateEventQueue.TryDequeue(out e))
-				       && Stopwatch.ElapsedMilliseconds < limit) ;
+				       && Stopwatch.ElapsedMilliseconds < limit) { }
+
 				if (dequeued)
 					ScheduleEvent(e);
 			}
@@ -72,9 +82,10 @@ namespace TrueCraft.Server
 			while (LaterEventQueue.Count > 0 && Stopwatch.ElapsedMilliseconds < limit)
 			{
 				ScheduledEvent e;
-				var dequeued = false;
+				bool dequeued;
 				while (!(dequeued = LaterEventQueue.TryDequeue(out e))
-				       && Stopwatch.ElapsedMilliseconds < limit) ;
+				       && Stopwatch.ElapsedMilliseconds < limit) { }
+
 				if (dequeued)
 					ScheduleEvent(e);
 			}
@@ -84,9 +95,10 @@ namespace TrueCraft.Server
 			while (DisposedSubjects.Count > 0 && Stopwatch.ElapsedMilliseconds < limit)
 			{
 				IEventSubject subject;
-				var dequeued = false;
+				bool dequeued;
 				while (!(dequeued = DisposedSubjects.TryDequeue(out subject))
-				       && Stopwatch.ElapsedMilliseconds < limit) ;
+				       && Stopwatch.ElapsedMilliseconds < limit) { }
+
 				if (dequeued)
 				{
 					// Cancel all events with this subject
@@ -109,6 +121,10 @@ namespace TrueCraft.Server
 				if (e.When <= start)
 				{
 					Profiler.Start("scheduler." + e.Name);
+
+					if (!Constants.IgnoredEvents.Contains(e.Name))
+						Server.Trace.TraceEvent(TraceEventType.Verbose, 0, $"activating event '{e.Name}' on subject {e.Subject?.GetType().Name}");
+
 					e.Action(Server);
 					Events.RemoveAt(i);
 					i--;

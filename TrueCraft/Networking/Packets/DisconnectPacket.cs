@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct DisconnectPacket : IPacket
 	{
-		public byte ID => 0xFF;
+		public byte ID => Constants.PacketIds.Disconnect;
 
 		public DisconnectPacket(string reason) => Reason = reason;
 

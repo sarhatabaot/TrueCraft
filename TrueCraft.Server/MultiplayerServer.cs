@@ -41,8 +41,7 @@ namespace TrueCraft.Server
 
 			ServerConfiguration = configuration;
 
-			var reader = new PacketReader(Trace);
-			PacketReader = reader;
+			PacketReader = new PacketReader(Trace);
 			Clients = new List<IRemoteClient>();
 			EnvironmentWorker = new Timer(DoEnvironment);
 			PacketHandlers = new PacketHandler[0x100];
@@ -67,9 +66,9 @@ namespace TrueCraft.Server
 			ChunksToSchedule = new ConcurrentBag<Tuple<IWorld, IChunk>>();
 			Time = new Stopwatch();
 
-			AccessConfiguration = Configuration.LoadConfiguration<AccessConfiguration>("access.yaml");
+			AccessConfiguration = Configuration.LoadConfiguration<AccessConfiguration>(Bootstrap.ResolvePath("access.yaml"));
 
-			reader.RegisterCorePackets();
+			((PacketReader)PacketReader).RegisterCorePackets();
 			Handlers.PacketHandlers.RegisterHandlers(this);
 		}
 
@@ -197,7 +196,8 @@ namespace TrueCraft.Server
 
 		public void DisconnectClient(IRemoteClient client)
 		{
-			lock (ClientLock) Clients.Remove(client);
+			lock (ClientLock)
+				Clients.Remove(client);
 
 			if (client.Disconnected)
 				return;
@@ -297,8 +297,8 @@ namespace TrueCraft.Server
 		private void ScheduleUpdatesForChunk(IWorld world, IChunk chunk)
 		{
 			chunk.UpdateHeightMap();
-			var _x = chunk.Coordinates.X * Chunk.Width;
-			var _z = chunk.Coordinates.Z * Chunk.Depth;
+			var w = chunk.Coordinates.X * Chunk.Width;
+			var d = chunk.Coordinates.Z * Chunk.Depth;
 
 			for (byte x = 0; x < Chunk.Width; x++)
 			for (byte z = 0; z < Chunk.Depth; z++)
@@ -312,9 +312,9 @@ namespace TrueCraft.Server
 				if (id == 0)
 					continue;
 				Coordinates3D coords;
-				coords.X = _x + x;
+				coords.X = w + x;
 				coords.Y = y;
-				coords.Z = _z + z;
+				coords.Z = d + z;
 				var provider = BlockRepository.GetBlockProvider(id);
 				provider.BlockLoadedFromChunk(coords, this, world);
 			}

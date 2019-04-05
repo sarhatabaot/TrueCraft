@@ -10,7 +10,7 @@ namespace TrueCraft.Client.Handlers
 {
 	internal static class ChunkHandlers
 	{
-		public static void HandleBlockChange(IPacket _packet, MultiplayerClient client)
+		public static void HandleBlockChange(IPacket _packet, MultiPlayerClient client)
 		{
 			var packet = (BlockChangePacket) _packet;
 			var coordinates = new Coordinates3D(packet.X, packet.Y, packet.Z);
@@ -33,14 +33,14 @@ namespace TrueCraft.Client.Handlers
 			client.OnChunkModified(new ChunkEventArgs(new ReadOnlyChunk(chunk)));
 		}
 
-		public static void HandleChunkPreamble(IPacket _packet, MultiplayerClient client)
+		public static void HandleChunkPreamble(IPacket _packet, MultiPlayerClient client)
 		{
 			var packet = (ChunkPreamblePacket) _packet;
 			var coords = new Coordinates2D(packet.X, packet.Z);
 			client.World.SetChunk(coords, new Chunk(coords));
 		}
 
-		public static void HandleChunkData(IPacket _packet, MultiplayerClient client)
+		public static void HandleChunkData(IPacket _packet, MultiPlayerClient client)
 		{
 			var packet = (ChunkDataPacket) _packet;
 			var coords = new Coordinates3D(packet.X, packet.Y, packet.Z);

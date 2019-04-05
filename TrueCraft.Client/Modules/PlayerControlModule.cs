@@ -83,53 +83,53 @@ namespace TrueCraft.Client.Modules
 					return true;
 
 				case Keys.Space:
-					if (Math.Abs(Math.Floor(Game.Client.Position.Y) - Game.Client.Position.Y) < 0)
+					if (Math.Floor(Game.Client.Position.Y) == Game.Client.Position.Y)
 						Game.Client.Velocity += Directions.Up * 0.3f;
 					return true;
 
 				case Keys.D1:
 				case Keys.NumPad1:
-					Game.Client.HotbarSelection = 0;
+					Game.Client.HotBarSelection = 0;
 					return true;
 
 				case Keys.D2:
 				case Keys.NumPad2:
-					Game.Client.HotbarSelection = 1;
+					Game.Client.HotBarSelection = 1;
 					return true;
 
 				case Keys.D3:
 				case Keys.NumPad3:
-					Game.Client.HotbarSelection = 2;
+					Game.Client.HotBarSelection = 2;
 					return true;
 
 				case Keys.D4:
 				case Keys.NumPad4:
-					Game.Client.HotbarSelection = 3;
+					Game.Client.HotBarSelection = 3;
 					return true;
 
 				case Keys.D5:
 				case Keys.NumPad5:
-					Game.Client.HotbarSelection = 4;
+					Game.Client.HotBarSelection = 4;
 					return true;
 
 				case Keys.D6:
 				case Keys.NumPad6:
-					Game.Client.HotbarSelection = 5;
+					Game.Client.HotBarSelection = 5;
 					return true;
 
 				case Keys.D7:
 				case Keys.NumPad7:
-					Game.Client.HotbarSelection = 6;
+					Game.Client.HotBarSelection = 6;
 					return true;
 
 				case Keys.D8:
 				case Keys.NumPad8:
-					Game.Client.HotbarSelection = 7;
+					Game.Client.HotBarSelection = 7;
 					return true;
 
 				case Keys.D9:
 				case Keys.NumPad9:
-					Game.Client.HotbarSelection = 8;
+					Game.Client.HotBarSelection = 8;
 					return true;
 			}
 
@@ -170,7 +170,7 @@ namespace TrueCraft.Client.Modules
 
 		public override bool GamePadButtonDown(GameTime gameTime, GamePadButtonEventArgs e)
 		{
-			var selected = Game.Client.HotbarSelection;
+			var selected = Game.Client.HotBarSelection;
 			switch (e.Button)
 			{
 				case Buttons.LeftShoulder:
@@ -179,7 +179,7 @@ namespace TrueCraft.Client.Modules
 						selected = 8;
 					if (selected > 8)
 						selected = 0;
-					Game.Client.HotbarSelection = selected;
+					Game.Client.HotBarSelection = selected;
 					break;
 				case Buttons.RightShoulder:
 					selected++;
@@ -187,10 +187,10 @@ namespace TrueCraft.Client.Modules
 						selected = 8;
 					if (selected > 8)
 						selected = 0;
-					Game.Client.HotbarSelection = selected;
+					Game.Client.HotBarSelection = selected;
 					break;
 				case Buttons.A:
-					if (Math.Abs(Math.Floor(Game.Client.Position.Y) - Game.Client.Position.Y) < 0)
+					if (Math.Floor(Game.Client.Position.Y) == Game.Client.Position.Y)
 						Game.Client.Velocity += Directions.Up * 0.3f;
 					break;
 			}
@@ -200,13 +200,13 @@ namespace TrueCraft.Client.Modules
 
 		public override bool MouseScroll(GameTime gameTime, MouseScrollEventArgs e)
 		{
-			var selected = Game.Client.HotbarSelection;
+			var selected = Game.Client.HotBarSelection;
 			selected += e.DeltaValue > 0 ? -1 : 1;
 			if (selected < 0)
 				selected = 8;
 			if (selected > 8)
 				selected = 0;
-			Game.Client.HotbarSelection = selected;
+			Game.Client.HotBarSelection = selected;
 			return true;
 		}
 
@@ -253,7 +253,7 @@ namespace TrueCraft.Client.Modules
 					Digging = true;
 					return true;
 				case MouseButton.Right:
-					var item = Game.Client.Inventory.Hotbar[Game.Client.HotbarSelection];
+					var item = Game.Client.Inventory.Hotbar[Game.Client.HotBarSelection];
 					Game.Client.QueuePacket(new PlayerBlockPlacementPacket(
 						Game.HighlightedBlock.X, (sbyte) Game.HighlightedBlock.Y, Game.HighlightedBlock.Z,
 						Game.HighlightedBlockFace, item.ID, item.Count, item.Metadata));
@@ -271,7 +271,7 @@ namespace TrueCraft.Client.Modules
 			Game.StartDigging = DateTime.UtcNow;
 			Game.EndDigging = Game.StartDigging.AddMilliseconds(
 				BlockProvider.GetHarvestTime(block,
-					Game.Client.Inventory.Hotbar[Game.Client.HotbarSelection].ID, out _));
+					Game.Client.Inventory.Hotbar[Game.Client.HotBarSelection].ID, out _));
 			Game.Client.QueuePacket(new PlayerDiggingPacket(
 				PlayerDiggingPacket.Action.StartDigging,
 				Game.TargetBlock.X, (sbyte) Game.TargetBlock.Y, Game.TargetBlock.Z,
@@ -310,7 +310,7 @@ namespace TrueCraft.Client.Modules
 
 			var gamePad =
 				GamePad.GetState(PlayerIndex.One); // TODO: Can this stuff be done effectively in the GamePadHandler?
-			if (gamePad.IsConnected && Math.Abs(gamePad.ThumbSticks.Left.Length()) > 0)
+			if (gamePad.IsConnected && gamePad.ThumbSticks.Left.Length() != 0)
 				delta = new Vector3(gamePad.ThumbSticks.Left.X, 0, gamePad.ThumbSticks.Left.Y);
 
 			var digging = Digging;
@@ -319,7 +319,7 @@ namespace TrueCraft.Client.Modules
 				digging = true;
 			if (gamePad.IsConnected && gamePad.Triggers.Left > 0.5f && GamePadState.Triggers.Left < 0.5f)
 			{
-				var item = Game.Client.Inventory.Hotbar[Game.Client.HotbarSelection];
+				var item = Game.Client.Inventory.Hotbar[Game.Client.HotBarSelection];
 				Game.Client.QueuePacket(new PlayerBlockPlacementPacket(
 					Game.HighlightedBlock.X, (sbyte) Game.HighlightedBlock.Y, Game.HighlightedBlock.Z,
 					Game.HighlightedBlockFace, item.ID, item.Count, item.Metadata));
@@ -386,7 +386,7 @@ namespace TrueCraft.Client.Modules
 				if (NextAnimation < DateTime.UtcNow)
 				{
 					NextAnimation = DateTime.UtcNow.AddSeconds(0.25);
-					Game.Client.QueuePacket(new AnimationPacket(Game.Client.EntityID,
+					Game.Client.QueuePacket(new AnimationPacket(Game.Client.EntityId,
 						AnimationPacket.PlayerAnimation.SwingArm));
 				}
 

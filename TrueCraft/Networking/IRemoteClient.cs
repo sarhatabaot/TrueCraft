@@ -101,7 +101,7 @@ namespace TrueCraft.Networking
 		/// <summary>
 		///  If logging is enabled, sends your message to the client as chat.
 		/// </summary>
-		void Log(string message, params object[] parameters);
+		void MaybeEchoToClient(string message, params object[] parameters);
 
 		/// <summary>
 		///  Opens a window on the client. This sends the appropriate packets and tracks
@@ -110,6 +110,6 @@ namespace TrueCraft.Networking
 		void OpenWindow(IWindow window);
 
 		int ChunkRadius { get; }
-		void UpdateChunks(bool block = false);
+		void UpdateChunks(bool blockingCall = false);
 	}
 }

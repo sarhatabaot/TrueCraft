@@ -5,15 +5,15 @@
 	/// </summary>
 	public struct EntityTeleportPacket : IPacket
 	{
-		public byte ID => 0x22;
+		public byte ID => Constants.PacketIds.EntityTeleport;
 
 		public int EntityID;
 		public int X, Y, Z;
 		public sbyte Yaw, Pitch;
 
-		public EntityTeleportPacket(int entityID, int x, int y, int z, sbyte yaw, sbyte pitch)
+		public EntityTeleportPacket(int entityId, int x, int y, int z, sbyte yaw, sbyte pitch)
 		{
-			EntityID = entityID;
+			EntityID = entityId;
 			X = x;
 			Y = y;
 			Z = z;

@@ -107,7 +107,7 @@ namespace TrueCraft.Client.Modules
 			// Selection
 			SpriteBatch.Draw(GUI, new Vector2(
 					Game.GraphicsDevice.Viewport.Width / 2 - Scale(HotbarBackgroundRect.Width / 2) +
-					Scale(Game.Client.HotbarSelection * 20 - 1),
+					Scale(Game.Client.HotBarSelection * 20 - 1),
 					Game.GraphicsDevice.Viewport.Height - Scale(HotbarBackgroundRect.Height + 6)),
 				HotbarSelectionRect, Color.White, 0, Vector2.Zero, Game.ScaleFactor * 2, SpriteEffects.None, 1);
 		}

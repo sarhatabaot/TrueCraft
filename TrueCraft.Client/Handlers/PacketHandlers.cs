@@ -9,7 +9,7 @@ namespace TrueCraft.Client.Handlers
 {
 	internal static class PacketHandlers
 	{
-		public static void RegisterHandlers(MultiplayerClient client)
+		public static void RegisterHandlers(MultiPlayerClient client)
 		{
 			client.RegisterPacketHandler(new KeepAlivePacket().ID, HandleKeepAlive);
 			client.RegisterPacketHandler(new HandshakeResponsePacket().ID, HandleHandshake);
@@ -18,6 +18,8 @@ namespace TrueCraft.Client.Handlers
 			client.RegisterPacketHandler(new LoginResponsePacket().ID, HandleLoginResponse);
 			client.RegisterPacketHandler(new UpdateHealthPacket().ID, HandleUpdateHealth);
 			client.RegisterPacketHandler(new TimeUpdatePacket().ID, HandleTimeUpdate);
+			client.RegisterPacketHandler(Constants.PacketIds.EntityTeleport, HandleEntityTeleport);
+
 			client.RegisterPacketHandler(new ChunkPreamblePacket().ID, ChunkHandlers.HandleChunkPreamble);
 			client.RegisterPacketHandler(new ChunkDataPacket().ID, ChunkHandlers.HandleChunkData);
 			client.RegisterPacketHandler(new BlockChangePacket().ID, ChunkHandlers.HandleBlockChange);
@@ -27,17 +29,17 @@ namespace TrueCraft.Client.Handlers
 			client.RegisterPacketHandler(new OpenWindowPacket().ID, InventoryHandlers.HandleOpenWindowPacket);
 		}
 
-		private static void HandleKeepAlive(IPacket packet, MultiplayerClient client)
+		private static void HandleKeepAlive(IPacket packet, MultiPlayerClient client)
 		{
 			// TODO
 		}
 
-		public static void HandleChatMessage(IPacket packet, MultiplayerClient client)
+		public static void HandleChatMessage(IPacket packet, MultiPlayerClient client)
 		{
 			client.OnChatMessage(new ChatMessageEventArgs(((ChatMessagePacket) packet).Message));
 		}
 
-		public static void HandleHandshake(IPacket packet, MultiplayerClient client)
+		public static void HandleHandshake(IPacket packet, MultiPlayerClient client)
 		{
 			if (((HandshakeResponsePacket) packet).ConnectionHash != "-")
 			{
@@ -49,13 +51,13 @@ namespace TrueCraft.Client.Handlers
 			client.QueuePacket(new LoginRequestPacket(PacketReader.Version, client.User.Username));
 		}
 
-		public static void HandleLoginResponse(IPacket packet, MultiplayerClient client)
+		public static void HandleLoginResponse(IPacket packet, MultiPlayerClient client)
 		{
-			client.EntityID = ((LoginResponsePacket) packet).EntityID;
+			client.EntityId = ((LoginResponsePacket) packet).EntityID;
 			client.QueuePacket(new PlayerGroundedPacket());
 		}
 
-		public static void HandlePositionAndLook(IPacket packet, MultiplayerClient client)
+		public static void HandlePositionAndLook(IPacket packet, MultiPlayerClient client)
 		{
 			var position = (SetPlayerPositionPacket) packet;
 			client._Position = new Vector3((float) position.X, (float) position.Y, (float) position.Z);
@@ -64,15 +66,23 @@ namespace TrueCraft.Client.Handlers
 			// TODO: Pitch and yaw
 		}
 
-		public static void HandleUpdateHealth(IPacket packet, MultiplayerClient client)
+		public static void HandleUpdateHealth(IPacket packet, MultiPlayerClient client)
 		{
 			client.Health = ((UpdateHealthPacket) packet).Health;
 		}
 
-		public static void HandleTimeUpdate(IPacket packet, MultiplayerClient client)
+		public static void HandleTimeUpdate(IPacket packet, MultiPlayerClient client)
 		{
 			var time = ((TimeUpdatePacket) packet).Time / 20.0;
 			client.World.World.BaseTime = DateTime.UtcNow - TimeSpan.FromSeconds(time);
+		}
+
+		public static void HandleEntityTeleport(IPacket packet, MultiPlayerClient client)
+		{
+			var teleport = (EntityTeleportPacket) packet;
+
+			client.Trace.TraceData(TraceEventType.Warning, 0,
+				$"server wants client to teleport entity {teleport.EntityID}, but we don't have an entity manager");
 		}
 	}
 }

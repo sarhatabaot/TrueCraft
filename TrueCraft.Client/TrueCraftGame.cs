@@ -22,7 +22,7 @@ namespace TrueCraft.Client
 	{
 		public static readonly int Reach = 3;
 
-		public TrueCraftGame(MultiplayerClient client, IPEndPoint endPoint)
+		public TrueCraftGame(MultiPlayerClient client, IPEndPoint endPoint)
 		{
 			Window.Title = "TrueCraft";
 			Content.RootDirectory = "Content";
@@ -56,7 +56,7 @@ namespace TrueCraft.Client
 			Components.Add(GamePadComponent);
 		}
 
-		public MultiplayerClient Client { get; }
+		public MultiPlayerClient Client { get; }
 		public GraphicsDeviceManager Graphics { get; }
 		public TextureMapper TextureMapper { get; private set; }
 		public Camera Camera { get; private set; }

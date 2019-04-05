@@ -16,7 +16,7 @@ namespace TrueCraft.Server
 {
 	public class EntityManager : IEntityManager
 	{
-		private readonly object EntityLock = new object();
+		private readonly object _lock = new object();
 
 		public EntityManager(IMultiPlayerServer server, IWorld world)
 		{
@@ -25,6 +25,7 @@ namespace TrueCraft.Server
 			PhysicsEngine = new PhysicsEngine(world, (BlockRepository) server.BlockRepository);
 			PendingDespawns = new ConcurrentBag<IEntity>();
 			Entities = new List<IEntity>();
+
 			// TODO: Handle loading worlds that already have entities
 			// Note: probably not the concern of EntityManager. The server could manually set this?
 			NextEntityID = 1;
@@ -62,7 +63,7 @@ namespace TrueCraft.Server
 			entity.EntityID = NextEntityID++;
 			entity.PropertyChanged -= HandlePropertyChanged;
 			entity.PropertyChanged += HandlePropertyChanged;
-			lock (EntityLock) Entities.Add(entity);
+			lock (_lock) Entities.Add(entity);
 			foreach (var clientEntity in GetEntitiesInRange(entity, 8)) // Note: 8 is pretty arbitrary here
 				if (clientEntity != entity && clientEntity is PlayerEntity)
 				{
@@ -98,11 +99,11 @@ namespace TrueCraft.Server
 						{
 							client.QueuePacket(new DestroyEntityPacket(entity.EntityID));
 							client.KnownEntities.Remove(entity);
-							client.Log("Destroying entity {0} ({1})", entity.EntityID, entity.GetType().Name);
+							client.MaybeEchoToClient("Destroying entity {0} ({1})", entity.EntityID, entity.GetType().Name);
 						}
 					}
 
-				lock (EntityLock)
+				lock (_lock)
 					Entities.Remove(entity);
 			}
 		}
@@ -137,50 +138,48 @@ namespace TrueCraft.Server
 		/// </summary>
 		public void SendEntitiesToClient(IRemoteClient _client)
 		{
-			var client = _client as RemoteClient;
-			foreach (var entity in GetEntitiesInRange(client.Entity, client.ChunkRadius))
-				if (entity != client.Entity)
-					SendEntityToClient(client, entity);
+			if (_client is RemoteClient client)
+				foreach (var entity in GetEntitiesInRange(client.Entity, client.ChunkRadius))
+					if (entity != client.Entity)
+						SendEntityToClient(client, entity);
 		}
 
 		private void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
-			var entity = sender as IEntity;
-			if (entity == null)
-				throw new InvalidCastException("Attempted to handle property changes for non-entity");
-			if (entity is PlayerEntity)
-				HandlePlayerPropertyChanged(e.PropertyName, entity as PlayerEntity);
+			if (!(sender is IEntity entity))
+				throw new InvalidCastException("attempted to handle property changes for a non-entity");
+
+			if (entity is PlayerEntity player)
+				HandlePlayerPropertyChanged(e.PropertyName, player);
+
 			switch (e.PropertyName)
 			{
-				case "Position":
-				case "Yaw":
-				case "Pitch":
-					PropegateEntityPositionUpdates(entity);
+				case nameof(Entity.Position):
+				case nameof(Entity.Yaw):
+				case nameof(Entity.Pitch):
+					PropagateEntityPositionUpdates(entity);
 					break;
-				case "Metadata":
-					PropegateEntityMetadataUpdates(entity);
+				case nameof(Entity.Metadata):
+					PropagateEntityMetadataUpdates(entity);
 					break;
 			}
 		}
 
 		private void HandlePlayerPropertyChanged(string property, PlayerEntity entity)
 		{
-			var client = GetClientForEntity(entity) as RemoteClient;
-			if (client == null)
+			if (!(GetClientForEntity(entity) is RemoteClient client))
 				return; // Note: would an exception be appropriate here?
+
 			switch (property)
 			{
-				case "Position":
-					if ((int) entity.Position.X >> 4 != (int) entity.OldPosition.X >> 4 ||
-					    (int) entity.Position.Z >> 4 != (int) entity.OldPosition.Z >> 4)
+				case nameof(Entity.Position):
+
+					if ((int) entity.Position.X >> 4 != (int) entity.OldPosition.X >> 4 || (int) entity.Position.Z >> 4 != (int) entity.OldPosition.Z >> 4)
 					{
-						client.Log("Passed chunk boundary at {0}, {1}", (int) entity.Position.X >> 4,
-							(int) entity.Position.Z >> 4);
-						Server.Scheduler.ScheduleEvent("client.update-chunks", client,
-							TimeSpan.Zero, s => client.UpdateChunks());
+						client.MaybeEchoToClient("Passed chunk boundary at {0}, {1}", (int) entity.Position.X >> 4, (int) entity.Position.Z >> 4);
+						Server.Scheduler.ScheduleEvent(Constants.Events.ClientUpdateChunks, client, TimeSpan.Zero, s => client.UpdateChunks());
 						UpdateClientEntities(client);
 					}
-
 					break;
 			}
 		}
@@ -188,29 +187,31 @@ namespace TrueCraft.Server
 		internal void UpdateClientEntities(RemoteClient client)
 		{
 			var entity = client.Entity;
+
 			// Calculate entities you shouldn't know about anymore
 			for (var i = 0; i < client.KnownEntities.Count; i++)
 			{
 				var knownEntity = client.KnownEntities[i];
-				if (knownEntity.Position.DistanceTo(entity.Position) > client.ChunkRadius * Chunk.Depth)
-				{
-					client.QueuePacket(new DestroyEntityPacket(knownEntity.EntityID));
-					client.KnownEntities.Remove(knownEntity);
-					i--;
-					// Make sure you're despawned on other clients if you move away from stationary players
-					if (knownEntity is PlayerEntity)
-					{
-						var c = (RemoteClient) GetClientForEntity(knownEntity as PlayerEntity);
-						if (c.KnownEntities.Contains(entity))
-						{
-							c.KnownEntities.Remove(entity);
-							c.QueuePacket(new DestroyEntityPacket(entity.EntityID));
-							c.Log("Destroying entity {0} ({1})", knownEntity.EntityID, knownEntity.GetType().Name);
-						}
-					}
+				if (!(knownEntity.Position.DistanceTo(entity.Position) > client.ChunkRadius * Chunk.Depth))
+					continue;
 
-					client.Log("Destroying entity {0} ({1})", knownEntity.EntityID, knownEntity.GetType().Name);
+				client.QueuePacket(new DestroyEntityPacket(knownEntity.EntityID));
+				client.KnownEntities.Remove(knownEntity);
+				i--;
+
+				// Make sure you're de-spawned on other clients if you move away from stationary players
+				if (knownEntity is PlayerEntity player)
+				{
+					var c = (RemoteClient) GetClientForEntity(player);
+					if (c.KnownEntities.Contains(entity))
+					{
+						c.KnownEntities.Remove(entity);
+						c.QueuePacket(new DestroyEntityPacket(entity.EntityID));
+						c.MaybeEchoToClient("Destroying entity {0} ({1})", player.EntityID, player.GetType().Name);
+					}
 				}
+
+				client.MaybeEchoToClient("Destroying entity {0} ({1})", knownEntity.EntityID, knownEntity.GetType().Name);
 			}
 
 			// Calculate entities you should now know about
@@ -219,23 +220,27 @@ namespace TrueCraft.Server
 				if (e != entity && !client.KnownEntities.Contains(e))
 				{
 					SendEntityToClient(client, e);
+
 					// Make sure other players know about you since you've moved
-					if (e is PlayerEntity)
+					if (e is PlayerEntity player)
 					{
-						var c = (RemoteClient) GetClientForEntity(e as PlayerEntity);
+						var c = (RemoteClient) GetClientForEntity(player);
 						if (!c.KnownEntities.Contains(entity))
 							SendEntityToClient(c, entity);
 					}
 				}
 		}
 
-		private void PropegateEntityPositionUpdates(IEntity entity)
+		private void PropagateEntityPositionUpdates(IEntity entity)
 		{
-			for (int i = 0, ServerClientsCount = Server.Clients.Count; i < ServerClientsCount; i++)
+			for (int i = 0, serverClientsCount = Server.Clients.Count; i < serverClientsCount; i++)
 			{
-				var client = Server.Clients[i] as RemoteClient;
+				if (!(Server.Clients[i] is RemoteClient client))
+					continue; // Note: would an exception be appropriate here?
+
 				if (client.Entity == entity)
 					continue; // Do not send movement updates back to the client that triggered them
+
 				if (client.KnownEntities.Contains(entity))
 					client.QueuePacket(new EntityTeleportPacket(entity.EntityID,
 						MathHelper.CreateAbsoluteInt(entity.Position.X),
@@ -246,7 +251,7 @@ namespace TrueCraft.Server
 			}
 		}
 
-		private void PropegateEntityMetadataUpdates(IEntity entity)
+		private void PropagateEntityMetadataUpdates(IEntity entity)
 		{
 			if (!entity.SendMetadataToClients)
 				return;
@@ -277,7 +282,7 @@ namespace TrueCraft.Server
 		{
 			if (entity.EntityID == -1)
 				return; // We haven't finished setting this entity up yet
-			client.Log("Spawning entity {0} ({1}) at {2}", entity.EntityID, entity.GetType().Name,
+			client.MaybeEchoToClient("Spawning entity {0} ({1}) at {2}", entity.EntityID, entity.GetType().Name,
 				(Coordinates3D) entity.Position);
 			RemoteClient spawnedClient = null;
 			if (entity is PlayerEntity)

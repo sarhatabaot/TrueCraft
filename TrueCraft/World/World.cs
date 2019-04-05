@@ -10,14 +10,14 @@ using TrueCraft.Serialization.Tags;
 
 namespace TrueCraft.World
 {
-	public class World : IDisposable, IWorld, IEnumerable<IChunk>
+	public class World : IDisposable, IWorld
 	{
 		public static readonly int Height = 128;
-		private int _Seed;
-		private Coordinates3D? _SpawnPoint;
+		private int _seed;
+		private Coordinates3D? _spawnPoint;
 
-		private readonly Dictionary<Thread, IChunk> ChunkCache = new Dictionary<Thread, IChunk>();
-		private readonly object ChunkCacheLock = new object();
+		private readonly Dictionary<Thread, IChunk> _chunkCache = new Dictionary<Thread, IChunk>();
+		private readonly object _chunkCacheLock = new object();
 
 		public World()
 		{
@@ -55,11 +55,11 @@ namespace TrueCraft.World
 
 		public int Seed
 		{
-			get => _Seed;
+			get => _seed;
 			set
 			{
-				_Seed = value;
-				BiomeDiagram = new BiomeMap(_Seed);
+				_seed = value;
+				BiomeDiagram = new BiomeMap(_seed);
 			}
 		}
 
@@ -67,11 +67,11 @@ namespace TrueCraft.World
 		{
 			get
 			{
-				if (_SpawnPoint == null)
-					_SpawnPoint = ChunkProvider.GetSpawn(this);
-				return _SpawnPoint.Value;
+				if (_spawnPoint == null)
+					_spawnPoint = ChunkProvider.GetSpawn(this);
+				return _spawnPoint.Value;
 			}
-			set => _SpawnPoint = value;
+			set => _spawnPoint = value;
 		}
 
 		public IBiomeMap BiomeDiagram { get; set; }
@@ -104,10 +104,7 @@ namespace TrueCraft.World
 			var regionZ = coordinates.Z / Region.Depth - (coordinates.Z < 0 ? 1 : 0);
 
 			var region = LoadOrGenerateRegion(new Coordinates2D(regionX, regionZ), generate);
-			if (region == null)
-				return null;
-			return region.GetChunk(new Coordinates2D(coordinates.X - regionX * 32, coordinates.Z - regionZ * 32),
-				generate);
+			return region?.GetChunk(new Coordinates2D(coordinates.X - regionX * 32, coordinates.Z - regionZ * 32), generate);
 		}
 
 		public byte GetBlockId(Coordinates3D coordinates)
@@ -130,112 +127,101 @@ namespace TrueCraft.World
 
 		public byte GetMetadata(Coordinates3D coordinates)
 		{
-			IChunk chunk;
-			coordinates = FindBlockPosition(coordinates, out chunk);
+			coordinates = FindBlockPosition(coordinates, out var chunk);
 			return chunk.GetMetadata(coordinates);
 		}
 
 		public byte GetSkyLight(Coordinates3D coordinates)
 		{
-			IChunk chunk;
-			coordinates = FindBlockPosition(coordinates, out chunk);
+			coordinates = FindBlockPosition(coordinates, out var chunk);
 			return chunk.GetSkyLight(coordinates);
 		}
 
 		public byte GetBlockLight(Coordinates3D coordinates)
 		{
-			IChunk chunk;
-			coordinates = FindBlockPosition(coordinates, out chunk);
+			coordinates = FindBlockPosition(coordinates, out var chunk);
 			return chunk.GetBlockLight(coordinates);
 		}
 
 		public NbtCompound GetTileEntity(Coordinates3D coordinates)
 		{
-			IChunk chunk;
-			coordinates = FindBlockPosition(coordinates, out chunk);
+			coordinates = FindBlockPosition(coordinates, out var chunk);
 			return chunk.GetTileEntity(coordinates);
 		}
 
 		public BlockDescriptor GetBlockData(Coordinates3D coordinates)
 		{
-			IChunk chunk;
-			var adjustedCoordinates = FindBlockPosition(coordinates, out chunk);
+			var adjustedCoordinates = FindBlockPosition(coordinates, out var chunk);
 			return GetBlockDataFromChunk(adjustedCoordinates, chunk, coordinates);
 		}
 
 		public void SetBlockData(Coordinates3D coordinates, BlockDescriptor descriptor)
 		{
-			IChunk chunk;
-			var adjustedCoordinates = FindBlockPosition(coordinates, out chunk);
+			var adjustedCoordinates = FindBlockPosition(coordinates, out var chunk);
 			var old = GetBlockDataFromChunk(adjustedCoordinates, chunk, coordinates);
 			chunk.SetBlockID(adjustedCoordinates, descriptor.ID);
 			chunk.SetMetadata(adjustedCoordinates, descriptor.Metadata);
-			if (BlockChanged != null)
-				BlockChanged(this,
-					new BlockChangeEventArgs(coordinates, old,
-						GetBlockDataFromChunk(adjustedCoordinates, chunk, coordinates)));
+
+			BlockChanged?.Invoke(this,
+				new BlockChangeEventArgs(coordinates, old,
+					GetBlockDataFromChunk(adjustedCoordinates, chunk, coordinates)));
 		}
 
 		public void SetBlockId(Coordinates3D coordinates, byte value)
 		{
-			IChunk chunk;
-			var adjustedCoordinates = FindBlockPosition(coordinates, out chunk);
+			var adjustedCoordinates = FindBlockPosition(coordinates, out var chunk);
 			var old = new BlockDescriptor();
 			if (BlockChanged != null)
 				old = GetBlockDataFromChunk(adjustedCoordinates, chunk, coordinates);
 			chunk.SetBlockID(adjustedCoordinates, value);
-			if (BlockChanged != null)
-				BlockChanged(this,
-					new BlockChangeEventArgs(coordinates, old,
-						GetBlockDataFromChunk(adjustedCoordinates, chunk, coordinates)));
+
+			BlockChanged?.Invoke(this,
+				new BlockChangeEventArgs(coordinates, old,
+					GetBlockDataFromChunk(adjustedCoordinates, chunk, coordinates)));
 		}
 
 		public void SetMetadata(Coordinates3D coordinates, byte value)
 		{
-			IChunk chunk;
-			var adjustedCoordinates = FindBlockPosition(coordinates, out chunk);
+			var adjustedCoordinates = FindBlockPosition(coordinates, out var chunk);
 			var old = new BlockDescriptor();
 			if (BlockChanged != null)
 				old = GetBlockDataFromChunk(adjustedCoordinates, chunk, coordinates);
 			chunk.SetMetadata(adjustedCoordinates, value);
-			if (BlockChanged != null)
-				BlockChanged(this,
-					new BlockChangeEventArgs(coordinates, old,
-						GetBlockDataFromChunk(adjustedCoordinates, chunk, coordinates)));
+
+			BlockChanged?.Invoke(this,
+				new BlockChangeEventArgs(coordinates, old,
+					GetBlockDataFromChunk(adjustedCoordinates, chunk, coordinates)));
 		}
 
 		public void SetSkyLight(Coordinates3D coordinates, byte value)
 		{
-			IChunk chunk;
-			var adjustedCoordinates = FindBlockPosition(coordinates, out chunk);
+			var adjustedCoordinates = FindBlockPosition(coordinates, out var chunk);
 			var old = new BlockDescriptor();
 			if (BlockChanged != null)
 				old = GetBlockDataFromChunk(adjustedCoordinates, chunk, coordinates);
 			chunk.SetSkyLight(adjustedCoordinates, value);
-			if (BlockChanged != null)
-				BlockChanged(this,
-					new BlockChangeEventArgs(coordinates, old,
-						GetBlockDataFromChunk(adjustedCoordinates, chunk, coordinates)));
+
+			BlockChanged?.Invoke(this,
+				new BlockChangeEventArgs(coordinates, old,
+					GetBlockDataFromChunk(adjustedCoordinates, chunk, coordinates)));
 		}
 
 		public void SetBlockLight(Coordinates3D coordinates, byte value)
 		{
-			IChunk chunk;
-			var adjustedCoordinates = FindBlockPosition(coordinates, out chunk);
+			var adjustedCoordinates = FindBlockPosition(coordinates, out var chunk);
 			var old = new BlockDescriptor();
 			if (BlockChanged != null)
 				old = GetBlockDataFromChunk(adjustedCoordinates, chunk, coordinates);
 			chunk.SetBlockLight(adjustedCoordinates, value);
-			if (BlockChanged != null)
-				BlockChanged(this,
-					new BlockChangeEventArgs(coordinates, old,
-						GetBlockDataFromChunk(adjustedCoordinates, chunk, coordinates)));
+
+			BlockChanged?.Invoke(this,
+				new BlockChangeEventArgs(coordinates, old,
+					GetBlockDataFromChunk(adjustedCoordinates, chunk, coordinates)));
 		}
 
 		public void SetTileEntity(Coordinates3D coordinates, NbtCompound value)
 		{
-			IChunk chunk;
-			coordinates = FindBlockPosition(coordinates, out chunk);
+			coordinates = FindBlockPosition(coordinates, out var chunk);
 			chunk.SetTileEntity(coordinates, value);
 		}
 
@@ -291,23 +277,23 @@ namespace TrueCraft.World
 			if (coordinates.Z < 0)
 				chunkZ = (coordinates.Z + 1) / Chunk.Depth - 1;
 
-			lock (ChunkCacheLock)
+			lock (_chunkCacheLock)
 			{
-				if (ChunkCache.ContainsKey(Thread.CurrentThread))
+				if (_chunkCache.ContainsKey(Thread.CurrentThread))
 				{
-					var cache = ChunkCache[Thread.CurrentThread];
+					var cache = _chunkCache[Thread.CurrentThread];
 					if (cache != null && chunkX == cache.Coordinates.X && chunkZ == cache.Coordinates.Z)
 						chunk = cache;
 					else
 					{
 						cache = GetChunk(new Coordinates2D(chunkX, chunkZ), generate);
-						ChunkCache[Thread.CurrentThread] = cache;
+						_chunkCache[Thread.CurrentThread] = cache;
 					}
 				}
 				else
 				{
 					var cache = GetChunk(new Coordinates2D(chunkX, chunkZ), generate);
-					ChunkCache[Thread.CurrentThread] = cache;
+					_chunkCache[Thread.CurrentThread] = cache;
 				}
 			}
 
@@ -339,8 +325,10 @@ namespace TrueCraft.World
 			if (!Directory.Exists(baseDirectory))
 				throw new DirectoryNotFoundException();
 
-			var world = new World(Path.GetFileName(baseDirectory));
-			world.BaseDirectory = baseDirectory;
+			var world = new World(Path.GetFileName(baseDirectory))
+			{
+				BaseDirectory = baseDirectory
+			};
 
 			if (File.Exists(Path.Combine(baseDirectory, "manifest.nbt")))
 			{
@@ -350,7 +338,7 @@ namespace TrueCraft.World
 					file.RootTag["SpawnPoint"]["Z"].IntValue);
 				world.Seed = file.RootTag["Seed"].IntValue;
 				var providerName = file.RootTag["ChunkProvider"].StringValue;
-				var provider = (IChunkProvider) Activator.CreateInstance(Type.GetType(providerName));
+				var provider = (IChunkProvider) Activator.CreateInstance(Type.GetType(providerName) ?? throw new InvalidOperationException($"invalid chunk provider '{providerName}'"));
 				provider.Initialize(world);
 				if (file.RootTag.Contains("Name"))
 					world.Name = file.RootTag["Name"].StringValue;
@@ -398,7 +386,8 @@ namespace TrueCraft.World
 
 			var regionPosition = new Coordinates2D(regionX, regionZ);
 			if (!Regions.ContainsKey(regionPosition))
-				throw new ArgumentOutOfRangeException("coordinates");
+				throw new ArgumentOutOfRangeException(nameof(coordinates));
+
 			Regions[regionPosition]
 				.UnloadChunk(new Coordinates2D(coordinates.X - regionX * 32, coordinates.Z - regionZ * 32));
 		}
@@ -426,10 +415,8 @@ namespace TrueCraft.World
 			if (BaseDirectory != null)
 			{
 				var file = Path.Combine(BaseDirectory, Region.GetRegionFileName(coordinates));
-				if (File.Exists(file))
-					region = new Region(coordinates, this, file);
-				else
-					region = new Region(coordinates, this);
+
+				region = File.Exists(file) ? new Region(coordinates, this, file) : new Region(coordinates, this);
 			}
 			else
 				region = new Region(coordinates, this);
@@ -441,14 +428,12 @@ namespace TrueCraft.World
 
 		protected internal void OnChunkGenerated(ChunkLoadedEventArgs e)
 		{
-			if (ChunkGenerated != null)
-				ChunkGenerated(this, e);
+			ChunkGenerated?.Invoke(this, e);
 		}
 
 		protected internal void OnChunkLoaded(ChunkLoadedEventArgs e)
 		{
-			if (ChunkLoaded != null)
-				ChunkLoaded(this, e);
+			ChunkLoaded?.Invoke(this, e);
 		}
 
 		public class ChunkEnumerator : IEnumerator<IChunk>

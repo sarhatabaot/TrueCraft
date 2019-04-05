@@ -2,5 +2,5 @@
 
 namespace TrueCraft.Client
 {
-	public delegate void PacketHandler(IPacket packet, MultiplayerClient client);
+	public delegate void PacketHandler(IPacket packet, MultiPlayerClient client);
 }

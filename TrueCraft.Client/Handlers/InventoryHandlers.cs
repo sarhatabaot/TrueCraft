@@ -6,7 +6,7 @@ namespace TrueCraft.Client.Handlers
 {
 	internal static class InventoryHandlers
 	{
-		public static void HandleWindowItems(IPacket _packet, MultiplayerClient client)
+		public static void HandleWindowItems(IPacket _packet, MultiPlayerClient client)
 		{
 			var packet = (WindowItemsPacket) _packet;
 			if (packet.WindowID == 0)
@@ -15,7 +15,7 @@ namespace TrueCraft.Client.Handlers
 				client.CurrentWindow.SetSlots(packet.Items);
 		}
 
-		public static void HandleSetSlot(IPacket _packet, MultiplayerClient client)
+		public static void HandleSetSlot(IPacket _packet, MultiPlayerClient client)
 		{
 			var packet = (SetSlotPacket) _packet;
 			IWindow window = null;
@@ -28,7 +28,7 @@ namespace TrueCraft.Client.Handlers
 					window[packet.SlotIndex] = new ItemStack(packet.ItemID, packet.Count, packet.Metadata);
 		}
 
-		public static void HandleOpenWindowPacket(IPacket _packet, MultiplayerClient client)
+		public static void HandleOpenWindowPacket(IPacket _packet, MultiPlayerClient client)
 		{
 			var packet = (OpenWindowPacket) _packet;
 			IWindow window = null;
@@ -43,7 +43,7 @@ namespace TrueCraft.Client.Handlers
 			client.CurrentWindow = window;
 		}
 
-		public static void HandleCloseWindowPacket(IPacket _packet, MultiplayerClient client)
+		public static void HandleCloseWindowPacket(IPacket _packet, MultiPlayerClient client)
 		{
 			client.CurrentWindow = null;
 		}

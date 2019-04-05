@@ -16,20 +16,34 @@ namespace TrueCraft.Server
 		public static CommandManager CommandManager;
 		public static MultiPlayerServer Server;
 
+		public static string BaseDirectory = string.Empty;
+
+		public static string ResolvePath(string file)
+		{
+			return Path.Combine(BaseDirectory, file);
+		}
+
 		public static void Start(params string[] args)
 		{
-			string baseDirectory = "";
 			if (args.Length == 1)
 			{
-				baseDirectory = args[0];
-				Directory.CreateDirectory(baseDirectory);
+				BaseDirectory = args[0];
+				Directory.CreateDirectory(BaseDirectory);
 			}
 
-			ServerConfiguration =
-				Configuration.LoadConfiguration<ServerConfiguration>(Path.Combine(baseDirectory, "config.yaml"))
-				?? new ServerConfiguration();
-
+			ServerConfiguration = Configuration.LoadConfiguration<ServerConfiguration>(ResolvePath("config.yaml")) ?? new ServerConfiguration();
 			Server = new MultiPlayerServer(ServerConfiguration);
+
+			AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
+			{
+				Server.Trace.TraceData(TraceEventType.Critical, 0, "unhandled exception", e.ExceptionObject);
+				
+				if (e.IsTerminating && Environment.UserInteractive)
+				{
+					Console.WriteLine("Press any key to quit.");
+					Console.ReadKey();
+				}
+			};
 
 			var buckets = ServerConfiguration.Debug?.Profiler?.Buckets?.Split(',');
 			if (buckets != null)
@@ -37,25 +51,25 @@ namespace TrueCraft.Server
 					Profiler.EnableBucket(bucket.Trim());
 
 			if (ServerConfiguration.Debug != null && ServerConfiguration.Debug.DeleteWorldOnStartup)
-				if (Directory.Exists(Path.Combine(baseDirectory, "world")))
-					Directory.Delete(Path.Combine(baseDirectory, "world"), true);
+				if (Directory.Exists(ResolvePath("world")))
+					Directory.Delete(ResolvePath("world"), true);
 
 			if (ServerConfiguration.Debug != null && ServerConfiguration.Debug.DeletePlayersOnStartup)
-				if (Directory.Exists(Path.Combine(baseDirectory, "players")))
-					Directory.Delete(Path.Combine(baseDirectory, "players"), true);
+				if (Directory.Exists(ResolvePath("players")))
+					Directory.Delete(ResolvePath("players"), true);
 			IWorld world;
 			try
 			{
-				world = World.World.LoadWorld(Path.Combine(baseDirectory, "world"));
+				world = World.World.LoadWorld(ResolvePath("world"));
 				Server.AddWorld(world);
 			}
 			catch
 			{
-				world = new World.World(Path.Combine(baseDirectory, "default"), new StandardGenerator())
+				world = new World.World(ResolvePath("default"), new StandardGenerator())
 				{
 					BlockRepository = Server.BlockRepository
 				};
-				world.Save(Path.Combine(baseDirectory, "world"));
+				world.Save(ResolvePath("world"));
 				Server.AddWorld(world);
 
 				Server.Trace.TraceEvent(TraceEventType.Information, 0, "Generating world around spawn point...");
@@ -107,7 +121,8 @@ namespace TrueCraft.Server
 			Server.Start(new IPEndPoint(IPAddress.Parse(ServerConfiguration.ServerAddress),
 				ServerConfiguration.ServerPort));
 			Console.CancelKeyPress += HandleCancelKeyPress;
-			Server.Scheduler.ScheduleEvent(Path.Combine(baseDirectory, "world.save"), null,
+
+			Server.Scheduler.ScheduleEvent(Constants.Events.WorldSave, null,
 				TimeSpan.FromSeconds(ServerConfiguration.WorldSaveInterval), SaveWorlds);
 			while (true)
 				Thread.Yield();
@@ -119,8 +134,7 @@ namespace TrueCraft.Server
 			foreach (var w in Server.Worlds)
 				w.Save();
 			Server.Trace.TraceEvent(TraceEventType.Information, 0, "Done.");
-			server.Scheduler.ScheduleEvent("world.save", null,
-				TimeSpan.FromSeconds(ServerConfiguration.WorldSaveInterval), SaveWorlds);
+			server.Scheduler.ScheduleEvent(Constants.Events.WorldSave, null, TimeSpan.FromSeconds(ServerConfiguration.WorldSaveInterval), SaveWorlds);
 		}
 
 		private static void HandleCancelKeyPress(object sender, ConsoleCancelEventArgs e)
