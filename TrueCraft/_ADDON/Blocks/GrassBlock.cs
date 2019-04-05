@@ -60,7 +60,7 @@ namespace TrueCraft.Logic.Blocks
 			}
 		}
 
-		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiplayerServer server,
+		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiPlayerServer server,
 			IWorld world)
 		{
 			if (source.Coordinates == descriptor.Coordinates + Coordinates3D.Up)
@@ -76,7 +76,7 @@ namespace TrueCraft.Logic.Blocks
 			}
 		}
 
-		public void TrySpread(Coordinates3D coords, IWorld world, IMultiplayerServer server)
+		public void TrySpread(Coordinates3D coords, IWorld world, IMultiPlayerServer server)
 		{
 			if (!world.IsValidPosition(coords + Coordinates3D.Up))
 				return;
@@ -131,7 +131,7 @@ namespace TrueCraft.Logic.Blocks
 				s => TrySpread(descriptor.Coordinates, world, user.Server));
 		}
 
-		public override void BlockLoadedFromChunk(Coordinates3D coords, IMultiplayerServer server, IWorld world)
+		public override void BlockLoadedFromChunk(Coordinates3D coords, IMultiPlayerServer server, IWorld world)
 		{
 			var chunk = world.FindChunk(coords);
 			server.Scheduler.ScheduleEvent("grass", chunk,

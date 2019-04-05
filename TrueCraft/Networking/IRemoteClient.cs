@@ -51,7 +51,7 @@ namespace TrueCraft.Networking
 		/// <summary>
 		///  The server this user is playing on.
 		/// </summary>
-		IMultiplayerServer Server { get; }
+		IMultiPlayerServer Server { get; }
 
 		/// <summary>
 		///  If true, this client will be sent logging information as chat messages.

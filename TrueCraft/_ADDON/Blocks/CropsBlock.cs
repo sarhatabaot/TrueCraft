@@ -45,7 +45,7 @@ namespace TrueCraft.Logic.Blocks
 			return new[] {new ItemStack(SeedsItem.ItemID)};
 		}
 
-		private void GrowBlock(IMultiplayerServer server, IWorld world, Coordinates3D coords)
+		private void GrowBlock(IMultiPlayerServer server, IWorld world, Coordinates3D coords)
 		{
 			if (world.GetBlockId(coords) != BlockID)
 				return;
@@ -61,7 +61,7 @@ namespace TrueCraft.Logic.Blocks
 			}
 		}
 
-		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiplayerServer server,
+		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiPlayerServer server,
 			IWorld world)
 		{
 			if (world.GetBlockId(descriptor.Coordinates + Coordinates3D.Down) != FarmlandBlock.BlockID)
@@ -79,7 +79,7 @@ namespace TrueCraft.Logic.Blocks
 				server => GrowBlock(server, world, descriptor.Coordinates + MathHelper.BlockFaceToCoordinates(face)));
 		}
 
-		public override void BlockLoadedFromChunk(Coordinates3D coords, IMultiplayerServer server, IWorld world)
+		public override void BlockLoadedFromChunk(Coordinates3D coords, IMultiPlayerServer server, IWorld world)
 		{
 			var chunk = world.FindChunk(coords);
 			server.Scheduler.ScheduleEvent("crops", chunk,

@@ -14,7 +14,7 @@ namespace TrueCraft.Tests.Logic
 	public class BlockProviderTest
 	{
 		public Mock<IWorld> World { get; set; }
-		public Mock<IMultiplayerServer> Server { get; set; }
+		public Mock<IMultiPlayerServer> Server { get; set; }
 		public Mock<IEntityManager> EntityManager { get; set; }
 		public Mock<IRemoteClient> User { get; set; }
 		public Mock<IBlockRepository> BlockRepository { get; set; }
@@ -23,7 +23,7 @@ namespace TrueCraft.Tests.Logic
 		public void SetUp()
 		{
 			World = new Mock<IWorld>();
-			Server = new Mock<IMultiplayerServer>();
+			Server = new Mock<IMultiPlayerServer>();
 			EntityManager = new Mock<IEntityManager>();
 			User = new Mock<IRemoteClient>();
 			BlockRepository = new Mock<IBlockRepository>();

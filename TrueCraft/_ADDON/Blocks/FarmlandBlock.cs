@@ -64,7 +64,7 @@ namespace TrueCraft.Logic.Blocks
 			return false;
 		}
 
-		private void HydrationCheckEvent(IMultiplayerServer server, Coordinates3D coords, IWorld world)
+		private void HydrationCheckEvent(IMultiPlayerServer server, Coordinates3D coords, IWorld world)
 		{
 			if (world.GetBlockId(coords) != BlockID)
 				return;
@@ -101,7 +101,7 @@ namespace TrueCraft.Logic.Blocks
 				server => HydrationCheckEvent(server, descriptor.Coordinates, world));
 		}
 
-		public override void BlockLoadedFromChunk(Coordinates3D coords, IMultiplayerServer server, IWorld world)
+		public override void BlockLoadedFromChunk(Coordinates3D coords, IMultiPlayerServer server, IWorld world)
 		{
 			var chunk = world.FindChunk(coords);
 			server.Scheduler.ScheduleEvent("farmland", chunk,

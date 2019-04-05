@@ -6,27 +6,19 @@ namespace TrueCraft.Server.Handlers
 {
 	public static class PacketHandlers
 	{
-		public static void RegisterHandlers(IMultiplayerServer server)
+		public static void RegisterHandlers(IMultiPlayerServer server)
 		{
 			server.RegisterPacketHandler(new KeepAlivePacket().ID, HandleKeepAlive);
 			server.RegisterPacketHandler(new ChatMessagePacket().ID, HandleChatMessage);
 			server.RegisterPacketHandler(new DisconnectPacket().ID, HandleDisconnect);
-
 			server.RegisterPacketHandler(new HandshakePacket().ID, LoginHandlers.HandleHandshakePacket);
 			server.RegisterPacketHandler(new LoginRequestPacket().ID, LoginHandlers.HandleLoginRequestPacket);
-
-			server.RegisterPacketHandler(new PlayerGroundedPacket().ID, (a, b, c) =>
-			{
-				/* no-op */
-			});
+			server.RegisterPacketHandler(new PlayerGroundedPacket().ID, (a, b, c) => { /* no-op */ });
 			server.RegisterPacketHandler(new PlayerPositionPacket().ID, EntityHandlers.HandlePlayerPositionPacket);
 			server.RegisterPacketHandler(new PlayerLookPacket().ID, EntityHandlers.HandlePlayerLookPacket);
-			server.RegisterPacketHandler(new PlayerPositionAndLookPacket().ID,
-				EntityHandlers.HandlePlayerPositionAndLookPacket);
-
+			server.RegisterPacketHandler(new PlayerPositionAndLookPacket().ID, EntityHandlers.HandlePlayerPositionAndLookPacket);
 			server.RegisterPacketHandler(new PlayerDiggingPacket().ID, InteractionHandlers.HandlePlayerDiggingPacket);
-			server.RegisterPacketHandler(new PlayerBlockPlacementPacket().ID,
-				InteractionHandlers.HandlePlayerBlockPlacementPacket);
+			server.RegisterPacketHandler(new PlayerBlockPlacementPacket().ID, InteractionHandlers.HandlePlayerBlockPlacementPacket);
 			server.RegisterPacketHandler(new ChangeHeldItemPacket().ID, InteractionHandlers.HandleChangeHeldItem);
 			server.RegisterPacketHandler(new PlayerActionPacket().ID, InteractionHandlers.HandlePlayerAction);
 			server.RegisterPacketHandler(new AnimationPacket().ID, InteractionHandlers.HandleAnimation);
@@ -35,22 +27,20 @@ namespace TrueCraft.Server.Handlers
 			server.RegisterPacketHandler(new UpdateSignPacket().ID, InteractionHandlers.HandleUpdateSignPacket);
 		}
 
-		internal static void HandleKeepAlive(IPacket _packet, IRemoteClient _client, IMultiplayerServer server)
+		internal static void HandleKeepAlive(IPacket packet, IRemoteClient client, IMultiPlayerServer server)
 		{
 			// TODO
 		}
 
-		internal static void HandleChatMessage(IPacket _packet, IRemoteClient _client, IMultiplayerServer _server)
+		internal static void HandleChatMessage(IPacket packet, IRemoteClient client, IMultiPlayerServer server)
 		{
 			// TODO: Abstract this to support things like commands
 			// TODO: Sanitize messages
-			var packet = (ChatMessagePacket) _packet;
-			var server = (MultiplayerServer) _server;
-			var args = new ChatMessageEventArgs(_client, packet.Message);
-			server.OnChatMessageReceived(args);
+
+			server.OnChatMessageReceived(new ChatMessageEventArgs(client, ((ChatMessagePacket) packet).Message));
 		}
 
-		internal static void HandleDisconnect(IPacket _packet, IRemoteClient _client, IMultiplayerServer server)
+		internal static void HandleDisconnect(IPacket packet, IRemoteClient client, IMultiPlayerServer server)
 		{
 			throw new PlayerDisconnectException(true);
 		}

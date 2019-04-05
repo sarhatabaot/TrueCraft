@@ -75,7 +75,7 @@ namespace TrueCraft.Logic.Blocks
 			return true;
 		}
 
-		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiplayerServer server,
+		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiPlayerServer server,
 			IWorld world)
 		{
 			if (!ValidPlacement(descriptor, world))
@@ -86,7 +86,7 @@ namespace TrueCraft.Logic.Blocks
 			}
 		}
 
-		private void TryGrowth(IMultiplayerServer server, Coordinates3D coords, IWorld world)
+		private void TryGrowth(IMultiPlayerServer server, Coordinates3D coords, IWorld world)
 		{
 			if (world.GetBlockId(coords) != BlockID)
 				return;
@@ -126,7 +126,7 @@ namespace TrueCraft.Logic.Blocks
 				server => TryGrowth(server, descriptor.Coordinates, world));
 		}
 
-		public override void BlockLoadedFromChunk(Coordinates3D coords, IMultiplayerServer server, IWorld world)
+		public override void BlockLoadedFromChunk(Coordinates3D coords, IMultiPlayerServer server, IWorld world)
 		{
 			var chunk = world.FindChunk(coords);
 			server.Scheduler.ScheduleEvent("sugarcane", chunk,

@@ -8,7 +8,7 @@ using TrueCraft.World;
 
 namespace TrueCraft.Server
 {
-	public interface IMultiplayerServer
+	public interface IMultiPlayerServer
 	{
 		object ClientLock { get; }
 		ServerConfiguration ServerConfiguration { get; }
@@ -26,10 +26,6 @@ namespace TrueCraft.Server
 		bool BlockUpdatesEnabled { get; set; }
 		bool EnableClientLogging { get; set; }
 		
-		event EventHandler<ChatMessageEventArgs> ChatMessageReceived;
-		event EventHandler<PlayerJoinedQuitEventArgs> PlayerJoined;
-		event EventHandler<PlayerJoinedQuitEventArgs> PlayerQuit;
-
 		void Start(IPEndPoint endPoint);
 		void Stop();
 		void RegisterPacketHandler(byte packetId, PacketHandler handler);
@@ -42,5 +38,13 @@ namespace TrueCraft.Server
 		bool PlayerIsWhitelisted(string client);
 		bool PlayerIsBlacklisted(string client);
 		bool PlayerIsOp(string client);
+
+		event EventHandler<ChatMessageEventArgs> ChatMessageReceived;
+		event EventHandler<PlayerJoinedQuitEventArgs> PlayerJoined;
+		event EventHandler<PlayerJoinedQuitEventArgs> PlayerQuit;
+
+		void OnChatMessageReceived(ChatMessageEventArgs args);
+		void OnPlayerJoined(PlayerJoinedQuitEventArgs e);
+		void OnPlayerQuit(PlayerJoinedQuitEventArgs e);
 	}
 }

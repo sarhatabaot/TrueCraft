@@ -10,7 +10,7 @@ namespace TrueCraft.Server
 	{
 		private readonly object EventLock = new object();
 
-		public EventScheduler(IMultiplayerServer server)
+		public EventScheduler(IMultiPlayerServer server)
 		{
 			Events = new List<ScheduledEvent>();
 			ImmediateEventQueue = new ConcurrentQueue<ScheduledEvent>();
@@ -24,7 +24,7 @@ namespace TrueCraft.Server
 		}
 
 		private IList<ScheduledEvent> Events { get; } // Sorted
-		private IMultiplayerServer Server { get; }
+		private IMultiPlayerServer Server { get; }
 		private HashSet<IEventSubject> Subjects { get; }
 		private Stopwatch Stopwatch { get; }
 		private ConcurrentQueue<ScheduledEvent> ImmediateEventQueue { get; }
@@ -32,7 +32,7 @@ namespace TrueCraft.Server
 		private ConcurrentQueue<IEventSubject> DisposedSubjects { get; }
 		public HashSet<string> DisabledEvents { get; }
 
-		public void ScheduleEvent(string name, IEventSubject subject, TimeSpan when, Action<IMultiplayerServer> action)
+		public void ScheduleEvent(string name, IEventSubject subject, TimeSpan when, Action<IMultiPlayerServer> action)
 		{
 			if (DisabledEvents.Contains(name))
 				return;
@@ -139,7 +139,7 @@ namespace TrueCraft.Server
 		private struct ScheduledEvent
 		{
 			public long When;
-			public Action<IMultiplayerServer> Action;
+			public Action<IMultiPlayerServer> Action;
 			public IEventSubject Subject;
 			public string Name;
 		}

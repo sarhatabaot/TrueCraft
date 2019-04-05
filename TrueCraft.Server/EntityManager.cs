@@ -18,7 +18,7 @@ namespace TrueCraft.Server
 	{
 		private readonly object EntityLock = new object();
 
-		public EntityManager(IMultiplayerServer server, IWorld world)
+		public EntityManager(IMultiPlayerServer server, IWorld world)
 		{
 			Server = server;
 			World = world;
@@ -32,7 +32,7 @@ namespace TrueCraft.Server
 			TimeSinceLastUpdate = TimeSpan.Zero;
 		}
 
-		public IMultiplayerServer Server { get; set; }
+		public IMultiPlayerServer Server { get; set; }
 		public PhysicsEngine PhysicsEngine { get; set; }
 
 		private int NextEntityID { get; set; }
@@ -89,7 +89,7 @@ namespace TrueCraft.Server
 					;
 				if (entity is IPhysicsEntity)
 					PhysicsEngine.RemoveEntity((IPhysicsEntity) entity);
-				lock ((Server as MultiplayerServer).ClientLock
+				lock ((Server as MultiPlayerServer).ClientLock
 				) // TODO: Thread safe way to iterate over client collection
 					for (int i = 0, ServerClientsCount = Server.Clients.Count; i < ServerClientsCount; i++)
 					{

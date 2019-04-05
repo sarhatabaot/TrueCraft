@@ -10,7 +10,7 @@ namespace TrueCraft.Server.Handlers
 {
 	internal static class LoginHandlers
 	{
-		public static void HandleHandshakePacket(IPacket packet, IRemoteClient client, IMultiplayerServer server)
+		public static void HandleHandshakePacket(IPacket packet, IRemoteClient client, IMultiPlayerServer server)
 		{
 			var handshakePacket = (HandshakePacket) packet;
 			var remoteClient = (RemoteClient) client;
@@ -18,7 +18,7 @@ namespace TrueCraft.Server.Handlers
 			remoteClient.QueuePacket(new HandshakeResponsePacket("-")); // TODO: Implement some form of authentication
 		}
 
-		public static void HandleLoginRequestPacket(IPacket packet, IRemoteClient client, IMultiplayerServer server)
+		public static void HandleLoginRequestPacket(IPacket packet, IRemoteClient client, IMultiPlayerServer server)
 		{
 			var loginRequestPacket = (LoginRequestPacket) packet;
 			var remoteClient = (RemoteClient) client;

@@ -41,7 +41,7 @@ namespace TrueCraft.Client.Modules
 					Process.GetCurrentProcess().Kill();
 					return true;
 
-				// Take a screenshot.
+				// Take a screen shot.
 				case Keys.F2:
 					Game.TakeScreenShot();
 					return true;
@@ -83,7 +83,7 @@ namespace TrueCraft.Client.Modules
 					return true;
 
 				case Keys.Space:
-					if (Math.Floor(Game.Client.Position.Y) == Game.Client.Position.Y)
+					if (Math.Abs(Math.Floor(Game.Client.Position.Y) - Game.Client.Position.Y) < 0)
 						Game.Client.Velocity += Directions.Up * 0.3f;
 					return true;
 
@@ -190,7 +190,7 @@ namespace TrueCraft.Client.Modules
 					Game.Client.HotbarSelection = selected;
 					break;
 				case Buttons.A:
-					if (Math.Floor(Game.Client.Position.Y) == Game.Client.Position.Y)
+					if (Math.Abs(Math.Floor(Game.Client.Position.Y) - Game.Client.Position.Y) < 0)
 						Game.Client.Velocity += Directions.Up * 0.3f;
 					break;
 			}
@@ -214,6 +214,7 @@ namespace TrueCraft.Client.Modules
 		{
 			if (!Capture)
 				return false;
+
 			if (IgnoreNextUpdate)
 			{
 				IgnoreNextUpdate = false;
@@ -268,10 +269,9 @@ namespace TrueCraft.Client.Modules
 			var block = Game.Client.World.GetBlockId(target);
 			Game.TargetBlock = target;
 			Game.StartDigging = DateTime.UtcNow;
-			short damage;
 			Game.EndDigging = Game.StartDigging.AddMilliseconds(
 				BlockProvider.GetHarvestTime(block,
-					Game.Client.Inventory.Hotbar[Game.Client.HotbarSelection].ID, out damage));
+					Game.Client.Inventory.Hotbar[Game.Client.HotbarSelection].ID, out _));
 			Game.Client.QueuePacket(new PlayerDiggingPacket(
 				PlayerDiggingPacket.Action.StartDigging,
 				Game.TargetBlock.X, (sbyte) Game.TargetBlock.Y, Game.TargetBlock.Z,
@@ -300,8 +300,7 @@ namespace TrueCraft.Client.Modules
 			var provider = Game.BlockRepository.GetBlockProvider(target);
 			if (provider.SoundEffect == SoundEffectClass.None)
 				return;
-			var effect = string.Format("footstep.{0}",
-				Enum.GetName(typeof(SoundEffectClass), provider.SoundEffect).ToLower());
+			var effect = string.Format("footstep.{0}", Enum.GetName(typeof(SoundEffectClass), provider.SoundEffect)?.ToLower());
 			Game.Audio.PlayPack(effect, 0.5f);
 		}
 
@@ -311,7 +310,7 @@ namespace TrueCraft.Client.Modules
 
 			var gamePad =
 				GamePad.GetState(PlayerIndex.One); // TODO: Can this stuff be done effectively in the GamePadHandler?
-			if (gamePad.IsConnected && gamePad.ThumbSticks.Left.Length() != 0)
+			if (gamePad.IsConnected && Math.Abs(gamePad.ThumbSticks.Left.Length()) > 0)
 				delta = new Vector3(gamePad.ThumbSticks.Left.X, 0, gamePad.ThumbSticks.Left.Y);
 
 			var digging = Digging;
@@ -326,7 +325,7 @@ namespace TrueCraft.Client.Modules
 					Game.HighlightedBlockFace, item.ID, item.Count, item.Metadata));
 			}
 
-			if (gamePad.IsConnected && gamePad.ThumbSticks.Right.Length() != 0)
+			if (gamePad.IsConnected && Math.Abs(gamePad.ThumbSticks.Right.Length()) > 0)
 			{
 				var look = -(gamePad.ThumbSticks.Right * 8) * (float) (gameTime.ElapsedGameTime.TotalSeconds * 30);
 
@@ -366,8 +365,7 @@ namespace TrueCraft.Client.Modules
 
 			if (delta != Vector3.Zero)
 			{
-				var lookAt = Vector3.Transform(-delta,
-					Microsoft.Xna.Framework.Matrix.CreateRotationY(Microsoft.Xna.Framework.MathHelper.ToRadians(-(Game.Client.Yaw - 180) + 180)));
+				var lookAt = Vector3.Transform(-delta, Matrix.CreateRotationY(Microsoft.Xna.Framework.MathHelper.ToRadians(-(Game.Client.Yaw - 180) + 180)));
 
 				lookAt.X *= (float) (gameTime.ElapsedGameTime.TotalSeconds * 4.3717);
 				lookAt.Z *= (float) (gameTime.ElapsedGameTime.TotalSeconds * 4.3717);

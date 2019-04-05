@@ -20,13 +20,13 @@ namespace TrueCraft.Server
 		private CancellationTokenSource CToken;
 		private int Port;
 		private readonly Random Rnd;
-		private readonly IMultiplayerServer Server;
+		private readonly IMultiPlayerServer Server;
 		private Timer Timer;
 		private UdpClient Udp;
 
 		private ConcurrentDictionary<IPEndPoint, QueryUser> UserList;
 
-		public QueryProtocol(IMultiplayerServer server, ServerConfiguration configuration)
+		public QueryProtocol(IMultiPlayerServer server, ServerConfiguration configuration)
 		{
 			Rnd = new Random();
 			Server = server;

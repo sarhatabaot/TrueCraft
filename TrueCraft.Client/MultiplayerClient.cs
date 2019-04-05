@@ -155,7 +155,7 @@ namespace TrueCraft.Client
 			if (!Connected || Client != null && !Client.Connected)
 				return;
 
-			Trace.TraceData(TraceEventType.Verbose, 0, $"queuing packet {packet.GetType().Name}");
+			Trace.TraceData(TraceEventType.Verbose, 0, $"queuing packet #{packet.ID:X2} ({packet.GetType().Name})");
 
 			using (var writeStream = new MemoryStream())
 			{
@@ -241,7 +241,7 @@ namespace TrueCraft.Client
 					var handler = PacketHandlers[packet.ID];
 					if (handler == null)
 					{
-						Trace.TraceEvent(TraceEventType.Warning, 0, $"no handler found for packet {packet.GetType().Name}");
+						Trace.TraceEvent(TraceEventType.Warning, 0, $"no handler found for packet {packet.ID:X2} ({packet.GetType().Name})");
 						continue;
 					}
 

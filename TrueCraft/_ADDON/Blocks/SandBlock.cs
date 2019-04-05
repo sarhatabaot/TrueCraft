@@ -33,7 +33,7 @@ namespace TrueCraft.Logic.Blocks
 			BlockUpdate(descriptor, descriptor, user.Server, world);
 		}
 
-		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiplayerServer server,
+		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiPlayerServer server,
 			IWorld world)
 		{
 			if (world.GetBlockId(descriptor.Coordinates + Coordinates3D.Down) == AirBlock.BlockID)

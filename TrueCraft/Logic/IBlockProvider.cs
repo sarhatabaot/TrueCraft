@@ -26,15 +26,15 @@ namespace TrueCraft.Logic
 		BoundingBox? InteractiveBoundingBox { get; } // NOTE: Will this eventually need to be metadata-aware?
 		Tuple<int, int> GetTextureMap(byte metadata);
 
-		void GenerateDropEntity(BlockDescriptor descriptor, IWorld world, IMultiplayerServer server,
+		void GenerateDropEntity(BlockDescriptor descriptor, IWorld world, IMultiPlayerServer server,
 			ItemStack heldItem);
 
 		void BlockLeftClicked(BlockDescriptor descriptor, BlockFace face, IWorld world, IRemoteClient user);
 		bool BlockRightClicked(BlockDescriptor descriptor, BlockFace face, IWorld world, IRemoteClient user);
 		void BlockPlaced(BlockDescriptor descriptor, BlockFace face, IWorld world, IRemoteClient user);
 		void BlockMined(BlockDescriptor descriptor, BlockFace face, IWorld world, IRemoteClient user);
-		void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiplayerServer server, IWorld world);
-		void BlockLoadedFromChunk(Coordinates3D coords, IMultiplayerServer server, IWorld world);
+		void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiPlayerServer server, IWorld world);
+		void BlockLoadedFromChunk(Coordinates3D coords, IMultiPlayerServer server, IWorld world);
 
 		void TileEntityLoadedForClient(BlockDescriptor descriptor, IWorld world, NbtCompound compound,
 			IRemoteClient client);

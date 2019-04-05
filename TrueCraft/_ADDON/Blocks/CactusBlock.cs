@@ -63,7 +63,7 @@ namespace TrueCraft.Logic.Blocks
 			return true;
 		}
 
-		private void TryGrowth(IMultiplayerServer server, Coordinates3D coords, IWorld world)
+		private void TryGrowth(IMultiPlayerServer server, Coordinates3D coords, IWorld world)
 		{
 			if (world.GetBlockId(coords) != BlockID)
 				return;
@@ -95,7 +95,7 @@ namespace TrueCraft.Logic.Blocks
 			}
 		}
 
-		public void DestroyCactus(BlockDescriptor descriptor, IMultiplayerServer server, IWorld world)
+		public void DestroyCactus(BlockDescriptor descriptor, IMultiPlayerServer server, IWorld world)
 		{
 			var toDrop = 0;
 
@@ -148,7 +148,7 @@ namespace TrueCraft.Logic.Blocks
 				server => TryGrowth(server, descriptor.Coordinates, world));
 		}
 
-		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiplayerServer server,
+		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiPlayerServer server,
 			IWorld world)
 		{
 			if (!ValidCactusPosition(descriptor, server.BlockRepository, world))
@@ -156,7 +156,7 @@ namespace TrueCraft.Logic.Blocks
 			base.BlockUpdate(descriptor, source, server, world);
 		}
 
-		public override void BlockLoadedFromChunk(Coordinates3D coords, IMultiplayerServer server, IWorld world)
+		public override void BlockLoadedFromChunk(Coordinates3D coords, IMultiPlayerServer server, IWorld world)
 		{
 			var chunk = world.FindChunk(coords);
 			server.Scheduler.ScheduleEvent("cactus", chunk,

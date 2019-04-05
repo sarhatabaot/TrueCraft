@@ -33,7 +33,7 @@ namespace TrueCraft.Server
 
 		private SemaphoreSlim sem = new SemaphoreSlim(1, 1);
 
-		public RemoteClient(IMultiplayerServer server, ServerConfiguration configuration, IPacketReader packetReader,
+		public RemoteClient(IMultiPlayerServer server, ServerConfiguration configuration, IPacketReader packetReader,
 			PacketHandler[] packetHandlers, Socket connection)
 		{
 			_configuration = configuration;
@@ -91,7 +91,7 @@ namespace TrueCraft.Server
 		//public NetworkStream NetworkStream { get; set; }
 		public IMinecraftStream MinecraftStream { get; internal set; }
 		public string Username { get; internal set; }
-		public IMultiplayerServer Server { get; set; }
+		public IMultiPlayerServer Server { get; set; }
 		public IWorld World { get; internal set; }
 		public IWindow Inventory { get; }
 		public short SelectedSlot { get; internal set; }
@@ -205,7 +205,7 @@ namespace TrueCraft.Server
 			if (Disconnected || Connection != null && !Connection.Connected)
 				return;
 
-			Server.Trace.TraceData(TraceEventType.Verbose, 0, $"queuing packet {packet.GetType().Name}");
+			Server.Trace.TraceData(TraceEventType.Verbose, 0, $"queuing packet #{packet.ID:X2} ({packet.GetType().Name})");
 
 			using (var writeStream = new MemoryStream())
 			{
@@ -344,6 +344,7 @@ namespace TrueCraft.Server
 				try
 				{
 					foreach (var packet in packets)
+					{
 						if (PacketHandlers[packet.ID] != null)
 							try
 							{
@@ -362,6 +363,7 @@ namespace TrueCraft.Server
 						{
 							Log("Unhandled packet {0}", packet.GetType().Name);
 						}
+					}
 				}
 				catch (NotSupportedException)
 				{
@@ -376,7 +378,7 @@ namespace TrueCraft.Server
 				Server.DisconnectClient(this);
 		}
 
-		internal void ExpandChunkRadius(IMultiplayerServer server)
+		internal void ExpandChunkRadius(IMultiPlayerServer server)
 		{
 			if (Disconnected)
 				return;
@@ -393,7 +395,7 @@ namespace TrueCraft.Server
 			});
 		}
 
-		internal void SendKeepAlive(IMultiplayerServer server)
+		internal void SendKeepAlive(IMultiPlayerServer server)
 		{
 			QueuePacket(new KeepAlivePacket());
 			server.Scheduler.ScheduleEvent("remote.keepalive", this, TimeSpan.FromSeconds(10), SendKeepAlive);

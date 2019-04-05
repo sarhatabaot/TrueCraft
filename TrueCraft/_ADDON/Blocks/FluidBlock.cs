@@ -38,7 +38,7 @@ namespace TrueCraft.Logic.Blocks
 			return new ItemStack[0];
 		}
 
-		public void ScheduleNextEvent(Coordinates3D coords, IWorld world, IMultiplayerServer server)
+		public void ScheduleNextEvent(Coordinates3D coords, IWorld world, IMultiPlayerServer server)
 		{
 			if (world.GetBlockId(coords) == StillID)
 				return;
@@ -54,7 +54,7 @@ namespace TrueCraft.Logic.Blocks
 				ScheduleNextEvent(descriptor.Coordinates, world, user.Server);
 		}
 
-		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiplayerServer server,
+		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiPlayerServer server,
 			IWorld world)
 		{
 			if (ID == StillID)
@@ -69,12 +69,12 @@ namespace TrueCraft.Logic.Blocks
 			}
 		}
 
-		public override void BlockLoadedFromChunk(Coordinates3D coords, IMultiplayerServer server, IWorld world)
+		public override void BlockLoadedFromChunk(Coordinates3D coords, IMultiPlayerServer server, IWorld world)
 		{
 			ScheduleNextEvent(coords, world, server);
 		}
 
-		private void AutomataUpdate(IMultiplayerServer server, IWorld world, Coordinates3D coords)
+		private void AutomataUpdate(IMultiPlayerServer server, IWorld world, Coordinates3D coords)
 		{
 			if (world.GetBlockId(coords) != FlowingID && world.GetBlockId(coords) != StillID)
 				return;
@@ -90,7 +90,7 @@ namespace TrueCraft.Logic.Blocks
 			}
 		}
 
-		public bool DoAutomata(IMultiplayerServer server, IWorld world, Coordinates3D coords)
+		public bool DoAutomata(IMultiPlayerServer server, IWorld world, Coordinates3D coords)
 		{
 			var previousLevel = world.GetMetadata(coords);
 
@@ -128,7 +128,7 @@ namespace TrueCraft.Logic.Blocks
 			return true;
 		}
 
-		private void FlowOutward(IWorld world, LiquidFlow target, IMultiplayerServer server)
+		private void FlowOutward(IWorld world, LiquidFlow target, IMultiPlayerServer server)
 		{
 			// For each block we can flow into, generate an item entity if appropriate
 			var provider = world.BlockRepository.GetBlockProvider(world.GetBlockId(target.TargetBlock));

@@ -15,7 +15,7 @@ namespace TrueCraft.Server.Handlers
 {
 	public static class InteractionHandlers
 	{
-		public static void HandlePlayerDiggingPacket(IPacket _packet, IRemoteClient _client, IMultiplayerServer server)
+		public static void HandlePlayerDiggingPacket(IPacket _packet, IRemoteClient _client, IMultiPlayerServer server)
 		{
 			var packet = (PlayerDiggingPacket) _packet;
 			var client = (RemoteClient) _client;
@@ -58,7 +58,7 @@ namespace TrueCraft.Server.Handlers
 						provider.BlockLeftClicked(descriptor, packet.Face, world, client);
 
 					// "But why on Earth does this behavior change if you use shears on leaves?"
-					// "This is poor seperation of concerns"
+					// "This is poor separation of concerns"
 					// "Let me do a git blame and flame whoever wrote the next line"
 					// To answer all of those questions, here:
 					// Minecraft sends a player digging packet when the player starts and stops digging a block (two packets)
@@ -72,7 +72,7 @@ namespace TrueCraft.Server.Handlers
 					time = BlockProvider.GetHarvestTime(descriptor.ID, client.SelectedItem.ID, out damage);
 					if (time <= 20)
 					{
-						provider.BlockMined(descriptor, packet.Face, world, client);
+						provider?.BlockMined(descriptor, packet.Face, world, client);
 						break;
 					}
 
@@ -99,8 +99,7 @@ namespace TrueCraft.Server.Handlers
 							// Damage the item
 							if (damage != 0)
 							{
-								var tool = server.ItemRepository.GetItemProvider(client.SelectedItem.ID) as ToolItem;
-								if (tool != null && tool.Uses != -1)
+								if (server.ItemRepository.GetItemProvider(client.SelectedItem.ID) is ToolItem tool && tool.Uses != -1)
 								{
 									var slot = client.SelectedItem;
 									slot.Metadata += damage;
@@ -117,14 +116,14 @@ namespace TrueCraft.Server.Handlers
 		}
 
 		public static void HandlePlayerBlockPlacementPacket(IPacket _packet, IRemoteClient _client,
-			IMultiplayerServer server)
+			IMultiPlayerServer server)
 		{
 			var packet = (PlayerBlockPlacementPacket) _packet;
 			var client = (RemoteClient) _client;
 
 			var slot = client.SelectedItem;
 			var position = new Coordinates3D(packet.X, packet.Y, packet.Z);
-			BlockDescriptor? block = null;
+			BlockDescriptor? block;
 			if (position != -Coordinates3D.One)
 			{
 				if (position.DistanceTo((Coordinates3D) client.Entity.Position) > 10 /* TODO: Reach */)
@@ -134,54 +133,43 @@ namespace TrueCraft.Server.Handlers
 			else
 				return;
 
-			var use = true;
-			if (block != null)
+			var provider = server.BlockRepository.GetBlockProvider(block.Value.ID);
+			if (provider == null)
 			{
-				var provider = server.BlockRepository.GetBlockProvider(block.Value.ID);
-				if (provider == null)
-				{
-					server.SendMessage(ChatColor.Red + "WARNING: block provider for ID {0} is null (player placing)",
-						block.Value.ID);
-					server.SendMessage(ChatColor.Red + "Error occured from client {0} at coordinates {1}",
-						client.Username, block.Value.Coordinates);
-					server.SendMessage(ChatColor.Red + "Packet logged at {0}, please report upstream", DateTime.UtcNow);
-					return;
-				}
+				server.SendMessage($"{ChatColor.Red}WARNING: block provider for ID {{0}} is null (player placing)", block.Value.ID);
+				server.SendMessage($"{ChatColor.Red}Error occured from client {{0}} at coordinates {{1}}", client.Username, block.Value.Coordinates);
+				server.SendMessage($"{ChatColor.Red}Packet logged at {{0}}, please report upstream", DateTime.UtcNow);
+				return;
+			}
 
-				if (!provider.BlockRightClicked(block.Value, packet.Face, client.World, client))
-				{
-					position += MathHelper.BlockFaceToCoordinates(packet.Face);
-					var oldID = client.World.GetBlockId(position);
-					var oldMeta = client.World.GetMetadata(position);
-					client.QueuePacket(new BlockChangePacket(position.X, (sbyte) position.Y, position.Z, (sbyte) oldID,
-						(sbyte) oldMeta));
-					client.QueuePacket(new SetSlotPacket(0, client.SelectedSlot, client.SelectedItem.ID,
-						client.SelectedItem.Count, client.SelectedItem.Metadata));
-					return;
-				}
+			if (!provider.BlockRightClicked(block.Value, packet.Face, client.World, client))
+			{
+				position += MathHelper.BlockFaceToCoordinates(packet.Face);
+				var oldId = client.World.GetBlockId(position);
+				var oldMeta = client.World.GetMetadata(position);
+				client.QueuePacket(new BlockChangePacket(position.X, (sbyte) position.Y, position.Z, (sbyte) oldId, (sbyte) oldMeta));
+				client.QueuePacket(new SetSlotPacket(0, client.SelectedSlot, client.SelectedItem.ID, client.SelectedItem.Count, client.SelectedItem.Metadata));
+				return;
 			}
 
 			if (!slot.Empty)
-				if (use)
+			{
+				var itemProvider = server.ItemRepository.GetItemProvider(slot.ID);
+				if (itemProvider == null)
 				{
-					var itemProvider = server.ItemRepository.GetItemProvider(slot.ID);
-					if (itemProvider == null)
-					{
-						server.SendMessage(ChatColor.Red + "WARNING: item provider for ID {0} is null (player placing)",
-							block.Value.ID);
-						server.SendMessage(ChatColor.Red + "Error occured from client {0} at coordinates {1}",
-							client.Username, block.Value.Coordinates);
-						server.SendMessage(ChatColor.Red + "Packet logged at {0}, please report upstream",
-							DateTime.UtcNow);
-					}
-
-					if (block != null)
-						if (itemProvider != null)
-							itemProvider.ItemUsedOnBlock(position, slot, packet.Face, client.World, client);
+					server.SendMessage(ChatColor.Red + "WARNING: item provider for ID {0} is null (player placing)",
+						block.Value.ID);
+					server.SendMessage(ChatColor.Red + "Error occured from client {0} at coordinates {1}",
+						client.Username, block.Value.Coordinates);
+					server.SendMessage(ChatColor.Red + "Packet logged at {0}, please report upstream",
+						DateTime.UtcNow);
 				}
+
+				itemProvider?.ItemUsedOnBlock(position, slot, packet.Face, client.World, client);
+			}
 		}
 
-		public static void HandleClickWindowPacket(IPacket _packet, IRemoteClient _client, IMultiplayerServer server)
+		public static void HandleClickWindowPacket(IPacket _packet, IRemoteClient _client, IMultiPlayerServer server)
 		{
 			var packet = (ClickWindowPacket) _packet;
 			var client = (RemoteClient) _client;
@@ -219,14 +207,14 @@ namespace TrueCraft.Server.Handlers
 			client.QueuePacket(new WindowItemsPacket(packet.WindowID, window.GetSlots()));
 		}
 
-		public static void HandleCloseWindowPacket(IPacket _packet, IRemoteClient _client, IMultiplayerServer server)
+		public static void HandleCloseWindowPacket(IPacket _packet, IRemoteClient _client, IMultiPlayerServer server)
 		{
 			var packet = (CloseWindowPacket) _packet;
 			if (packet.WindowID != 0)
 				(_client as RemoteClient).CloseWindow(true);
 		}
 
-		public static void HandleChangeHeldItem(IPacket _packet, IRemoteClient _client, IMultiplayerServer server)
+		public static void HandleChangeHeldItem(IPacket _packet, IRemoteClient _client, IMultiPlayerServer server)
 		{
 			var packet = (ChangeHeldItemPacket) _packet;
 			var client = (RemoteClient) _client;
@@ -237,7 +225,7 @@ namespace TrueCraft.Server.Handlers
 					client.SelectedItem.Metadata));
 		}
 
-		public static void HandlePlayerAction(IPacket _packet, IRemoteClient _client, IMultiplayerServer server)
+		public static void HandlePlayerAction(IPacket _packet, IRemoteClient _client, IMultiPlayerServer server)
 		{
 			var packet = (PlayerActionPacket) _packet;
 			var client = (RemoteClient) _client;
@@ -253,7 +241,7 @@ namespace TrueCraft.Server.Handlers
 			}
 		}
 
-		public static void HandleAnimation(IPacket _packet, IRemoteClient _client, IMultiplayerServer server)
+		public static void HandleAnimation(IPacket _packet, IRemoteClient _client, IMultiPlayerServer server)
 		{
 			var packet = (AnimationPacket) _packet;
 			var client = (RemoteClient) _client;
@@ -266,7 +254,7 @@ namespace TrueCraft.Server.Handlers
 			}
 		}
 
-		public static void HandleUpdateSignPacket(IPacket _packet, IRemoteClient _client, IMultiplayerServer server)
+		public static void HandleUpdateSignPacket(IPacket _packet, IRemoteClient _client, IMultiPlayerServer server)
 		{
 			var packet = (UpdateSignPacket) _packet;
 			var client = (RemoteClient) _client;

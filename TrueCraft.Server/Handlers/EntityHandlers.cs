@@ -7,21 +7,21 @@ namespace TrueCraft.Server.Handlers
 {
 	internal static class EntityHandlers
 	{
-		public static void HandlePlayerPositionPacket(IPacket _packet, IRemoteClient _client, IMultiplayerServer server)
+		public static void HandlePlayerPositionPacket(IPacket _packet, IRemoteClient _client, IMultiPlayerServer server)
 		{
 			var packet = (PlayerPositionPacket) _packet;
 			HandlePlayerMovement(_client, new Vector3((float) packet.X, (float) packet.Y, (float) packet.Z), _client.Entity.Yaw,
 				_client.Entity.Pitch);
 		}
 
-		public static void HandlePlayerLookPacket(IPacket _packet, IRemoteClient _client, IMultiplayerServer server)
+		public static void HandlePlayerLookPacket(IPacket _packet, IRemoteClient _client, IMultiPlayerServer server)
 		{
 			var packet = (PlayerLookPacket) _packet;
 			HandlePlayerMovement(_client, _client.Entity.Position, packet.Yaw, packet.Pitch);
 		}
 
 		public static void HandlePlayerPositionAndLookPacket(IPacket _packet, IRemoteClient _client,
-			IMultiplayerServer server)
+			IMultiPlayerServer server)
 		{
 			var packet = (PlayerPositionAndLookPacket) _packet;
 			HandlePlayerMovement(_client, new Vector3((float) packet.X, (float) packet.Y, (float) packet.Z), packet.Yaw, packet.Pitch);

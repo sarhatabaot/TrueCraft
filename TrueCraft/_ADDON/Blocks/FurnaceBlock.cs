@@ -150,7 +150,7 @@ namespace TrueCraft.Logic.Blocks
 			UpdateWindows(coords, state);
 		}
 
-		public override void BlockLoadedFromChunk(Coordinates3D coords, IMultiplayerServer server, IWorld world)
+		public override void BlockLoadedFromChunk(Coordinates3D coords, IMultiPlayerServer server, IWorld world)
 		{
 			var state = GetState(world, coords);
 			TryInitializeFurnace(state, server.Scheduler, world, coords, server.ItemRepository);

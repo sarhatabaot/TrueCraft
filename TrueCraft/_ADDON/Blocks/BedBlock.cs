@@ -88,7 +88,7 @@ namespace TrueCraft.Logic.Blocks
 			return true;
 		}
 
-		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiplayerServer server,
+		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiPlayerServer server,
 			IWorld world)
 		{
 			if (!ValidBedPosition(descriptor, server.BlockRepository, world))

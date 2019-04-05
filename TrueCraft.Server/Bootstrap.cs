@@ -14,7 +14,7 @@ namespace TrueCraft.Server
 	{
 		public static ServerConfiguration ServerConfiguration;
 		public static CommandManager CommandManager;
-		public static MultiplayerServer Server;
+		public static MultiPlayerServer Server;
 
 		public static void Start(params string[] args)
 		{
@@ -29,7 +29,7 @@ namespace TrueCraft.Server
 				Configuration.LoadConfiguration<ServerConfiguration>(Path.Combine(baseDirectory, "config.yaml"))
 				?? new ServerConfiguration();
 
-			Server = new MultiplayerServer(ServerConfiguration);
+			Server = new MultiPlayerServer(ServerConfiguration);
 
 			var buckets = ServerConfiguration.Debug?.Profiler?.Buckets?.Split(',');
 			if (buckets != null)
@@ -113,7 +113,7 @@ namespace TrueCraft.Server
 				Thread.Yield();
 		}
 
-		private static void SaveWorlds(IMultiplayerServer server)
+		private static void SaveWorlds(IMultiPlayerServer server)
 		{
 			Server.Trace.TraceEvent(TraceEventType.Information, 0, "Saving world...");
 			foreach (var w in Server.Worlds)

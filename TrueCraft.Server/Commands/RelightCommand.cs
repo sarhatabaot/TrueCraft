@@ -23,7 +23,7 @@ namespace TrueCraft.Server.Commands
 				return;
 			}
 
-			var server = client.Server as MultiplayerServer;
+			var server = client.Server as MultiPlayerServer;
 			var chunk = client.World.FindChunk((Coordinates3D) client.Entity.Position);
 			var lighter = server.WorldLighters.SingleOrDefault(l => l.World == client.World);
 			if (lighter != null)

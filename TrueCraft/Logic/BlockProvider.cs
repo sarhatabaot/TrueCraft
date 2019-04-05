@@ -56,7 +56,7 @@ namespace TrueCraft.Logic
 			world.SetBlockId(descriptor.Coordinates, 0);
 		}
 
-		public void GenerateDropEntity(BlockDescriptor descriptor, IWorld world, IMultiplayerServer server,
+		public void GenerateDropEntity(BlockDescriptor descriptor, IWorld world, IMultiPlayerServer server,
 			ItemStack item)
 		{
 			var entityManager = server.GetEntityManagerForWorld(world);
@@ -84,7 +84,7 @@ namespace TrueCraft.Logic
 			}
 		}
 
-		public virtual void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiplayerServer server,
+		public virtual void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiPlayerServer server,
 			IWorld world)
 		{
 			if (!IsSupported(descriptor, server, world))
@@ -94,7 +94,7 @@ namespace TrueCraft.Logic
 			}
 		}
 
-		public virtual void BlockLoadedFromChunk(Coordinates3D coords, IMultiplayerServer server, IWorld world)
+		public virtual void BlockLoadedFromChunk(Coordinates3D coords, IMultiPlayerServer server, IWorld world)
 		{
 			// This space intentionally left blank
 		}
@@ -247,7 +247,7 @@ namespace TrueCraft.Logic
 		/// </summary>
 		public virtual string DisplayName => string.Empty;
 
-		public virtual bool IsSupported(BlockDescriptor descriptor, IMultiplayerServer server, IWorld world)
+		public virtual bool IsSupported(BlockDescriptor descriptor, IMultiPlayerServer server, IWorld world)
 		{
 			var support = GetSupportDirection(descriptor);
 			if (support != Coordinates3D.Zero)

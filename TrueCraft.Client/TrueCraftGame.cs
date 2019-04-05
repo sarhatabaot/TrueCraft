@@ -26,6 +26,7 @@ namespace TrueCraft.Client
 		{
 			Window.Title = "TrueCraft";
 			Content.RootDirectory = "Content";
+
 			Graphics = new GraphicsDeviceManager(this);
 			Graphics.SynchronizeWithVerticalRetrace = false;
 			Graphics.IsFullScreen = UserSettings.Local.IsFullscreen;
@@ -34,7 +35,9 @@ namespace TrueCraft.Client
 			Graphics.GraphicsProfile = GraphicsProfile.HiDef;
 			Graphics.PreparingDeviceSettings += PrepareDeviceSettings;
 			Graphics.ApplyChanges();
+			
 			Window.ClientSizeChanged += Window_ClientSizeChanged;
+
 			Client = client;
 			EndPoint = endPoint;
 			LastPhysicsUpdate = DateTime.MinValue;
@@ -236,81 +239,121 @@ namespace TrueCraft.Client
 
 		private void OnKeyboardKeyDown(object sender, KeyboardKeyEventArgs e)
 		{
+			if (!IsActive)
+				return;
+
 			foreach (var module in InputModules)
 			{
-				if (module is IInputModule input)
-					if (input.KeyDown(GameTime, e))
-						break;
+				if (!(module is IInputModule input))
+					continue;
+
+				if (input.KeyDown(GameTime, e))
+					break;
 			}
 		}
 
 		private void OnKeyboardKeyUp(object sender, KeyboardKeyEventArgs e)
 		{
+			if (!IsActive)
+				return;
+
 			foreach (var module in InputModules)
 			{
-				if (module is IInputModule input)
-					if (input.KeyUp(GameTime, e))
-						break;
+				if (!(module is IInputModule input))
+					continue;
+
+				if (input.KeyUp(GameTime, e))
+					break;
 			}
 		}
 
 		private void OnGamePadButtonUp(object sender, GamePadButtonEventArgs e)
 		{
+			if (!IsActive)
+				return;
+
 			foreach (var module in InputModules)
 			{
-				if (module is IInputModule input)
-					if (input.GamePadButtonUp(GameTime, e))
-						break;
+				if (!(module is IInputModule input))
+					continue;
+
+				if (input.GamePadButtonUp(GameTime, e))
+					break;
 			}
 		}
 
 		private void OnGamePadButtonDown(object sender, GamePadButtonEventArgs e)
 		{
+			if (!IsActive)
+				return;
+
 			foreach (var module in InputModules)
 			{
-				if (module is IInputModule input)
-					if (input.GamePadButtonDown(GameTime, e))
-						break;
+				if (!(module is IInputModule input))
+					continue;
+
+				if (input.GamePadButtonDown(GameTime, e))
+					break;
 			}
 		}
 
 		private void OnMouseComponentScroll(object sender, MouseScrollEventArgs e)
 		{
+			if (!IsActive)
+				return;
+
 			foreach (var module in InputModules)
 			{
-				if (module is IInputModule input)
-					if (input.MouseScroll(GameTime, e))
-						break;
+				if (!(module is IInputModule input))
+					continue;
+
+				if (input.MouseScroll(GameTime, e))
+					break;
 			}
 		}
 
 		private void OnMouseComponentButtonDown(object sender, MouseButtonEventArgs e)
 		{
+			if (!IsActive)
+				return;
+
 			foreach (var module in InputModules)
 			{
-				if (module is IInputModule input)
-					if (input.MouseButtonDown(GameTime, e))
-						break;
+				if (!(module is IInputModule input))
+					continue;
+
+				if (input.MouseButtonDown(GameTime, e))
+					break;
 			}
 		}
 
 		private void OnMouseComponentButtonUp(object sender, MouseButtonEventArgs e)
 		{
+			if (!IsActive)
+				return;
+
 			foreach (var module in InputModules)
 			{
-				if (module is IInputModule input)
-					if (input.MouseButtonUp(GameTime, e))
-						break;
+				if (!(module is IInputModule input))
+					continue;
+
+				if (input.MouseButtonUp(GameTime, e))
+					break;
 			}
 		}
 
 		private void OnMouseComponentMove(object sender, MouseMoveEventArgs e)
 		{
+			if (!IsActive)
+				return;
+
 			foreach (var module in InputModules)
 			{
-				if (module is IInputModule input)
-					if (input.MouseMove(GameTime, e))
-						break;
+				if (!(module is IInputModule input))
+					continue;
+
+				if (input.MouseMove(GameTime, e))
+					break;
 			}
 		}
 
@@ -323,7 +366,7 @@ namespace TrueCraft.Client
 			using (var stream = File.OpenWrite(path))
 				RenderTarget.SaveAsPng(stream, RenderTarget.Width, RenderTarget.Height);
 
-			ChatModule.AddMessage($"Screen shot saved to {Path.GetFileName(path)}");
+			ChatModule.AddMessage($"screen shot saved to {Path.GetFileName(path)}");
 		}
 
 		public void FlushMainThreadActions()
@@ -344,6 +387,7 @@ namespace TrueCraft.Client
 			if (chunk != null && Client.LoggedIn)
 				if (chunk.GetHeight((byte) adjusted.X, (byte) adjusted.Z) != 0)
 					Client.Physics.Update(gameTime.ElapsedGameTime);
+
 			if (NextPhysicsUpdate < DateTime.UtcNow && Client.LoggedIn)
 			{
 				// NOTE: This is to make the vanilla server send us chunk packets
@@ -372,12 +416,10 @@ namespace TrueCraft.Client
 			const double bobbingMultiplier = 0.05;
 
 			var bobbing = Bobbing * 1.5;
-			var xbob = Math.Cos(bobbing + Math.PI / 2) * bobbingMultiplier;
-			var ybob = Math.Sin(Math.PI / 2 - 2 * bobbing) * bobbingMultiplier;
+			var x = Math.Cos(bobbing + Math.PI / 2) * bobbingMultiplier;
+			var y = Math.Sin(Math.PI / 2 - 2 * bobbing) * bobbingMultiplier;
 
-			Camera.Position = new Vector3(
-				(float) (Client.Position.X + xbob), (float) (Client.Position.Y + Client.Size.Height + ybob), Client.Position.Z);
-
+			Camera.Position = new Vector3((float) (Client.Position.X + x), (float) (Client.Position.Y + Client.Size.Height + y), Client.Position.Z);
 			Camera.Pitch = Client.Pitch;
 			Camera.Yaw = Client.Yaw;
 		}
@@ -409,8 +451,7 @@ namespace TrueCraft.Client
 			base.Draw(gameTime);
 		}
 
-		private bool show_test_window = false;
-
+		private bool _showTestWindow;
 		
 		protected virtual void ImGuiLayout()
 		{
@@ -432,10 +473,10 @@ namespace TrueCraft.Client
 			}
 			ImGui.End();
 			
-			if (show_test_window)
+			if (_showTestWindow)
 			{
 				ImGui.SetNextWindowPos(new System.Numerics.Vector2(650, 20), ImGuiCond.FirstUseEver);
-				ImGui.ShowDemoWindow(ref show_test_window);
+				ImGui.ShowDemoWindow(ref _showTestWindow);
 			}
 		}
 

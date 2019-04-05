@@ -280,7 +280,7 @@ namespace TrueCraft.Client.Modules
 
 		public override void Update(GameTime gameTime)
 		{
-			Game.IsMouseVisible = Game.Client.CurrentWindow != null;
+			Game.IsMouseVisible = Game.Client.CurrentWindow != null || !Game.IsActive;
 			base.Update(gameTime);
 		}
 

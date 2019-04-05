@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using Microsoft.Xna.Framework;
 using TrueCraft.Extensions;
@@ -18,7 +17,7 @@ using TrueCraft.World;
 
 namespace TrueCraft.Server
 {
-	public class MultiplayerServer : IMultiplayerServer, IDisposable
+	public class MultiPlayerServer : IMultiPlayerServer, IDisposable
 	{
 		private static readonly int MillisecondsPerTick = 1000 / 20;
 		private readonly PacketHandler[] PacketHandlers;
@@ -34,7 +33,7 @@ namespace TrueCraft.Server
 
 		public TraceSource Trace { get; }
 
-		public MultiplayerServer(ServerConfiguration configuration)
+		public MultiPlayerServer(ServerConfiguration configuration)
 		{
 			Trace = new TraceSource(configuration.ServerAddress);
 			Trace.Switch.Level = SourceLevels.All;
@@ -207,7 +206,7 @@ namespace TrueCraft.Server
 
 			if (client.LoggedIn)
 			{
-				SendMessage(ChatColor.Yellow + "{0} has left the server.", client.Username);
+				SendMessage($"{ChatColor.Yellow}{client.Username} has left the server.");
 				GetEntityManagerForWorld(client.World).DespawnEntity(client.Entity);
 				GetEntityManagerForWorld(client.World).FlushDespawns();
 			}
@@ -238,10 +237,11 @@ namespace TrueCraft.Server
 		{
 			if (ServerConfiguration.EnableEventLoading)
 				ChunksToSchedule.Add(new Tuple<IWorld, IChunk>(sender as IWorld, e.Chunk));
+
 			if (ServerConfiguration.EnableLighting)
 			{
 				var lighter = WorldLighters.SingleOrDefault(l => l.World == sender);
-				lighter.InitialLighting(e.Chunk, false);
+				lighter?.InitialLighting(e.Chunk, false);
 			}
 		}
 
@@ -253,6 +253,7 @@ namespace TrueCraft.Server
 				for (int i = 0, ClientsCount = Clients.Count; i < ClientsCount; i++)
 				{
 					var client = (RemoteClient) Clients[i];
+
 					// TODO: Confirm that the client knows of this block
 					if (client.LoggedIn && client.World == sender)
 						client.QueuePacket(new BlockChangePacket(e.Position.X, (sbyte) e.Position.Y, e.Position.Z,
@@ -342,17 +343,17 @@ namespace TrueCraft.Server
 			}
 		}
 
-		protected internal void OnChatMessageReceived(ChatMessageEventArgs e)
+		public void OnChatMessageReceived(ChatMessageEventArgs e)
 		{
 			ChatMessageReceived?.Invoke(this, e);
 		}
 
-		protected internal void OnPlayerJoined(PlayerJoinedQuitEventArgs e)
+		public void OnPlayerJoined(PlayerJoinedQuitEventArgs e)
 		{
 			PlayerJoined?.Invoke(this, e);
 		}
 
-		protected internal void OnPlayerQuit(PlayerJoinedQuitEventArgs e)
+		public void OnPlayerQuit(PlayerJoinedQuitEventArgs e)
 		{
 			PlayerQuit?.Invoke(this, e);
 		}
@@ -367,9 +368,9 @@ namespace TrueCraft.Server
 				lock (ClientLock)
 					Clients.Add(client);
 			}
-			catch
+			catch(Exception ex)
 			{
-				// Who cares
+				Trace.TraceData(TraceEventType.Critical, 0, "error accepting client", ex);
 			}
 			finally
 			{
@@ -398,6 +399,7 @@ namespace TrueCraft.Server
 			if (ServerConfiguration.EnableLighting)
 			{
 				Profiler.Start("environment.lighting");
+
 				foreach (var lighter in WorldLighters)
 				{
 					while (Time.ElapsedMilliseconds < limit && lighter.TryLightNext())
@@ -407,18 +409,17 @@ namespace TrueCraft.Server
 
 					if (Time.ElapsedMilliseconds >= limit)
 					{
-						Trace.TraceEvent(TraceEventType.Warning, 0, ChatColor.RemoveColors("Lighting queue is backed up"));
+						Trace.TraceEvent(TraceEventType.Warning, 0, ChatColor.RemoveColors("lighting queue is backed up"));
 					}
 				}
-
+				
 				Profiler.Done();
 			}
 
 			if (ServerConfiguration.EnableEventLoading)
 			{
 				Profiler.Start("environment.chunks");
-				Tuple<IWorld, IChunk> t;
-				if (ChunksToSchedule.TryTake(out t))
+				if (ChunksToSchedule.TryTake(out var t))
 					ScheduleUpdatesForChunk(t.Item1, t.Item2);
 				Profiler.Done();
 			}
@@ -437,7 +438,7 @@ namespace TrueCraft.Server
 			if (disposing) Stop();
 		}
 
-		~MultiplayerServer() => Dispose(false);
+		~MultiPlayerServer() => Dispose(false);
 
 		private struct BlockUpdate
 		{
