@@ -95,7 +95,7 @@ namespace TrueCraft.Server
 		public IPacketReader PacketReader { get; }
 		public IList<IRemoteClient> Clients { get; }
 		public IList<IWorld> Worlds { get; }
-		public IEventScheduler Scheduler { get; }
+		public EventScheduler Scheduler { get; }
 		public IBlockRepository BlockRepository { get; }
 		public IItemRepository ItemRepository { get; }
 		public ICraftingRepository CraftingRepository { get; }

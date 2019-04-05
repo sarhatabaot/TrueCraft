@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using TrueCraft.Profiling;
+using TrueCraft.Server;
 
-namespace TrueCraft.Server
+namespace TrueCraft
 {
-	public class EventScheduler : IEventScheduler
+	public class EventScheduler
 	{
-		private readonly object EventLock = new object();
-
 		public EventScheduler(IMultiPlayerServer server)
 		{
 			Events = new List<ScheduledEvent>();

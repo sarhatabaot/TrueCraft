@@ -226,7 +226,7 @@ namespace TrueCraft.Logic.Blocks
 			Handling = false;
 		}
 
-		private void TryInitializeFurnace(FurnaceState state, IEventScheduler scheduler, IWorld world,
+		private void TryInitializeFurnace(FurnaceState state, EventScheduler scheduler, IWorld world,
 			Coordinates3D coords, IItemRepository itemRepository)
 		{
 			if (TrackedFurnaces.ContainsKey(coords))
@@ -271,7 +271,7 @@ namespace TrueCraft.Logic.Blocks
 				}
 		}
 
-		private void UpdateFurnace(IEventScheduler scheduler, IWorld world, Coordinates3D coords,
+		private void UpdateFurnace(EventScheduler scheduler, IWorld world, Coordinates3D coords,
 			IItemRepository itemRepository)
 		{
 			if (TrackedFurnaces.ContainsKey(coords))

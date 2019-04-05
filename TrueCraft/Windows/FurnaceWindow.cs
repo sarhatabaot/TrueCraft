@@ -13,7 +13,7 @@ namespace TrueCraft.Windows
 		public const short MainIndex = 3;
 		public const short HotbarIndex = 30;
 
-		public FurnaceWindow(IEventScheduler scheduler, Coordinates3D coordinates,
+		public FurnaceWindow(EventScheduler scheduler, Coordinates3D coordinates,
 			IItemRepository itemRepository, InventoryWindow inventory)
 		{
 			ItemRepository = itemRepository;
@@ -49,7 +49,7 @@ namespace TrueCraft.Windows
 		}
 
 		public IItemRepository ItemRepository { get; set; }
-		public IEventScheduler EventScheduler { get; set; }
+		public EventScheduler EventScheduler { get; set; }
 		public Coordinates3D Coordinates { get; set; }
 
 		private bool Copying { get; set; }
