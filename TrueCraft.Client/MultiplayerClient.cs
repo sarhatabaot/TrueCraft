@@ -153,7 +153,7 @@ namespace TrueCraft.Client
 			if (!Connected || Client != null && !Client.Connected)
 				return;
 
-			if (packet.ID != Constants.PacketIds.PlayerGrounded) // prevents noise, as this is emitted constantly
+			if (!Constants.IgnoredPacketIds.Contains(packet.ID))
 				Trace.TraceData(TraceEventType.Verbose, 0, $"queuing packet #{packet.ID:X2} ({packet.GetType().Name})");
 
 			using (var writeStream = new MemoryStream())

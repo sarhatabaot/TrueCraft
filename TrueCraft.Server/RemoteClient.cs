@@ -201,7 +201,8 @@ namespace TrueCraft.Server
 			if (Disconnected || Connection != null && !Connection.Connected)
 				return;
 
-			Server.Trace.TraceData(TraceEventType.Verbose, 0, $"queuing packet #{packet.ID:X2} ({packet.GetType().Name})");
+			if(!Constants.IgnoredPacketIds.Contains(packet.ID))
+				Server.Trace.TraceData(TraceEventType.Verbose, 0, $"queuing packet #{packet.ID:X2} ({packet.GetType().Name})");
 
 			using (var writeStream = new MemoryStream())
 			{
