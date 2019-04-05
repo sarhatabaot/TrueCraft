@@ -93,8 +93,7 @@ namespace TrueCraft.World
 		/// </summary>
 		public IChunk FindChunk(Coordinates3D coordinates, bool generate = true)
 		{
-			IChunk chunk;
-			FindBlockPosition(coordinates, out chunk, generate);
+			FindBlockPosition(coordinates, out var chunk, generate);
 			return chunk;
 		}
 
@@ -109,8 +108,7 @@ namespace TrueCraft.World
 
 		public byte GetBlockId(Coordinates3D coordinates)
 		{
-			IChunk chunk;
-			coordinates = FindBlockPosition(coordinates, out chunk);
+			coordinates = FindBlockPosition(coordinates, out var chunk);
 			return chunk.GetBlockID(coordinates);
 		}
 
@@ -392,8 +390,7 @@ namespace TrueCraft.World
 				.UnloadChunk(new Coordinates2D(coordinates.X - regionX * 32, coordinates.Z - regionZ * 32));
 		}
 
-		private BlockDescriptor GetBlockDataFromChunk(Coordinates3D adjustedCoordinates, IChunk chunk,
-			Coordinates3D coordinates)
+		private static BlockDescriptor GetBlockDataFromChunk(Coordinates3D adjustedCoordinates, IChunk chunk, Coordinates3D coordinates)
 		{
 			return new BlockDescriptor
 			{
@@ -411,6 +408,7 @@ namespace TrueCraft.World
 				return (Region) Regions[coordinates];
 			if (!generate)
 				return null;
+
 			Region region;
 			if (BaseDirectory != null)
 			{

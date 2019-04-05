@@ -57,6 +57,7 @@ namespace TrueCraft.Server
 			if (ServerConfiguration.Debug != null && ServerConfiguration.Debug.DeletePlayersOnStartup)
 				if (Directory.Exists(ResolvePath("players")))
 					Directory.Delete(ResolvePath("players"), true);
+
 			IWorld world;
 			try
 			{
@@ -65,7 +66,7 @@ namespace TrueCraft.Server
 			}
 			catch
 			{
-				world = new World.World(ResolvePath("default"), new StandardGenerator())
+				world = new World.World(ResolvePath("default"), new FlatlandGenerator())
 				{
 					BlockRepository = Server.BlockRepository
 				};
@@ -80,7 +81,6 @@ namespace TrueCraft.Server
 					var progress = (int) ((x + 5) / 10.0 * 100);
 					if (progress % 10 == 0)
 					{
-						Server.Trace.TraceEvent(TraceEventType.Information, 0, "Generating world around spawn point...");
 						Server.Trace.TraceEvent(TraceEventType.Information, 0, "{0}% complete", progress + 10);
 					}
 				}

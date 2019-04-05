@@ -28,6 +28,34 @@ namespace TrueCraft.Client
 		public TraceSource Trace { get; }
 		public ClientTraceWriter TraceListener { get; }
 
+		public TrueCraftUser User { get; set; }
+		public ReadOnlyWorld World { get; }
+		public PhysicsEngine Physics { get; set; }
+		public bool LoggedIn { get; internal set; }
+		public int EntityId { get; internal set; }
+		public InventoryWindow Inventory { get; set; }
+		public int Health { get; set; }
+		public IWindow CurrentWindow { get; set; }
+		public ICraftingRepository CraftingRepository { get; set; }
+
+		public int HotBarSelection
+		{
+			get => _hotBarSelection;
+			set
+			{
+				_hotBarSelection = value;
+				QueuePacket(new ChangeHeldItemPacket
+					{ Slot = (short) value });
+			}
+		}
+
+		private TcpClient Client { get; }
+		private PacketReader PacketReader { get; }
+
+		private SocketAsyncEventArgsPool SocketPool { get; }
+
+		public bool Connected => Interlocked.Read(ref _connected) == 1;
+
 		public MultiPlayerClient(TrueCraftUser user)
 		{
 			TraceListener = new ClientTraceWriter();
@@ -56,35 +84,7 @@ namespace TrueCraft.Client
 			CraftingRepository = crafting;
 			crafting.DiscoverRecipes();
 		}
-
-		public TrueCraftUser User { get; set; }
-		public ReadOnlyWorld World { get; }
-		public PhysicsEngine Physics { get; set; }
-		public bool LoggedIn { get; internal set; }
-		public int EntityId { get; internal set; }
-		public InventoryWindow Inventory { get; set; }
-		public int Health { get; set; }
-		public IWindow CurrentWindow { get; set; }
-		public ICraftingRepository CraftingRepository { get; set; }
-
-		public bool Connected => Interlocked.Read(ref _connected) == 1;
-
-		public int HotBarSelection
-		{
-			get => _hotBarSelection;
-			set
-			{
-				_hotBarSelection = value;
-				QueuePacket(new ChangeHeldItemPacket
-					{Slot = (short) value});
-			}
-		}
-
-		private TcpClient Client { get; }
-		private PacketReader PacketReader { get; }
-
-		private SocketAsyncEventArgsPool SocketPool { get; }
-
+		
 		public void Dispose()
 		{
 			Dispose(true);

@@ -62,8 +62,7 @@ namespace TrueCraft.Client
 		public Camera Camera { get; private set; }
 		public ConcurrentBag<Action> PendingMainThreadActions { get; set; }
 		public double Bobbing { get; set; }
-		public ChunkModule ChunkModule { get; set; }
-		public ChatModule ChatModule { get; set; }
+		
 		public float ScaleFactor { get; set; }
 		public Coordinates3D HighlightedBlock { get; set; }
 		public BlockFace HighlightedBlockFace { get; set; }
@@ -72,11 +71,9 @@ namespace TrueCraft.Client
 		public Coordinates3D TargetBlock { get; set; }
 		public AudioManager Audio { get; set; }
 		public Texture2D WhitePixel { get; set; }
-		public PlayerControlModule ControlModule { get; set; }
-		public SkyModule SkyModule { get; set; }
 
 		private List<IGameplayModule> InputModules { get; set; }
-		private List<IGameplayModule> GraphicalModules { get; set; }
+		
 		private SpriteBatch SpriteBatch { get; set; }
 		private KeyboardHandler KeyboardComponent { get; }
 		private MouseHandler MouseComponent { get; }
@@ -116,6 +113,15 @@ namespace TrueCraft.Client
 
 		private ImGuiRenderer _imgui;
 
+		public ChunkModule ChunkModule { get; set; }
+		public HighlightModule HighlightModule { get; set; }
+		public ChatModule ChatModule { get; set; }
+		public HUDModule HudModule { get; set; }
+		public WindowModule WindowModule { get; set; }
+		public PlayerControlModule ControlModule { get; set; }
+		public SkyModule SkyModule { get; set; }
+
+
 		protected override void Initialize()
 		{
 			base.Initialize(); // (calls LoadContent)
@@ -124,7 +130,6 @@ namespace TrueCraft.Client
 			_imgui.RebuildFontAtlas();
 
 			InputModules = new List<IGameplayModule>();
-			GraphicalModules = new List<IGameplayModule>();
 			
 			if (GraphicsDevice.Viewport.Width < 640 || GraphicsDevice.Viewport.Height < 480)
 				ScaleFactor = 0.5f;
@@ -144,24 +149,18 @@ namespace TrueCraft.Client
 
 			SkyModule = new SkyModule(this);
 			ChunkModule = new ChunkModule(this);
+			HighlightModule = new HighlightModule(this);
 			DebugInfoModule = new DebugInfoModule(this, Pixel);
 			ChatModule = new ChatModule(this, Pixel);
-			var hud = new HUDModule(this, Pixel);
-			var windowModule = new WindowModule(this, Pixel);
-
-			GraphicalModules.Add(SkyModule);
-			GraphicalModules.Add(ChunkModule);
-			GraphicalModules.Add(new HighlightModule(this));
-			GraphicalModules.Add(hud);
-			GraphicalModules.Add(ChatModule);
-			GraphicalModules.Add(windowModule);
-			GraphicalModules.Add(DebugInfoModule);
-
-			InputModules.Add(windowModule);
+			HudModule = new HUDModule(this, Pixel);
+			WindowModule = new WindowModule(this, Pixel);
+			ControlModule = new PlayerControlModule(this);
+			
+			InputModules.Add(WindowModule);
 			InputModules.Add(DebugInfoModule);
 			InputModules.Add(ChatModule);
-			InputModules.Add(new HUDModule(this, Pixel));
-			InputModules.Add(ControlModule = new PlayerControlModule(this));
+			InputModules.Add(HudModule);
+			InputModules.Add(ControlModule);
 
 			Client.PropertyChanged += HandleClientPropertyChanged;
 			Client.Connect(EndPoint);
@@ -403,8 +402,13 @@ namespace TrueCraft.Client
 					module.Update(gameTime);
 			}
 
-			foreach (var module in GraphicalModules)
-				module.Update(gameTime);
+			SkyModule.Update(gameTime);
+			ChunkModule.Update(gameTime);
+			HighlightModule.Update(gameTime);
+			HudModule.Update(gameTime);
+			ChatModule.Update(gameTime);
+			WindowModule.Update(gameTime);
+			DebugInfoModule.Update(gameTime);
 
 			UpdateCamera();
 
@@ -433,11 +437,13 @@ namespace TrueCraft.Client
 
 			Mesh.ResetStats();
 
-			foreach (var module in GraphicalModules)
-			{
-				if (module is IGraphicalModule drawable)
-					drawable.Draw(gameTime);
-			}
+			SkyModule.Draw(gameTime);
+			ChunkModule.Draw(gameTime);
+			HighlightModule.Draw(gameTime);
+			HudModule.Draw(gameTime);
+			ChatModule.Draw(gameTime);
+			WindowModule.Draw(gameTime);
+			DebugInfoModule.Draw(gameTime);
 
 			_imgui.BeforeLayout(gameTime);
 			ImGuiLayout();

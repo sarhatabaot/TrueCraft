@@ -150,9 +150,10 @@ namespace TrueCraft.Server
 
 		public void Save()
 		{
-			var path = Bootstrap.ResolvePath(Path.Combine(Directory.GetCurrentDirectory(), "players", Username + ".nbt"));
-			if (_configuration.Singleplayer)
-				path = Bootstrap.ResolvePath(Path.Combine(((World.World) World).BaseDirectory, "player.nbt"));
+			string path = Bootstrap.ResolvePath(_configuration.Singleplayer
+				? Bootstrap.ResolvePath(Path.Combine(((World.World) World).BaseDirectory, "player.nbt"))
+				: Bootstrap.ResolvePath(Path.Combine(Directory.GetCurrentDirectory(), "players", Username + ".nbt")));
+
 			Directory.CreateDirectory(Path.GetDirectoryName(path));
 
 			if (Entity == null) // I didn't think this could happen but null reference exceptions have been reported here
@@ -343,13 +344,13 @@ namespace TrueCraft.Server
 								}
 								catch (Exception ex)
 								{
-									Server.Trace.TraceData(TraceEventType.Error, 0, "Disconnecting client due to exception in network worker", ex);
+									Server.Trace.TraceData(TraceEventType.Error, 0, "disconnecting client due to exception in network worker", ex);
 									Server.DisconnectClient(this);
 								}
 							}
 							else
 							{
-								var message = $"Unhandled packet {packet.ID:X2} ({packet.GetType().Name})";
+								var message = $"unhandled packet {packet.ID:X2} ({packet.GetType().Name})";
 								MaybeEchoToClient(message);
 								Server.Trace.TraceData(TraceEventType.Error, 0, message);
 							}
@@ -357,7 +358,7 @@ namespace TrueCraft.Server
 					}
 					catch (NotSupportedException)
 					{
-						Server.Trace.TraceEvent(TraceEventType.Error, 0, "Disconnecting client due to unsupported packet received.");
+						Server.Trace.TraceEvent(TraceEventType.Error, 0, "disconnecting client due to unsupported packet received.");
 					}
 				}
 				else
@@ -421,7 +422,7 @@ namespace TrueCraft.Server
 							var chunk = World.GetChunk(coords, blockingCall);
 							if (chunk == null)
 							{
-								Server.Trace.TraceEvent(TraceEventType.Warning, 0, $"no chunk found at {coords}");
+								Server.Trace.TraceEvent(TraceEventType.Warning, 0, $"no chunk found @({coords.X}, {coords.Z})");
 							}
 							else
 							{
@@ -429,9 +430,13 @@ namespace TrueCraft.Server
 								toLoad.Add(new Tuple<Coordinates2D, IChunk>(coords, chunk));
 							}
 						}
+						else
+						{
+							Server.Trace.TraceEvent(TraceEventType.Verbose, 0, $"... skipping already loaded chunk @({coords.X}, {coords.Z})");
+						}
 
 						count--;
-						if (count > 0 && count % 100 == 0)
+						//if (count > 0 && count % 100 == 0)
 							Server.Trace.TraceEvent(TraceEventType.Start, 0, $"... {count} remaining");
 					}
 				}
@@ -523,8 +528,7 @@ namespace TrueCraft.Server
 						SelectedItem.Metadata));
 			}
 
-			if (e.SlotIndex >= InventoryWindow.ArmorIndex &&
-			    e.SlotIndex < InventoryWindow.ArmorIndex + InventoryWindow.Armor.Length)
+			if (e.SlotIndex >= InventoryWindow.ArmorIndex && e.SlotIndex < InventoryWindow.ArmorIndex + InventoryWindow.Armor.Length)
 			{
 				var slot = (short) (4 - (e.SlotIndex - InventoryWindow.ArmorIndex));
 				var notified = Server.GetEntityManagerForWorld(World).ClientsForEntity(Entity);
