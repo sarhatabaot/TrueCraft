@@ -123,7 +123,10 @@ namespace TrueCraft.Server
 					Profiler.Start("scheduler." + e.Name);
 
 					if (!Constants.IgnoredEvents.Contains(e.Name))
-						Server.Trace.TraceEvent(TraceEventType.Verbose, 0, $"activating event '{e.Name}' on subject {e.Subject?.GetType().Name}");
+					{
+						var subjectLine = e.Subject != null ? $" on subject {e.Subject?.GetType().Name}" : string.Empty;
+						Server.Trace.TraceEvent(TraceEventType.Verbose, 0, $"activating event '{e.Name}'{subjectLine}");
+					}
 
 					e.Action(Server);
 					Events.RemoveAt(i);
