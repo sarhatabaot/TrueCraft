@@ -6,7 +6,10 @@ namespace VisualTests
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			using (var game = new VisualTestGame(args))
+			{
+				game.Run();
+			}
 		}
 	}
 }
