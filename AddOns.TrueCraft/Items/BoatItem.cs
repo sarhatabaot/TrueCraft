@@ -2,7 +2,7 @@ using System;
 using TrueCraft.Logic;
 using TrueCraft._ADDON.Blocks;
 
-namespace TrueCraft._ADDON.Items
+namespace TrueCraft.Items
 {
 	public class BoatItem : ItemProvider, ICraftingRecipe
 	{

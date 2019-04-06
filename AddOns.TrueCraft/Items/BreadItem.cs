@@ -1,7 +1,8 @@
 using System;
 using TrueCraft.Logic;
+using TrueCraft._ADDON.Items;
 
-namespace TrueCraft._ADDON.Items
+namespace TrueCraft.Items
 {
 	public class BreadItem : FoodItem, ICraftingRecipe
 	{
