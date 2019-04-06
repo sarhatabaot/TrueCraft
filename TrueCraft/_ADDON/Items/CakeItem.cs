@@ -9,7 +9,7 @@ namespace TrueCraft.Logic.Items
 	{
 		public static readonly short ItemID = 0x162;
 
-		public override short ID => 0x162;
+		public override short Id => 0x162;
 
 		//This is per "slice"
 		public override float Restores => 1.5f;
@@ -40,7 +40,7 @@ namespace TrueCraft.Logic.Items
 			var old = world.BlockRepository.GetBlockProvider(world.GetBlockId(coordinates));
 			if (old.Hardness == 0)
 			{
-				world.SetBlockId(coordinates, CakeBlock.BlockID);
+				world.SetBlockId(coordinates, CakeBlock.BlockId);
 				item.Count--;
 				user.Inventory[user.SelectedSlot] = item;
 			}

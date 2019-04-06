@@ -3,7 +3,7 @@
 	public interface IBiomeProvider
 	{
 		bool Spawn { get; }
-		byte ID { get; }
+		byte Id { get; }
 		int Elevation { get; }
 		double Temperature { get; }
 		double Rainfall { get; }

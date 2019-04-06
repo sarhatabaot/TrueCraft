@@ -7,9 +7,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class CakeBlock : BlockProvider, ICraftingRecipe
 	{
-		public static readonly byte BlockID = 0x5C;
+		public static readonly byte BlockId = 0x5C;
 
-		public override byte ID => 0x5C;
+		public override byte Id => 0x5C;
 
 		public override double BlastResistance => 2.5;
 
@@ -43,7 +43,7 @@ namespace TrueCraft.Logic.Blocks
 				}
 			};
 
-		public ItemStack Output => new ItemStack(BlockID);
+		public ItemStack Output => new ItemStack(BlockId);
 
 		public bool SignificantMetadata => false;
 
@@ -56,7 +56,7 @@ namespace TrueCraft.Logic.Blocks
 			IRemoteClient user)
 		{
 			if (descriptor.Metadata == 5)
-				world.SetBlockId(descriptor.Coordinates, AirBlock.BlockID);
+				world.SetBlockId(descriptor.Coordinates, AirBlock.BlockId);
 			else
 				world.SetMetadata(descriptor.Coordinates, (byte) (descriptor.Metadata + 1));
 			return false;

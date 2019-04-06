@@ -26,7 +26,7 @@ namespace TrueCraft.Client.Handlers
 				return;
 			}
 
-			chunk.SetBlockID(adjusted, (byte) packet.BlockID);
+			chunk.SetBlockID(adjusted, (byte) packet.BlockId);
 			chunk.SetMetadata(adjusted, (byte) packet.Metadata);
 			client.OnBlockChanged(new BlockChangeEventArgs(coordinates, new BlockDescriptor(),
 				new BlockDescriptor()));

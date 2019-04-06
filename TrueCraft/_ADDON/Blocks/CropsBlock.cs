@@ -9,9 +9,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class CropsBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x3B;
+		public static readonly byte BlockId = 0x3B;
 
-		public override byte ID => 0x3B;
+		public override byte Id => 0x3B;
 
 		public override double BlastResistance => 0;
 
@@ -47,7 +47,7 @@ namespace TrueCraft.Logic.Blocks
 
 		private void GrowBlock(IMultiPlayerServer server, IWorld world, Coordinates3D coords)
 		{
-			if (world.GetBlockId(coords) != BlockID)
+			if (world.GetBlockId(coords) != BlockId)
 				return;
 			var meta = world.GetMetadata(coords);
 			meta++;
@@ -64,7 +64,7 @@ namespace TrueCraft.Logic.Blocks
 		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiPlayerServer server,
 			IWorld world)
 		{
-			if (world.GetBlockId(descriptor.Coordinates + Coordinates3D.Down) != FarmlandBlock.BlockID)
+			if (world.GetBlockId(descriptor.Coordinates + Coordinates3D.Down) != FarmlandBlock.BlockId)
 			{
 				GenerateDropEntity(descriptor, world, server, ItemStack.EmptyStack);
 				world.SetBlockId(descriptor.Coordinates, 0);

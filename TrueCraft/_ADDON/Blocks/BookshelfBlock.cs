@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class BookshelfBlock : BlockProvider, ICraftingRecipe, IBurnableItem
 	{
-		public static readonly byte BlockID = 0x2F;
+		public static readonly byte BlockId = 0x2F;
 
-		public override byte ID => 0x2F;
+		public override byte Id => 0x2F;
 
 		public override double BlastResistance => 7.5;
 
@@ -27,9 +27,9 @@ namespace TrueCraft.Logic.Blocks
 			new[,]
 			{
 				{
-					new ItemStack(WoodenPlanksBlock.BlockID),
-					new ItemStack(WoodenPlanksBlock.BlockID),
-					new ItemStack(WoodenPlanksBlock.BlockID)
+					new ItemStack(WoodenPlanksBlock.BlockId),
+					new ItemStack(WoodenPlanksBlock.BlockId),
+					new ItemStack(WoodenPlanksBlock.BlockId)
 				},
 				{
 					new ItemStack(BookItem.ItemID),
@@ -37,13 +37,13 @@ namespace TrueCraft.Logic.Blocks
 					new ItemStack(BookItem.ItemID)
 				},
 				{
-					new ItemStack(WoodenPlanksBlock.BlockID),
-					new ItemStack(WoodenPlanksBlock.BlockID),
-					new ItemStack(WoodenPlanksBlock.BlockID)
+					new ItemStack(WoodenPlanksBlock.BlockId),
+					new ItemStack(WoodenPlanksBlock.BlockId),
+					new ItemStack(WoodenPlanksBlock.BlockId)
 				}
 			};
 
-		public ItemStack Output => new ItemStack(BlockID);
+		public ItemStack Output => new ItemStack(BlockId);
 
 		public bool SignificantMetadata => false;
 

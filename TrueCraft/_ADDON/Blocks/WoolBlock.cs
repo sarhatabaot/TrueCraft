@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class WoolBlock : BlockProvider, ICraftingRecipe
 	{
-		public static readonly byte BlockID = 0x23;
+		public static readonly byte BlockId = 0x23;
 
-		public override byte ID => 0x23;
+		public override byte Id => 0x23;
 
 		public override double BlastResistance => 4;
 
@@ -28,7 +28,7 @@ namespace TrueCraft.Logic.Blocks
 				{new ItemStack(StringItem.ItemID), new ItemStack(StringItem.ItemID)}
 			};
 
-		public ItemStack Output => new ItemStack(BlockID);
+		public ItemStack Output => new ItemStack(BlockId);
 
 		public bool SignificantMetadata => true;
 

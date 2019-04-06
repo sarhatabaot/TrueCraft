@@ -19,9 +19,9 @@ namespace TrueCraft.Logic.Blocks
 			South = 0x02
 		}
 
-		public static readonly byte BlockID = 0x41;
+		public static readonly byte BlockId = 0x41;
 
-		public override byte ID => 0x41;
+		public override byte Id => 0x41;
 
 		public override double BlastResistance => 2;
 
@@ -60,7 +60,7 @@ namespace TrueCraft.Logic.Blocks
 				}
 			};
 
-		public ItemStack Output => new ItemStack(BlockID);
+		public ItemStack Output => new ItemStack(BlockId);
 
 		public bool SignificantMetadata => false;
 
@@ -111,7 +111,7 @@ namespace TrueCraft.Logic.Blocks
 			descriptor.Metadata = (byte) direction;
 			if (IsSupported(descriptor, user.Server, world))
 			{
-				world.SetBlockId(descriptor.Coordinates, BlockID);
+				world.SetBlockId(descriptor.Coordinates, BlockId);
 				world.SetMetadata(descriptor.Coordinates, (byte) direction);
 				item.Count--;
 				user.Inventory[user.SelectedSlot] = item;

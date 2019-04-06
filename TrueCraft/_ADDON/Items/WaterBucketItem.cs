@@ -6,10 +6,10 @@ namespace TrueCraft.Logic.Items
 	{
 		public new static readonly short ItemID = 0x146;
 
-		public override short ID => 0x146;
+		public override short Id => 0x146;
 
 		public override string DisplayName => "Water Bucket";
 
-		protected override byte? RelevantBlockType => WaterBlock.BlockID;
+		protected override byte? RelevantBlockType => WaterBlock.BlockId;
 	}
 }

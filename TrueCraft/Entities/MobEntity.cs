@@ -54,7 +54,7 @@ namespace TrueCraft.Entities
 		public event EventHandler PathComplete;
 
 		public override IPacket SpawnPacket =>
-			new SpawnMobPacket(EntityID, MobType,
+			new SpawnMobPacket(EntityId, MobType,
 				MathHelper.CreateAbsoluteInt(Position.X),
 				MathHelper.CreateAbsoluteInt(Position.Y),
 				MathHelper.CreateAbsoluteInt(Position.Z),

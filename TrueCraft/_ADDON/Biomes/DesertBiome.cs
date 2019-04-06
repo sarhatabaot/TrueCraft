@@ -4,7 +4,7 @@ namespace TrueCraft.TerrainGen.Biomes
 {
 	public class DesertBiome : BiomeProvider
 	{
-		public override byte ID => (byte) Biome.Desert;
+		public override byte Id => (byte) Biome.Desert;
 
 		public override double Temperature => 2.0f;
 
@@ -16,9 +16,9 @@ namespace TrueCraft.TerrainGen.Biomes
 
 		public override PlantSpecies[] Plants => new[] {PlantSpecies.Deadbush, PlantSpecies.Cactus};
 
-		public override byte SurfaceBlock => SandBlock.BlockID;
+		public override byte SurfaceBlock => SandBlock.BlockId;
 
-		public override byte FillerBlock => SandstoneBlock.BlockID;
+		public override byte FillerBlock => SandstoneBlock.BlockId;
 
 		public override int SurfaceDepth => 4;
 	}

@@ -19,7 +19,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 
 		static LadderRenderer()
 		{
-			RegisterRenderer(LadderBlock.BlockID, new LadderRenderer());
+			RegisterRenderer(LadderBlock.BlockId, new LadderRenderer());
 			for (var i = 0; i < Texture.Length; i++)
 				Texture[i] *= new Vector2(16f / 256f);
 		}

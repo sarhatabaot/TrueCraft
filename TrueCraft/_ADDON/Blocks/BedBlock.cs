@@ -23,9 +23,9 @@ namespace TrueCraft.Logic.Blocks
 			Head = 0x8
 		}
 
-		public static readonly byte BlockID = 0x1A;
+		public static readonly byte BlockId = 0x1A;
 
-		public override byte ID => 0x1A;
+		public override byte Id => 0x1A;
 
 		public override double BlastResistance => 1;
 
@@ -73,7 +73,7 @@ namespace TrueCraft.Logic.Blocks
 
 				if ((descriptor.Metadata & (byte) BedType.Head) == (byte) BedType.Head)
 					other = -other;
-				if (world.GetBlockId(descriptor.Coordinates + other) != BlockID)
+				if (world.GetBlockId(descriptor.Coordinates + other) != BlockId)
 					return false;
 			}
 

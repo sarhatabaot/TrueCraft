@@ -2,7 +2,7 @@
 {
 	public struct OreData
 	{
-		public byte ID;
+		public byte Id;
 		public OreTypes Type;
 		public int MinY;
 		public int MaxY;
@@ -12,7 +12,7 @@
 
 		public OreData(byte id, OreTypes type, int minY, int maxY, int viens, int abundance, float rarity)
 		{
-			ID = id;
+			Id = id;
 			Type = type;
 			MinY = minY;
 			MaxY = maxY;

@@ -13,13 +13,13 @@ namespace TrueCraft.Server
 		TimeSpan TimeSinceLastUpdate { get; }
 
 		/// <summary>
-		///  Adds an entity to the world and assigns it an entity ID.
+		///  Adds an entity to the world and assigns it an entity Id.
 		/// </summary>
 		void SpawnEntity(IEntity entity);
 
 		void DespawnEntity(IEntity entity);
 		void FlushDespawns();
-		IEntity GetEntityByID(int id);
+		IEntity GetEntityById(int Id);
 		void Update();
 		void SendEntitiesToClient(IRemoteClient client);
 		IList<IEntity> EntitiesInRange(Vector3 center, float radius);

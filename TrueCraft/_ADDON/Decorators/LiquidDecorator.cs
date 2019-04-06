@@ -19,20 +19,20 @@ namespace TrueCraft.TerrainGen.Decorators
 				{
 					var blockLocation = new Coordinates3D(x, y, z);
 					int blockId = chunk.GetBlockID(blockLocation);
-					if (blockId.Equals(AirBlock.BlockID))
+					if (blockId.Equals(AirBlock.BlockId))
 					{
 						chunk.SetBlockID(blockLocation, biome.WaterBlock);
 						var below = blockLocation + Coordinates3D.Down;
-						if (!chunk.GetBlockID(below).Equals(AirBlock.BlockID) &&
+						if (!chunk.GetBlockID(below).Equals(AirBlock.BlockId) &&
 						    !chunk.GetBlockID(below).Equals(biome.WaterBlock))
-							if (!biome.WaterBlock.Equals(LavaBlock.BlockID) &&
-							    !biome.WaterBlock.Equals(StationaryLavaBlock.BlockID))
+							if (!biome.WaterBlock.Equals(LavaBlock.BlockId) &&
+							    !biome.WaterBlock.Equals(StationaryLavaBlock.BlockId))
 							{
 								var random = new Random(world.Seed);
 								if (random.Next(100) < 40)
-									chunk.SetBlockID(below, ClayBlock.BlockID);
+									chunk.SetBlockID(below, ClayBlock.BlockId);
 								else
-									chunk.SetBlockID(below, SandBlock.BlockID);
+									chunk.SetBlockID(below, SandBlock.BlockId);
 							}
 					}
 				}
@@ -41,7 +41,7 @@ namespace TrueCraft.TerrainGen.Decorators
 				{
 					var blockLocation = new Coordinates3D(x, y, z);
 					int blockId = chunk.GetBlockID(blockLocation);
-					if (blockId.Equals(AirBlock.BlockID)) chunk.SetBlockID(blockLocation, LavaBlock.BlockID);
+					if (blockId.Equals(AirBlock.BlockId)) chunk.SetBlockID(blockLocation, LavaBlock.BlockId);
 				}
 			}
 		}

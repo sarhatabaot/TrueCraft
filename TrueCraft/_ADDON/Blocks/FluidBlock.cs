@@ -22,7 +22,7 @@ namespace TrueCraft.Logic.Blocks
 		// is one greater than the largest value nearby. When they reach
 		// MaximumFluidDepletion, the fluid stops propgetating.
 
-		public abstract override byte ID { get; }
+		public abstract override byte Id { get; }
 
 		public override BoundingBox? BoundingBox => null;
 
@@ -50,14 +50,14 @@ namespace TrueCraft.Logic.Blocks
 
 		public override void BlockPlaced(BlockDescriptor descriptor, BlockFace face, IWorld world, IRemoteClient user)
 		{
-			if (ID == FlowingID)
+			if (Id == FlowingID)
 				ScheduleNextEvent(descriptor.Coordinates, world, user.Server);
 		}
 
 		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiPlayerServer server,
 			IWorld world)
 		{
-			if (ID == StillID)
+			if (Id == StillID)
 			{
 				var outward = DetermineOutwardFlow(world, descriptor.Coordinates);
 				var inward = DetermineInwardFlow(world, descriptor.Coordinates);
@@ -132,7 +132,7 @@ namespace TrueCraft.Logic.Blocks
 		{
 			// For each block we can flow into, generate an item entity if appropriate
 			var provider = world.BlockRepository.GetBlockProvider(world.GetBlockId(target.TargetBlock));
-			provider.GenerateDropEntity(new BlockDescriptor {Coordinates = target.TargetBlock, ID = provider.ID}, world,
+			provider.GenerateDropEntity(new BlockDescriptor {Coordinates = target.TargetBlock, Id = provider.Id}, world,
 				server, ItemStack.EmptyStack);
 			// And overwrite the block with a new fluid block.
 			world.SetBlockId(target.TargetBlock, FlowingID);
@@ -141,8 +141,8 @@ namespace TrueCraft.Logic.Blocks
 			server.Scheduler.ScheduleEvent("fluid", chunk,
 				TimeSpan.FromSeconds(SecondsBetweenUpdates),
 				s => AutomataUpdate(s, world, target.TargetBlock));
-			if (FlowingID == LavaBlock.BlockID)
-				(BlockRepository.GetBlockProvider(FireBlock.BlockID) as FireBlock).ScheduleUpdate(
+			if (FlowingID == LavaBlock.BlockId)
+				(BlockRepository.GetBlockProvider(FireBlock.BlockId) as FireBlock).ScheduleUpdate(
 					server, world, world.GetBlockData(target.TargetBlock));
 		}
 
@@ -193,7 +193,7 @@ namespace TrueCraft.Logic.Blocks
 
 			var currentLevel = world.GetMetadata(coords);
 			var blockBelow = world.BlockRepository.GetBlockProvider(world.GetBlockId(coords + Coordinates3D.Down));
-			if (blockBelow.Hardness == 0 && blockBelow.ID != FlowingID && blockBelow.ID != StillID)
+			if (blockBelow.Hardness == 0 && blockBelow.Id != FlowingID && blockBelow.Id != StillID)
 			{
 				outwardFlow.Add(new LiquidFlow(coords + Coordinates3D.Down, 1));
 				if (currentLevel != 0)
@@ -259,22 +259,22 @@ namespace TrueCraft.Logic.Blocks
 					var xID = world.BlockRepository.GetBlockProvider(world.GetBlockId(xCoordinateCheck));
 					var zID = world.BlockRepository.GetBlockProvider(world.GetBlockId(zCoordinateCheck));
 
-					if (xID.Hardness == 0 && xID.ID != FlowingID && xID.ID != StillID)
+					if (xID.Hardness == 0 && xID.Id != FlowingID && xID.Id != StillID)
 						if (outwardFlow.All(f => f.TargetBlock != xCoordinateCheck))
 							outwardFlow.Add(new LiquidFlow(xCoordinateCheck, (byte) (currentLevel + 1)));
 
-					if (zID.Hardness == 0 && zID.ID != FlowingID && zID.ID != StillID)
+					if (zID.Hardness == 0 && zID.Id != FlowingID && zID.Id != StillID)
 						if (outwardFlow.All(f => f.TargetBlock != zCoordinateCheck))
 							outwardFlow.Add(new LiquidFlow(zCoordinateCheck, (byte) (currentLevel + 1)));
 				}
 
 				// Occasionally, there are scenarios where the nearest candidate hole is not acceptable, but
 				// there is space immediately next to the block. We should fill that space.
-				if (outwardFlow.Count == 0 && blockBelow.ID != FlowingID && blockBelow.ID != StillID)
+				if (outwardFlow.Count == 0 && blockBelow.Id != FlowingID && blockBelow.Id != StillID)
 					for (var i = 0; i < Neighbors.Length; i++)
 					{
 						var b = world.BlockRepository.GetBlockProvider(world.GetBlockId(coords + Neighbors[i]));
-						if (b.Hardness == 0 && b.ID != StillID && b.ID != FlowingID)
+						if (b.Hardness == 0 && b.Id != StillID && b.Id != FlowingID)
 							outwardFlow.Add(new LiquidFlow(Neighbors[i] + coords, (byte) (currentLevel + 1)));
 					}
 			}

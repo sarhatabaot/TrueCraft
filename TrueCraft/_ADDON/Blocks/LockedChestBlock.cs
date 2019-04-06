@@ -4,9 +4,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class LockedChestBlock : BlockProvider, IBurnableItem
 	{
-		public static readonly byte BlockID = 0x5F;
+		public static readonly byte BlockId = 0x5F;
 
-		public override byte ID => 0x5F;
+		public override byte Id => 0x5F;
 
 		public override double BlastResistance => 0;
 

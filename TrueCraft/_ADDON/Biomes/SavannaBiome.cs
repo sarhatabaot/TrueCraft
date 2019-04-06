@@ -2,7 +2,7 @@
 {
 	public class SavannaBiome : BiomeProvider
 	{
-		public override byte ID => (byte) Biome.Savanna;
+		public override byte Id => (byte) Biome.Savanna;
 
 		public override double Temperature => 1.2f;
 

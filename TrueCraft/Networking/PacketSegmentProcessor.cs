@@ -49,7 +49,7 @@ namespace TrueCraft.Networking
 						CurrentPacket = createPacket();
 					else
 					{
-						_trace.TraceData(TraceEventType.Error, 0, $"Unable to read packet type with ID #{packetId:X2}");
+						_trace.TraceData(TraceEventType.Error, 0, $"Unable to read packet type with Id #{packetId:X2}");
 						PacketBuffer.Clear();
 						return false;
 					}

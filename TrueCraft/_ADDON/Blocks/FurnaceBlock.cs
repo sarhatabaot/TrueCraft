@@ -15,7 +15,7 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class FurnaceBlock : BlockProvider, ICraftingRecipe
 	{
-		public static readonly byte BlockID = 0x3D;
+		public static readonly byte BlockId = 0x3D;
 
 		private bool Handling;
 
@@ -25,7 +25,7 @@ namespace TrueCraft.Logic.Blocks
 			TrackedFurnaceWindows = new Dictionary<Coordinates3D, List<IWindow>>();
 		}
 
-		public override byte ID => 0x3D;
+		public override byte Id => 0x3D;
 
 		public override double BlastResistance => 17.5;
 
@@ -44,29 +44,29 @@ namespace TrueCraft.Logic.Blocks
 			new[,]
 			{
 				{
-					new ItemStack(CobblestoneBlock.BlockID),
-					new ItemStack(CobblestoneBlock.BlockID),
-					new ItemStack(CobblestoneBlock.BlockID)
+					new ItemStack(CobblestoneBlock.BlockId),
+					new ItemStack(CobblestoneBlock.BlockId),
+					new ItemStack(CobblestoneBlock.BlockId)
 				},
 				{
-					new ItemStack(CobblestoneBlock.BlockID),
+					new ItemStack(CobblestoneBlock.BlockId),
 					ItemStack.EmptyStack,
-					new ItemStack(CobblestoneBlock.BlockID)
+					new ItemStack(CobblestoneBlock.BlockId)
 				},
 				{
-					new ItemStack(CobblestoneBlock.BlockID),
-					new ItemStack(CobblestoneBlock.BlockID),
-					new ItemStack(CobblestoneBlock.BlockID)
+					new ItemStack(CobblestoneBlock.BlockId),
+					new ItemStack(CobblestoneBlock.BlockId),
+					new ItemStack(CobblestoneBlock.BlockId)
 				}
 			};
 
-		public ItemStack Output => new ItemStack(BlockID);
+		public ItemStack Output => new ItemStack(BlockId);
 
 		public bool SignificantMetadata => false;
 
 		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
 		{
-			return new[] {new ItemStack(BlockID)};
+			return new[] {new ItemStack(BlockId)};
 		}
 
 		private NbtCompound CreateTileEntity()
@@ -122,11 +122,11 @@ namespace TrueCraft.Logic.Blocks
 					window[2] = state.Items[2];
 
 					window.Client.QueuePacket(new UpdateProgressPacket(
-						window.ID, UpdateProgressPacket.ProgressTarget.ItemCompletion, state.CookTime));
+						window.Id, UpdateProgressPacket.ProgressTarget.ItemCompletion, state.CookTime));
 					var burnProgress = state.BurnTimeRemaining / (double) state.BurnTimeTotal;
 					var burn = (short) (burnProgress * 250);
 					window.Client.QueuePacket(new UpdateProgressPacket(
-						window.ID, UpdateProgressPacket.ProgressTarget.AvailableHeat, burn));
+						window.Id, UpdateProgressPacket.ProgressTarget.AvailableHeat, burn));
 				}
 
 				Handling = false;
@@ -236,8 +236,8 @@ namespace TrueCraft.Logic.Blocks
 			var fuelStack = state.Items[FurnaceWindow.FuelIndex];
 			var outputStack = state.Items[FurnaceWindow.OutputIndex];
 
-			var input = itemRepository.GetItemProvider(inputStack.ID) as ISmeltableItem;
-			var fuel = itemRepository.GetItemProvider(fuelStack.ID) as IBurnableItem;
+			var input = itemRepository.GetItemProvider(inputStack.Id) as ISmeltableItem;
+			var fuel = itemRepository.GetItemProvider(fuelStack.Id) as IBurnableItem;
 
 			if (state.BurnTimeRemaining > 0)
 			{
@@ -263,7 +263,7 @@ namespace TrueCraft.Logic.Blocks
 					state.CookTime = 0;
 					state.Items[FurnaceWindow.FuelIndex].Count--;
 					SetState(world, coords, state);
-					world.SetBlockId(coords, LitFurnaceBlock.BlockID);
+					world.SetBlockId(coords, LitFurnaceBlock.BlockId);
 					var subject = new FurnaceEventSubject();
 					TrackedFurnaces[coords] = subject;
 					scheduler.ScheduleEvent("smelting", subject, TimeSpan.FromSeconds(1),
@@ -277,14 +277,14 @@ namespace TrueCraft.Logic.Blocks
 			if (TrackedFurnaces.ContainsKey(coords))
 				TrackedFurnaces.Remove(coords);
 
-			if (world.GetBlockId(coords) != BlockID && world.GetBlockId(coords) != LitFurnaceBlock.BlockID) return;
+			if (world.GetBlockId(coords) != BlockId && world.GetBlockId(coords) != LitFurnaceBlock.BlockId) return;
 
 			var state = GetState(world, coords);
 
 			var inputStack = state.Items[FurnaceWindow.IngredientIndex];
 			var outputStack = state.Items[FurnaceWindow.OutputIndex];
 
-			var input = itemRepository.GetItemProvider(inputStack.ID) as ISmeltableItem;
+			var input = itemRepository.GetItemProvider(inputStack.Id) as ISmeltableItem;
 
 			// Update burn time
 			var burnTime = state.BurnTimeRemaining;
@@ -295,7 +295,7 @@ namespace TrueCraft.Logic.Blocks
 				{
 					state.BurnTimeRemaining = 0;
 					state.BurnTimeTotal = 0;
-					world.SetBlockId(coords, BlockID);
+					world.SetBlockId(coords, BlockId);
 				}
 			}
 

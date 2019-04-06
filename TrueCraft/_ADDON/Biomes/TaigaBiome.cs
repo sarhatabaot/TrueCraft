@@ -2,7 +2,7 @@
 {
 	public class TaigaBiome : BiomeProvider
 	{
-		public override byte ID => (byte) Biome.Taiga;
+		public override byte Id => (byte) Biome.Taiga;
 
 		public override double Temperature => 0.0f;
 

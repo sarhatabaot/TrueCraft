@@ -6,14 +6,14 @@ namespace TrueCraft.Logic.Items
 	{
 		public new static readonly short ItemID = 0x157;
 
-		public override short ID => 0x157;
+		public override short Id => 0x157;
 
 		public override string DisplayName => "Minecart with Furnace";
 
 		public override ItemStack[,] Pattern =>
 			new[,]
 			{
-				{new ItemStack(FurnaceBlock.BlockID)},
+				{new ItemStack(FurnaceBlock.BlockId)},
 				{new ItemStack(MinecartItem.ItemID)}
 			};
 	}

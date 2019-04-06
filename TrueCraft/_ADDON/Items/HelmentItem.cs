@@ -33,7 +33,7 @@
 			}
 		}
 
-		public ItemStack Output => new ItemStack(ID);
+		public ItemStack Output => new ItemStack(Id);
 
 		public bool SignificantMetadata => false;
 	}

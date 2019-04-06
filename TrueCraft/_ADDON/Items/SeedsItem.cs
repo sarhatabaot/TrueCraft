@@ -9,7 +9,7 @@ namespace TrueCraft.Logic.Items
 	{
 		public static readonly short ItemID = 0x127;
 
-		public override short ID => 0x127;
+		public override short Id => 0x127;
 
 		public override string DisplayName => "Seeds";
 
@@ -21,10 +21,10 @@ namespace TrueCraft.Logic.Items
 		public override void ItemUsedOnBlock(Coordinates3D coordinates, ItemStack item, BlockFace face, IWorld world,
 			IRemoteClient user)
 		{
-			if (world.GetBlockId(coordinates) == FarmlandBlock.BlockID)
+			if (world.GetBlockId(coordinates) == FarmlandBlock.BlockId)
 			{
-				world.SetBlockId(coordinates + MathHelper.BlockFaceToCoordinates(face), CropsBlock.BlockID);
-				world.BlockRepository.GetBlockProvider(CropsBlock.BlockID).BlockPlaced(
+				world.SetBlockId(coordinates + MathHelper.BlockFaceToCoordinates(face), CropsBlock.BlockId);
+				world.BlockRepository.GetBlockProvider(CropsBlock.BlockId).BlockPlaced(
 					new BlockDescriptor {Coordinates = coordinates}, face, world, user);
 			}
 		}

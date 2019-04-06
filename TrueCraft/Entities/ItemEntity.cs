@@ -26,7 +26,7 @@ namespace TrueCraft.Entities
 		public ItemStack Item { get; set; }
 
 		public override IPacket SpawnPacket =>
-			new SpawnItemPacket(EntityID, Item.ID, Item.Count, Item.Metadata,
+			new SpawnItemPacket(EntityId, Item.Id, Item.Count, Item.Metadata,
 				MathHelper.CreateAbsoluteInt(Position.X), MathHelper.CreateAbsoluteInt(Position.Y),
 				MathHelper.CreateAbsoluteInt(Position.Z),
 				MathHelper.CreateRotationByte(Yaw),

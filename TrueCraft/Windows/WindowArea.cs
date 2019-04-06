@@ -42,7 +42,7 @@ namespace TrueCraft.Windows
 			for (var i = 0; i < Length; i++)
 				if (this[i].Empty && emptyIndex == -1)
 					emptyIndex = i;
-				else if (this[i].ID == item.ID &&
+				else if (this[i].Id == item.Id &&
 				         this[i].Metadata == item.Metadata &&
 				         this[i].Count < maximumStackSize)
 				{
@@ -52,13 +52,13 @@ namespace TrueCraft.Windows
 						from[index] = ItemStack.EmptyStack;
 					if (this[i].Count + item.Count > maximumStackSize)
 					{
-						item = new ItemStack(item.ID, (sbyte) (item.Count - (maximumStackSize - this[i].Count)),
+						item = new ItemStack(item.Id, (sbyte) (item.Count - (maximumStackSize - this[i].Count)),
 							item.Metadata, item.Nbt);
-						this[i] = new ItemStack(item.ID, (sbyte) maximumStackSize, item.Metadata, item.Nbt);
+						this[i] = new ItemStack(item.Id, (sbyte) maximumStackSize, item.Metadata, item.Nbt);
 						continue;
 					}
 
-					this[i] = new ItemStack(item.ID, (sbyte) (this[i].Count + item.Count), item.Metadata);
+					this[i] = new ItemStack(item.Id, (sbyte) (this[i].Count + item.Count), item.Metadata);
 					return i;
 				}
 

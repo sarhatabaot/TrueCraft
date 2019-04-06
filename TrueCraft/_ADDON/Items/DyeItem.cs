@@ -26,7 +26,7 @@ namespace TrueCraft.Logic.Items
 
 		public static readonly short ItemID = 0x15F;
 
-		public override short ID => 0x15F;
+		public override short Id => 0x15F;
 
 		public override string DisplayName => "Dye";
 
@@ -85,7 +85,7 @@ namespace TrueCraft.Logic.Items
 				new[,]
 				{
 					{
-						new ItemStack(RoseBlock.BlockID)
+						new ItemStack(RoseBlock.BlockId)
 					}
 				};
 
@@ -116,7 +116,7 @@ namespace TrueCraft.Logic.Items
 				new[,]
 				{
 					{
-						new ItemStack(DandelionBlock.BlockID)
+						new ItemStack(DandelionBlock.BlockId)
 					}
 				};
 

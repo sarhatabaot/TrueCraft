@@ -26,7 +26,7 @@
 		public int Z;
 
 		/// <summary>
-		///  For record play, the record ID. For smoke, the direction. For break block, the block ID.
+		///  For record play, the record Id. For smoke, the direction. For break block, the block Id.
 		/// </summary>
 		public int Data;
 

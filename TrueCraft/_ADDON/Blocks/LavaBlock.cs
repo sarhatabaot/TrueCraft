@@ -2,7 +2,7 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class LavaBlock : FluidBlock
 	{
-		public static readonly byte BlockID = 0x0A;
+		public static readonly byte BlockId = 0x0A;
 
 		public LavaBlock() : this(false)
 		{
@@ -16,7 +16,7 @@ namespace TrueCraft.Logic.Blocks
 				_MaximumFluidDepletion = 3;
 		}
 
-		public override byte ID => 0x0A;
+		public override byte Id => 0x0A;
 
 		public override double BlastResistance => 0;
 
@@ -37,8 +37,8 @@ namespace TrueCraft.Logic.Blocks
 		private byte _MaximumFluidDepletion { get; }
 		protected override byte MaximumFluidDepletion => _MaximumFluidDepletion;
 
-		protected override byte FlowingID => BlockID;
+		protected override byte FlowingID => BlockId;
 
-		protected override byte StillID => StationaryLavaBlock.BlockID;
+		protected override byte StillID => StationaryLavaBlock.BlockId;
 	}
 }

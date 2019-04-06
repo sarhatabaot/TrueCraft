@@ -48,7 +48,7 @@ namespace TrueCraft.Client.Modules
 				var mouse = new Point((int) (state.X - 8 * Game.ScaleFactor * 2), (int) (state.Y - 8 * Game.ScaleFactor * 2));
 				var rect = new Rectangle(mouse.X, mouse.Y, scale.X, scale.Y);
 				if (!HeldItem.Empty)
-					provider = Game.ItemRepository.GetItemProvider(HeldItem.ID);
+					provider = Game.ItemRepository.GetItemProvider(HeldItem.Id);
 
 				SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp,
 					DepthStencilState.None, RasterizerState.CullCounterClockwise);
@@ -120,7 +120,7 @@ namespace TrueCraft.Client.Modules
 					var item = Game.Client.CurrentWindow[SelectedSlot];
 					if (!item.Empty)
 					{
-						var p = Game.ItemRepository.GetItemProvider(item.ID);
+						var p = Game.ItemRepository.GetItemProvider(item.Id);
 						var size = Font.MeasureText(p.DisplayName);
 						mouse.X = state.X + 10;
 						mouse.Y = state.Y + 10;
@@ -146,15 +146,15 @@ namespace TrueCraft.Client.Modules
 		{
 			if (Game.Client.CurrentWindow == null)
 				return false;
-			var id = Game.Client.CurrentWindow.ID;
-			if (id == -1)
-				id = 0; // Minecraft is stupid
+			var Id = Game.Client.CurrentWindow.Id;
+			if (Id == -1)
+				Id = 0; // Minecraft is stupid
 			var item = ItemStack.EmptyStack;
 			if (SelectedSlot > -1)
 				item = Game.Client.CurrentWindow[SelectedSlot];
-			var packet = new ClickWindowPacket(id, SelectedSlot, e.Button == MouseButton.Right,
+			var packet = new ClickWindowPacket(Id, SelectedSlot, e.Button == MouseButton.Right,
 				0, Keyboard.GetState().IsKeyDown(Keys.LeftShift) || Keyboard.GetState().IsKeyDown(Keys.RightShift),
-				item.ID, item.Count, item.Metadata);
+				item.Id, item.Count, item.Metadata);
 			if (packet.SlotIndex == -999)
 			{
 				// Special case (throwing item) TODO
@@ -184,7 +184,7 @@ namespace TrueCraft.Client.Modules
 				if (e.Key == Keys.Escape)
 				{
 					if (Game.Client.CurrentWindow.Type != -1)
-						Game.Client.QueuePacket(new CloseWindowPacket(Game.Client.CurrentWindow.ID));
+						Game.Client.QueuePacket(new CloseWindowPacket(Game.Client.CurrentWindow.Id));
 					Game.Client.CurrentWindow = null;
 					Mouse.SetPosition(Game.GraphicsDevice.Viewport.Width / 2, Game.GraphicsDevice.Viewport.Height / 2);
 					Game.ControlModule.IgnoreNextUpdate = true;
@@ -260,7 +260,7 @@ namespace TrueCraft.Client.Modules
 
 				if (item.Empty)
 					continue;
-				var provider = Game.ItemRepository.GetItemProvider(item.ID);
+				var provider = Game.ItemRepository.GetItemProvider(item.Id);
 				var texture = provider.GetIconTexture((byte) item.Metadata);
 				if (texture != null && stage == RenderStage.Sprites)
 					IconRenderer.RenderItemIcon(SpriteBatch, Items, provider,

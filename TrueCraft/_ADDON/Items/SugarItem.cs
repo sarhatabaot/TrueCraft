@@ -6,7 +6,7 @@ namespace TrueCraft.Logic.Items
 	{
 		public static readonly short ItemID = 0x161;
 
-		public override short ID => 0x161;
+		public override short Id => 0x161;
 
 		public override string DisplayName => "Sugar";
 

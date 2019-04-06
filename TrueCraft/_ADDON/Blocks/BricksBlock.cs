@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class BricksBlock : BlockProvider, ICraftingRecipe
 	{
-		public static readonly byte BlockID = 0x2D;
+		public static readonly byte BlockId = 0x2D;
 
-		public override byte ID => 0x2D;
+		public override byte Id => 0x2D;
 
 		public override double BlastResistance => 30;
 
@@ -24,7 +24,7 @@ namespace TrueCraft.Logic.Blocks
 				{new ItemStack(BrickItem.ItemID), new ItemStack(BrickItem.ItemID)}
 			};
 
-		public ItemStack Output => new ItemStack(BlockID);
+		public ItemStack Output => new ItemStack(BlockId);
 
 		public bool SignificantMetadata => false;
 

@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class RoseBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x26;
+		public static readonly byte BlockId = 0x26;
 
-		public override byte ID => 0x26;
+		public override byte Id => 0x26;
 
 		public override double BlastResistance => 0;
 

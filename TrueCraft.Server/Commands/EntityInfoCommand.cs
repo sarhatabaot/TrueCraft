@@ -12,7 +12,7 @@ namespace TrueCraft.Server.Commands
 
 		public override string Name => "entity";
 
-		public override string Description => "Provides information about an entity ID.";
+		public override string Description => "Provides information about an entity Id.";
 
 		public override string[] Aliases => new string[0];
 
@@ -24,18 +24,18 @@ namespace TrueCraft.Server.Commands
 				return;
 			}
 
-			int id;
-			if (!int.TryParse(arguments[0], out id))
+			int Id;
+			if (!int.TryParse(arguments[0], out Id))
 			{
 				Help(client, alias, arguments);
 				return;
 			}
 
 			var manager = client.Server.GetEntityManagerForWorld(client.World);
-			var entity = manager.GetEntityByID(id);
+			var entity = manager.GetEntityById(Id);
 			if (entity == null)
 			{
-				client.SendMessage(ChatColor.Red + "An entity with that ID does not exist in this world.");
+				client.SendMessage(ChatColor.Red + "An entity with that Id does not exist in this world.");
 				return;
 			}
 
@@ -54,7 +54,7 @@ namespace TrueCraft.Server.Commands
 
 		public override void Help(IRemoteClient client, string alias, string[] arguments)
 		{
-			client.SendMessage("/entity [id]: Shows information about this entity.");
+			client.SendMessage("/entity [Id]: Shows information about this entity.");
 		}
 	}
 }

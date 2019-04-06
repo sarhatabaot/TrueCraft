@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class DeadBushBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x20;
+		public static readonly byte BlockId = 0x20;
 
-		public override byte ID => 0x20;
+		public override byte Id => 0x20;
 
 		public override double BlastResistance => 0;
 

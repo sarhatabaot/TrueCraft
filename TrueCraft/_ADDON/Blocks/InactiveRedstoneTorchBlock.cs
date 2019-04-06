@@ -4,9 +4,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class InactiveRedstoneTorchBlock : RedstoneTorchBlock
 	{
-		public new static readonly byte BlockID = 0x4B;
+		public new static readonly byte BlockId = 0x4B;
 
-		public override byte ID => 0x4B;
+		public override byte Id => 0x4B;
 
 		public override byte Luminance => 0;
 

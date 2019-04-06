@@ -116,7 +116,7 @@ namespace TrueCraft.World
 		}
 
 		/// <summary>
-		///  Sets the block ID at specific coordinates relative to this chunk.
+		///  Sets the block Id at specific coordinates relative to this chunk.
 		///  Warning: The parent world's BlockChanged event handler does not get called.
 		/// </summary>
 		public void SetBlockID(Coordinates3D coordinates, byte value)
@@ -126,10 +126,10 @@ namespace TrueCraft.World
 				ParentRegion.DamageChunk(Coordinates);
 			var index = coordinates.Y + coordinates.Z * Height + coordinates.X * Height * Width;
 			Data[index] = value;
-			if (value == AirBlock.BlockID)
+			if (value == AirBlock.BlockId)
 				Metadata[index] = 0x0;
 			var oldHeight = GetHeight((byte) coordinates.X, (byte) coordinates.Z);
-			if (value == AirBlock.BlockID)
+			if (value == AirBlock.BlockId)
 			{
 				if (oldHeight <= coordinates.Y)
 					while (coordinates.Y > 0)

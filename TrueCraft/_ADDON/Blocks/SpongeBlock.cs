@@ -4,9 +4,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class SpongeBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x13;
+		public static readonly byte BlockId = 0x13;
 
-		public override byte ID => 0x13;
+		public override byte Id => 0x13;
 
 		public override double BlastResistance => 3;
 

@@ -58,19 +58,19 @@ namespace TrueCraft.Tests.Logic
 			var blockProvider = new Mock<BlockProvider> {CallBase = true};
 			var descriptor = new BlockDescriptor
 			{
-				ID = 10,
+				Id = 10,
 				Coordinates = Coordinates3D.Zero
 			};
 
 			blockProvider.Object.BlockMined(descriptor, BlockFace.PositiveY, World.Object, User.Object);
-			EntityManager.Verify(m => m.SpawnEntity(It.Is<ItemEntity>(e => e.Item.ID == 10)));
+			EntityManager.Verify(m => m.SpawnEntity(It.Is<ItemEntity>(e => e.Item.Id == 10)));
 			World.Verify(w => w.SetBlockId(Coordinates3D.Zero, 0));
 
 			blockProvider.Protected()
 				.Setup<ItemStack[]>("GetDrop", ItExpr.IsAny<BlockDescriptor>(), ItExpr.IsAny<ItemStack>())
 				.Returns(() => new[] {new ItemStack(12)});
 			blockProvider.Object.BlockMined(descriptor, BlockFace.PositiveY, World.Object, User.Object);
-			EntityManager.Verify(m => m.SpawnEntity(It.Is<ItemEntity>(e => e.Item.ID == 12)));
+			EntityManager.Verify(m => m.SpawnEntity(It.Is<ItemEntity>(e => e.Item.Id == 12)));
 			World.Verify(w => w.SetBlockId(Coordinates3D.Zero, 0));
 		}
 
@@ -83,8 +83,8 @@ namespace TrueCraft.Tests.Logic
 			world.SetBlockId(Coordinates3D.OneY, 2);
 
 			var blockProvider = new Mock<BlockProvider> {CallBase = true};
-			var updated = new BlockDescriptor {ID = 2, Coordinates = Coordinates3D.Up};
-			var source = new BlockDescriptor {ID = 2, Coordinates = Coordinates3D.Right};
+			var updated = new BlockDescriptor {Id = 2, Coordinates = Coordinates3D.Up};
+			var source = new BlockDescriptor {Id = 2, Coordinates = Coordinates3D.Right};
 			blockProvider.Setup(b => b.GetSupportDirection(It.IsAny<BlockDescriptor>())).Returns(Coordinates3D.Down);
 
 			var supportive = new Mock<IBlockProvider>();
@@ -102,7 +102,7 @@ namespace TrueCraft.Tests.Logic
 
 			blockProvider.Object.BlockUpdate(updated, source, Server.Object, world);
 			Assert.AreEqual(0, world.GetBlockId(Coordinates3D.OneY));
-			EntityManager.Verify(m => m.SpawnEntity(It.Is<ItemEntity>(e => e.Item.ID == 2)));
+			EntityManager.Verify(m => m.SpawnEntity(It.Is<ItemEntity>(e => e.Item.Id == 2)));
 		}
 	}
 }

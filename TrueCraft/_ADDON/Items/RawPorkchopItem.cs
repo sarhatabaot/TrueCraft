@@ -6,7 +6,7 @@ namespace TrueCraft.Logic.Items
 	{
 		public static readonly short ItemID = 0x13F;
 
-		public override short ID => 0x13F;
+		public override short Id => 0x13F;
 
 		public override float Restores => 1.5f;
 

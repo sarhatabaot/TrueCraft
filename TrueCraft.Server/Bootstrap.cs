@@ -97,7 +97,7 @@ namespace TrueCraft.Server
 								{
 									var coords = new Coordinates3D(x + w, y, z + d);
 									var data = world.GetBlockData(coords);
-									var provider = world.BlockRepository.GetBlockProvider(data.ID);
+									var provider = world.BlockRepository.GetBlockProvider(data.Id);
 									provider.BlockUpdate(data, data, Server, world);
 								}
 					}

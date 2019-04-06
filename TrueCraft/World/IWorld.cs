@@ -25,7 +25,7 @@ namespace TrueCraft.World
 
 		IChunk GetChunk(Coordinates2D coordinates, bool generate = true);
 		IChunk FindChunk(Coordinates3D coordinates, bool generate = true);
-		bool TryGetBlockId(Coordinates3D coordinates, out byte id);
+		bool TryGetBlockId(Coordinates3D coordinates, out byte Id);
 		byte GetBlockId(Coordinates3D coordinates);
 		byte GetMetadata(Coordinates3D coordinates);
 		byte GetBlockLight(Coordinates3D coordinates);

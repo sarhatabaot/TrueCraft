@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class LeverBlock : BlockProvider, ICraftingRecipe
 	{
-		public static readonly byte BlockID = 0x45;
+		public static readonly byte BlockId = 0x45;
 
-		public override byte ID => 0x45;
+		public override byte Id => 0x45;
 
 		public override double BlastResistance => 2.5;
 
@@ -25,10 +25,10 @@ namespace TrueCraft.Logic.Blocks
 			new[,]
 			{
 				{new ItemStack(StickItem.ItemID)},
-				{new ItemStack(CobblestoneBlock.BlockID)}
+				{new ItemStack(CobblestoneBlock.BlockId)}
 			};
 
-		public ItemStack Output => new ItemStack(BlockID);
+		public ItemStack Output => new ItemStack(BlockId);
 
 		public bool SignificantMetadata => false;
 

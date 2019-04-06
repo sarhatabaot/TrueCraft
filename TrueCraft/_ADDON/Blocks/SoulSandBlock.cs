@@ -4,9 +4,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class SoulSandBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x58;
+		public static readonly byte BlockId = 0x58;
 
-		public override byte ID => 0x58;
+		public override byte Id => 0x58;
 
 		public override double BlastResistance => 2.5;
 

@@ -35,7 +35,7 @@ namespace TrueCraft.Server.Commands
 
 		public override void Help(IRemoteClient client, string alias, string[] arguments)
 		{
-			client.SendMessage("Correct usage is /" + alias + " <Item ID> [Amount]");
+			client.SendMessage("Correct usage is /" + alias + " <Item Id> [Amount]");
 		}
 	}
 }

@@ -29,7 +29,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 
 		static CactusRenderer()
 		{
-			RegisterRenderer(CactusBlock.BlockID, new CactusRenderer());
+			RegisterRenderer(CactusBlock.BlockId, new CactusRenderer());
 			for (var j = 0; j < Texture.Length; j++)
 				Texture[j] *= new Vector2(16f / 256f);
 			for (var j = 0; j < TopTexture.Length; j++)

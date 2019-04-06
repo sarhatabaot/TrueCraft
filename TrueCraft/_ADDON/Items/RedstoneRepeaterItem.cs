@@ -7,7 +7,7 @@ namespace TrueCraft.Logic.Items
 	{
 		public static readonly short ItemID = 0x164;
 
-		public override short ID => 0x164;
+		public override short Id => 0x164;
 
 		public override string DisplayName => "Redstone Repeater";
 
@@ -15,12 +15,12 @@ namespace TrueCraft.Logic.Items
 			new[,]
 			{
 				{
-					new ItemStack(RedstoneTorchBlock.BlockID), new ItemStack(RedstoneDustBlock.BlockID),
-					new ItemStack(RedstoneTorchBlock.BlockID)
+					new ItemStack(RedstoneTorchBlock.BlockId), new ItemStack(RedstoneDustBlock.BlockId),
+					new ItemStack(RedstoneTorchBlock.BlockId)
 				},
 				{
-					new ItemStack(StoneBlock.BlockID), new ItemStack(StoneBlock.BlockID),
-					new ItemStack(StoneBlock.BlockID)
+					new ItemStack(StoneBlock.BlockId), new ItemStack(StoneBlock.BlockId),
+					new ItemStack(StoneBlock.BlockId)
 				}
 			};
 

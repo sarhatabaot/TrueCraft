@@ -7,7 +7,7 @@ namespace TrueCraft.Logic.Items
 	{
 		public static readonly short ItemID = 0x14D;
 
-		public override short ID => 0x14D;
+		public override short Id => 0x14D;
 
 		public override sbyte MaximumStack => 1;
 
@@ -17,14 +17,14 @@ namespace TrueCraft.Logic.Items
 			new[,]
 			{
 				{
-					new ItemStack(WoodenPlanksBlock.BlockID),
+					new ItemStack(WoodenPlanksBlock.BlockId),
 					ItemStack.EmptyStack,
-					new ItemStack(WoodenPlanksBlock.BlockID)
+					new ItemStack(WoodenPlanksBlock.BlockId)
 				},
 				{
-					new ItemStack(WoodenPlanksBlock.BlockID),
-					new ItemStack(WoodenPlanksBlock.BlockID),
-					new ItemStack(WoodenPlanksBlock.BlockID)
+					new ItemStack(WoodenPlanksBlock.BlockId),
+					new ItemStack(WoodenPlanksBlock.BlockId),
+					new ItemStack(WoodenPlanksBlock.BlockId)
 				}
 			};
 

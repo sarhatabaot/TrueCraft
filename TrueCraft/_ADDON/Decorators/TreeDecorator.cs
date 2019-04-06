@@ -32,12 +32,12 @@ namespace TrueCraft.TerrainGen.Decorators
 				if (Noise.Value2D(blockX, blockZ) > 0.3)
 				{
 					var location = new Coordinates3D(x, height, z);
-					var id = chunk.GetBlockID(location);
-					var provider = world.BlockRepository.GetBlockProvider(id);
-					if (id == DirtBlock.BlockID || id == GrassBlock.BlockID || id == SnowfallBlock.BlockID
-					    || id != StationaryWaterBlock.BlockID && id != WaterBlock.BlockID
-					                                          && id != LavaBlock.BlockID &&
-					                                          id != StationaryLavaBlock.BlockID
+					var Id = chunk.GetBlockID(location);
+					var provider = world.BlockRepository.GetBlockProvider(Id);
+					if (Id == DirtBlock.BlockId || Id == GrassBlock.BlockId || Id == SnowfallBlock.BlockId
+					    || Id != StationaryWaterBlock.BlockId && Id != WaterBlock.BlockId
+					                                          && Id != LavaBlock.BlockId &&
+					                                          Id != StationaryLavaBlock.BlockId
 					                                          && provider.BoundingBox == null)
 					{
 						if (provider.BoundingBox == null)

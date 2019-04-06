@@ -185,14 +185,14 @@ namespace TrueCraft.Client.Rendering
 			for (byte y = 0; y < Chunk.Height; y++)
 			{
 				var coords = new Coordinates3D(x, y, z);
-				var id = chunk.GetBlockId(coords);
-				var provider = BlockRepository.GetBlockProvider(id);
-				if (id != 0 && coords.Y == 0)
+				var Id = chunk.GetBlockId(coords);
+				var provider = BlockRepository.GetBlockProvider(Id);
+				if (Id != 0 && coords.Y == 0)
 					AddBottomBlock(coords, state, chunk);
 				if (!provider.Opaque)
 				{
 					AddAdjacentBlocks(coords, state, chunk);
-					if (id != 0)
+					if (Id != 0)
 						AddTransparentBlock(coords, state, chunk);
 				}
 				else
@@ -211,14 +211,14 @@ namespace TrueCraft.Client.Rendering
 				var c = coords.Key;
 				var descriptor = new BlockDescriptor
 				{
-					ID = chunk.GetBlockId(coords.Key),
+					Id = chunk.GetBlockId(coords.Key),
 					Metadata = chunk.GetMetadata(coords.Key),
 					BlockLight = chunk.GetBlockLight(coords.Key),
 					SkyLight = chunk.GetSkyLight(coords.Key),
 					Coordinates = coords.Key,
 					Chunk = chunk.Chunk
 				};
-				var provider = BlockRepository.GetBlockProvider(descriptor.ID);
+				var provider = BlockRepository.GetBlockProvider(descriptor.Id);
 				if (provider.RenderOpaque)
 				{
 					int[] i;

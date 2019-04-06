@@ -6,9 +6,9 @@ namespace TrueCraft.TerrainGen.Biomes
 	public abstract class BiomeProvider : IBiomeProvider
 	{
 		/// <summary>
-		///  The ID of the biome.
+		///  The Id of the biome.
 		/// </summary>
-		public abstract byte ID { get; }
+		public abstract byte Id { get; }
 
 		public virtual int Elevation => 0;
 
@@ -49,17 +49,17 @@ namespace TrueCraft.TerrainGen.Biomes
 		/// <summary>
 		///  The block used to fill water features such as lakes, rivers, etc.
 		/// </summary>
-		public virtual byte WaterBlock => StationaryWaterBlock.BlockID;
+		public virtual byte WaterBlock => StationaryWaterBlock.BlockId;
 
 		/// <summary>
 		///  The main surface block used for the terrain of the biome.
 		/// </summary>
-		public virtual byte SurfaceBlock => GrassBlock.BlockID;
+		public virtual byte SurfaceBlock => GrassBlock.BlockId;
 
 		/// <summary>
 		///  The main "filler" block found under the surface block in the terrain of the biome.
 		/// </summary>
-		public virtual byte FillerBlock => DirtBlock.BlockID;
+		public virtual byte FillerBlock => DirtBlock.BlockId;
 
 		/// <summary>
 		///  The depth of the surface block layer

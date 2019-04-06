@@ -9,7 +9,7 @@ namespace TrueCraft.Logic.Items
 	{
 		public static readonly short ItemID = 0x143;
 
-		public override short ID => 0x143;
+		public override short Id => 0x143;
 
 		public override sbyte MaximumStack => 1;
 
@@ -19,12 +19,12 @@ namespace TrueCraft.Logic.Items
 			new[,]
 			{
 				{
-					new ItemStack(WoodenPlanksBlock.BlockID), new ItemStack(WoodenPlanksBlock.BlockID),
-					new ItemStack(WoodenPlanksBlock.BlockID)
+					new ItemStack(WoodenPlanksBlock.BlockId), new ItemStack(WoodenPlanksBlock.BlockId),
+					new ItemStack(WoodenPlanksBlock.BlockId)
 				},
 				{
-					new ItemStack(WoodenPlanksBlock.BlockID), new ItemStack(WoodenPlanksBlock.BlockID),
-					new ItemStack(WoodenPlanksBlock.BlockID)
+					new ItemStack(WoodenPlanksBlock.BlockId), new ItemStack(WoodenPlanksBlock.BlockId),
+					new ItemStack(WoodenPlanksBlock.BlockId)
 				},
 				{ItemStack.EmptyStack, new ItemStack(StickItem.ItemID), ItemStack.EmptyStack}
 			};
@@ -43,12 +43,12 @@ namespace TrueCraft.Logic.Items
 		{
 			if (face == BlockFace.PositiveY)
 			{
-				var provider = user.Server.BlockRepository.GetBlockProvider(UprightSignBlock.BlockID);
+				var provider = user.Server.BlockRepository.GetBlockProvider(UprightSignBlock.BlockId);
 				provider.ItemUsedOnBlock(coordinates, item, face, world, user);
 			}
 			else
 			{
-				var provider = user.Server.BlockRepository.GetBlockProvider(WallSignBlock.BlockID);
+				var provider = user.Server.BlockRepository.GetBlockProvider(WallSignBlock.BlockId);
 				provider.ItemUsedOnBlock(coordinates, item, face, world, user);
 			}
 		}

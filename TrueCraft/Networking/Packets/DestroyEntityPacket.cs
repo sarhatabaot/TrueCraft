@@ -5,18 +5,18 @@
 	{
 		public byte Id => Constants.PacketIds.DestroyEntity;
 
-		public int EntityID;
+		public int EntityId;
 
-		public DestroyEntityPacket(int entityID) => EntityID = entityID;
+		public DestroyEntityPacket(int entityID) => EntityId = entityID;
 
 		public void ReadPacket(IMcStream stream)
 		{
-			EntityID = stream.ReadInt32();
+			EntityId = stream.ReadInt32();
 		}
 
 		public void WritePacket(IMcStream stream)
 		{
-			stream.WriteInt32(EntityID);
+			stream.WriteInt32(EntityId);
 		}
 	}
 }

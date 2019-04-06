@@ -7,7 +7,7 @@ namespace TrueCraft.Logic.Items
 	{
 		public static readonly short ItemID = 0x142;
 
-		public override short ID => 0x142;
+		public override short Id => 0x142;
 
 		public override float Restores => 10;
 
@@ -17,19 +17,19 @@ namespace TrueCraft.Logic.Items
 			new[,]
 			{
 				{
-					new ItemStack(GoldBlock.BlockID),
-					new ItemStack(GoldBlock.BlockID),
-					new ItemStack(GoldBlock.BlockID)
+					new ItemStack(GoldBlock.BlockId),
+					new ItemStack(GoldBlock.BlockId),
+					new ItemStack(GoldBlock.BlockId)
 				},
 				{
-					new ItemStack(GoldBlock.BlockID),
-					new ItemStack(AppleItem.ItemID),
-					new ItemStack(GoldBlock.BlockID)
+					new ItemStack(GoldBlock.BlockId),
+					new ItemStack(AppleItem.ItemId),
+					new ItemStack(GoldBlock.BlockId)
 				},
 				{
-					new ItemStack(GoldBlock.BlockID),
-					new ItemStack(GoldBlock.BlockID),
-					new ItemStack(GoldBlock.BlockID)
+					new ItemStack(GoldBlock.BlockId),
+					new ItemStack(GoldBlock.BlockId),
+					new ItemStack(GoldBlock.BlockId)
 				}
 			};
 

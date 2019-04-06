@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class GoldBlock : BlockProvider, ICraftingRecipe
 	{
-		public static readonly byte BlockID = 0x29;
+		public static readonly byte BlockId = 0x29;
 
-		public override byte ID => 0x29;
+		public override byte Id => 0x29;
 
 		public override double BlastResistance => 30;
 
@@ -38,7 +38,7 @@ namespace TrueCraft.Logic.Blocks
 				}
 			};
 
-		public ItemStack Output => new ItemStack(BlockID);
+		public ItemStack Output => new ItemStack(BlockId);
 
 		public bool SignificantMetadata => false;
 

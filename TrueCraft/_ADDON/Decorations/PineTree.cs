@@ -25,17 +25,17 @@ namespace TrueCraft.TerrainGen.Decorations
 
 			var random = new Random(world.Seed);
 			var height = random.Next(7, 8);
-			GenerateColumn(chunk, location, height, WoodBlock.BlockID, 0x1);
+			GenerateColumn(chunk, location, height, WoodBlock.BlockId, 0x1);
 			for (var y = 1; y < height; y++)
 			{
 				if (y % 2 == 0)
 				{
 					GenerateVanillaCircle(chunk, location + new Coordinates3D(0, y + 1, 0), LeafRadius - 1,
-						LeavesBlock.BlockID, 0x1);
+						LeavesBlock.BlockId, 0x1);
 					continue;
 				}
 
-				GenerateVanillaCircle(chunk, location + new Coordinates3D(0, y + 1, 0), LeafRadius, LeavesBlock.BlockID,
+				GenerateVanillaCircle(chunk, location + new Coordinates3D(0, y + 1, 0), LeafRadius, LeavesBlock.BlockId,
 					0x1);
 			}
 
@@ -52,12 +52,12 @@ namespace TrueCraft.TerrainGen.Decorations
 		protected void GenerateTopper(IChunk chunk, Coordinates3D location, byte type = 0x0)
 		{
 			const int sectionRadius = 1;
-			GenerateCircle(chunk, location, sectionRadius, LeavesBlock.BlockID, 0x1);
+			GenerateCircle(chunk, location, sectionRadius, LeavesBlock.BlockId, 0x1);
 			var top = location + Coordinates3D.Up;
-			chunk.SetBlockID(top, LeavesBlock.BlockID);
+			chunk.SetBlockID(top, LeavesBlock.BlockId);
 			chunk.SetMetadata(top, 0x1);
 			if (type == 0x1 && (top + Coordinates3D.Up).Y < Chunk.Height)
-				GenerateVanillaCircle(chunk, top + Coordinates3D.Up, sectionRadius, LeavesBlock.BlockID, 0x1);
+				GenerateVanillaCircle(chunk, top + Coordinates3D.Up, sectionRadius, LeavesBlock.BlockId, 0x1);
 		}
 	}
 }

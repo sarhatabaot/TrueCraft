@@ -7,11 +7,11 @@ namespace TrueCraft.Logic.Items
 	{
 		public static readonly short ItemID = 0x14A;
 
-		public override short ID => 0x14A;
+		public override short Id => 0x14A;
 
 		public override string DisplayName => "Iron Door";
 
-		protected override byte BlockID => IronDoorBlock.BlockID;
+		protected override byte BlockId => IronDoorBlock.BlockId;
 
 		public override Tuple<int, int> GetIconTexture(byte metadata)
 		{

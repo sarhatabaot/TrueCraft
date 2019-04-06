@@ -47,7 +47,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 
 		static TNTRenderer()
 		{
-			RegisterRenderer(TNTBlock.BlockID, new TNTRenderer());
+			RegisterRenderer(TNTBlock.BlockId, new TNTRenderer());
 			for (var i = 0; i < Texture.Length; i++)
 				Texture[i] *= new Vector2(16f / 256f);
 		}

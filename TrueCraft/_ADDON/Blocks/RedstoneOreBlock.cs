@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class RedstoneOreBlock : BlockProvider, ISmeltableItem
 	{
-		public static readonly byte BlockID = 0x49;
+		public static readonly byte BlockId = 0x49;
 
-		public override byte ID => 0x49;
+		public override byte Id => 0x49;
 
 		public override double BlastResistance => 15;
 

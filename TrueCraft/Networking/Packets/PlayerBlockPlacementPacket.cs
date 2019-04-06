@@ -27,7 +27,7 @@
 		public BlockFace Face;
 
 		/// <summary>
-		///  The block or item ID. You should probably ignore this and use a server-side inventory.
+		///  The block or item Id. You should probably ignore this and use a server-side inventory.
 		/// </summary>
 		public short ItemID;
 

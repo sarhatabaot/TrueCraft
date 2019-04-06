@@ -56,17 +56,17 @@ namespace TrueCraft.Server
 			Console.ForegroundColor = foreground;
 		}
 
-		public override void TraceData(TraceEventCache eventCache, string source, TraceEventType eventType, int id, object data)
+		public override void TraceData(TraceEventCache eventCache, string source, TraceEventType eventType, int Id, object data)
 		{
-			if ((Filter != null) && !Filter.ShouldTrace(eventCache, source, eventType, id, null, null, data, null))
+			if ((Filter != null) && !Filter.ShouldTrace(eventCache, source, eventType, Id, null, null, data, null))
 				return;
 			var message = data.ToString();
 			WriteLine(message, eventType.ToString());
 		}
 
-		public override void TraceData(TraceEventCache eventCache, string source, TraceEventType eventType, int id, params object[] data)
+		public override void TraceData(TraceEventCache eventCache, string source, TraceEventType eventType, int Id, params object[] data)
 		{
-			if ((Filter != null) && !Filter.ShouldTrace(eventCache, source, eventType, id, null, null, data, null))
+			if ((Filter != null) && !Filter.ShouldTrace(eventCache, source, eventType, Id, null, null, data, null))
 				return;
 
 			var stringBuilder = new StringBuilder();
@@ -85,7 +85,7 @@ namespace TrueCraft.Server
 			WriteLine(stringBuilder.ToString(), eventType.ToString());
 		}
 
-		public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string message)
+		public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int Id, string message)
 		{
 			WriteLine(message, eventType.ToString());
 		}

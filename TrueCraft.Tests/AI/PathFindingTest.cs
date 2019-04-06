@@ -22,8 +22,8 @@ namespace TrueCraft.Tests.AI
 						Console.Write("o");
 					else
 					{
-						var id = world.GetBlockId(coords);
-						if (id != 0)
+						var Id = world.GetBlockId(coords);
+						if (Id != 0)
 							Console.Write("x");
 						else
 							Console.Write("_");

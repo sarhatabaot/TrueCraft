@@ -2,7 +2,7 @@
 {
 	public class SeasonalForestBiome : BiomeProvider
 	{
-		public override byte ID => (byte) Biome.SeasonalForest;
+		public override byte Id => (byte) Biome.SeasonalForest;
 
 		public override double Temperature => 0.7f;
 

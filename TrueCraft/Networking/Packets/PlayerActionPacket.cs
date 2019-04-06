@@ -12,18 +12,18 @@
 
 		public byte Id => Constants.PacketIds.PlayerAction;
 
-		public int EntityID;
+		public int EntityId;
 		public PlayerAction Action;
 
 		public void ReadPacket(IMcStream stream)
 		{
-			EntityID = stream.ReadInt32();
+			EntityId = stream.ReadInt32();
 			Action = (PlayerAction) stream.ReadInt8();
 		}
 
 		public void WritePacket(IMcStream stream)
 		{
-			stream.WriteInt32(EntityID);
+			stream.WriteInt32(EntityId);
 			stream.WriteInt8((sbyte) Action);
 		}
 	}

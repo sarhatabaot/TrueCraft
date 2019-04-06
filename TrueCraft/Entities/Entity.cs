@@ -22,7 +22,7 @@ namespace TrueCraft.Entities
 		protected Entity()
 		{
 			EnablePropertyChange = true;
-			EntityID = -1;
+			EntityId = -1;
 			SpawnTime = DateTime.UtcNow;
 		}
 
@@ -50,7 +50,7 @@ namespace TrueCraft.Entities
 
 		public DateTime SpawnTime { get; set; }
 
-		public int EntityID { get; set; }
+		public int EntityId { get; set; }
 		public IEntityManager EntityManager { get; set; }
 		public IWorld World { get; set; }
 

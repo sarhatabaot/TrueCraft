@@ -18,7 +18,7 @@ namespace TrueCraft.Networking
 		public MemoryStream PendingStream { get; set; }
 
 		/// <summary>
-		///  Used by PacketReader to insert the ID and length into the stream before the packet contents.
+		///  Used by PacketReader to insert the Id and length into the stream before the packet contents.
 		/// </summary>
 		internal bool WriteImmediately { get; set; }
 

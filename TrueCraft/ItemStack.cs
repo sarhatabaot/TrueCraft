@@ -43,10 +43,10 @@ namespace TrueCraft
 		/// <summary>
 		///  Creates a new item stack with the specified values.
 		/// </summary>
-		/// <param name="id">The item ID for the item stack.</param>
-		public ItemStack(short id) : this()
+		/// <param name="Id">The item Id for the item stack.</param>
+		public ItemStack(short Id) : this()
 		{
-			_Id = id;
+			_Id = Id;
 			_Count = 1;
 			Metadata = 0;
 			Nbt = null;
@@ -56,31 +56,31 @@ namespace TrueCraft
 		/// <summary>
 		///  Creates a new item stack with the specified values.
 		/// </summary>
-		/// <param name="id">The item ID for the item stack.</param>
+		/// <param name="Id">The item Id for the item stack.</param>
 		/// <param name="count">The item count for the item stack.</param>
-		public ItemStack(short id, sbyte count) : this(id) => Count = count;
+		public ItemStack(short Id, sbyte count) : this(Id) => Count = count;
 
 		/// <summary>
 		///  Creates a new item stack with the specified values.
 		/// </summary>
-		/// <param name="id">The item ID for the item stack.</param>
+		/// <param name="Id">The item Id for the item stack.</param>
 		/// <param name="count">The item count for the item stack.</param>
 		/// <param name="metadata">The metadata for the item stack.</param>
-		public ItemStack(short id, sbyte count, short metadata) : this(id, count) => Metadata = metadata;
+		public ItemStack(short Id, sbyte count, short metadata) : this(Id, count) => Metadata = metadata;
 
 		/// <summary>
 		///  Creates a new item stack with the specified values.
 		/// </summary>
-		/// <param name="id">The item ID for the item stack.</param>
+		/// <param name="Id">The item Id for the item stack.</param>
 		/// <param name="count">The item count for the item stack.</param>
 		/// <param name="metadata">The metadata for the item stack.</param>
 		/// <param name="nbt">The NBT compound tag for the item stack.</param>
-		public ItemStack(short id, sbyte count, short metadata, NbtCompound nbt) : this(id, count, metadata)
+		public ItemStack(short Id, sbyte count, short metadata, NbtCompound nbt) : this(Id, count, metadata)
 		{
 			Nbt = nbt;
 			if (Count == 0)
 			{
-				ID = -1;
+				Id = -1;
 				Metadata = 0;
 				Nbt = null;
 			}
@@ -94,7 +94,7 @@ namespace TrueCraft
 		public static ItemStack FromStream(IMcStream stream)
 		{
 			var slot = EmptyStack;
-			slot.ID = stream.ReadInt16();
+			slot.Id = stream.ReadInt16();
 			if (slot.Empty)
 				return slot;
 			slot.Count = stream.ReadInt8();
@@ -116,7 +116,7 @@ namespace TrueCraft
 		/// <param name="stream">The stream to write to.</param>
 		public void WriteTo(IMcStream stream)
 		{
-			stream.WriteInt16(ID);
+			stream.WriteInt16(Id);
 			if (Empty)
 				return;
 			stream.WriteInt8(Count);
@@ -142,7 +142,7 @@ namespace TrueCraft
 		public static ItemStack FromNbt(NbtCompound compound)
 		{
 			var s = EmptyStack;
-			s.ID = compound.Get<NbtShort>("id").Value;
+			s.Id = compound.Get<NbtShort>("Id").Value;
 			s.Metadata = compound.Get<NbtShort>("Damage").Value;
 			s.Count = (sbyte) compound.Get<NbtByte>("Count").Value;
 			s.Index = compound.Get<NbtByte>("Slot").Value;
@@ -158,7 +158,7 @@ namespace TrueCraft
 		public NbtCompound ToNbt()
 		{
 			var c = new NbtCompound();
-			c.Add(new NbtShort("id", ID));
+			c.Add(new NbtShort("Id", Id));
 			c.Add(new NbtShort("Damage", Metadata));
 			c.Add(new NbtByte("Count", (byte) Count));
 			c.Add(new NbtByte("Slot", (byte) Index));
@@ -171,12 +171,12 @@ namespace TrueCraft
 		///  Gets whether this item stack is empty.
 		/// </summary>
 		[NbtIgnore]
-		public bool Empty => ID == -1;
+		public bool Empty => Id == -1;
 
 		/// <summary>
-		///  Gets or sets the item ID for this item stack.
+		///  Gets or sets the item Id for this item stack.
 		/// </summary>
-		public short ID
+		public short Id
 		{
 			get => _Id;
 			set
@@ -237,7 +237,7 @@ namespace TrueCraft
 			if (Empty)
 				return "(Empty)";
 
-			var resultBuilder = new StringBuilder("ID: " + ID);
+			var resultBuilder = new StringBuilder("Id: " + Id);
 
 			if (Count != 1) resultBuilder.Append("; Count: " + Count);
 			if (Metadata != 0) resultBuilder.Append("; Metadata: " + Metadata);
@@ -252,7 +252,7 @@ namespace TrueCraft
 		/// <returns></returns>
 		public object Clone()
 		{
-			return new ItemStack(ID, Count, Metadata, Nbt);
+			return new ItemStack(Id, Count, Metadata, Nbt);
 		}
 
 		/// <summary>

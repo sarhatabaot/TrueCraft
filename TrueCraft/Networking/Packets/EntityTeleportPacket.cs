@@ -8,13 +8,13 @@
 	{
 		public byte Id => Constants.PacketIds.EntityTeleport;
 
-		public int EntityID;
+		public int EntityId;
 		public int X, Y, Z;
 		public sbyte Yaw, Pitch;
 
 		public EntityTeleportPacket(int entityId, int x, int y, int z, sbyte yaw, sbyte pitch)
 		{
-			EntityID = entityId;
+			EntityId = entityId;
 			X = x;
 			Y = y;
 			Z = z;
@@ -24,7 +24,7 @@
 
 		public void ReadPacket(IMcStream stream)
 		{
-			EntityID = stream.ReadInt32();
+			EntityId = stream.ReadInt32();
 			X = stream.ReadInt32();
 			Y = stream.ReadInt32();
 			Z = stream.ReadInt32();
@@ -34,7 +34,7 @@
 
 		public void WritePacket(IMcStream stream)
 		{
-			stream.WriteInt32(EntityID);
+			stream.WriteInt32(EntityId);
 			stream.WriteInt32(X);
 			stream.WriteInt32(Y);
 			stream.WriteInt32(Z);

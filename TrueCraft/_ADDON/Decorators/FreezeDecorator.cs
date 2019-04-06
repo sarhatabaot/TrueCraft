@@ -18,27 +18,27 @@ namespace TrueCraft.TerrainGen.Decorators
 					for (var y = height; y < Chunk.Height; y++)
 					{
 						var location = new Coordinates3D(x, y, z);
-						if (chunk.GetBlockID(location).Equals(StationaryWaterBlock.BlockID) ||
-						    chunk.GetBlockID(location).Equals(WaterBlock.BlockID))
-							chunk.SetBlockID(location, IceBlock.BlockID);
+						if (chunk.GetBlockID(location).Equals(StationaryWaterBlock.BlockId) ||
+						    chunk.GetBlockID(location).Equals(WaterBlock.BlockId))
+							chunk.SetBlockID(location, IceBlock.BlockId);
 						else
 						{
 							var below = chunk.GetBlockID(location);
 							byte[] whitelist =
 							{
-								DirtBlock.BlockID,
-								GrassBlock.BlockID,
-								IceBlock.BlockID,
-								LeavesBlock.BlockID
+								DirtBlock.BlockId,
+								GrassBlock.BlockId,
+								IceBlock.BlockId,
+								LeavesBlock.BlockId
 							};
 							if (y == height && whitelist.Any(w => w == below))
 							{
-								if (chunk.GetBlockID(location).Equals(IceBlock.BlockID) &&
+								if (chunk.GetBlockID(location).Equals(IceBlock.BlockId) &&
 								    CoverIce(chunk, biomes, location))
-									chunk.SetBlockID(location + Coordinates3D.Up, SnowfallBlock.BlockID);
-								else if (!chunk.GetBlockID(location).Equals(SnowfallBlock.BlockID) &&
-								         !chunk.GetBlockID(location).Equals(AirBlock.BlockID))
-									chunk.SetBlockID(location + Coordinates3D.Up, SnowfallBlock.BlockID);
+									chunk.SetBlockID(location + Coordinates3D.Up, SnowfallBlock.BlockId);
+								else if (!chunk.GetBlockID(location).Equals(SnowfallBlock.BlockId) &&
+								         !chunk.GetBlockID(location).Equals(AirBlock.BlockId))
+									chunk.SetBlockID(location + Coordinates3D.Up, SnowfallBlock.BlockId);
 							}
 						}
 					}

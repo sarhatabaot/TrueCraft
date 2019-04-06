@@ -14,12 +14,12 @@ namespace TrueCraft.TerrainGen
 
 		public void RegisterBiomeProvider(IBiomeProvider provider)
 		{
-			BiomeProviders[provider.ID] = provider;
+			BiomeProviders[provider.Id] = provider;
 		}
 
-		public IBiomeProvider GetBiome(byte id)
+		public IBiomeProvider GetBiome(byte Id)
 		{
-			return BiomeProviders[id];
+			return BiomeProviders[Id];
 		}
 
 		public IBiomeProvider GetBiome(double temperature, double rainfall, bool spawn)

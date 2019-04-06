@@ -93,7 +93,7 @@ namespace TrueCraft.Client
 			WriteLine(stringBuilder.ToString(), eventType.ToString());
 		}
 
-		public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string message)
+		public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int Id, string message)
 		{
 			WriteLine(message, eventType.ToString());
 		}

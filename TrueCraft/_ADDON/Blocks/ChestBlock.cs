@@ -12,7 +12,7 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class ChestBlock : BlockProvider, ICraftingRecipe, IBurnableItem
 	{
-		public static readonly byte BlockID = 0x36;
+		public static readonly byte BlockId = 0x36;
 
 		private static readonly Coordinates3D[] AdjacentBlocks =
 		{
@@ -22,7 +22,7 @@ namespace TrueCraft.Logic.Blocks
 			Coordinates3D.East
 		};
 
-		public override byte ID => 0x36;
+		public override byte Id => 0x36;
 
 		public override double BlastResistance => 12.5;
 
@@ -42,23 +42,23 @@ namespace TrueCraft.Logic.Blocks
 			new[,]
 			{
 				{
-					new ItemStack(WoodenPlanksBlock.BlockID),
-					new ItemStack(WoodenPlanksBlock.BlockID),
-					new ItemStack(WoodenPlanksBlock.BlockID)
+					new ItemStack(WoodenPlanksBlock.BlockId),
+					new ItemStack(WoodenPlanksBlock.BlockId),
+					new ItemStack(WoodenPlanksBlock.BlockId)
 				},
 				{
-					new ItemStack(WoodenPlanksBlock.BlockID),
+					new ItemStack(WoodenPlanksBlock.BlockId),
 					ItemStack.EmptyStack,
-					new ItemStack(WoodenPlanksBlock.BlockID)
+					new ItemStack(WoodenPlanksBlock.BlockId)
 				},
 				{
-					new ItemStack(WoodenPlanksBlock.BlockID),
-					new ItemStack(WoodenPlanksBlock.BlockID),
-					new ItemStack(WoodenPlanksBlock.BlockID)
+					new ItemStack(WoodenPlanksBlock.BlockId),
+					new ItemStack(WoodenPlanksBlock.BlockId),
+					new ItemStack(WoodenPlanksBlock.BlockId)
 				}
 			};
 
-		public ItemStack Output => new ItemStack(BlockID);
+		public ItemStack Output => new ItemStack(BlockId);
 
 		public bool SignificantMetadata => false;
 
@@ -75,7 +75,7 @@ namespace TrueCraft.Logic.Blocks
 			var _ = Coordinates3D.Down;
 			// Check for adjacent chests. We can only allow one adjacent check block.
 			for (var i = 0; i < AdjacentBlocks.Length; i++)
-				if (world.GetBlockId(coords + AdjacentBlocks[i]) == BlockID)
+				if (world.GetBlockId(coords + AdjacentBlocks[i]) == BlockId)
 				{
 					_ = coords + AdjacentBlocks[i];
 					adjacent++;
@@ -85,7 +85,7 @@ namespace TrueCraft.Logic.Blocks
 			{
 				if (_ != Coordinates3D.Down)
 					for (var i = 0; i < AdjacentBlocks.Length; i++)
-						if (world.GetBlockId(_ + AdjacentBlocks[i]) == BlockID)
+						if (world.GetBlockId(_ + AdjacentBlocks[i]) == BlockId)
 							adjacent++;
 				if (adjacent <= 1)
 					base.ItemUsedOnBlock(coordinates, item, face, world, user);
@@ -105,7 +105,7 @@ namespace TrueCraft.Logic.Blocks
 			for (var i = 0; i < AdjacentBlocks.Length; i++)
 			{
 				var test = self + AdjacentBlocks[i];
-				if (world.GetBlockId(test) == BlockID)
+				if (world.GetBlockId(test) == BlockId)
 				{
 					adjacent = test;
 					var up = world.BlockRepository.GetBlockProvider(world.GetBlockId(test + Coordinates3D.Up));

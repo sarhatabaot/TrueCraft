@@ -4,9 +4,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class DoubleSlabBlock : SlabBlock
 	{
-		public new static readonly byte BlockID = 0x2B;
+		public new static readonly byte BlockId = 0x2B;
 
-		public override byte ID => 0x2B;
+		public override byte Id => 0x2B;
 
 		public override double BlastResistance => 30;
 

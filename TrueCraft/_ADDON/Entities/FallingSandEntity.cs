@@ -16,7 +16,7 @@ namespace TrueCraft.Entities
 		public override byte EntityType => 70;
 
 		public override IPacket SpawnPacket =>
-			new SpawnGenericEntityPacket(EntityID, (sbyte) EntityType,
+			new SpawnGenericEntityPacket(EntityId, (sbyte) EntityType,
 				MathHelper.CreateAbsoluteInt(Position.X), MathHelper.CreateAbsoluteInt(Position.Y),
 				MathHelper.CreateAbsoluteInt(Position.Z), 0, null, null, null);
 
@@ -30,16 +30,16 @@ namespace TrueCraft.Entities
 				return;
 			if (collisionDirection == Vector3.Down)
 			{
-				var id = SandBlock.BlockID;
+				var Id = SandBlock.BlockId;
 				if (EntityType == 71)
-					id = GravelBlock.BlockID;
+					Id = GravelBlock.BlockId;
 				EntityManager.DespawnEntity(this);
 				var position = (Coordinates3D) collisionPoint + Coordinates3D.Up;
 				var hit = World.BlockRepository.GetBlockProvider(World.GetBlockId(position));
-				if (hit.BoundingBox == null && BlockProvider.Overwritable.All(o => o != hit.ID))
-					EntityManager.SpawnEntity(new ItemEntity(position.AsVector3() + new Vector3(0.5f), new ItemStack(id)));
+				if (hit.BoundingBox == null && BlockProvider.Overwritable.All(o => o != hit.Id))
+					EntityManager.SpawnEntity(new ItemEntity(position.AsVector3() + new Vector3(0.5f), new ItemStack(Id)));
 				else
-					World.SetBlockId(position, id);
+					World.SetBlockId(position, Id);
 			}
 		}
 

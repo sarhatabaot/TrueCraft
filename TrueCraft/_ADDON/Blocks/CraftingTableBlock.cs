@@ -9,9 +9,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class CraftingTableBlock : BlockProvider, ICraftingRecipe, IBurnableItem
 	{
-		public static readonly byte BlockID = 0x3A;
+		public static readonly byte BlockId = 0x3A;
 
-		public override byte ID => 0x3A;
+		public override byte Id => 0x3A;
 
 		public override double BlastResistance => 12.5;
 
@@ -28,11 +28,11 @@ namespace TrueCraft.Logic.Blocks
 		public ItemStack[,] Pattern =>
 			new[,]
 			{
-				{new ItemStack(WoodenPlanksBlock.BlockID), new ItemStack(WoodenPlanksBlock.BlockID)},
-				{new ItemStack(WoodenPlanksBlock.BlockID), new ItemStack(WoodenPlanksBlock.BlockID)}
+				{new ItemStack(WoodenPlanksBlock.BlockId), new ItemStack(WoodenPlanksBlock.BlockId)},
+				{new ItemStack(WoodenPlanksBlock.BlockId), new ItemStack(WoodenPlanksBlock.BlockId)}
 			};
 
-		public ItemStack Output => new ItemStack(BlockID);
+		public ItemStack Output => new ItemStack(BlockId);
 
 		public bool SignificantMetadata => false;
 

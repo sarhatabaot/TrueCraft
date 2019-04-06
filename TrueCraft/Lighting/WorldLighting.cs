@@ -34,7 +34,7 @@ namespace TrueCraft.Lighting
 			world.ChunkLoaded += (sender, e) => GenerateHeightMap(e.Chunk);
 			world.BlockChanged += (sender, e) =>
 			{
-				if (e.NewBlock.ID != e.OldBlock.ID)
+				if (e.NewBlock.Id != e.OldBlock.Id)
 					UpdateHeightMap(e.Position);
 			};
 			foreach (var chunk in world)
@@ -60,10 +60,10 @@ namespace TrueCraft.Lighting
 				coords.X = x;
 				coords.Y = y - 1;
 				coords.Z = z;
-				var id = chunk.GetBlockID(coords);
-				if (id == 0)
+				var Id = chunk.GetBlockID(coords);
+				if (Id == 0)
 					continue;
-				var provider = BlockRepository.GetBlockProvider(id);
+				var provider = BlockRepository.GetBlockProvider(Id);
 				if (provider == null || provider.LightOpacity != 0)
 				{
 					map[x, z] = y;
@@ -91,10 +91,10 @@ namespace TrueCraft.Lighting
 				_.X = x;
 				_.Y = y - 1;
 				_.Z = z;
-				var id = chunk.GetBlockID(_);
-				if (id == 0)
+				var Id = chunk.GetBlockID(_);
+				if (Id == 0)
 					continue;
-				var provider = BlockRepository.GetBlockProvider(id);
+				var provider = BlockRepository.GetBlockProvider(Id);
 				if (provider.LightOpacity != 0)
 				{
 					map[x, z] = y;
@@ -159,8 +159,8 @@ namespace TrueCraft.Lighting
 
 			Profiler.Start("lighting.voxel");
 
-			var id = World.GetBlockId(coords);
-			var provider = BlockRepository.GetBlockProvider(id);
+			var Id = World.GetBlockId(coords);
+			var provider = BlockRepository.GetBlockProvider(Id);
 
 			// The opacity of the block determines the amount of light it receives from
 			// neighboring blocks. This is subtracted from the max of the neighboring

@@ -112,14 +112,14 @@ namespace TrueCraft.World
 			return chunk.GetBlockID(coordinates);
 		}
 
-		public bool TryGetBlockId(Coordinates3D coordinates, out byte id)
+		public bool TryGetBlockId(Coordinates3D coordinates, out byte Id)
 		{
 			if (!FindBlockPosition(coordinates, out var chunk, out var position))
 			{
-				id = default;
+				Id = default;
 				return false;
 			}
-			id = chunk.GetBlockID(position);
+			Id = chunk.GetBlockID(position);
 			return true;
 		}
 
@@ -157,7 +157,7 @@ namespace TrueCraft.World
 		{
 			var adjustedCoordinates = FindBlockPosition(coordinates, out var chunk);
 			var old = GetBlockDataFromChunk(adjustedCoordinates, chunk, coordinates);
-			chunk.SetBlockID(adjustedCoordinates, descriptor.ID);
+			chunk.SetBlockID(adjustedCoordinates, descriptor.Id);
 			chunk.SetMetadata(adjustedCoordinates, descriptor.Metadata);
 
 			BlockChanged?.Invoke(this,
@@ -394,7 +394,7 @@ namespace TrueCraft.World
 		{
 			return new BlockDescriptor
 			{
-				ID = chunk.GetBlockID(adjustedCoordinates),
+				Id = chunk.GetBlockID(adjustedCoordinates),
 				Metadata = chunk.GetMetadata(adjustedCoordinates),
 				BlockLight = chunk.GetBlockLight(adjustedCoordinates),
 				SkyLight = chunk.GetSkyLight(adjustedCoordinates),

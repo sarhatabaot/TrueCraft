@@ -60,7 +60,7 @@ namespace TrueCraft.Server
 			entity.SpawnTime = DateTime.UtcNow;
 			entity.EntityManager = this;
 			entity.World = World;
-			entity.EntityID = NextEntityID++;
+			entity.EntityId = NextEntityID++;
 			entity.PropertyChanged -= HandlePropertyChanged;
 			entity.PropertyChanged += HandlePropertyChanged;
 			lock (_lock) Entities.Add(entity);
@@ -97,9 +97,9 @@ namespace TrueCraft.Server
 						var client = (RemoteClient) Server.Clients[i];
 						if (client.KnownEntities.Contains(entity) && !client.Disconnected)
 						{
-							client.QueuePacket(new DestroyEntityPacket(entity.EntityID));
+							client.QueuePacket(new DestroyEntityPacket(entity.EntityId));
 							client.KnownEntities.Remove(entity);
-							client.MaybeEchoToClient("Destroying entity {0} ({1})", entity.EntityID, entity.GetType().Name);
+							client.MaybeEchoToClient("Destroying entity {0} ({1})", entity.EntityId, entity.GetType().Name);
 						}
 					}
 
@@ -108,9 +108,9 @@ namespace TrueCraft.Server
 			}
 		}
 
-		public IEntity GetEntityByID(int id)
+		public IEntity GetEntityById(int Id)
 		{
-			return Entities.SingleOrDefault(e => e.EntityID == id);
+			return Entities.SingleOrDefault(e => e.EntityId == Id);
 		}
 
 		public void Update()
@@ -195,7 +195,7 @@ namespace TrueCraft.Server
 				if (!(knownEntity.Position.DistanceTo(entity.Position) > client.ChunkRadius * Chunk.Depth))
 					continue;
 
-				client.QueuePacket(new DestroyEntityPacket(knownEntity.EntityID));
+				client.QueuePacket(new DestroyEntityPacket(knownEntity.EntityId));
 				client.KnownEntities.Remove(knownEntity);
 				i--;
 
@@ -206,12 +206,12 @@ namespace TrueCraft.Server
 					if (c.KnownEntities.Contains(entity))
 					{
 						c.KnownEntities.Remove(entity);
-						c.QueuePacket(new DestroyEntityPacket(entity.EntityID));
-						c.MaybeEchoToClient("Destroying entity {0} ({1})", player.EntityID, player.GetType().Name);
+						c.QueuePacket(new DestroyEntityPacket(entity.EntityId));
+						c.MaybeEchoToClient("Destroying entity {0} ({1})", player.EntityId, player.GetType().Name);
 					}
 				}
 
-				client.MaybeEchoToClient("Destroying entity {0} ({1})", knownEntity.EntityID, knownEntity.GetType().Name);
+				client.MaybeEchoToClient("Destroying entity {0} ({1})", knownEntity.EntityId, knownEntity.GetType().Name);
 			}
 
 			// Calculate entities you should now know about
@@ -242,7 +242,7 @@ namespace TrueCraft.Server
 					continue; // Do not send movement updates back to the client that triggered them
 
 				if (client.KnownEntities.Contains(entity))
-					client.QueuePacket(new EntityTeleportPacket(entity.EntityID,
+					client.QueuePacket(new EntityTeleportPacket(entity.EntityId,
 						MathHelper.CreateAbsoluteInt(entity.Position.X),
 						MathHelper.CreateAbsoluteInt(entity.Position.Y),
 						MathHelper.CreateAbsoluteInt(entity.Position.Z),
@@ -261,7 +261,7 @@ namespace TrueCraft.Server
 				if (client.Entity == entity)
 					continue; // Do not send movement updates back to the client that triggered them
 				if (client.KnownEntities.Contains(entity))
-					client.QueuePacket(new EntityMetadataPacket(entity.EntityID, entity.Metadata));
+					client.QueuePacket(new EntityMetadataPacket(entity.EntityId, entity.Metadata));
 			}
 		}
 
@@ -274,15 +274,15 @@ namespace TrueCraft.Server
 		private IEntity[] GetEntitiesInRange(IEntity entity, int maxChunks)
 		{
 			return Entities.Where(e =>
-					e.EntityID != entity.EntityID && !e.Despawned && IsInRange(e.Position, entity.Position, maxChunks))
+					e.EntityId != entity.EntityId && !e.Despawned && IsInRange(e.Position, entity.Position, maxChunks))
 				.ToArray();
 		}
 
 		private void SendEntityToClient(RemoteClient client, IEntity entity)
 		{
-			if (entity.EntityID == -1)
+			if (entity.EntityId == -1)
 				return; // We haven't finished setting this entity up yet
-			client.MaybeEchoToClient("Spawning entity {0} ({1}) at {2}", entity.EntityID, entity.GetType().Name,
+			client.MaybeEchoToClient("Spawning entity {0} ({1}) at {2}", entity.EntityId, entity.GetType().Name,
 				(Coordinates3D) entity.Position);
 			RemoteClient spawnedClient = null;
 			if (entity is PlayerEntity)
@@ -294,7 +294,7 @@ namespace TrueCraft.Server
 				var pentity = entity as IPhysicsEntity;
 				client.QueuePacket(new EntityVelocityPacket
 				{
-					EntityID = entity.EntityID,
+					EntityId = entity.EntityId,
 					XVelocity = (short) (pentity.Velocity.X * 320),
 					YVelocity = (short) (pentity.Velocity.Y * 320),
 					ZVelocity = (short) (pentity.Velocity.Z * 320)
@@ -302,26 +302,26 @@ namespace TrueCraft.Server
 			}
 
 			if (entity.SendMetadataToClients)
-				client.QueuePacket(new EntityMetadataPacket(entity.EntityID, entity.Metadata));
+				client.QueuePacket(new EntityMetadataPacket(entity.EntityId, entity.Metadata));
 			if (spawnedClient != null)
 			{
 				// Send equipment when spawning player entities
-				client.QueuePacket(new EntityEquipmentPacket(entity.EntityID,
-					0, spawnedClient.SelectedItem.ID, spawnedClient.SelectedItem.Metadata));
-				client.QueuePacket(new EntityEquipmentPacket(entity.EntityID,
-					4, spawnedClient.InventoryWindow.Armor[0].ID, spawnedClient.InventoryWindow.Armor[0].Metadata));
-				client.QueuePacket(new EntityEquipmentPacket(entity.EntityID,
-					3, spawnedClient.InventoryWindow.Armor[1].ID, spawnedClient.InventoryWindow.Armor[1].Metadata));
-				client.QueuePacket(new EntityEquipmentPacket(entity.EntityID,
-					2, spawnedClient.InventoryWindow.Armor[2].ID, spawnedClient.InventoryWindow.Armor[2].Metadata));
-				client.QueuePacket(new EntityEquipmentPacket(entity.EntityID,
-					1, spawnedClient.InventoryWindow.Armor[3].ID, spawnedClient.InventoryWindow.Armor[3].Metadata));
+				client.QueuePacket(new EntityEquipmentPacket(entity.EntityId,
+					0, spawnedClient.SelectedItem.Id, spawnedClient.SelectedItem.Metadata));
+				client.QueuePacket(new EntityEquipmentPacket(entity.EntityId,
+					4, spawnedClient.InventoryWindow.Armor[0].Id, spawnedClient.InventoryWindow.Armor[0].Metadata));
+				client.QueuePacket(new EntityEquipmentPacket(entity.EntityId,
+					3, spawnedClient.InventoryWindow.Armor[1].Id, spawnedClient.InventoryWindow.Armor[1].Metadata));
+				client.QueuePacket(new EntityEquipmentPacket(entity.EntityId,
+					2, spawnedClient.InventoryWindow.Armor[2].Id, spawnedClient.InventoryWindow.Armor[2].Metadata));
+				client.QueuePacket(new EntityEquipmentPacket(entity.EntityId,
+					1, spawnedClient.InventoryWindow.Armor[3].Id, spawnedClient.InventoryWindow.Armor[3].Metadata));
 			}
 		}
 
 		private IRemoteClient GetClientForEntity(PlayerEntity entity)
 		{
-			return Server.Clients.SingleOrDefault(c => c.Entity != null && c.Entity.EntityID == entity.EntityID);
+			return Server.Clients.SingleOrDefault(c => c.Entity != null && c.Entity.EntityId == entity.EntityId);
 		}
 	}
 }

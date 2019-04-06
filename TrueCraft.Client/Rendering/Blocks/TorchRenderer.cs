@@ -46,7 +46,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 
 		static TorchRenderer()
 		{
-			RegisterRenderer(TorchBlock.BlockID, new TorchRenderer());
+			RegisterRenderer(TorchBlock.BlockId, new TorchRenderer());
 			for (var i = 0; i < Texture.Length; i++)
 				Texture[i] /= 256f;
 		}

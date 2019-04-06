@@ -14,7 +14,7 @@ namespace TrueCraft.Logic.Blocks
 			var upper = ((DoorItem.DoorFlags) descriptor.Metadata & DoorItem.DoorFlags.Upper) ==
 			            DoorItem.DoorFlags.Upper;
 			var other = upper ? Coordinates3D.Down : Coordinates3D.Up;
-			if (world.GetBlockId(descriptor.Coordinates + other) != ID)
+			if (world.GetBlockId(descriptor.Coordinates + other) != Id)
 				world.SetBlockId(descriptor.Coordinates, 0);
 		}
 

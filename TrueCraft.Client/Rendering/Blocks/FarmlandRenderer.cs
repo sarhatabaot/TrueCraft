@@ -81,7 +81,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 
 		static FarmlandRenderer()
 		{
-			RegisterRenderer(FarmlandBlock.BlockID, new FarmlandRenderer());
+			RegisterRenderer(FarmlandBlock.BlockId, new FarmlandRenderer());
 			for (var i = 0; i < DryTexture.Length; i++)
 			{
 				DryTexture[i] *= new Vector2(16f / 256f);

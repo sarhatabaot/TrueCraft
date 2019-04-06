@@ -13,14 +13,14 @@
 
 		public byte Id => Constants.PacketIds.SpawnPainting;
 
-		public int EntityID;
+		public int EntityId;
 		public string PaintingName;
 		public int X, Y, Z;
 		public PaintingDirection Direction;
 
 		public void ReadPacket(IMcStream stream)
 		{
-			EntityID = stream.ReadInt32();
+			EntityId = stream.ReadInt32();
 			PaintingName = stream.ReadString();
 			X = stream.ReadInt32();
 			Y = stream.ReadInt32();
@@ -30,7 +30,7 @@
 
 		public void WritePacket(IMcStream stream)
 		{
-			stream.WriteInt32(EntityID);
+			stream.WriteInt32(EntityId);
 			stream.WriteString(PaintingName);
 			stream.WriteInt32(X);
 			stream.WriteInt32(Y);

@@ -13,9 +13,9 @@ namespace TrueCraft.Logic.Blocks
 			Fern = 2
 		}
 
-		public static readonly byte BlockID = 0x1F;
+		public static readonly byte BlockId = 0x1F;
 
-		public override byte ID => 0x1F;
+		public override byte Id => 0x1F;
 
 		public override double BlastResistance => 0;
 

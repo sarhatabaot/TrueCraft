@@ -22,7 +22,7 @@ namespace TrueCraft.Server.Handlers
 			var world = _client.World;
 			var position = new Coordinates3D(packet.X, packet.Y, packet.Z);
 			var descriptor = world.GetBlockData(position);
-			var provider = server.BlockRepository.GetBlockProvider(descriptor.ID);
+			var provider = server.BlockRepository.GetBlockProvider(descriptor.Id);
 			short damage;
 			int time;
 			switch (packet.PlayerAction)
@@ -46,14 +46,14 @@ namespace TrueCraft.Server.Handlers
 					{
 						var c = (RemoteClient) nearbyClient;
 						if (c.KnownEntities.Contains(client.Entity))
-							c.QueuePacket(new AnimationPacket(client.Entity.EntityID,
+							c.QueuePacket(new AnimationPacket(client.Entity.EntityId,
 								AnimationPacket.PlayerAnimation.SwingArm));
 					}
 
 					if (provider == null)
 						server.SendMessage(
-							ChatColor.Red + "WARNING: block provider for ID {0} is null (player digging)",
-							descriptor.ID);
+							ChatColor.Red + "WARNING: block provider for Id {0} is null (player digging)",
+							descriptor.Id);
 					else
 						provider.BlockLeftClicked(descriptor, packet.Face, world, client);
 
@@ -69,7 +69,7 @@ namespace TrueCraft.Server.Handlers
 					// So if you want to blame anyone, send flames to Notch for the stupid idea of not sending "stop digging" packets
 					// for hardness == 0 blocks.
 
-					time = BlockProvider.GetHarvestTime(descriptor.ID, client.SelectedItem.ID, out damage);
+					time = BlockProvider.GetHarvestTime(descriptor.Id, client.SelectedItem.Id, out damage);
 					if (time <= 20)
 					{
 						provider?.BlockMined(descriptor, packet.Face, world, client);
@@ -83,13 +83,13 @@ namespace TrueCraft.Server.Handlers
 					{
 						var c = (RemoteClient) nearbyClient;
 						if (c.KnownEntities.Contains(client.Entity))
-							c.QueuePacket(new AnimationPacket(client.Entity.EntityID,
+							c.QueuePacket(new AnimationPacket(client.Entity.EntityId,
 								AnimationPacket.PlayerAnimation.None));
 					}
 
-					if (provider != null && descriptor.ID != 0)
+					if (provider != null && descriptor.Id != 0)
 					{
-						time = BlockProvider.GetHarvestTime(descriptor.ID, client.SelectedItem.ID, out damage);
+						time = BlockProvider.GetHarvestTime(descriptor.Id, client.SelectedItem.Id, out damage);
 						if (time <= 20)
 							break; // Already handled earlier
 						var diff = (DateTime.UtcNow - client.ExpectedDigComplete).TotalMilliseconds;
@@ -99,7 +99,7 @@ namespace TrueCraft.Server.Handlers
 							// Damage the item
 							if (damage != 0)
 							{
-								if (server.ItemRepository.GetItemProvider(client.SelectedItem.ID) is ToolItem tool && tool.Uses != -1)
+								if (server.ItemRepository.GetItemProvider(client.SelectedItem.Id) is ToolItem tool && tool.Uses != -1)
 								{
 									var slot = client.SelectedItem;
 									slot.Metadata += damage;
@@ -133,10 +133,10 @@ namespace TrueCraft.Server.Handlers
 			else
 				return;
 
-			var provider = server.BlockRepository.GetBlockProvider(block.Value.ID);
+			var provider = server.BlockRepository.GetBlockProvider(block.Value.Id);
 			if (provider == null)
 			{
-				server.SendMessage($"{ChatColor.Red}WARNING: block provider for ID {{0}} is null (player placing)", block.Value.ID);
+				server.SendMessage($"{ChatColor.Red}WARNING: block provider for Id {{0}} is null (player placing)", block.Value.Id);
 				server.SendMessage($"{ChatColor.Red}Error occured from client {{0}} at coordinates {{1}}", client.Username, block.Value.Coordinates);
 				server.SendMessage($"{ChatColor.Red}Packet logged at {{0}}, please report upstream", DateTime.UtcNow);
 				return;
@@ -148,17 +148,17 @@ namespace TrueCraft.Server.Handlers
 				var oldId = client.World.GetBlockId(position);
 				var oldMeta = client.World.GetMetadata(position);
 				client.QueuePacket(new BlockChangePacket(position.X, (sbyte) position.Y, position.Z, (sbyte) oldId, (sbyte) oldMeta));
-				client.QueuePacket(new SetSlotPacket(0, client.SelectedSlot, client.SelectedItem.ID, client.SelectedItem.Count, client.SelectedItem.Metadata));
+				client.QueuePacket(new SetSlotPacket(0, client.SelectedSlot, client.SelectedItem.Id, client.SelectedItem.Count, client.SelectedItem.Metadata));
 				return;
 			}
 
 			if (!slot.Empty)
 			{
-				var itemProvider = server.ItemRepository.GetItemProvider(slot.ID);
+				var itemProvider = server.ItemRepository.GetItemProvider(slot.Id);
 				if (itemProvider == null)
 				{
-					server.SendMessage(ChatColor.Red + "WARNING: item provider for ID {0} is null (player placing)",
-						block.Value.ID);
+					server.SendMessage(ChatColor.Red + "WARNING: item provider for Id {0} is null (player placing)",
+						block.Value.Id);
 					server.SendMessage(ChatColor.Red + "Error occured from client {0} at coordinates {1}",
 						client.Username, block.Value.Coordinates);
 					server.SendMessage(ChatColor.Red + "Packet logged at {0}, please report upstream",
@@ -221,7 +221,7 @@ namespace TrueCraft.Server.Handlers
 			client.SelectedSlot = (short) (packet.Slot + InventoryWindow.HotbarIndex);
 			var notified = server.GetEntityManagerForWorld(client.World).ClientsForEntity(client.Entity);
 			foreach (var c in notified)
-				c.QueuePacket(new EntityEquipmentPacket(client.Entity.EntityID, 0, client.SelectedItem.ID,
+				c.QueuePacket(new EntityEquipmentPacket(client.Entity.EntityId, 0, client.SelectedItem.Id,
 					client.SelectedItem.Metadata));
 		}
 
@@ -245,7 +245,7 @@ namespace TrueCraft.Server.Handlers
 		{
 			var packet = (AnimationPacket) _packet;
 			var client = (RemoteClient) _client;
-			if (packet.EntityID == client.Entity.EntityID)
+			if (packet.EntityId == client.Entity.EntityId)
 			{
 				var nearby = server.GetEntityManagerForWorld(client.World)
 					.ClientsForEntity(client.Entity);
@@ -262,7 +262,7 @@ namespace TrueCraft.Server.Handlers
 			if (client.Entity.Position.DistanceTo(coords.AsVector3()) < 10) // TODO: Reach
 			{
 				var block = client.World.GetBlockId(coords);
-				if (block == UprightSignBlock.BlockID || block == WallSignBlock.BlockID)
+				if (block == UprightSignBlock.BlockId || block == WallSignBlock.BlockId)
 				{
 					client.World.SetTileEntity(coords, new NbtCompound(new[]
 					{

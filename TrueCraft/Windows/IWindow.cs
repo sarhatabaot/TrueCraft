@@ -7,7 +7,7 @@ namespace TrueCraft.Windows
 	{
 		IRemoteClient Client { get; set; }
 		IWindowArea[] WindowAreas { get; }
-		sbyte ID { get; set; }
+		sbyte Id { get; set; }
 		string Name { get; }
 		sbyte Type { get; }
 		int Length { get; }

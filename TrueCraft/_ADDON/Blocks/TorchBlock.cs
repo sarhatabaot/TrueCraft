@@ -18,9 +18,9 @@ namespace TrueCraft.Logic.Blocks
 			Ground = 0x05
 		}
 
-		public static readonly byte BlockID = 0x32;
+		public static readonly byte BlockId = 0x32;
 
-		public override byte ID => 0x32;
+		public override byte Id => 0x32;
 
 		public override double BlastResistance => 0;
 
@@ -48,7 +48,7 @@ namespace TrueCraft.Logic.Blocks
 				{new ItemStack(StickItem.ItemID)}
 			};
 
-		public virtual ItemStack Output => new ItemStack(BlockID, 4);
+		public virtual ItemStack Output => new ItemStack(BlockId, 4);
 
 		public virtual bool SignificantMetadata => false;
 
@@ -98,16 +98,16 @@ namespace TrueCraft.Logic.Blocks
 			var old = world.GetBlockData(coordinates);
 			byte[] overwritable =
 			{
-				AirBlock.BlockID,
-				WaterBlock.BlockID,
-				StationaryWaterBlock.BlockID,
-				LavaBlock.BlockID,
-				StationaryLavaBlock.BlockID
+				AirBlock.BlockId,
+				WaterBlock.BlockId,
+				StationaryWaterBlock.BlockId,
+				LavaBlock.BlockId,
+				StationaryLavaBlock.BlockId
 			};
-			if (overwritable.Any(b => b == old.ID))
+			if (overwritable.Any(b => b == old.Id))
 			{
 				var data = world.GetBlockData(coordinates);
-				data.ID = ID;
+				data.Id = Id;
 				data.Metadata = (byte) item.Metadata;
 
 				BlockPlaced(data, face, world, user);

@@ -54,24 +54,24 @@ namespace TrueCraft.Server.Commands
 		protected static bool GiveItem(IRemoteClient receivingPlayer, string itemid, string amount,
 			IRemoteClient client)
 		{
-			short id;
+			short Id;
 			short metadata = 0;
 			int count;
 
 			if (itemid.Contains(":"))
 			{
 				var parts = itemid.Split(':');
-				if (!short.TryParse(parts[0], out id) || !short.TryParse(parts[1], out metadata) ||
+				if (!short.TryParse(parts[0], out Id) || !short.TryParse(parts[1], out metadata) ||
 				    !int.TryParse(amount, out count)) return false;
 			}
 			else
 			{
-				if (!short.TryParse(itemid, out id) || !int.TryParse(amount, out count)) return false;
+				if (!short.TryParse(itemid, out Id) || !int.TryParse(amount, out count)) return false;
 			}
 
-			if (client.Server.ItemRepository.GetItemProvider(id) == null)
+			if (client.Server.ItemRepository.GetItemProvider(Id) == null)
 			{
-				client.SendMessage("Invalid item id \"" + id + "\".");
+				client.SendMessage("Invalid item Id \"" + Id + "\".");
 				return true;
 			}
 
@@ -89,7 +89,7 @@ namespace TrueCraft.Server.Commands
 
 				count -= amountToGive;
 
-				inventory.PickUpStack(new ItemStack(id, amountToGive, metadata));
+				inventory.PickUpStack(new ItemStack(Id, amountToGive, metadata));
 			}
 
 			return true;
@@ -97,7 +97,7 @@ namespace TrueCraft.Server.Commands
 
 		public override void Help(IRemoteClient client, string alias, string[] arguments)
 		{
-			client.SendMessage("Correct usage is /" + alias + " <User> <Item ID> [Amount]");
+			client.SendMessage("Correct usage is /" + alias + " <User> <Item Id> [Amount]");
 		}
 	}
 }

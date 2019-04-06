@@ -85,7 +85,7 @@ namespace TrueCraft.Client.Rendering
 			_glyphs = new Dictionary<char, FontChar>();
 			foreach (var glyph in _definition.Chars)
 			{
-				var c = (char) glyph.ID;
+				var c = (char) glyph.Id;
 				_glyphs.Add(c, glyph);
 			}
 		}

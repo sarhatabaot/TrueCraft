@@ -79,7 +79,7 @@ namespace TrueCraft.Server.Handlers
 
 			// Send setup packets
 			server.Trace.TraceData(TraceEventType.Start, 0, "sending setup packets");
-			client.QueuePacket(new LoginResponsePacket(client.Entity.EntityID, 0, Dimension.Overworld));
+			client.QueuePacket(new LoginResponsePacket(client.Entity.EntityId, 0, Dimension.Overworld));
 			client.QueuePacket(new WindowItemsPacket(0, client.Inventory.GetSlots()));
 			client.QueuePacket(new UpdateHealthPacket(((PlayerEntity) client.Entity).Health));
 			client.QueuePacket(new SpawnPositionPacket((int) position.X, (int) position.Y, (int) position.Z));

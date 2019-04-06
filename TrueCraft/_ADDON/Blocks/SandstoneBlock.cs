@@ -4,9 +4,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class SandstoneBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x18;
+		public static readonly byte BlockId = 0x18;
 
-		public override byte ID => 0x18;
+		public override byte Id => 0x18;
 
 		public override double BlastResistance => 4;
 

@@ -8,9 +8,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class StickyPistonBlock : BlockProvider, ICraftingRecipe
 	{
-		public static readonly byte BlockID = 0x1D;
+		public static readonly byte BlockId = 0x1D;
 
-		public override byte ID => 0x1D;
+		public override byte Id => 0x1D;
 
 		public override double BlastResistance => 2.5;
 
@@ -26,10 +26,10 @@ namespace TrueCraft.Logic.Blocks
 			new[,]
 			{
 				{new ItemStack(SlimeballItem.ItemID)},
-				{new ItemStack(PistonBlock.BlockID)}
+				{new ItemStack(PistonBlock.BlockId)}
 			};
 
-		public ItemStack Output => new ItemStack(BlockID);
+		public ItemStack Output => new ItemStack(BlockId);
 
 		public bool SignificantMetadata => false;
 

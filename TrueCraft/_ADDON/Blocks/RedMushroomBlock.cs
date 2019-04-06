@@ -4,9 +4,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class RedMushroomBlock : MushroomBlock
 	{
-		public static readonly byte BlockID = 0x28;
+		public static readonly byte BlockId = 0x28;
 
-		public override byte ID => 0x28;
+		public override byte Id => 0x28;
 
 		public override byte Luminance => 0;
 

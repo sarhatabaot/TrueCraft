@@ -11,7 +11,7 @@
 		public SpawnGenericEntityPacket(int entityID, sbyte entityType, int x, int y, int z,
 			int data, short? xVelocity, short? yVelocity, short? zVelocity)
 		{
-			EntityID = entityID;
+			EntityId = entityID;
 			EntityType = entityType;
 			X = x;
 			Y = y;
@@ -22,7 +22,7 @@
 			ZVelocity = zVelocity;
 		}
 
-		public int EntityID;
+		public int EntityId;
 		public sbyte EntityType; // TODO: Enum? Maybe a lookup would be better.
 		public int X, Y, Z;
 		public int Data;
@@ -30,7 +30,7 @@
 
 		public void ReadPacket(IMcStream stream)
 		{
-			EntityID = stream.ReadInt32();
+			EntityId = stream.ReadInt32();
 			EntityType = stream.ReadInt8();
 			X = stream.ReadInt32();
 			Y = stream.ReadInt32();
@@ -46,7 +46,7 @@
 
 		public void WritePacket(IMcStream stream)
 		{
-			stream.WriteInt32(EntityID);
+			stream.WriteInt32(EntityId);
 			stream.WriteInt8(EntityType);
 			stream.WriteInt32(X);
 			stream.WriteInt32(Y);

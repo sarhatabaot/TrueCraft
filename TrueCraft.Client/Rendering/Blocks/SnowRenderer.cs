@@ -19,7 +19,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 
 		static SnowRenderer()
 		{
-			RegisterRenderer(SnowfallBlock.BlockID, new SnowRenderer());
+			RegisterRenderer(SnowfallBlock.BlockId, new SnowRenderer());
 			for (var i = 0; i < Texture.Length; i++)
 				Texture[i] *= new Vector2(16f / 256f);
 		}

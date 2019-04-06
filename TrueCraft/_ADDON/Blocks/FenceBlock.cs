@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class FenceBlock : BlockProvider, ICraftingRecipe, IBurnableItem
 	{
-		public static readonly byte BlockID = 0x55;
+		public static readonly byte BlockId = 0x55;
 
-		public override byte ID => 0x55;
+		public override byte Id => 0x55;
 
 		public override double BlastResistance => 15;
 
@@ -30,17 +30,17 @@ namespace TrueCraft.Logic.Blocks
 			{
 				{
 					new ItemStack(StickItem.ItemID),
-					new ItemStack(WoodenPlanksBlock.BlockID),
+					new ItemStack(WoodenPlanksBlock.BlockId),
 					new ItemStack(StickItem.ItemID)
 				},
 				{
 					new ItemStack(StickItem.ItemID),
-					new ItemStack(WoodenPlanksBlock.BlockID),
+					new ItemStack(WoodenPlanksBlock.BlockId),
 					new ItemStack(StickItem.ItemID)
 				}
 			};
 
-		public ItemStack Output => new ItemStack(BlockID);
+		public ItemStack Output => new ItemStack(BlockId);
 
 		public bool SignificantMetadata => false;
 

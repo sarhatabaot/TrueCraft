@@ -10,14 +10,14 @@
 			X = x;
 			Y = y;
 			Z = z;
-			BlockID = blockID;
+			BlockId = blockID;
 			Metadata = metadata;
 		}
 
 		public int X;
 		public sbyte Y;
 		public int Z;
-		public sbyte BlockID;
+		public sbyte BlockId;
 		public sbyte Metadata;
 
 		public void ReadPacket(IMcStream stream)
@@ -25,7 +25,7 @@
 			X = stream.ReadInt32();
 			Y = stream.ReadInt8();
 			Z = stream.ReadInt32();
-			BlockID = stream.ReadInt8();
+			BlockId = stream.ReadInt8();
 			Metadata = stream.ReadInt8();
 		}
 
@@ -34,7 +34,7 @@
 			stream.WriteInt32(X);
 			stream.WriteInt8(Y);
 			stream.WriteInt32(Z);
-			stream.WriteInt8(BlockID);
+			stream.WriteInt8(BlockId);
 			stream.WriteInt8(Metadata);
 		}
 	}

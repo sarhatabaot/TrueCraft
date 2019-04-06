@@ -126,7 +126,7 @@ namespace TrueCraft.Serialization.Tags
 		internal abstract void WriteTag([NotNull] NbtBinaryWriter writeReader, bool writeName);
 
 
-		// WriteData does not write the tag's ID byte or the name
+		// WriteData does not write the tag's Id byte or the name
 		internal abstract void WriteData([NotNull] NbtBinaryWriter writeReader);
 
 

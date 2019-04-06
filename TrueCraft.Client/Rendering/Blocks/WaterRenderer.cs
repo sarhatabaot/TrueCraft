@@ -19,8 +19,8 @@ namespace TrueCraft.Client.Rendering.Blocks
 
 		static WaterRenderer()
 		{
-			RegisterRenderer(WaterBlock.BlockID, new WaterRenderer());
-			RegisterRenderer(StationaryWaterBlock.BlockID, new WaterRenderer());
+			RegisterRenderer(WaterBlock.BlockId, new WaterRenderer());
+			RegisterRenderer(StationaryWaterBlock.BlockId, new WaterRenderer());
 			for (var i = 0; i < Texture.Length; i++)
 				Texture[i] *= new Vector2(16f / 256f);
 		}

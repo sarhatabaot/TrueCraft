@@ -53,7 +53,7 @@ namespace TrueCraft.Client.Handlers
 
 		public static void HandleLoginResponse(IPacket packet, MultiPlayerClient client)
 		{
-			client.EntityId = ((LoginResponsePacket) packet).EntityID;
+			client.EntityId = ((LoginResponsePacket) packet).EntityId;
 			client.QueuePacket(new PlayerGroundedPacket());
 		}
 
@@ -82,7 +82,7 @@ namespace TrueCraft.Client.Handlers
 			var teleport = (EntityTeleportPacket) packet;
 
 			client.Trace.TraceData(TraceEventType.Warning, 0,
-				$"server wants client to teleport entity {teleport.EntityID}, but we don't have an entity manager");
+				$"server wants client to teleport entity {teleport.EntityId}, but we don't have an entity manager");
 		}
 	}
 }

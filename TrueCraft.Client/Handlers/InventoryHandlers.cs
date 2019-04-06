@@ -39,7 +39,7 @@ namespace TrueCraft.Client.Handlers
 					break;
 			}
 
-			window.ID = packet.WindowID;
+			window.Id = packet.WindowID;
 			client.CurrentWindow = window;
 		}
 

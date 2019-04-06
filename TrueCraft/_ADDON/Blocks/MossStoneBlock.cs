@@ -4,9 +4,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class MossStoneBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x30;
+		public static readonly byte BlockId = 0x30;
 
-		public override byte ID => 0x30;
+		public override byte Id => 0x30;
 
 		public override double BlastResistance => 30;
 

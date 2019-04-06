@@ -5,7 +5,7 @@
 	{
 		public byte Id => Constants.PacketIds.SpawnPlayer;
 
-		public int EntityID;
+		public int EntityId;
 		public string PlayerName;
 		public int X, Y, Z;
 		public sbyte Yaw, Pitch;
@@ -18,7 +18,7 @@
 		public SpawnPlayerPacket(int entityID, string playerName, int x, int y, int z, sbyte yaw, sbyte pitch,
 			short currentItem)
 		{
-			EntityID = entityID;
+			EntityId = entityID;
 			PlayerName = playerName;
 			X = x;
 			Y = y;
@@ -30,7 +30,7 @@
 
 		public void ReadPacket(IMcStream stream)
 		{
-			EntityID = stream.ReadInt32();
+			EntityId = stream.ReadInt32();
 			PlayerName = stream.ReadString();
 			X = stream.ReadInt32();
 			Y = stream.ReadInt32();
@@ -42,7 +42,7 @@
 
 		public void WritePacket(IMcStream stream)
 		{
-			stream.WriteInt32(EntityID);
+			stream.WriteInt32(EntityId);
 			stream.WriteString(PlayerName);
 			stream.WriteInt32(X);
 			stream.WriteInt32(Y);

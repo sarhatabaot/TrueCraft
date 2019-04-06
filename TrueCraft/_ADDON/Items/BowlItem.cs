@@ -7,7 +7,7 @@ namespace TrueCraft.Logic.Items
 	{
 		public static readonly short ItemID = 0x119;
 
-		public override short ID => 0x119;
+		public override short Id => 0x119;
 
 		public override string DisplayName => "Bowl";
 
@@ -15,10 +15,10 @@ namespace TrueCraft.Logic.Items
 			new[,]
 			{
 				{
-					new ItemStack(WoodenPlanksBlock.BlockID), ItemStack.EmptyStack,
-					new ItemStack(WoodenPlanksBlock.BlockID)
+					new ItemStack(WoodenPlanksBlock.BlockId), ItemStack.EmptyStack,
+					new ItemStack(WoodenPlanksBlock.BlockId)
 				},
-				{ItemStack.EmptyStack, new ItemStack(WoodenPlanksBlock.BlockID), ItemStack.EmptyStack}
+				{ItemStack.EmptyStack, new ItemStack(WoodenPlanksBlock.BlockId), ItemStack.EmptyStack}
 			};
 
 		public ItemStack Output => new ItemStack(ItemID);

@@ -15,24 +15,24 @@
 
 		public byte Id => Constants.PacketIds.Animation;
 
-		public int EntityID;
+		public int EntityId;
 		public PlayerAnimation Animation;
 
 		public AnimationPacket(int entityID, PlayerAnimation animation)
 		{
-			EntityID = entityID;
+			EntityId = entityID;
 			Animation = animation;
 		}
 
 		public void ReadPacket(IMcStream stream)
 		{
-			EntityID = stream.ReadInt32();
+			EntityId = stream.ReadInt32();
 			Animation = (PlayerAnimation) stream.ReadInt8();
 		}
 
 		public void WritePacket(IMcStream stream)
 		{
-			stream.WriteInt32(EntityID);
+			stream.WriteInt32(EntityId);
 			stream.WriteInt8((sbyte) Animation);
 		}
 	}

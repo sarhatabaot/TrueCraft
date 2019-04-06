@@ -256,7 +256,7 @@ namespace TrueCraft.Client.Modules
 					var item = Game.Client.Inventory.Hotbar[Game.Client.HotBarSelection];
 					Game.Client.QueuePacket(new PlayerBlockPlacementPacket(
 						Game.HighlightedBlock.X, (sbyte) Game.HighlightedBlock.Y, Game.HighlightedBlock.Z,
-						Game.HighlightedBlockFace, item.ID, item.Count, item.Metadata));
+						Game.HighlightedBlockFace, item.Id, item.Count, item.Metadata));
 					return true;
 			}
 
@@ -271,7 +271,7 @@ namespace TrueCraft.Client.Modules
 			Game.StartDigging = DateTime.UtcNow;
 			Game.EndDigging = Game.StartDigging.AddMilliseconds(
 				BlockProvider.GetHarvestTime(block,
-					Game.Client.Inventory.Hotbar[Game.Client.HotBarSelection].ID, out _));
+					Game.Client.Inventory.Hotbar[Game.Client.HotBarSelection].Id, out _));
 			Game.Client.QueuePacket(new PlayerDiggingPacket(
 				PlayerDiggingPacket.Action.StartDigging,
 				Game.TargetBlock.X, (sbyte) Game.TargetBlock.Y, Game.TargetBlock.Z,
@@ -295,7 +295,7 @@ namespace TrueCraft.Client.Modules
 		{
 			var coords = (Coordinates3D) Game.Client.BoundingBox.Min.Floor();
 			var target = Game.Client.World.GetBlockId(coords);
-			if (target == AirBlock.BlockID)
+			if (target == AirBlock.BlockId)
 				target = Game.Client.World.GetBlockId(coords + Coordinates3D.Down);
 			var provider = Game.BlockRepository.GetBlockProvider(target);
 			if (provider.SoundEffect == SoundEffectClass.None)
@@ -322,7 +322,7 @@ namespace TrueCraft.Client.Modules
 				var item = Game.Client.Inventory.Hotbar[Game.Client.HotBarSelection];
 				Game.Client.QueuePacket(new PlayerBlockPlacementPacket(
 					Game.HighlightedBlock.X, (sbyte) Game.HighlightedBlock.Y, Game.HighlightedBlock.Z,
-					Game.HighlightedBlockFace, item.ID, item.Count, item.Metadata));
+					Game.HighlightedBlockFace, item.Id, item.Count, item.Metadata));
 			}
 
 			if (gamePad.IsConnected && Math.Abs(gamePad.ThumbSticks.Right.Length()) > 0)

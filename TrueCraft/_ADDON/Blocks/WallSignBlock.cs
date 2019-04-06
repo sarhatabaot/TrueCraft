@@ -10,9 +10,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class WallSignBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x44;
+		public static readonly byte BlockId = 0x44;
 
-		public override byte ID => 0x44;
+		public override byte Id => 0x44;
 
 		public override double BlastResistance => 5;
 

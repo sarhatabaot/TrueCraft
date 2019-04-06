@@ -2,9 +2,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class PistonPlaceholderBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x24;
+		public static readonly byte BlockId = 0x24;
 
-		public override byte ID => 0x24;
+		public override byte Id => 0x24;
 
 		public override double BlastResistance => 0;
 

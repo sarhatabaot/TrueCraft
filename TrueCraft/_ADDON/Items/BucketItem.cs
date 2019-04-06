@@ -9,7 +9,7 @@ namespace TrueCraft.Logic.Items
 	{
 		public static readonly short ItemID = 0x145;
 
-		public override short ID => 0x145;
+		public override short Id => 0x145;
 
 		public override string DisplayName => "Bucket";
 
@@ -24,10 +24,10 @@ namespace TrueCraft.Logic.Items
 			IRemoteClient user)
 		{
 			coordinates += MathHelper.BlockFaceToCoordinates(face);
-			if (item.ID == ItemID) // Empty bucket
+			if (item.Id == ItemID) // Empty bucket
 			{
 				var block = world.GetBlockId(coordinates);
-				if (block == WaterBlock.BlockID || block == StationaryWaterBlock.BlockID)
+				if (block == WaterBlock.BlockId || block == StationaryWaterBlock.BlockId)
 				{
 					var meta = world.GetMetadata(coordinates);
 					if (meta == 0) // Is source block?
@@ -36,7 +36,7 @@ namespace TrueCraft.Logic.Items
 						world.SetBlockId(coordinates, 0);
 					}
 				}
-				else if (block == LavaBlock.BlockID || block == StationaryLavaBlock.BlockID)
+				else if (block == LavaBlock.BlockId || block == StationaryLavaBlock.BlockId)
 				{
 					var meta = world.GetMetadata(coordinates);
 					if (meta == 0) // Is source block?

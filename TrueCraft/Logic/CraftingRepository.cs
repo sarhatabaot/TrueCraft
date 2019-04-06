@@ -27,7 +27,7 @@ namespace TrueCraft.Logic
 			{
 				var supplied = craftingArea[(y + _y) * craftingArea.Width + x + _x];
 				var required = recipe.Pattern[_y, _x];
-				if (supplied.ID != required.ID || supplied.Count < required.Count ||
+				if (supplied.Id != required.Id || supplied.Count < required.Count ||
 				    recipe.SignificantMetadata && required.Metadata != supplied.Metadata)
 					return false;
 			}

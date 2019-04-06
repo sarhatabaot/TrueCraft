@@ -9,7 +9,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 	{
 		private readonly Vector2[][] Textures;
 
-		static WheatRenderer() => RegisterRenderer(CropsBlock.BlockID, new WheatRenderer());
+		static WheatRenderer() => RegisterRenderer(CropsBlock.BlockId, new WheatRenderer());
 
 		public WheatRenderer()
 		{

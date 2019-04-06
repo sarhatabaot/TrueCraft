@@ -6,9 +6,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class JackoLanternBlock : BlockProvider, ICraftingRecipe
 	{
-		public static readonly byte BlockID = 0x5B;
+		public static readonly byte BlockId = 0x5B;
 
-		public override byte ID => 0x5B;
+		public override byte Id => 0x5B;
 
 		public override double BlastResistance => 5;
 
@@ -27,11 +27,11 @@ namespace TrueCraft.Logic.Blocks
 		public ItemStack[,] Pattern =>
 			new[,]
 			{
-				{new ItemStack(PumpkinBlock.BlockID)},
-				{new ItemStack(TorchBlock.BlockID)}
+				{new ItemStack(PumpkinBlock.BlockId)},
+				{new ItemStack(TorchBlock.BlockId)}
 			};
 
-		public ItemStack Output => new ItemStack(BlockID);
+		public ItemStack Output => new ItemStack(BlockId);
 
 		public bool SignificantMetadata => false;
 

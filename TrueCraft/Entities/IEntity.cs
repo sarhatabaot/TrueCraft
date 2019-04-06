@@ -10,7 +10,7 @@ namespace TrueCraft.Entities
 	public interface IEntity : INotifyPropertyChanged
 	{
 		IPacket SpawnPacket { get; }
-		int EntityID { get; set; }
+		int EntityId { get; set; }
 		Vector3 Position { get; set; }
 		float Yaw { get; set; }
 		float Pitch { get; set; }

@@ -25,10 +25,10 @@ namespace TrueCraft.Logic.Items
 						baseMaterial = IronIngotItem.ItemID;
 						break;
 					case ToolMaterial.Stone:
-						baseMaterial = CobblestoneBlock.BlockID;
+						baseMaterial = CobblestoneBlock.BlockId;
 						break;
 					case ToolMaterial.Wood:
-						baseMaterial = WoodenPlanksBlock.BlockID;
+						baseMaterial = WoodenPlanksBlock.BlockId;
 						break;
 				}
 
@@ -41,18 +41,18 @@ namespace TrueCraft.Logic.Items
 			}
 		}
 
-		public ItemStack Output => new ItemStack(ID);
+		public ItemStack Output => new ItemStack(Id);
 
 		public bool SignificantMetadata => false;
 
 		public override void ItemUsedOnBlock(Coordinates3D coordinates, ItemStack item, BlockFace face, IWorld world,
 			IRemoteClient user)
 		{
-			var id = world.GetBlockId(coordinates);
-			if (id == DirtBlock.BlockID || id == GrassBlock.BlockID)
+			var Id = world.GetBlockId(coordinates);
+			if (Id == DirtBlock.BlockId || Id == GrassBlock.BlockId)
 			{
-				world.SetBlockId(coordinates, FarmlandBlock.BlockID);
-				user.Server.BlockRepository.GetBlockProvider(FarmlandBlock.BlockID).BlockPlaced(
+				world.SetBlockId(coordinates, FarmlandBlock.BlockId);
+				user.Server.BlockRepository.GetBlockProvider(FarmlandBlock.BlockId).BlockPlaced(
 					new BlockDescriptor {Coordinates = coordinates}, face, world, user);
 			}
 		}

@@ -8,7 +8,7 @@
 	{
 		public byte Id => Constants.PacketIds.UseBed;
 
-		public int EntityID;
+		public int EntityId;
 		public bool InBed;
 		public int X;
 		public sbyte Y;
@@ -16,7 +16,7 @@
 
 		public void ReadPacket(IMcStream stream)
 		{
-			EntityID = stream.ReadInt32();
+			EntityId = stream.ReadInt32();
 			InBed = stream.ReadBoolean();
 			X = stream.ReadInt32();
 			Y = stream.ReadInt8();
@@ -25,7 +25,7 @@
 
 		public void WritePacket(IMcStream stream)
 		{
-			stream.WriteInt32(EntityID);
+			stream.WriteInt32(EntityId);
 			stream.WriteBoolean(InBed);
 			stream.WriteInt32(X);
 			stream.WriteInt8(Y);

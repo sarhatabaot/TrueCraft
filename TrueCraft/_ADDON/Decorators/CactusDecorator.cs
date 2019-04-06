@@ -24,11 +24,11 @@ namespace TrueCraft.TerrainGen.Decorators
 				{
 					var blockLocation = new Coordinates3D(x, height, z);
 					var cactiPosition = blockLocation + Coordinates3D.Up;
-					if (chunk.GetBlockID(blockLocation).Equals(SandBlock.BlockID))
+					if (chunk.GetBlockID(blockLocation).Equals(SandBlock.BlockId))
 					{
 						var HeightChance = chanceNoise.Value2D(blockX, blockZ);
 						var CactusHeight = HeightChance < 1.4 ? 2 : 3;
-						Decoration.GenerateColumn(chunk, cactiPosition, CactusHeight, CactusBlock.BlockID);
+						Decoration.GenerateColumn(chunk, cactiPosition, CactusHeight, CactusBlock.BlockId);
 					}
 				}
 			}

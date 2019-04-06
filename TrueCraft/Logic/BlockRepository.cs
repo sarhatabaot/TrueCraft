@@ -14,20 +14,20 @@ namespace TrueCraft.Logic
 		public BoundingBox? GetBoundingBox(IWorld world, Coordinates3D coordinates)
 		{
 			// TODO: Block-specific bounding boxes
-			var id = world.GetBlockId(coordinates);
-			if (id == 0) return null;
-			var provider = BlockProviders[id];
+			var Id = world.GetBlockId(coordinates);
+			if (Id == 0) return null;
+			var provider = BlockProviders[Id];
 			return provider.BoundingBox;
 		}
 
-		public IBlockProvider GetBlockProvider(byte id)
+		public IBlockProvider GetBlockProvider(byte Id)
 		{
-			return BlockProviders[id];
+			return BlockProviders[Id];
 		}
 
 		public void RegisterBlockProvider(IBlockProvider provider)
 		{
-			BlockProviders[provider.ID] = provider;
+			BlockProviders[provider.Id] = provider;
 		}
 
 		public void DiscoverBlockProviders()

@@ -44,8 +44,8 @@ namespace TrueCraft.World
 		{
 			var temp = Math.Abs(TempNoise.Value2D(location.X, location.Z));
 			var rainfall = Math.Abs(RainNoise.Value2D(location.X, location.Z));
-			var ID = biomes.GetBiome(temp, rainfall, spawn).ID;
-			return ID;
+			var Id = biomes.GetBiome(temp, rainfall, spawn).Id;
+			return Id;
 		}
 
 		/*

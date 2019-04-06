@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class DetectorRailBlock : RailBlock
 	{
-		public new static readonly byte BlockID = 0x1C;
+		public new static readonly byte BlockId = 0x1C;
 
-		public override byte ID => 0x1C;
+		public override byte Id => 0x1C;
 
 		public override string DisplayName => "Detector Rail";
 
@@ -21,12 +21,12 @@ namespace TrueCraft.Logic.Blocks
 				},
 				{
 					new ItemStack(IronIngotItem.ItemID),
-					new ItemStack(StonePressurePlateBlock.BlockID),
+					new ItemStack(StonePressurePlateBlock.BlockId),
 					new ItemStack(IronIngotItem.ItemID)
 				},
 				{
 					new ItemStack(IronIngotItem.ItemID),
-					new ItemStack(RedstoneDustBlock.BlockID),
+					new ItemStack(RedstoneDustBlock.BlockId),
 					new ItemStack(IronIngotItem.ItemID)
 				}
 			};

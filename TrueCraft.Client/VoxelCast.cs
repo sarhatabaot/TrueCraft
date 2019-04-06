@@ -28,10 +28,10 @@ namespace TrueCraft.Client
 				var coords = (Coordinates3D) (new Vector3(x, y, z) + ray.Position).Round();
 				if (!world.IsValidPosition(coords))
 					continue;
-				var id = world.GetBlockId(coords);
-				if (id != 0)
+				var Id = world.GetBlockId(coords);
+				if (Id != 0)
 				{
-					var provider = repository.GetBlockProvider(id);
+					var provider = repository.GetBlockProvider(Id);
 					var box = provider.InteractiveBoundingBox;
 					if (box != null)
 					{

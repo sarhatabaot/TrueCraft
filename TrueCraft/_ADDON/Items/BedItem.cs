@@ -9,7 +9,7 @@ namespace TrueCraft.Logic.Items
 	{
 		public static readonly short ItemID = 0x163;
 
-		public override short ID => 0x163;
+		public override short Id => 0x163;
 
 		public override sbyte MaximumStack => 1;
 
@@ -19,14 +19,14 @@ namespace TrueCraft.Logic.Items
 			new[,]
 			{
 				{
-					new ItemStack(WoolBlock.BlockID),
-					new ItemStack(WoolBlock.BlockID),
-					new ItemStack(WoolBlock.BlockID)
+					new ItemStack(WoolBlock.BlockId),
+					new ItemStack(WoolBlock.BlockId),
+					new ItemStack(WoolBlock.BlockId)
 				},
 				{
-					new ItemStack(WoodenPlanksBlock.BlockID),
-					new ItemStack(WoodenPlanksBlock.BlockID),
-					new ItemStack(WoodenPlanksBlock.BlockID)
+					new ItemStack(WoodenPlanksBlock.BlockId),
+					new ItemStack(WoodenPlanksBlock.BlockId),
+					new ItemStack(WoodenPlanksBlock.BlockId)
 				}
 			};
 
@@ -66,7 +66,7 @@ namespace TrueCraft.Logic.Items
 					break;
 			}
 
-			var bedProvider = (BedBlock) user.Server.BlockRepository.GetBlockProvider(BedBlock.BlockID);
+			var bedProvider = (BedBlock) user.Server.BlockRepository.GetBlockProvider(BedBlock.BlockId);
 			if (!bedProvider.ValidBedPosition(new BlockDescriptor {Coordinates = head},
 				    user.Server.BlockRepository, user.World, false, true) ||
 			    !bedProvider.ValidBedPosition(new BlockDescriptor {Coordinates = foot},
@@ -74,9 +74,9 @@ namespace TrueCraft.Logic.Items
 				return;
 			user.Server.BlockUpdatesEnabled = false;
 			world.SetBlockData(head, new BlockDescriptor
-				{ID = BedBlock.BlockID, Metadata = (byte) ((byte) direction | (byte) BedBlock.BedType.Head)});
+				{Id = BedBlock.BlockId, Metadata = (byte) ((byte) direction | (byte) BedBlock.BedType.Head)});
 			world.SetBlockData(foot, new BlockDescriptor
-				{ID = BedBlock.BlockID, Metadata = (byte) ((byte) direction | (byte) BedBlock.BedType.Foot)});
+				{Id = BedBlock.BlockId, Metadata = (byte) ((byte) direction | (byte) BedBlock.BedType.Foot)});
 			user.Server.BlockUpdatesEnabled = true;
 			item.Count--;
 			user.Inventory[user.SelectedSlot] = item;

@@ -7,9 +7,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class DispenserBlock : BlockProvider, ICraftingRecipe
 	{
-		public static readonly byte BlockID = 0x17;
+		public static readonly byte BlockId = 0x17;
 
-		public override byte ID => 0x17;
+		public override byte Id => 0x17;
 
 		public override double BlastResistance => 17.5;
 
@@ -23,23 +23,23 @@ namespace TrueCraft.Logic.Blocks
 			new[,]
 			{
 				{
-					new ItemStack(CobblestoneBlock.BlockID),
-					new ItemStack(CobblestoneBlock.BlockID),
-					new ItemStack(CobblestoneBlock.BlockID)
+					new ItemStack(CobblestoneBlock.BlockId),
+					new ItemStack(CobblestoneBlock.BlockId),
+					new ItemStack(CobblestoneBlock.BlockId)
 				},
 				{
-					new ItemStack(CobblestoneBlock.BlockID),
+					new ItemStack(CobblestoneBlock.BlockId),
 					new ItemStack(BowItem.ItemID),
-					new ItemStack(CobblestoneBlock.BlockID)
+					new ItemStack(CobblestoneBlock.BlockId)
 				},
 				{
-					new ItemStack(CobblestoneBlock.BlockID),
+					new ItemStack(CobblestoneBlock.BlockId),
 					new ItemStack(RedstoneItem.ItemID),
-					new ItemStack(CobblestoneBlock.BlockID)
+					new ItemStack(CobblestoneBlock.BlockId)
 				}
 			};
 
-		public ItemStack Output => new ItemStack(BlockID);
+		public ItemStack Output => new ItemStack(BlockId);
 
 		public bool SignificantMetadata => false;
 

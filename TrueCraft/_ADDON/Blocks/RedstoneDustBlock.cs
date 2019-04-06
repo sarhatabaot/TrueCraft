@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class RedstoneDustBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x37;
+		public static readonly byte BlockId = 0x37;
 
-		public override byte ID => 0x37;
+		public override byte Id => 0x37;
 
 		public override double BlastResistance => 0;
 

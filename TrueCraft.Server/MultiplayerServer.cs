@@ -249,7 +249,7 @@ namespace TrueCraft.Server
 		private void HandleBlockChanged(object sender, BlockChangeEventArgs e)
 		{
 			// TODO: Propagate lighting changes to client (not possible with beta 1.7.3 protocol)
-			if (e.NewBlock.ID != e.OldBlock.ID || e.NewBlock.Metadata != e.OldBlock.Metadata)
+			if (e.NewBlock.Id != e.OldBlock.Id || e.NewBlock.Metadata != e.OldBlock.Metadata)
 			{
 				for (int i = 0, ClientsCount = Clients.Count; i < ClientsCount; i++)
 				{
@@ -258,7 +258,7 @@ namespace TrueCraft.Server
 					// TODO: Confirm that the client knows of this block
 					if (client.LoggedIn && client.World == sender)
 						client.QueuePacket(new BlockChangePacket(e.Position.X, (sbyte) e.Position.Y, e.Position.Z,
-							(sbyte) e.NewBlock.ID, (sbyte) e.NewBlock.Metadata));
+							(sbyte) e.NewBlock.Id, (sbyte) e.NewBlock.Metadata));
 				}
 
 				PendingBlockUpdates.Enqueue(new BlockUpdate {Coordinates = e.Position, World = sender as IWorld});
@@ -309,14 +309,14 @@ namespace TrueCraft.Server
 				_coords.X = x;
 				_coords.Y = y;
 				_coords.Z = z;
-				var id = chunk.GetBlockID(_coords);
-				if (id == 0)
+				var Id = chunk.GetBlockID(_coords);
+				if (Id == 0)
 					continue;
 				Coordinates3D coords;
 				coords.X = w + x;
 				coords.Y = y;
 				coords.Z = d + z;
-				var provider = BlockRepository.GetBlockProvider(id);
+				var provider = BlockRepository.GetBlockProvider(Id);
 				provider.BlockLoadedFromChunk(coords, this, world);
 			}
 		}
@@ -338,7 +338,7 @@ namespace TrueCraft.Server
 				foreach (var offset in adjacent)
 				{
 					var descriptor = update.World.GetBlockData(update.Coordinates + offset);
-					var provider = BlockRepository.GetBlockProvider(descriptor.ID);
+					var provider = BlockRepository.GetBlockProvider(descriptor.Id);
 					provider?.BlockUpdate(descriptor, source, this, update.World);
 				}
 			}

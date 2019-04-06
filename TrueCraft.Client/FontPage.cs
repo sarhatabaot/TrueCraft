@@ -6,7 +6,7 @@ namespace TrueCraft.Client
 	[Serializable]
 	public class FontPage
 	{
-		[XmlAttribute("id")] public int ID { get; set; }
+		[XmlAttribute("id")] public int Id { get; set; }
 
 		[XmlAttribute("file")] public string File { get; set; }
 	}

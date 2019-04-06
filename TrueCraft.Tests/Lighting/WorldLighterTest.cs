@@ -200,10 +200,10 @@ namespace TrueCraft.Tests.Lighting
 			{
 				var coords = new Coordinates3D(5, y, 5);
 				world.SetBlockId(coords, 0);
-				world.SetBlockId(coords + Coordinates3D.East, DirtBlock.BlockID);
-				world.SetBlockId(coords + Coordinates3D.West, DirtBlock.BlockID);
-				world.SetBlockId(coords + Coordinates3D.North, DirtBlock.BlockID);
-				world.SetBlockId(coords + Coordinates3D.South, DirtBlock.BlockID);
+				world.SetBlockId(coords + Coordinates3D.East, DirtBlock.BlockId);
+				world.SetBlockId(coords + Coordinates3D.West, DirtBlock.BlockId);
+				world.SetBlockId(coords + Coordinates3D.North, DirtBlock.BlockId);
+				world.SetBlockId(coords + Coordinates3D.South, DirtBlock.BlockId);
 			}
 
 			world.GetChunk(Coordinates2D.Zero).UpdateHeightMap();
@@ -219,7 +219,7 @@ namespace TrueCraft.Tests.Lighting
 
 			for (var y = 1; y <= 16; y++)
 				if (y % 2 == 1)
-					world.SetBlockId(new Coordinates3D(5, y, 5), LeavesBlock.BlockID);
+					world.SetBlockId(new Coordinates3D(5, y, 5), LeavesBlock.BlockId);
 			world.GetChunk(Coordinates2D.Zero).UpdateHeightMap();
 
 			lighter.EnqueueOperation(new BoundingBox(new Vector3(5, 0, 5),

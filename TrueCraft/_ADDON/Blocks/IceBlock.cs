@@ -6,9 +6,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class IceBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x4F;
+		public static readonly byte BlockId = 0x4F;
 
-		public override byte ID => 0x4F;
+		public override byte Id => 0x4F;
 
 		public override double BlastResistance => 2.5;
 
@@ -31,8 +31,8 @@ namespace TrueCraft.Logic.Blocks
 
 		public override void BlockMined(BlockDescriptor descriptor, BlockFace face, IWorld world, IRemoteClient user)
 		{
-			world.SetBlockId(descriptor.Coordinates, WaterBlock.BlockID);
-			BlockRepository.GetBlockProvider(WaterBlock.BlockID).BlockPlaced(descriptor, face, world, user);
+			world.SetBlockId(descriptor.Coordinates, WaterBlock.BlockId);
+			BlockRepository.GetBlockProvider(WaterBlock.BlockId).BlockPlaced(descriptor, face, world, user);
 		}
 	}
 }

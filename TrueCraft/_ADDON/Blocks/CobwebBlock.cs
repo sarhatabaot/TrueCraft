@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class CobwebBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x1E;
+		public static readonly byte BlockId = 0x1E;
 
-		public override byte ID => 0x1E;
+		public override byte Id => 0x1E;
 
 		public override double BlastResistance => 20;
 

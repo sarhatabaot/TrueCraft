@@ -6,7 +6,7 @@ namespace TrueCraft.Logic.Items
 	{
 		public static readonly short ItemID = 0x15B;
 
-		public override short ID => 0x15B;
+		public override short Id => 0x15B;
 
 		public override string DisplayName => "Clock";
 

@@ -4,9 +4,9 @@ namespace TrueCraft.Logic.Items
 {
 	public class AppleItem : FoodItem
 	{
-		public static readonly short ItemID = 0x104;
+		public static readonly short ItemId = 0x104;
 
-		public override short ID => 0x104;
+		public override short Id => 0x104;
 
 		public override float Restores => 2;
 

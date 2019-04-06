@@ -4,7 +4,7 @@ namespace TrueCraft.TerrainGen.Biomes
 {
 	public class TundraBiome : BiomeProvider
 	{
-		public override byte ID => (byte) Biome.Tundra;
+		public override byte Id => (byte) Biome.Tundra;
 
 		public override double Temperature => 0.1f;
 
@@ -16,8 +16,8 @@ namespace TrueCraft.TerrainGen.Biomes
 
 		public override double TreeDensity => 50;
 
-		public override byte SurfaceBlock => GrassBlock.BlockID;
+		public override byte SurfaceBlock => GrassBlock.BlockId;
 
-		public override byte FillerBlock => DirtBlock.BlockID;
+		public override byte FillerBlock => DirtBlock.BlockId;
 	}
 }

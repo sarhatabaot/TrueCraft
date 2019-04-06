@@ -27,7 +27,7 @@ namespace TrueCraft.Windows
 				WindowChange(this, new WindowChangeEventArgs(destination + to.StartIndex, slot));
 		}
 
-		public sbyte ID { get; set; }
+		public sbyte Id { get; set; }
 		public abstract string Name { get; }
 		public abstract sbyte Type { get; }
 		public abstract void CopyToInventory(IWindow inventoryWindow);
@@ -148,7 +148,7 @@ namespace TrueCraft.Windows
 			var existing = window[packet.SlotIndex];
 			if (window.ReadOnlySlots.Contains(packet.SlotIndex))
 			{
-				if (itemStaging.ID == existing.ID || itemStaging.Empty)
+				if (itemStaging.Id == existing.Id || itemStaging.Empty)
 				{
 					if (itemStaging.Empty)
 						itemStaging = existing;

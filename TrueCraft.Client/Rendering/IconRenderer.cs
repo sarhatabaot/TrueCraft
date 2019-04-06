@@ -18,10 +18,10 @@ namespace TrueCraft.Client.Rendering
 					continue;
 				int[] indicies;
 				var verticies = BlockRenderer.RenderBlock(provider,
-					new BlockDescriptor {ID = provider.ID}, VisibleFaces.All, new Vector3(-0.5f),
+					new BlockDescriptor {Id = provider.Id}, VisibleFaces.All, new Vector3(-0.5f),
 					0, out indicies);
 				var mesh = new Mesh(game, verticies, indicies);
-				BlockMeshes[provider.ID] = mesh;
+				BlockMeshes[provider.Id] = mesh;
 			}
 
 			PrepareEffects(game);
@@ -56,7 +56,7 @@ namespace TrueCraft.Client.Rendering
 		public static void RenderBlockIcon(TrueCraftGame game, IBlockProvider provider, byte metadata,
 			Rectangle destination)
 		{
-			var mesh = BlockMeshes[provider.ID];
+			var mesh = BlockMeshes[provider.Id];
 			if (mesh != null)
 			{
 				RenderEffect.World = Microsoft.Xna.Framework.Matrix.Identity

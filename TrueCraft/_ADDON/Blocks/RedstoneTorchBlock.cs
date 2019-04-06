@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class RedstoneTorchBlock : TorchBlock, ICraftingRecipe
 	{
-		public new static readonly byte BlockID = 0x4C;
+		public new static readonly byte BlockId = 0x4C;
 
-		public override byte ID => 0x4C;
+		public override byte Id => 0x4C;
 
 		public override double BlastResistance => 0;
 
@@ -24,11 +24,11 @@ namespace TrueCraft.Logic.Blocks
 		public override ItemStack[,] Pattern =>
 			new[,]
 			{
-				{new ItemStack(RedstoneDustBlock.BlockID)},
+				{new ItemStack(RedstoneDustBlock.BlockId)},
 				{new ItemStack(StickItem.ItemID)}
 			};
 
-		public override ItemStack Output => new ItemStack(BlockID);
+		public override ItemStack Output => new ItemStack(BlockId);
 
 		public override bool SignificantMetadata => false;
 

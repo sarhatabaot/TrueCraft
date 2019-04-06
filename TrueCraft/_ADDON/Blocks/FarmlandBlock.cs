@@ -18,9 +18,9 @@ namespace TrueCraft.Logic.Blocks
 
 		public static readonly int UpdateIntervalSeconds = 30;
 
-		public static readonly byte BlockID = 0x3C;
+		public static readonly byte BlockId = 0x3C;
 
-		public override byte ID => 0x3C;
+		public override byte Id => 0x3C;
 
 		public override double BlastResistance => 3;
 
@@ -38,7 +38,7 @@ namespace TrueCraft.Logic.Blocks
 
 		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
 		{
-			return new[] {new ItemStack(DirtBlock.BlockID)};
+			return new[] {new ItemStack(DirtBlock.BlockId)};
 		}
 
 		public override Tuple<int, int> GetTextureMap(byte metadata)
@@ -56,8 +56,8 @@ namespace TrueCraft.Logic.Blocks
 				y++) // TODO: This does not check one above the farmland block for some reason
 			for (var z = min.Z; z < max.Z; z++)
 			{
-				var id = world.GetBlockId(new Coordinates3D(x, y, z));
-				if (id == WaterBlock.BlockID || id == StationaryWaterBlock.BlockID)
+				var Id = world.GetBlockId(new Coordinates3D(x, y, z));
+				if (Id == WaterBlock.BlockId || Id == StationaryWaterBlock.BlockId)
 					return true;
 			}
 
@@ -66,7 +66,7 @@ namespace TrueCraft.Logic.Blocks
 
 		private void HydrationCheckEvent(IMultiPlayerServer server, Coordinates3D coords, IWorld world)
 		{
-			if (world.GetBlockId(coords) != BlockID)
+			if (world.GetBlockId(coords) != BlockId)
 				return;
 			if (MathHelper.Random.Next(3) == 0)
 			{
@@ -78,7 +78,7 @@ namespace TrueCraft.Logic.Blocks
 					meta--;
 					if (meta == 0)
 					{
-						world.SetBlockId(coords, BlockID);
+						world.SetBlockId(coords, BlockId);
 						return;
 					}
 				}

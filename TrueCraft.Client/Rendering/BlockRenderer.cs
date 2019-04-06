@@ -94,9 +94,9 @@ namespace TrueCraft.Client.Rendering
 			};
 		}
 
-		public static void RegisterRenderer(byte id, BlockRenderer renderer)
+		public static void RegisterRenderer(byte Id, BlockRenderer renderer)
 		{
-			Renderers[id] = renderer;
+			Renderers[Id] = renderer;
 		}
 
 		public static VertexPositionNormalColorTexture[] RenderBlock(IBlockProvider provider,
@@ -106,7 +106,7 @@ namespace TrueCraft.Client.Rendering
 			var textureMap = provider.GetTextureMap(descriptor.Metadata);
 			if (textureMap == null)
 				textureMap = new Tuple<int, int>(0, 0); // TODO: handle this better
-			return Renderers[descriptor.ID].Render(descriptor, offset, faces, textureMap, indiciesOffset, out indicies);
+			return Renderers[descriptor.Id].Render(descriptor, offset, faces, textureMap, indiciesOffset, out indicies);
 		}
 
 		public virtual VertexPositionNormalColorTexture[] Render(BlockDescriptor descriptor, Vector3 offset,

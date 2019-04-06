@@ -6,9 +6,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class PumpkinBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x56;
+		public static readonly byte BlockId = 0x56;
 
-		public override byte ID => 0x56;
+		public override byte Id => 0x56;
 
 		public override double BlastResistance => 5;
 

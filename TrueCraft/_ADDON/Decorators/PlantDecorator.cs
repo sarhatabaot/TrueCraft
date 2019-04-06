@@ -31,7 +31,7 @@ namespace TrueCraft.TerrainGen.Decorators
 							var bushNoise = chanceNoise.Value2D(blockX * 0.7, blockZ * 0.7);
 							var grassNoise = chanceNoise.Value2D(blockX * 0.3, blockZ * 0.3);
 							if (biome.Plants.Contains(PlantSpecies.Deadbush) && bushNoise > 1 &&
-							    chunk.GetBlockID(blockLocation) == SandBlock.BlockID)
+							    chunk.GetBlockID(blockLocation) == SandBlock.BlockId)
 							{
 								GenerateDeadBush(chunk, plantPosition);
 								continue;
@@ -62,23 +62,23 @@ namespace TrueCraft.TerrainGen.Decorators
 
 		private void GenerateRose(IChunk chunk, Coordinates3D location)
 		{
-			chunk.SetBlockID(location, RoseBlock.BlockID);
+			chunk.SetBlockID(location, RoseBlock.BlockId);
 		}
 
 		private void GenerateDandelion(IChunk chunk, Coordinates3D location)
 		{
-			chunk.SetBlockID(location, DandelionBlock.BlockID);
+			chunk.SetBlockID(location, DandelionBlock.BlockId);
 		}
 
 		private void GenerateTallGrass(IChunk chunk, Coordinates3D location, byte meta)
 		{
-			chunk.SetBlockID(location, TallGrassBlock.BlockID);
+			chunk.SetBlockID(location, TallGrassBlock.BlockId);
 			chunk.SetMetadata(location, meta);
 		}
 
 		private void GenerateDeadBush(IChunk chunk, Coordinates3D location)
 		{
-			chunk.SetBlockID(location, DeadBushBlock.BlockID);
+			chunk.SetBlockID(location, DeadBushBlock.BlockId);
 		}
 	}
 }

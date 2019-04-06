@@ -4,9 +4,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class PortalBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x5A;
+		public static readonly byte BlockId = 0x5A;
 
-		public override byte ID => 0x5A;
+		public override byte Id => 0x5A;
 
 		public override double BlastResistance => 0;
 

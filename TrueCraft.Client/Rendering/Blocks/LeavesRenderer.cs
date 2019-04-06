@@ -28,7 +28,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 
 		static LeavesRenderer()
 		{
-			RegisterRenderer(LeavesBlock.BlockID, new LeavesRenderer());
+			RegisterRenderer(LeavesBlock.BlockId, new LeavesRenderer());
 			for (var i = 0; i < BaseTextures.Length; i++)
 			{
 				BaseTextures[i] *= new Vector2(16f / 256f);

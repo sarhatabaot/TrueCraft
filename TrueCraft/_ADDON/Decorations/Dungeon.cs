@@ -29,7 +29,7 @@ namespace TrueCraft.TerrainGen.Decorations
 			var random = new Random(world.Seed);
 
 			//Generate room
-			GenerateCuboid(chunk, location, Size, CobblestoneBlock.BlockID, 0x0, 0x2);
+			GenerateCuboid(chunk, location, Size, CobblestoneBlock.BlockId, 0x0, 0x2);
 
 			//Randomly add mossy cobblestone to floor
 			MossFloor(chunk, location, random);
@@ -37,7 +37,7 @@ namespace TrueCraft.TerrainGen.Decorations
 			//Place Spawner
 			chunk.SetBlockID(
 				new Coordinates3D((int) (location.X + (Size.X + 1) / 2), (location + Coordinates3D.Up).Y,
-					(int) (location.Z + (Size.Z + 1) / 2)), MonsterSpawnerBlock.BlockID);
+					(int) (location.Z + (Size.Z + 1) / 2)), MonsterSpawnerBlock.BlockId);
 
 			//Create entrances
 			CreateEntraces(chunk, location, random);
@@ -68,8 +68,8 @@ namespace TrueCraft.TerrainGen.Decorations
 						                        || blockLocation.Z < 0 || blockLocation.Z >= Chunk.Depth
 						                        || blockLocation.Y < 0 || blockLocation.Y >= Chunk.Height)
 							continue;
-						chunk.SetBlockID(blockLocation, AirBlock.BlockID);
-						chunk.SetBlockID(blockLocation + Coordinates3D.Up, AirBlock.BlockID);
+						chunk.SetBlockID(blockLocation, AirBlock.BlockId);
+						chunk.SetBlockID(blockLocation + Coordinates3D.Up, AirBlock.BlockId);
 						entrances++;
 					}
 				}
@@ -86,7 +86,7 @@ namespace TrueCraft.TerrainGen.Decorations
 				          || location.Y < 0 || location.Y >= Chunk.Height)
 					continue;
 				if (random.Next(0, 3) == 0)
-					chunk.SetBlockID(new Coordinates3D(x, location.Y, z), MossStoneBlock.BlockID);
+					chunk.SetBlockID(new Coordinates3D(x, location.Y, z), MossStoneBlock.BlockId);
 			}
 		}
 
@@ -101,13 +101,13 @@ namespace TrueCraft.TerrainGen.Decorations
 				var z = random.Next(location.Z, location.Z + (int) Size.Z);
 				if (!IsCuboidWall(new Coordinates2D(x, z), location, Size) &&
 				    !IsCuboidCorner(new Coordinates2D(x, z), location, Size))
-					if (NeighboursBlock(chunk, new Coordinates3D(x, above.Y, z), CobblestoneBlock.BlockID))
+					if (NeighboursBlock(chunk, new Coordinates3D(x, above.Y, z), CobblestoneBlock.BlockId))
 					{
 						if (x < 0 || x >= Chunk.Width
 						          || z < 0 || z >= Chunk.Depth
 						          || above.Y < 0 || above.Y >= Chunk.Height)
 							continue;
-						chunk.SetBlockID(new Coordinates3D(x, above.Y, z), ChestBlock.BlockID);
+						chunk.SetBlockID(new Coordinates3D(x, above.Y, z), ChestBlock.BlockId);
 						break;
 					}
 			}

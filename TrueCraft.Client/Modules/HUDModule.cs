@@ -147,7 +147,7 @@ namespace TrueCraft.Client.Modules
 				var item = Game.Client.Inventory.Hotbar[i];
 				if (item.Empty)
 					continue;
-				var provider = Game.ItemRepository.GetItemProvider(item.ID);
+				var provider = Game.ItemRepository.GetItemProvider(item.Id);
 				if (provider.GetIconTexture((byte) item.Metadata) == null)
 					continue;
 				var position = origin + new Point((int) Scale(i * 20), 0);
@@ -170,7 +170,7 @@ namespace TrueCraft.Client.Modules
 				var item = Game.Client.Inventory.Hotbar[i];
 				if (item.Empty)
 					continue;
-				var provider = Game.ItemRepository.GetItemProvider(item.ID) as IBlockProvider;
+				var provider = Game.ItemRepository.GetItemProvider(item.Id) as IBlockProvider;
 				if (provider == null || provider.GetIconTexture((byte) item.Metadata) != null)
 					continue;
 				var position = origin + new Point((int) Scale(i * 20), 0);

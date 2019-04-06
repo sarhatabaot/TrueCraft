@@ -20,7 +20,7 @@ namespace TrueCraft.Logic.Items
 			Open = 0x4
 		}
 
-		protected abstract byte BlockID { get; }
+		protected abstract byte BlockId { get; }
 
 		public override sbyte MaximumStack => 1;
 
@@ -28,7 +28,7 @@ namespace TrueCraft.Logic.Items
 		{
 			get
 			{
-				var baseMaterial = this is IronDoorItem ? IronIngotItem.ItemID : WoodenPlanksBlock.BlockID;
+				var baseMaterial = this is IronDoorItem ? IronIngotItem.ItemID : WoodenPlanksBlock.BlockId;
 				return new[,]
 				{
 					{new ItemStack(baseMaterial), new ItemStack(baseMaterial)},
@@ -38,7 +38,7 @@ namespace TrueCraft.Logic.Items
 			}
 		}
 
-		public ItemStack Output => new ItemStack(ID);
+		public ItemStack Output => new ItemStack(Id);
 
 		public bool SignificantMetadata => false;
 
@@ -67,9 +67,9 @@ namespace TrueCraft.Logic.Items
 			}
 
 			user.Server.BlockUpdatesEnabled = false;
-			world.SetBlockId(bottom, BlockID);
+			world.SetBlockId(bottom, BlockId);
 			world.SetMetadata(bottom, (byte) direction);
-			world.SetBlockId(top, BlockID);
+			world.SetBlockId(top, BlockId);
 			world.SetMetadata(top, (byte) (direction | DoorFlags.Upper));
 			user.Server.BlockUpdatesEnabled = true;
 			item.Count--;

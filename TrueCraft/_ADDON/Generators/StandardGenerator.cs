@@ -129,11 +129,11 @@ namespace TrueCraft.TerrainGen
 				    || cellValue.Equals(1)
 				    && world.BiomeDiagram.ClosestCellPoint(location) >= featurePointDistance)
 				{
-					var id = SingleBiome
+					var Id = SingleBiome
 						? GenerationBiome
 						: world.BiomeDiagram.GenerateBiome(seed, Biomes, location,
 							IsSpawnCoordinate(location.X, location.Z));
-					var cell = new BiomeCell(id, location);
+					var cell = new BiomeCell(Id, location);
 					world.BiomeDiagram.AddCell(cell);
 				}
 
@@ -165,7 +165,7 @@ namespace TrueCraft.TerrainGen
 					if (cave < threshold)
 					{
 						if (y == 0)
-							chunk.SetBlockID(new Coordinates3D(x, y, z), BedrockBlock.BlockID);
+							chunk.SetBlockID(new Coordinates3D(x, y, z), BedrockBlock.BlockId);
 						else
 						{
 							if (y.Equals(height) || y < height && y > surfaceHeight)
@@ -175,7 +175,7 @@ namespace TrueCraft.TerrainGen
 								if (y > surfaceHeight - biome.FillerDepth)
 									chunk.SetBlockID(new Coordinates3D(x, y, z), biome.FillerBlock);
 								else
-									chunk.SetBlockID(new Coordinates3D(x, y, z), StoneBlock.BlockID);
+									chunk.SetBlockID(new Coordinates3D(x, y, z), StoneBlock.BlockId);
 							}
 						}
 					}

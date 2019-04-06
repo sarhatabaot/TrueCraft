@@ -13,9 +13,9 @@ namespace TrueCraft.Logic.Blocks
 		public static readonly int MaxGrowthSeconds = 60;
 		public static readonly int MaxGrowHeight = 3;
 
-		public static readonly byte BlockID = 0x51;
+		public static readonly byte BlockId = 0x51;
 
-		public override byte ID => 0x51;
+		public override byte Id => 0x51;
 
 		public override double BlastResistance => 2;
 
@@ -48,7 +48,7 @@ namespace TrueCraft.Logic.Blocks
 				};
 
 				foreach (var coords in adjacent)
-					if (world.GetBlockId(coords) != AirBlock.BlockID)
+					if (world.GetBlockId(coords) != AirBlock.BlockId)
 						return false;
 			}
 
@@ -56,7 +56,7 @@ namespace TrueCraft.Logic.Blocks
 			{
 				var supportingBlock =
 					repository.GetBlockProvider(world.GetBlockId(descriptor.Coordinates + Coordinates3D.Down));
-				if (supportingBlock.ID != BlockID && supportingBlock.ID != SandBlock.BlockID)
+				if (supportingBlock.Id != BlockId && supportingBlock.Id != SandBlock.BlockId)
 					return false;
 			}
 
@@ -65,12 +65,12 @@ namespace TrueCraft.Logic.Blocks
 
 		private void TryGrowth(IMultiPlayerServer server, Coordinates3D coords, IWorld world)
 		{
-			if (world.GetBlockId(coords) != BlockID)
+			if (world.GetBlockId(coords) != BlockId)
 				return;
 			// Find current height of stalk
 			var height = 0;
 			for (var y = -MaxGrowHeight; y <= MaxGrowHeight; y++)
-				if (world.GetBlockId(coords + Coordinates3D.Down * y) == BlockID)
+				if (world.GetBlockId(coords + Coordinates3D.Down * y) == BlockId)
 					height++;
 			if (height < MaxGrowHeight)
 			{
@@ -82,7 +82,7 @@ namespace TrueCraft.Logic.Blocks
 				{
 					if (world.GetBlockId(coords + Coordinates3D.Up) == 0)
 					{
-						world.SetBlockId(coords + Coordinates3D.Up, BlockID);
+						world.SetBlockId(coords + Coordinates3D.Up, BlockId);
 						server.Scheduler.ScheduleEvent("cactus", chunk,
 							TimeSpan.FromSeconds(MathHelper.Random.Next(MinGrowthSeconds, MaxGrowthSeconds)),
 							_server => TryGrowth(_server, coords + Coordinates3D.Up, world));
@@ -103,9 +103,9 @@ namespace TrueCraft.Logic.Blocks
 			for (var y = descriptor.Coordinates.Y; y < 127; y++)
 			{
 				var coordinates = new Coordinates3D(descriptor.Coordinates.X, y, descriptor.Coordinates.Z);
-				if (world.GetBlockId(coordinates) == BlockID)
+				if (world.GetBlockId(coordinates) == BlockId)
 				{
-					world.SetBlockId(coordinates, AirBlock.BlockID);
+					world.SetBlockId(coordinates, AirBlock.BlockId);
 					toDrop++;
 				}
 			}
@@ -114,9 +114,9 @@ namespace TrueCraft.Logic.Blocks
 			for (var y = descriptor.Coordinates.Y - 1; y > 0; y--)
 			{
 				var coordinates = new Coordinates3D(descriptor.Coordinates.X, y, descriptor.Coordinates.Z);
-				if (world.GetBlockId(coordinates) == BlockID)
+				if (world.GetBlockId(coordinates) == BlockId)
 				{
-					world.SetBlockId(coordinates, AirBlock.BlockID);
+					world.SetBlockId(coordinates, AirBlock.BlockId);
 					toDrop++;
 				}
 			}
@@ -124,7 +124,7 @@ namespace TrueCraft.Logic.Blocks
 			var manager = server.GetEntityManagerForWorld(world);
 			manager.SpawnEntity(
 				new ItemEntity(descriptor.Coordinates.AsVector3() + Coordinates3D.Up.AsVector3(),
-					new ItemStack(BlockID, (sbyte) toDrop)));
+					new ItemStack(BlockId, (sbyte) toDrop)));
 		}
 
 		public override void BlockPlaced(BlockDescriptor descriptor, BlockFace face, IWorld world, IRemoteClient user)
@@ -133,12 +133,12 @@ namespace TrueCraft.Logic.Blocks
 				base.BlockPlaced(descriptor, face, world, user);
 			else
 			{
-				world.SetBlockId(descriptor.Coordinates, AirBlock.BlockID);
+				world.SetBlockId(descriptor.Coordinates, AirBlock.BlockId);
 
 				var manager = user.Server.GetEntityManagerForWorld(world);
 				manager.SpawnEntity(
 					new ItemEntity(descriptor.Coordinates.AsVector3() + Coordinates3D.Up.AsVector3(),
-						new ItemStack(BlockID, 1)));
+						new ItemStack(BlockId, 1)));
 				// user.Inventory.PickUpStack() wasn't working?
 			}
 

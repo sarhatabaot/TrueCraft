@@ -182,10 +182,10 @@ namespace TrueCraft.Server
 		{
 			CurrentWindow = window;
 			window.Client = this;
-			window.ID = NextWindowID++;
+			window.Id = NextWindowID++;
 			if (NextWindowID < 0) NextWindowID = 1;
-			QueuePacket(new OpenWindowPacket(window.ID, window.Type, window.Name, 0));
-			QueuePacket(new WindowItemsPacket(window.ID, window.GetSlots()));
+			QueuePacket(new OpenWindowPacket(window.Id, window.Type, window.Name, 0));
+			QueuePacket(new WindowItemsPacket(window.Id, window.GetSlots()));
 			window.WindowChange += HandleWindowChange;
 		}
 
@@ -253,7 +253,7 @@ namespace TrueCraft.Server
 
 		private void HandlePickUpItem(object sender, EntityEventArgs e)
 		{
-			var packet = new CollectItemPacket(e.Entity.EntityID, Entity.EntityID);
+			var packet = new CollectItemPacket(e.Entity.EntityId, Entity.EntityId);
 			QueuePacket(packet);
 			var manager = Server.GetEntityManagerForWorld(World);
 			foreach (var client in manager.ClientsForEntity(Entity))
@@ -264,7 +264,7 @@ namespace TrueCraft.Server
 		public void CloseWindow(bool clientInitiated = false)
 		{
 			if (!clientInitiated)
-				QueuePacket(new CloseWindowPacket(CurrentWindow.ID));
+				QueuePacket(new CloseWindowPacket(CurrentWindow.Id));
 			CurrentWindow.CopyToInventory(Inventory);
 			CurrentWindow.Dispose();
 			CurrentWindow = InventoryWindow;
@@ -494,11 +494,11 @@ namespace TrueCraft.Server
 					{
 						Coordinates = coords + new Coordinates3D(chunk.X, 0, chunk.Z),
 						Metadata = chunk.GetMetadata(coords),
-						ID = chunk.GetBlockID(coords),
+						Id = chunk.GetBlockID(coords),
 						BlockLight = chunk.GetBlockLight(coords),
 						SkyLight = chunk.GetSkyLight(coords)
 					};
-					var provider = Server.BlockRepository.GetBlockProvider(descriptor.ID);
+					var provider = Server.BlockRepository.GetBlockProvider(descriptor.Id);
 					provider.TileEntityLoadedForClient(descriptor, World, kvp.Value, this);
 				}});
 		}
@@ -513,18 +513,18 @@ namespace TrueCraft.Server
 		{
 			if (!(sender is InventoryWindow))
 			{
-				QueuePacket(new SetSlotPacket(((IWindow) sender).ID, (short) e.SlotIndex, e.Value.ID, e.Value.Count,
+				QueuePacket(new SetSlotPacket(((IWindow) sender).Id, (short) e.SlotIndex, e.Value.Id, e.Value.Count,
 					e.Value.Metadata));
 				return;
 			}
 
-			QueuePacket(new SetSlotPacket(0, (short) e.SlotIndex, e.Value.ID, e.Value.Count, e.Value.Metadata));
+			QueuePacket(new SetSlotPacket(0, (short) e.SlotIndex, e.Value.Id, e.Value.Count, e.Value.Metadata));
 
 			if (e.SlotIndex == SelectedSlot)
 			{
 				var notified = Server.GetEntityManagerForWorld(World).ClientsForEntity(Entity);
 				foreach (var c in notified)
-					c.QueuePacket(new EntityEquipmentPacket(Entity.EntityID, 0, SelectedItem.ID,
+					c.QueuePacket(new EntityEquipmentPacket(Entity.EntityId, 0, SelectedItem.Id,
 						SelectedItem.Metadata));
 			}
 
@@ -533,7 +533,7 @@ namespace TrueCraft.Server
 				var slot = (short) (4 - (e.SlotIndex - InventoryWindow.ArmorIndex));
 				var notified = Server.GetEntityManagerForWorld(World).ClientsForEntity(Entity);
 				foreach (var c in notified)
-					c.QueuePacket(new EntityEquipmentPacket(Entity.EntityID, slot, e.Value.ID, e.Value.Metadata));
+					c.QueuePacket(new EntityEquipmentPacket(Entity.EntityId, slot, e.Value.Id, e.Value.Metadata));
 			}
 		}
 

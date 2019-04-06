@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class DandelionBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x25;
+		public static readonly byte BlockId = 0x25;
 
-		public override byte ID => 0x25;
+		public override byte Id => 0x25;
 
 		public override double BlastResistance => 0;
 

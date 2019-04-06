@@ -18,7 +18,7 @@ namespace TrueCraft.Entities
 		public PlayerEntity(string username) => Username = username;
 
 		public override IPacket SpawnPacket =>
-			new SpawnPlayerPacket(EntityID, Username,
+			new SpawnPlayerPacket(EntityId, Username,
 				MathHelper.CreateAbsoluteInt(Position.X),
 				MathHelper.CreateAbsoluteInt(Position.Y),
 				MathHelper.CreateAbsoluteInt(Position.Z),

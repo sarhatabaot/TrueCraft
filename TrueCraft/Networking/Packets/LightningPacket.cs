@@ -8,12 +8,12 @@
 	{
 		public byte Id => Constants.PacketIds.Lightning;
 
-		public int EntityID;
+		public int EntityId;
 		public int X, Y, Z;
 
 		public void ReadPacket(IMcStream stream)
 		{
-			EntityID = stream.ReadInt32();
+			EntityId = stream.ReadInt32();
 			stream.ReadBoolean(); // Unknown
 			X = stream.ReadInt32();
 			Y = stream.ReadInt32();
@@ -22,7 +22,7 @@
 
 		public void WritePacket(IMcStream stream)
 		{
-			stream.WriteInt32(EntityID);
+			stream.WriteInt32(EntityId);
 			stream.WriteBoolean(true); // Unknown
 			stream.WriteInt32(X);
 			stream.WriteInt32(Y);

@@ -10,9 +10,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class UprightSignBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x3F;
+		public static readonly byte BlockId = 0x3F;
 
-		public override byte ID => 0x3F;
+		public override byte Id => 0x3F;
 
 		public override double BlastResistance => 5;
 

@@ -6,7 +6,7 @@ namespace TrueCraft.Logic.Items
 	{
 		public static readonly short ItemID = 0x10C;
 
-		public override short ID => 0x10C;
+		public override short Id => 0x10C;
 
 		public override ToolMaterial Material => ToolMaterial.Wood;
 

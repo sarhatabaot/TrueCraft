@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class StoneBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x01;
+		public static readonly byte BlockId = 0x01;
 
-		public override byte ID => 0x01;
+		public override byte Id => 0x01;
 
 		public override double BlastResistance => 30;
 
@@ -24,9 +24,9 @@ namespace TrueCraft.Logic.Blocks
 
 		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
 		{
-			var provider = ItemRepository.GetItemProvider(item.ID);
+			var provider = ItemRepository.GetItemProvider(item.Id);
 			if (provider is PickaxeItem)
-				return new[] {new ItemStack(CobblestoneBlock.BlockID, 1, descriptor.Metadata)};
+				return new[] {new ItemStack(CobblestoneBlock.BlockId, 1, descriptor.Metadata)};
 			return new ItemStack[0];
 		}
 	}

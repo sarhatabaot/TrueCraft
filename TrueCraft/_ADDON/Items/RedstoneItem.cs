@@ -9,7 +9,7 @@ namespace TrueCraft.Logic.Items
 	{
 		public static readonly short ItemID = 0x14B;
 
-		public override short ID => 0x14B;
+		public override short Id => 0x14B;
 
 		public override string DisplayName => "Redstone";
 
@@ -27,7 +27,7 @@ namespace TrueCraft.Logic.Items
 
 			if (supportingBlock.Opaque)
 			{
-				world.SetBlockId(coordinates, RedstoneDustBlock.BlockID);
+				world.SetBlockId(coordinates, RedstoneDustBlock.BlockId);
 				item.Count--;
 				user.Inventory[user.SelectedSlot] = item;
 			}

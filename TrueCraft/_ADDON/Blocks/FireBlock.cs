@@ -10,7 +10,7 @@ namespace TrueCraft.Logic.Blocks
 		public static readonly int MinSpreadTime = 1;
 		public static readonly int MaxSpreadTime = 5;
 
-		public static readonly byte BlockID = 0x33;
+		public static readonly byte BlockId = 0x33;
 
 		private static readonly Coordinates3D[] SpreadableBlocks =
 		{
@@ -35,7 +35,7 @@ namespace TrueCraft.Logic.Blocks
 			Coordinates3D.Backwards
 		};
 
-		public override byte ID => 0x33;
+		public override byte Id => 0x33;
 
 		public override double BlastResistance => 0;
 
@@ -64,16 +64,16 @@ namespace TrueCraft.Logic.Blocks
 			var down = descriptor.Coordinates + Coordinates3D.Down;
 
 			var current = world.GetBlockId(descriptor.Coordinates);
-			if (current != BlockID && current != LavaBlock.BlockID && current != StationaryLavaBlock.BlockID)
+			if (current != BlockId && current != LavaBlock.BlockId && current != StationaryLavaBlock.BlockId)
 				return;
 
 			// Decay
 			var meta = world.GetMetadata(descriptor.Coordinates);
 			meta++;
 			if (meta == 0xE)
-				if (!world.IsValidPosition(down) || world.GetBlockId(down) != NetherrackBlock.BlockID)
+				if (!world.IsValidPosition(down) || world.GetBlockId(down) != NetherrackBlock.BlockId)
 				{
-					world.SetBlockId(descriptor.Coordinates, AirBlock.BlockID);
+					world.SetBlockId(descriptor.Coordinates, AirBlock.BlockId);
 					return;
 				}
 
@@ -85,7 +85,7 @@ namespace TrueCraft.Logic.Blocks
 				var provider = BlockRepository
 					.GetBlockProvider(world.GetBlockId(pick + descriptor.Coordinates));
 				if (provider.Flammable)
-					world.SetBlockId(pick + descriptor.Coordinates, AirBlock.BlockID);
+					world.SetBlockId(pick + descriptor.Coordinates, AirBlock.BlockId);
 			}
 
 			// Spread
@@ -100,7 +100,7 @@ namespace TrueCraft.Logic.Blocks
 			foreach (var coord in SpreadableBlocks)
 			{
 				var check = descriptor.Coordinates + coord;
-				if (world.GetBlockId(check) == AirBlock.BlockID)
+				if (world.GetBlockId(check) == AirBlock.BlockId)
 					foreach (var adj in AdjacentBlocks)
 					{
 						var provider = BlockRepository.GetBlockProvider(
@@ -111,7 +111,7 @@ namespace TrueCraft.Logic.Blocks
 								check = check + adj;
 
 							// Spread to this block
-							world.SetBlockId(check, BlockID);
+							world.SetBlockId(check, BlockId);
 							ScheduleUpdate(server, world, world.GetBlockData(check));
 							break;
 						}

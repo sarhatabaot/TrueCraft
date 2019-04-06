@@ -6,14 +6,14 @@
 	public interface IItemRepository
 	{
 		/// <summary>
-		///  Gets this repository's item provider for the specified item ID. This may return null
-		///  if the item ID in question has no corresponding block provider.
+		///  Gets this repository's item provider for the specified item Id. This may return null
+		///  if the item Id in question has no corresponding block provider.
 		/// </summary>
-		IItemProvider GetItemProvider(short id);
+		IItemProvider GetItemProvider(short Id);
 
 		/// <summary>
 		///  Registers a new item provider. This overrides any existing item providers that use the
-		///  same item ID.
+		///  same item Id.
 		/// </summary>
 		void RegisterItemProvider(IItemProvider provider);
 	}

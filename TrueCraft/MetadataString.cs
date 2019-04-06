@@ -14,7 +14,7 @@ namespace TrueCraft
 		public MetadataString(string value)
 		{
 			if (value.Length > 16)
-				throw new ArgumentOutOfRangeException("value", "Maximum string length is 16 characters");
+				throw new ArgumentOutOfRangeException(nameof(value), "Maximum string length is 16 characters");
 			while (value.Length < 16)
 				value = value + "\0";
 			Value = value;

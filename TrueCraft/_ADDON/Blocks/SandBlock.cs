@@ -9,9 +9,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class SandBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x0C;
+		public static readonly byte BlockId = 0x0C;
 
-		public override byte ID => 0x0C;
+		public override byte Id => 0x0C;
 
 		public override double BlastResistance => 2.5;
 
@@ -36,9 +36,9 @@ namespace TrueCraft.Logic.Blocks
 		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiPlayerServer server,
 			IWorld world)
 		{
-			if (world.GetBlockId(descriptor.Coordinates + Coordinates3D.Down) == AirBlock.BlockID)
+			if (world.GetBlockId(descriptor.Coordinates + Coordinates3D.Down) == AirBlock.BlockId)
 			{
-				world.SetBlockId(descriptor.Coordinates, AirBlock.BlockID);
+				world.SetBlockId(descriptor.Coordinates, AirBlock.BlockId);
 				server.GetEntityManagerForWorld(world).SpawnEntity(new FallingSandEntity(descriptor.Coordinates.AsVector3()));
 			}
 		}

@@ -8,14 +8,14 @@
 	{
 		public byte Id => Constants.PacketIds.EntityVelocity;
 
-		public int EntityID;
+		public int EntityId;
 		public short XVelocity;
 		public short YVelocity;
 		public short ZVelocity;
 
 		public void ReadPacket(IMcStream stream)
 		{
-			EntityID = stream.ReadInt32();
+			EntityId = stream.ReadInt32();
 			XVelocity = stream.ReadInt16();
 			YVelocity = stream.ReadInt16();
 			ZVelocity = stream.ReadInt16();
@@ -23,7 +23,7 @@
 
 		public void WritePacket(IMcStream stream)
 		{
-			stream.WriteInt32(EntityID);
+			stream.WriteInt32(EntityId);
 			stream.WriteInt16(XVelocity);
 			stream.WriteInt16(YVelocity);
 			stream.WriteInt16(ZVelocity);

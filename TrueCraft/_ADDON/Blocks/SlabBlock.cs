@@ -12,9 +12,9 @@ namespace TrueCraft.Logic.Blocks
 			Cobblestone = 0x3
 		}
 
-		public static readonly byte BlockID = 0x2C;
+		public static readonly byte BlockId = 0x2C;
 
-		public override byte ID => 0x2C;
+		public override byte Id => 0x2C;
 
 		public override double BlastResistance => 30;
 
@@ -40,12 +40,12 @@ namespace TrueCraft.Logic.Blocks
 			public ItemStack[,] Pattern => new[,]
 			{
 				{
-					new ItemStack(StoneBlock.BlockID), new ItemStack(StoneBlock.BlockID),
-					new ItemStack(StoneBlock.BlockID)
+					new ItemStack(StoneBlock.BlockId), new ItemStack(StoneBlock.BlockId),
+					new ItemStack(StoneBlock.BlockId)
 				}
 			};
 
-			public ItemStack Output => new ItemStack(BlockID, 3, (short) SlabMaterial.Stone);
+			public ItemStack Output => new ItemStack(BlockId, 3, (short) SlabMaterial.Stone);
 
 			public bool SignificantMetadata => true;
 		}
@@ -55,12 +55,12 @@ namespace TrueCraft.Logic.Blocks
 			public ItemStack[,] Pattern => new[,]
 			{
 				{
-					new ItemStack(SandstoneBlock.BlockID), new ItemStack(SandstoneBlock.BlockID),
-					new ItemStack(SandstoneBlock.BlockID)
+					new ItemStack(SandstoneBlock.BlockId), new ItemStack(SandstoneBlock.BlockId),
+					new ItemStack(SandstoneBlock.BlockId)
 				}
 			};
 
-			public ItemStack Output => new ItemStack(BlockID, 3, (short) SlabMaterial.Standstone);
+			public ItemStack Output => new ItemStack(BlockId, 3, (short) SlabMaterial.Standstone);
 
 			public bool SignificantMetadata => true;
 		}
@@ -70,12 +70,12 @@ namespace TrueCraft.Logic.Blocks
 			public ItemStack[,] Pattern => new[,]
 			{
 				{
-					new ItemStack(WoodenPlanksBlock.BlockID), new ItemStack(WoodenPlanksBlock.BlockID),
-					new ItemStack(WoodenPlanksBlock.BlockID)
+					new ItemStack(WoodenPlanksBlock.BlockId), new ItemStack(WoodenPlanksBlock.BlockId),
+					new ItemStack(WoodenPlanksBlock.BlockId)
 				}
 			};
 
-			public ItemStack Output => new ItemStack(BlockID, 3, (short) SlabMaterial.Wooden);
+			public ItemStack Output => new ItemStack(BlockId, 3, (short) SlabMaterial.Wooden);
 
 			public bool SignificantMetadata => true;
 		}
@@ -85,12 +85,12 @@ namespace TrueCraft.Logic.Blocks
 			public ItemStack[,] Pattern => new[,]
 			{
 				{
-					new ItemStack(CobblestoneBlock.BlockID), new ItemStack(CobblestoneBlock.BlockID),
-					new ItemStack(CobblestoneBlock.BlockID)
+					new ItemStack(CobblestoneBlock.BlockId), new ItemStack(CobblestoneBlock.BlockId),
+					new ItemStack(CobblestoneBlock.BlockId)
 				}
 			};
 
-			public ItemStack Output => new ItemStack(BlockID, 3, (short) SlabMaterial.Cobblestone);
+			public ItemStack Output => new ItemStack(BlockId, 3, (short) SlabMaterial.Cobblestone);
 
 			public bool SignificantMetadata => true;
 		}

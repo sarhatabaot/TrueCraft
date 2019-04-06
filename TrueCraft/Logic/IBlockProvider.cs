@@ -9,7 +9,7 @@ namespace TrueCraft.Logic
 {
 	public interface IBlockProvider : IItemProvider
 	{
-		byte ID { get; }
+		new byte Id { get; }
 		double BlastResistance { get; }
 		double Hardness { get; }
 		byte Luminance { get; }

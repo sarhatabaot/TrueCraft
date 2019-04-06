@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class DiamondOreBlock : BlockProvider, ISmeltableItem
 	{
-		public static readonly byte BlockID = 0x38;
+		public static readonly byte BlockId = 0x38;
 
-		public override byte ID => 0x38;
+		public override byte Id => 0x38;
 
 		public override double BlastResistance => 15;
 

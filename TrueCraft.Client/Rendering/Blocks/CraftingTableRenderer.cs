@@ -48,7 +48,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 
 		static CraftingTableRenderer()
 		{
-			RegisterRenderer(CraftingTableBlock.BlockID, new CraftingTableRenderer());
+			RegisterRenderer(CraftingTableBlock.BlockId, new CraftingTableRenderer());
 			for (var i = 0; i < Texture.Length; i++)
 				Texture[i] *= new Vector2(16f / 256f);
 		}

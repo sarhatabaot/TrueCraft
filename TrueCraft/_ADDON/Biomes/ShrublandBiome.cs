@@ -2,7 +2,7 @@
 {
 	public class ShrublandBiome : BiomeProvider
 	{
-		public override byte ID => (byte) Biome.Shrubland;
+		public override byte Id => (byte) Biome.Shrubland;
 
 		public override double Temperature => 0.8f;
 

@@ -18,18 +18,18 @@
 
 		public byte Id => Constants.PacketIds.EntityStatus;
 
-		public int EntityID;
+		public int EntityId;
 		public EntityStatus Status;
 
 		public void ReadPacket(IMcStream stream)
 		{
-			EntityID = stream.ReadInt32();
+			EntityId = stream.ReadInt32();
 			Status = (EntityStatus) stream.ReadInt8();
 		}
 
 		public void WritePacket(IMcStream stream)
 		{
-			stream.WriteInt32(EntityID);
+			stream.WriteInt32(EntityId);
 			stream.WriteInt8((sbyte) Status);
 		}
 	}

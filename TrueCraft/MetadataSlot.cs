@@ -29,8 +29,8 @@ namespace TrueCraft
 		public override void WriteTo(IMcStream stream, byte index)
 		{
 			stream.WriteUInt8(GetKey(index));
-			stream.WriteInt16(Value.ID);
-			if (Value.ID != -1)
+			stream.WriteInt16(Value.Id);
+			if (Value.Id != -1)
 			{
 				stream.WriteInt8(Value.Count);
 				stream.WriteInt16(Value.Metadata);

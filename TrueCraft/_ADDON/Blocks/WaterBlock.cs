@@ -4,9 +4,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class WaterBlock : FluidBlock
 	{
-		public static readonly byte BlockID = 0x08;
+		public static readonly byte BlockId = 0x08;
 
-		public override byte ID => 0x08;
+		public override byte Id => 0x08;
 
 		public override double BlastResistance => 500;
 
@@ -24,9 +24,9 @@ namespace TrueCraft.Logic.Blocks
 
 		protected override byte MaximumFluidDepletion => 7;
 
-		protected override byte FlowingID => BlockID;
+		protected override byte FlowingID => BlockId;
 
-		protected override byte StillID => StationaryWaterBlock.BlockID;
+		protected override byte StillID => StationaryWaterBlock.BlockId;
 
 		public override Tuple<int, int> GetTextureMap(byte metadata)
 		{

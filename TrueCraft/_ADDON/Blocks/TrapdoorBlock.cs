@@ -21,9 +21,9 @@ namespace TrueCraft.Logic.Blocks
 			Open = 0x4
 		}
 
-		public static readonly byte BlockID = 0x60;
+		public static readonly byte BlockId = 0x60;
 
-		public override byte ID => 0x60;
+		public override byte Id => 0x60;
 
 		public override double BlastResistance => 15;
 
@@ -43,16 +43,16 @@ namespace TrueCraft.Logic.Blocks
 			new[,]
 			{
 				{
-					new ItemStack(WoodenPlanksBlock.BlockID), new ItemStack(WoodenPlanksBlock.BlockID),
-					new ItemStack(WoodenPlanksBlock.BlockID)
+					new ItemStack(WoodenPlanksBlock.BlockId), new ItemStack(WoodenPlanksBlock.BlockId),
+					new ItemStack(WoodenPlanksBlock.BlockId)
 				},
 				{
-					new ItemStack(WoodenPlanksBlock.BlockID), new ItemStack(WoodenPlanksBlock.BlockID),
-					new ItemStack(WoodenPlanksBlock.BlockID)
+					new ItemStack(WoodenPlanksBlock.BlockId), new ItemStack(WoodenPlanksBlock.BlockId),
+					new ItemStack(WoodenPlanksBlock.BlockId)
 				}
 			};
 
-		public ItemStack Output => new ItemStack(BlockID);
+		public ItemStack Output => new ItemStack(BlockId);
 
 		public bool SignificantMetadata => false;
 
@@ -105,7 +105,7 @@ namespace TrueCraft.Logic.Blocks
 
 		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
 		{
-			return new[] {new ItemStack(ID)};
+			return new[] {new ItemStack(Id)};
 		}
 	}
 }

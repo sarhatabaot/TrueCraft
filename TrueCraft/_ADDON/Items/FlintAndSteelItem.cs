@@ -8,7 +8,7 @@ namespace TrueCraft.Logic.Items
 	public class FlintAndSteelItem : ToolItem, ICraftingRecipe
 	{
 		public static readonly short ItemID = 0x103;
-		public override short ID => 0x103;
+		public override short Id => 0x103;
 		public override sbyte MaximumStack => 1;
 		public override short BaseDurability => 65;
 		public override string DisplayName => "Flint and Steel";
@@ -32,10 +32,10 @@ namespace TrueCraft.Logic.Items
 			IRemoteClient user)
 		{
 			coordinates += MathHelper.BlockFaceToCoordinates(face);
-			if (world.GetBlockId(coordinates) == AirBlock.BlockID)
+			if (world.GetBlockId(coordinates) == AirBlock.BlockId)
 			{
-				world.SetBlockId(coordinates, FireBlock.BlockID);
-				world.BlockRepository.GetBlockProvider(FireBlock.BlockID)
+				world.SetBlockId(coordinates, FireBlock.BlockId);
+				world.BlockRepository.GetBlockProvider(FireBlock.BlockId)
 					.BlockPlaced(world.GetBlockData(coordinates), face, world, user);
 
 				var slot = user.SelectedItem;

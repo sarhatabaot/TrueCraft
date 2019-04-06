@@ -13,9 +13,9 @@ namespace TrueCraft.Logic.Blocks
 		public static readonly int MaxGrowthSeconds = 120;
 		public static readonly int MaxGrowHeight = 3;
 
-		public static readonly byte BlockID = 0x53;
+		public static readonly byte BlockId = 0x53;
 
-		public override byte ID => 0x53;
+		public override byte Id => 0x53;
 
 		public override double BlastResistance => 0;
 
@@ -47,7 +47,7 @@ namespace TrueCraft.Logic.Blocks
 		public static bool ValidPlacement(BlockDescriptor descriptor, IWorld world)
 		{
 			var below = world.GetBlockId(descriptor.Coordinates + Coordinates3D.Down);
-			if (below != BlockID && below != GrassBlock.BlockID && below != DirtBlock.BlockID)
+			if (below != BlockId && below != GrassBlock.BlockId && below != DirtBlock.BlockId)
 				return false;
 			var toCheck = new[]
 			{
@@ -56,13 +56,13 @@ namespace TrueCraft.Logic.Blocks
 				Coordinates3D.Down + Coordinates3D.Backwards,
 				Coordinates3D.Down + Coordinates3D.Forwards
 			};
-			if (below != BlockID)
+			if (below != BlockId)
 			{
 				var foundWater = false;
 				for (var i = 0; i < toCheck.Length; i++)
 				{
-					var id = world.GetBlockId(descriptor.Coordinates + toCheck[i]);
-					if (id == WaterBlock.BlockID || id == StationaryWaterBlock.BlockID)
+					var Id = world.GetBlockId(descriptor.Coordinates + toCheck[i]);
+					if (Id == WaterBlock.BlockId || Id == StationaryWaterBlock.BlockId)
 					{
 						foundWater = true;
 						break;
@@ -88,12 +88,12 @@ namespace TrueCraft.Logic.Blocks
 
 		private void TryGrowth(IMultiPlayerServer server, Coordinates3D coords, IWorld world)
 		{
-			if (world.GetBlockId(coords) != BlockID)
+			if (world.GetBlockId(coords) != BlockId)
 				return;
 			// Find current height of stalk
 			var height = 0;
 			for (var y = -MaxGrowHeight; y <= MaxGrowHeight; y++)
-				if (world.GetBlockId(coords + Coordinates3D.Down * y) == BlockID)
+				if (world.GetBlockId(coords + Coordinates3D.Down * y) == BlockId)
 					height++;
 			if (height < MaxGrowHeight)
 			{
@@ -105,7 +105,7 @@ namespace TrueCraft.Logic.Blocks
 				{
 					if (world.GetBlockId(coords + Coordinates3D.Up) == 0)
 					{
-						world.SetBlockId(coords + Coordinates3D.Up, BlockID);
+						world.SetBlockId(coords + Coordinates3D.Up, BlockId);
 						server.Scheduler.ScheduleEvent("sugarcane", chunk,
 							TimeSpan.FromSeconds(MathHelper.Random.Next(MinGrowthSeconds, MaxGrowthSeconds)),
 							_server => TryGrowth(_server, coords + Coordinates3D.Up, world));

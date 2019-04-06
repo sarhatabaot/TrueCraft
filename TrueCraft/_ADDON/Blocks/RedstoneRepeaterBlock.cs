@@ -4,9 +4,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class RedstoneRepeaterBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x5D;
+		public static readonly byte BlockId = 0x5D;
 
-		public override byte ID => 0x5D;
+		public override byte Id => 0x5D;
 
 		public override double BlastResistance => 0;
 

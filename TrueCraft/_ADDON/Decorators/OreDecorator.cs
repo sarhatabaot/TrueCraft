@@ -13,12 +13,12 @@ namespace TrueCraft.TerrainGen.Decorators
 
 		public OreDecorator()
 		{
-			var coal = new OreData(CoalOreBlock.BlockID, OreTypes.Coal, 10, 120, 25, 25, 3f);
-			var iron = new OreData(IronOreBlock.BlockID, OreTypes.Iron, 1, 64, 15, 5, 2.3f);
-			var lapis = new OreData(LapisLazuliOreBlock.BlockID, OreTypes.Lapiz, 10, 25, 7, 4, 1.4f);
-			var gold = new OreData(GoldOreBlock.BlockID, OreTypes.Gold, 1, 32, 6, 4, 1.04f);
-			var diamond = new OreData(DiamondOreBlock.BlockID, OreTypes.Diamond, 1, 15, 6, 3, 0.7f);
-			var redstone = new OreData(RedstoneOreBlock.BlockID, OreTypes.Redstone, 1, 16, 4, 6, 1.13f);
+			var coal = new OreData(CoalOreBlock.BlockId, OreTypes.Coal, 10, 120, 25, 25, 3f);
+			var iron = new OreData(IronOreBlock.BlockId, OreTypes.Iron, 1, 64, 15, 5, 2.3f);
+			var lapis = new OreData(LapisLazuliOreBlock.BlockId, OreTypes.Lapiz, 10, 25, 7, 4, 1.4f);
+			var gold = new OreData(GoldOreBlock.BlockId, OreTypes.Gold, 1, 32, 6, 4, 1.04f);
+			var diamond = new OreData(DiamondOreBlock.BlockId, OreTypes.Diamond, 1, 15, 6, 3, 0.7f);
+			var redstone = new OreData(RedstoneOreBlock.BlockId, OreTypes.Redstone, 1, 16, 4, 6, 1.13f);
 			Ores.Add(coal);
 			Ores.Add(iron);
 			Ores.Add(lapis);
@@ -68,8 +68,8 @@ namespace TrueCraft.TerrainGen.Decorators
 							var biome = biomes.GetBiome(chunk.Biomes[(int) (x * Chunk.Width + z)]);
 							if (biome.Ores.Contains(data.Type) && chunk
 								    .GetBlockID(new Coordinates3D((int) x, (int) y, (int) z))
-								    .Equals(StoneBlock.BlockID))
-								chunk.SetBlockID(new Coordinates3D((int) x, (int) y, (int) z), data.ID);
+								    .Equals(StoneBlock.BlockId))
+								chunk.SetBlockID(new Coordinates3D((int) x, (int) y, (int) z), data.Id);
 						}
 
 						var blockX = MathHelper.ChunkToBlockX((int) x, chunk.Coordinates.X);
@@ -97,8 +97,8 @@ namespace TrueCraft.TerrainGen.Decorators
 							var Biome = biomes.GetBiome(chunk.Biomes[newX * Chunk.Width + newZ]);
 							var coordinates = new Coordinates3D(newX, newY, newZ);
 							if (Biome.Ores.Contains(data.Type) &&
-							    chunk.GetBlockID(coordinates).Equals(StoneBlock.BlockID))
-								chunk.SetBlockID(coordinates, data.ID);
+							    chunk.GetBlockID(coordinates).Equals(StoneBlock.BlockId))
+								chunk.SetBlockID(coordinates, data.Id);
 						}
 					}
 				}

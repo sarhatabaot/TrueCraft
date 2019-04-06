@@ -25,10 +25,10 @@ namespace TrueCraft.Logic.Items
 						baseMaterial = IronIngotItem.ItemID;
 						break;
 					case ToolMaterial.Stone:
-						baseMaterial = CobblestoneBlock.BlockID;
+						baseMaterial = CobblestoneBlock.BlockId;
 						break;
 					case ToolMaterial.Wood:
-						baseMaterial = WoodenPlanksBlock.BlockID;
+						baseMaterial = WoodenPlanksBlock.BlockId;
 						break;
 				}
 
@@ -41,7 +41,7 @@ namespace TrueCraft.Logic.Items
 			}
 		}
 
-		public ItemStack Output => new ItemStack(ID);
+		public ItemStack Output => new ItemStack(Id);
 
 		public bool SignificantMetadata => false;
 	}

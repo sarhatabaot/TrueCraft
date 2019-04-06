@@ -4,9 +4,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class ObsidianBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x31;
+		public static readonly byte BlockId = 0x31;
 
-		public override byte ID => 0x31;
+		public override byte Id => 0x31;
 
 		public override double BlastResistance => 6000;
 

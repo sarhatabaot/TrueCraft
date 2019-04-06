@@ -20,12 +20,12 @@ namespace TrueCraft.Logic
 	{
 		public static readonly byte[] Overwritable =
 		{
-			AirBlock.BlockID,
-			WaterBlock.BlockID,
-			StationaryWaterBlock.BlockID,
-			LavaBlock.BlockID,
-			StationaryLavaBlock.BlockID,
-			SnowfallBlock.BlockID
+			AirBlock.BlockId,
+			WaterBlock.BlockId,
+			StationaryWaterBlock.BlockId,
+			LavaBlock.BlockId,
+			StationaryLavaBlock.BlockId,
+			SnowfallBlock.BlockId
 		};
 
 		public static IBlockRepository BlockRepository { get; set; }
@@ -35,7 +35,7 @@ namespace TrueCraft.Logic
 			IRemoteClient user)
 		{
 			var coords = descriptor.Coordinates + MathHelper.BlockFaceToCoordinates(face);
-			if (world.IsValidPosition(coords) && world.GetBlockId(coords) == FireBlock.BlockID)
+			if (world.IsValidPosition(coords) && world.GetBlockId(coords) == FireBlock.BlockId)
 				world.SetBlockId(coords, 0);
 		}
 
@@ -63,7 +63,7 @@ namespace TrueCraft.Logic
 			var items = new ItemStack[0];
 			var type = ToolType.None;
 			var material = ToolMaterial.None;
-			var held = ItemRepository.GetItemProvider(item.ID);
+			var held = ItemRepository.GetItemProvider(item.Id);
 
 			if (held is ToolItem)
 			{
@@ -106,9 +106,9 @@ namespace TrueCraft.Logic
 		}
 
 		/// <summary>
-		///  The ID of the block.
+		///  The Id of the block.
 		/// </summary>
-		public abstract byte ID { get; }
+		public abstract byte Id { get; }
 
 		public virtual SoundEffectClass SoundEffect => SoundEffectClass.Stone;
 
@@ -186,11 +186,11 @@ namespace TrueCraft.Logic
 			IRemoteClient user)
 		{
 			var old = world.GetBlockData(coordinates);
-			if (!Overwritable.Any(b => b == old.ID))
+			if (!Overwritable.Any(b => b == old.Id))
 			{
 				coordinates += MathHelper.BlockFaceToCoordinates(face);
 				old = world.GetBlockData(coordinates);
-				if (!Overwritable.Any(b => b == old.ID))
+				if (!Overwritable.Any(b => b == old.Id))
 					return;
 			}
 
@@ -216,7 +216,7 @@ namespace TrueCraft.Logic
 			}
 
 			// Place block
-			world.SetBlockId(coordinates, ID);
+			world.SetBlockId(coordinates, Id);
 			world.SetMetadata(coordinates, (byte) item.Metadata);
 
 			BlockPlaced(world.GetBlockData(coordinates), face, world, user);
@@ -230,7 +230,7 @@ namespace TrueCraft.Logic
 			}
 		}
 
-		short IItemProvider.ID => ID;
+		short IItemProvider.Id => Id;
 
 		public virtual Tuple<int, int> GetIconTexture(byte metadata)
 		{
@@ -268,7 +268,7 @@ namespace TrueCraft.Logic
 				meta = (short) ((this as ICraftingRecipe).SignificantMetadata ? descriptor.Metadata : 0);
 			else
 				meta = descriptor.Metadata;
-			return new[] {new ItemStack(descriptor.ID, 1, meta)};
+			return new[] {new ItemStack(descriptor.Id, 1, meta)};
 		}
 
 		public virtual Coordinates3D GetSupportDirection(BlockDescriptor descriptor)

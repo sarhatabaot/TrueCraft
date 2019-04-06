@@ -15,11 +15,11 @@ namespace TrueCraft.TerrainGen.Decorations
 
 			var random = new Random(world.Seed);
 			var height = random.Next(7, 8);
-			GenerateColumn(chunk, location, height, WoodBlock.BlockID, 0x1);
-			GenerateCircle(chunk, location + new Coordinates3D(0, height - 2, 0), LeafRadius - 1, LeavesBlock.BlockID,
+			GenerateColumn(chunk, location, height, WoodBlock.BlockId, 0x1);
+			GenerateCircle(chunk, location + new Coordinates3D(0, height - 2, 0), LeafRadius - 1, LeavesBlock.BlockId,
 				0x1);
-			GenerateCircle(chunk, location + new Coordinates3D(0, height - 1, 0), LeafRadius, LeavesBlock.BlockID, 0x1);
-			GenerateCircle(chunk, location + new Coordinates3D(0, height, 0), LeafRadius, LeavesBlock.BlockID, 0x1);
+			GenerateCircle(chunk, location + new Coordinates3D(0, height - 1, 0), LeafRadius, LeavesBlock.BlockId, 0x1);
+			GenerateCircle(chunk, location + new Coordinates3D(0, height, 0), LeafRadius, LeavesBlock.BlockId, 0x1);
 			GenerateTopper(chunk, location + new Coordinates3D(0, height + 1, 0), 0x0);
 			return true;
 		}

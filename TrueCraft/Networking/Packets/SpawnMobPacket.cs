@@ -8,7 +8,7 @@
 		public SpawnMobPacket(int entityId, sbyte type, int x, int y, int z, sbyte yaw, sbyte pitch,
 			MetadataDictionary metadata)
 		{
-			EntityID = entityId;
+			EntityId = entityId;
 			MobType = type;
 			X = x;
 			Y = y;
@@ -18,7 +18,7 @@
 			Metadata = metadata;
 		}
 
-		public int EntityID;
+		public int EntityId;
 		public sbyte MobType;
 		public int X, Y, Z;
 		public sbyte Yaw, Pitch;
@@ -26,7 +26,7 @@
 
 		public void ReadPacket(IMcStream stream)
 		{
-			EntityID = stream.ReadInt32();
+			EntityId = stream.ReadInt32();
 			MobType = stream.ReadInt8();
 			X = stream.ReadInt32();
 			Y = stream.ReadInt32();
@@ -38,7 +38,7 @@
 
 		public void WritePacket(IMcStream stream)
 		{
-			stream.WriteInt32(EntityID);
+			stream.WriteInt32(EntityId);
 			stream.WriteInt8(MobType);
 			stream.WriteInt32(X);
 			stream.WriteInt32(Y);

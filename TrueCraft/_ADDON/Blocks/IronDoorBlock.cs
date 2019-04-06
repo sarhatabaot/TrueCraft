@@ -5,11 +5,11 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class IronDoorBlock : DoorBlock
 	{
-		public static readonly byte BlockID = 0x47;
+		public static readonly byte BlockId = 0x47;
 
 		public override short ItemID => IronDoorItem.ItemID;
 
-		public override byte ID => 0x47;
+		public override byte Id => 0x47;
 
 		public override double BlastResistance => 25;
 

@@ -4,9 +4,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class CobblestoneBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x04;
+		public static readonly byte BlockId = 0x04;
 
-		public override byte ID => 0x04;
+		public override byte Id => 0x04;
 
 		public override double BlastResistance => 30;
 

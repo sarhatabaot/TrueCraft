@@ -9,7 +9,7 @@ namespace TrueCraft.Logic.Items
 	{
 		public static readonly short ItemID = 0x152;
 
-		public override short ID => 0x152;
+		public override short Id => 0x152;
 
 		public override string DisplayName => "Sugar Canes";
 
@@ -24,10 +24,10 @@ namespace TrueCraft.Logic.Items
 			coordinates += MathHelper.BlockFaceToCoordinates(face);
 			if (SugarcaneBlock.ValidPlacement(new BlockDescriptor {Coordinates = coordinates}, world))
 			{
-				world.SetBlockId(coordinates, SugarcaneBlock.BlockID);
+				world.SetBlockId(coordinates, SugarcaneBlock.BlockId);
 				item.Count--;
 				user.Inventory[user.SelectedSlot] = item;
-				user.Server.BlockRepository.GetBlockProvider(SugarcaneBlock.BlockID).BlockPlaced(
+				user.Server.BlockRepository.GetBlockProvider(SugarcaneBlock.BlockId).BlockPlaced(
 					new BlockDescriptor {Coordinates = coordinates}, face, world, user);
 			}
 		}

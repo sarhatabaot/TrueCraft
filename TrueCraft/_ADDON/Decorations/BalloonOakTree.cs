@@ -26,9 +26,9 @@ namespace TrueCraft.TerrainGen.Decorations
 
 			var random = new Random(world.Seed);
 			var height = random.Next(4, 5);
-			GenerateColumn(chunk, location, height, WoodBlock.BlockID, 0x0);
+			GenerateColumn(chunk, location, height, WoodBlock.BlockId, 0x0);
 			var leafLocation = location + new Coordinates3D(0, height, 0);
-			GenerateSphere(chunk, leafLocation, LeafRadius, LeavesBlock.BlockID, 0x0);
+			GenerateSphere(chunk, leafLocation, LeafRadius, LeavesBlock.BlockId, 0x0);
 			return true;
 		}
 	}

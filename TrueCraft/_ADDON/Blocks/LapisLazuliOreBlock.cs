@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class LapisLazuliOreBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x15;
+		public static readonly byte BlockId = 0x15;
 
-		public override byte ID => 0x15;
+		public override byte Id => 0x15;
 
 		public override double BlastResistance => 15;
 

@@ -24,12 +24,12 @@
 			Items = new ItemStack[length];
 			for (var i = 0; i < length; i++)
 			{
-				var id = stream.ReadInt16();
-				if (id != -1)
+				var Id = stream.ReadInt16();
+				if (Id != -1)
 				{
 					var count = stream.ReadInt8();
 					var metadata = stream.ReadInt16();
-					Items[i] = new ItemStack(id, count, metadata);
+					Items[i] = new ItemStack(Id, count, metadata);
 				}
 				else
 					Items[i] = ItemStack.EmptyStack;
@@ -42,7 +42,7 @@
 			stream.WriteInt16((short) Items.Length);
 			for (var i = 0; i < Items.Length; i++)
 			{
-				stream.WriteInt16(Items[i].ID);
+				stream.WriteInt16(Items[i].Id);
 				if (!Items[i].Empty)
 				{
 					stream.WriteInt8(Items[i].Count);

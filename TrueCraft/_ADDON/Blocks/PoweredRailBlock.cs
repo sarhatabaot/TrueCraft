@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class PoweredRailBlock : RailBlock
 	{
-		public new static readonly byte BlockID = 0x1B;
+		public new static readonly byte BlockId = 0x1B;
 
-		public override byte ID => 0x1B;
+		public override byte Id => 0x1B;
 
 		public override string DisplayName => "Powered Rail";
 
@@ -26,7 +26,7 @@ namespace TrueCraft.Logic.Blocks
 				},
 				{
 					new ItemStack(IronIngotItem.ItemID),
-					new ItemStack(RedstoneDustBlock.BlockID),
+					new ItemStack(RedstoneDustBlock.BlockId),
 					new ItemStack(IronIngotItem.ItemID)
 				}
 			};

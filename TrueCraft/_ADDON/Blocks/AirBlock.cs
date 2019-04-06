@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class AirBlock : BlockProvider
 	{
-		public static readonly byte BlockID = 0x00;
+		public static readonly byte BlockId = 0x00;
 
-		public override byte ID => 0x00;
+		public override byte Id => 0x00;
 
 		public override double BlastResistance => 0;
 

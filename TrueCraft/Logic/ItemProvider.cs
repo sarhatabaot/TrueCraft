@@ -7,7 +7,7 @@ namespace TrueCraft.Logic
 {
 	public abstract class ItemProvider : IItemProvider
 	{
-		public abstract short ID { get; }
+		public abstract short Id { get; }
 
 		public abstract Tuple<int, int> GetIconTexture(byte metadata);
 

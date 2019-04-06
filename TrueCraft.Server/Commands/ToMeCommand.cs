@@ -26,18 +26,18 @@ namespace TrueCraft.Server.Commands
 				return;
 			}
 
-			int id;
-			if (!int.TryParse(arguments[0], out id))
+			int Id;
+			if (!int.TryParse(arguments[0], out Id))
 			{
 				Help(client, alias, arguments);
 				return;
 			}
 
 			var manager = client.Server.GetEntityManagerForWorld(client.World);
-			var entity = manager.GetEntityByID(id) as MobEntity;
+			var entity = manager.GetEntityById(Id) as MobEntity;
 			if (entity == null)
 			{
-				client.SendMessage(ChatColor.Red + "An entity with that ID does not exist in this world.");
+				client.SendMessage(ChatColor.Red + "An entity with that Id does not exist in this world.");
 				return;
 			}
 
@@ -59,7 +59,7 @@ namespace TrueCraft.Server.Commands
 
 		public override void Help(IRemoteClient client, string alias, string[] arguments)
 		{
-			client.SendMessage("/tome [id]: Moves a mob to your position.");
+			client.SendMessage("/tome [Id]: Moves a mob to your position.");
 		}
 	}
 }

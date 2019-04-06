@@ -10,11 +10,11 @@ namespace TrueCraft.Logic
 
 		public ItemRepository() => ItemProviders = new List<IItemProvider>();
 
-		public IItemProvider GetItemProvider(short id)
+		public IItemProvider GetItemProvider(short Id)
 		{
 			// TODO: Binary search
 			for (var i = 0; i < ItemProviders.Count; i++)
-				if (ItemProviders[i].ID == id)
+				if (ItemProviders[i].Id == Id)
 					return ItemProviders[i];
 			return null;
 		}
@@ -24,13 +24,13 @@ namespace TrueCraft.Logic
 			int i;
 			for (i = ItemProviders.Count - 1; i >= 0; i--)
 			{
-				if (provider.ID == ItemProviders[i].ID)
+				if (provider.Id == ItemProviders[i].Id)
 				{
 					ItemProviders[i] = provider; // Override
 					return;
 				}
 
-				if (ItemProviders[i].ID < provider.ID)
+				if (ItemProviders[i].Id < provider.Id)
 					break;
 			}
 

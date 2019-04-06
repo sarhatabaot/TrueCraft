@@ -116,7 +116,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 
 		static LogRenderer()
 		{
-			RegisterRenderer(WoodBlock.BlockID, new LogRenderer());
+			RegisterRenderer(WoodBlock.BlockId, new LogRenderer());
 			for (var i = 0; i < BaseTexture.Length; i++)
 			{
 				BaseTexture[i] *= new Vector2(16f / 256f);

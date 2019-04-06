@@ -6,7 +6,7 @@ namespace TrueCraft.Client
 	[Serializable]
 	public class FontChar
 	{
-		[XmlAttribute("id")] public int ID { get; set; }
+		[XmlAttribute("id")] public int Id { get; set; }
 
 		[XmlAttribute("x")] public int X { get; set; }
 

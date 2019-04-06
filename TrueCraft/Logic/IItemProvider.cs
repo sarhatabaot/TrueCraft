@@ -7,7 +7,7 @@ namespace TrueCraft.Logic
 {
 	public interface IItemProvider
 	{
-		short ID { get; }
+		short Id { get; }
 		sbyte MaximumStack { get; }
 		string DisplayName { get; }
 		void ItemUsedOnNothing(ItemStack item, IWorld world, IRemoteClient user);

@@ -5,9 +5,9 @@ namespace TrueCraft.Logic.Blocks
 {
 	public class TNTBlock : BlockProvider, ICraftingRecipe
 	{
-		public static readonly byte BlockID = 0x2E;
+		public static readonly byte BlockId = 0x2E;
 
-		public override byte ID => 0x2E;
+		public override byte Id => 0x2E;
 
 		public override double BlastResistance => 0;
 
@@ -24,22 +24,22 @@ namespace TrueCraft.Logic.Blocks
 			{
 				{
 					new ItemStack(GunpowderItem.ItemID),
-					new ItemStack(SandBlock.BlockID),
+					new ItemStack(SandBlock.BlockId),
 					new ItemStack(GunpowderItem.ItemID)
 				},
 				{
-					new ItemStack(SandBlock.BlockID),
+					new ItemStack(SandBlock.BlockId),
 					new ItemStack(GunpowderItem.ItemID),
-					new ItemStack(SandBlock.BlockID)
+					new ItemStack(SandBlock.BlockId)
 				},
 				{
 					new ItemStack(GunpowderItem.ItemID),
-					new ItemStack(SandBlock.BlockID),
+					new ItemStack(SandBlock.BlockId),
 					new ItemStack(GunpowderItem.ItemID)
 				}
 			};
 
-		public ItemStack Output => new ItemStack(BlockID);
+		public ItemStack Output => new ItemStack(BlockId);
 
 		public bool SignificantMetadata => false;
 
