@@ -4,7 +4,7 @@ using TrueCraft.Logic.Blocks;
 using TrueCraft.World;
 using TrueCraft._ADDON.Blocks;
 
-namespace TrueCraft._ADDON.Decorations
+namespace TrueCraft.Decorations
 {
 	public class OakTree : Decoration
 	{
