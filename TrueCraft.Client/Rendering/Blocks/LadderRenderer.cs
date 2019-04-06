@@ -25,7 +25,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 		}
 
 		public override VertexPositionNormalColorTexture[] Render(BlockDescriptor descriptor, Vector3 offset,
-			VisibleFaces faces, Tuple<int, int> textureMap, int indiciesOffset, out int[] indicies)
+			VisibleFaces faces, Tuple<int, int> textureMap, int indicesOffset, out int[] indices)
 		{
 			var lighting = new int[6];
 			for (var i = 0; i < 6; i++)
@@ -40,25 +40,25 @@ namespace TrueCraft.Client.Rendering.Blocks
 			switch ((LadderBlock.LadderDirection) descriptor.Metadata)
 			{
 				case LadderBlock.LadderDirection.North:
-					verticies = CreateQuad(CubeFace.PositiveZ, offset, Texture, 0, indiciesOffset, out indicies,
+					verticies = CreateQuad(CubeFace.PositiveZ, offset, Texture, 0, indicesOffset, out indices,
 						Color.White);
 					correction = Vector3.Forward;
 					faceCorrection = (int) CubeFace.PositiveZ * 4;
 					break;
 				case LadderBlock.LadderDirection.South:
-					verticies = CreateQuad(CubeFace.NegativeZ, offset, Texture, 0, indiciesOffset, out indicies,
+					verticies = CreateQuad(CubeFace.NegativeZ, offset, Texture, 0, indicesOffset, out indices,
 						Color.White);
 					correction = Vector3.Backward;
 					faceCorrection = (int) CubeFace.NegativeZ * 4;
 					break;
 				case LadderBlock.LadderDirection.East:
-					verticies = CreateQuad(CubeFace.NegativeX, offset, Texture, 0, indiciesOffset, out indicies,
+					verticies = CreateQuad(CubeFace.NegativeX, offset, Texture, 0, indicesOffset, out indices,
 						Color.White);
 					correction = Vector3.Right;
 					faceCorrection = (int) CubeFace.NegativeX * 4;
 					break;
 				case LadderBlock.LadderDirection.West:
-					verticies = CreateQuad(CubeFace.PositiveX, offset, Texture, 0, indiciesOffset, out indicies,
+					verticies = CreateQuad(CubeFace.PositiveX, offset, Texture, 0, indicesOffset, out indices,
 						Color.White);
 					correction = Vector3.Left;
 					faceCorrection = (int) CubeFace.PositiveX * 4;
@@ -66,15 +66,15 @@ namespace TrueCraft.Client.Rendering.Blocks
 				default:
 					// Should never happen
 					verticies = CreateUniformCube(offset, Texture, VisibleFaces.All,
-						indiciesOffset, out indicies, Color.White);
+						indicesOffset, out indices, Color.White);
 					correction = Vector3.Zero;
 					break;
 			}
 
 			for (var i = 0; i < verticies.Length; i++)
 				verticies[i].Position += correction;
-			for (var i = 0; i < indicies.Length; i++)
-				indicies[i] -= faceCorrection;
+			for (var i = 0; i < indices.Length; i++)
+				indices[i] -= faceCorrection;
 			return verticies;
 		}
 	}

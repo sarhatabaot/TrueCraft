@@ -101,36 +101,36 @@ namespace TrueCraft.Client.Rendering.Blocks
 		protected Vector2 BirchSaplingTextureMap => new Vector2(15, 4);
 
 		public override VertexPositionNormalColorTexture[] Render(BlockDescriptor descriptor, Vector3 offset,
-			VisibleFaces faces, Tuple<int, int> textureMap, int indiciesOffset, out int[] indicies)
+			VisibleFaces faces, Tuple<int, int> textureMap, int indicesOffset, out int[] indices)
 		{
 			if (descriptor.Id == RoseBlock.BlockId)
-				return RenderQuads(descriptor, offset, RoseTexture, indiciesOffset, out indicies, Color.White);
+				return RenderQuads(descriptor, offset, RoseTexture, indicesOffset, out indices, Color.White);
 			if (descriptor.Id == DandelionBlock.BlockId)
-				return RenderQuads(descriptor, offset, DandelionTexture, indiciesOffset, out indicies, Color.White);
+				return RenderQuads(descriptor, offset, DandelionTexture, indicesOffset, out indices, Color.White);
 			if (descriptor.Id == SaplingBlock.BlockId)
 				switch ((SaplingBlock.SaplingType) descriptor.Metadata)
 				{
 					case SaplingBlock.SaplingType.Oak:
 					default:
-						return RenderQuads(descriptor, offset, OakSaplingTexture, indiciesOffset, out indicies,
+						return RenderQuads(descriptor, offset, OakSaplingTexture, indicesOffset, out indices,
 							Color.White);
 					case SaplingBlock.SaplingType.Spruce:
-						return RenderQuads(descriptor, offset, SpruceSaplingTexture, indiciesOffset, out indicies,
+						return RenderQuads(descriptor, offset, SpruceSaplingTexture, indicesOffset, out indices,
 							Color.White);
 					case SaplingBlock.SaplingType.Birch:
-						return RenderQuads(descriptor, offset, BirchSaplingTexture, indiciesOffset, out indicies,
+						return RenderQuads(descriptor, offset, BirchSaplingTexture, indicesOffset, out indices,
 							Color.White);
 				}
 			switch ((TallGrassBlock.TallGrassType) descriptor.Metadata)
 			{
 				case TallGrassBlock.TallGrassType.DeadBush:
-					return RenderQuads(descriptor, offset, DeadBushTexture, indiciesOffset, out indicies, Color.White);
+					return RenderQuads(descriptor, offset, DeadBushTexture, indicesOffset, out indices, Color.White);
 				case TallGrassBlock.TallGrassType.Fern:
-					return RenderQuads(descriptor, offset, FernTexture, indiciesOffset, out indicies,
+					return RenderQuads(descriptor, offset, FernTexture, indicesOffset, out indices,
 						GrassRenderer.BiomeColor);
 				case TallGrassBlock.TallGrassType.TallGrass:
 				default:
-					return RenderQuads(descriptor, offset, TallGrassTexture, indiciesOffset, out indicies,
+					return RenderQuads(descriptor, offset, TallGrassTexture, indicesOffset, out indices,
 						GrassRenderer.BiomeColor);
 			}
 		}

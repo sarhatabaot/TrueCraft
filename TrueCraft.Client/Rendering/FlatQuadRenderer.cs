@@ -72,9 +72,9 @@ namespace TrueCraft.Client.Rendering
 		protected virtual Vector2 TextureMap => Vector2.Zero;
 
 		public override VertexPositionNormalColorTexture[] Render(BlockDescriptor descriptor, Vector3 offset,
-			VisibleFaces faces, Tuple<int, int> textureMap, int indiciesOffset, out int[] indicies)
+			VisibleFaces faces, Tuple<int, int> textureMap, int indicesOffset, out int[] indices)
 		{
-			return RenderQuads(descriptor, offset, Texture, indiciesOffset, out indicies, Color.White);
+			return RenderQuads(descriptor, offset, Texture, indicesOffset, out indices, Color.White);
 		}
 
 		protected VertexPositionNormalColorTexture[] RenderQuads(BlockDescriptor descriptor, Vector3 offset,

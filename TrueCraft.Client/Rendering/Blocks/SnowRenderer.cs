@@ -25,7 +25,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 		}
 
 		public override VertexPositionNormalColorTexture[] Render(BlockDescriptor descriptor, Vector3 offset,
-			VisibleFaces faces, Tuple<int, int> textureMap, int indiciesOffset, out int[] indicies)
+			VisibleFaces faces, Tuple<int, int> textureMap, int indicesOffset, out int[] indices)
 		{
 			var lighting = new int[6];
 			for (var i = 0; i < 6; i++)
@@ -34,7 +34,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 				lighting[i] = GetLight(descriptor.Chunk, coords);
 			}
 
-			var cube = CreateUniformCube(Vector3.Zero, Texture, faces, indiciesOffset, out indicies,
+			var cube = CreateUniformCube(Vector3.Zero, Texture, faces, indicesOffset, out indices,
 				Color.White, lighting);
 			var heightMultiplier = new Vector3(1, (descriptor.Metadata + 1) / 16f, 1);
 			for (var i = 0; i < cube.Length; i++)

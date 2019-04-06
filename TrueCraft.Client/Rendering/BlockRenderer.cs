@@ -110,7 +110,7 @@ namespace TrueCraft.Client.Rendering
 		}
 
 		public virtual VertexPositionNormalColorTexture[] Render(BlockDescriptor descriptor, Vector3 offset,
-			VisibleFaces faces, Tuple<int, int> textureMap, int indiciesOffset, out int[] indicies)
+			VisibleFaces faces, Tuple<int, int> textureMap, int indicesOffset, out int[] indices)
 		{
 			var texCoords = new Vector2(textureMap.Item1, textureMap.Item2);
 			var texture = new[]
@@ -131,7 +131,7 @@ namespace TrueCraft.Client.Rendering
 				lighting[i] = GetLight(descriptor.Chunk, coords);
 			}
 
-			return CreateUniformCube(offset, texture, faces, indiciesOffset, out indicies, Color.White, lighting);
+			return CreateUniformCube(offset, texture, faces, indicesOffset, out indices, Color.White, lighting);
 		}
 
 		public static VertexPositionNormalColorTexture[] CreateUniformCube(Vector3 offset, Vector2[] texture,

@@ -26,7 +26,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 		}
 
 		public override VertexPositionNormalColorTexture[] Render(BlockDescriptor descriptor, Vector3 offset,
-			VisibleFaces faces, Tuple<int, int> textureMap, int indiciesOffset, out int[] indicies)
+			VisibleFaces faces, Tuple<int, int> textureMap, int indicesOffset, out int[] indices)
 		{
 			var lighting = new int[6];
 			for (var i = 0; i < 6; i++)
@@ -37,7 +37,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 
 			// TODO: Rest of water rendering (shape and level and so on)
 			var overhead = new Vector3(0.5f, 0.5f, 0.5f);
-			var cube = CreateUniformCube(overhead, Texture, faces, indiciesOffset, out indicies, Color.Blue, lighting);
+			var cube = CreateUniformCube(overhead, Texture, faces, indicesOffset, out indices, Color.Blue, lighting);
 			for (var i = 0; i < cube.Length; i++)
 			{
 				if (cube[i].Position.Y > 0) cube[i].Position.Y *= 14f / 16f;

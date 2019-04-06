@@ -5,7 +5,7 @@ using TrueCraft._ADDON.Blocks;
 
 namespace TrueCraft.Client.Rendering.Blocks
 {
-	public class TNTRenderer : BlockRenderer
+	public class TntRenderer : BlockRenderer
 	{
 		private static readonly Vector2 TopTexture = new Vector2(9, 0);
 		private static readonly Vector2 BottomTexture = new Vector2(10, 0);
@@ -45,15 +45,15 @@ namespace TrueCraft.Client.Rendering.Blocks
 			BottomTexture + Vector2.UnitX
 		};
 
-		static TNTRenderer()
+		static TntRenderer()
 		{
-			RegisterRenderer(TNTBlock.BlockId, new TNTRenderer());
+			RegisterRenderer(TNTBlock.BlockId, new TntRenderer());
 			for (var i = 0; i < Texture.Length; i++)
 				Texture[i] *= new Vector2(16f / 256f);
 		}
 
 		public override VertexPositionNormalColorTexture[] Render(BlockDescriptor descriptor, Vector3 offset,
-			VisibleFaces faces, Tuple<int, int> textureMap, int indiciesOffset, out int[] indicies)
+			VisibleFaces faces, Tuple<int, int> textureMap, int indicesOffset, out int[] indices)
 		{
 			var lighting = new int[6];
 			for (var i = 0; i < 6; i++)
@@ -62,7 +62,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 				lighting[i] = GetLight(descriptor.Chunk, coords);
 			}
 
-			return CreateUniformCube(offset, Texture, faces, indiciesOffset, out indicies, Color.White, lighting);
+			return CreateUniformCube(offset, Texture, faces, indicesOffset, out indices, Color.White, lighting);
 		}
 	}
 }

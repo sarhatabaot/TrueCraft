@@ -52,7 +52,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 		}
 
 		public override VertexPositionNormalColorTexture[] Render(BlockDescriptor descriptor, Vector3 offset,
-			VisibleFaces faces, Tuple<int, int> textureMap, int indiciesOffset, out int[] indicies)
+			VisibleFaces faces, Tuple<int, int> textureMap, int indicesOffset, out int[] indices)
 		{
 			var lighting = new int[6];
 			for (var i = 0; i < 6; i++)
@@ -63,7 +63,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 
 			var centerized = new Vector3(7f / 16f, 0, 7f / 16f);
 			var cube = CreateUniformCube(Vector3.Zero, Texture, VisibleFaces.All,
-				indiciesOffset, out indicies, Color.White, lighting);
+				indicesOffset, out indices, Color.White, lighting);
 			for (var i = 0; i < cube.Length; i++)
 			{
 				cube[i].Position.X *= 1f / 8f;

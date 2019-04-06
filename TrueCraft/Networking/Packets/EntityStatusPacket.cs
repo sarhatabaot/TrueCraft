@@ -13,7 +13,7 @@
 			WolfTaming = 6,
 			WolfTamed = 7,
 			WolfShaking = 8,
-			EatingAccepted = 9 // what
+			EatingAccepted = 9
 		}
 
 		public byte Id => Constants.PacketIds.EntityStatus;

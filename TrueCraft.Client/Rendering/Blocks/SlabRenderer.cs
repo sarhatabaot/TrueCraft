@@ -188,11 +188,11 @@ namespace TrueCraft.Client.Rendering.Blocks
 		}
 
 		public override VertexPositionNormalColorTexture[] Render(BlockDescriptor descriptor, Vector3 offset,
-			VisibleFaces faces, Tuple<int, int> textureMap, int indiciesOffset, out int[] indicies)
+			VisibleFaces faces, Tuple<int, int> textureMap, int indicesOffset, out int[] indices)
 		{
 			if (descriptor.Id == SlabBlock.BlockId)
-				return RenderSlab(descriptor, offset, textureMap, indiciesOffset, out indicies);
-			return RenderDoubleSlab(descriptor, offset, textureMap, indiciesOffset, out indicies);
+				return RenderSlab(descriptor, offset, textureMap, indicesOffset, out indices);
+			return RenderDoubleSlab(descriptor, offset, textureMap, indicesOffset, out indices);
 		}
 
 		protected virtual VertexPositionNormalColorTexture[] RenderSlab(BlockDescriptor descriptor, Vector3 offset,

@@ -90,7 +90,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 		}
 
 		public override VertexPositionNormalColorTexture[] Render(BlockDescriptor descriptor, Vector3 offset,
-			VisibleFaces faces, Tuple<int, int> textureMap, int indiciesOffset, out int[] indicies)
+			VisibleFaces faces, Tuple<int, int> textureMap, int indicesOffset, out int[] indices)
 		{
 			var texture = DryTexture;
 			if (descriptor.Metadata == (byte) FarmlandBlock.MoistureLevel.Moist)
@@ -104,7 +104,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 			}
 
 			var overhead = new Vector3(0.5f, 0.5f, 0.5f);
-			var cube = CreateUniformCube(overhead, texture, faces, indiciesOffset, out indicies, Color.White, lighting);
+			var cube = CreateUniformCube(overhead, texture, faces, indicesOffset, out indices, Color.White, lighting);
 			for (var i = 0; i < cube.Length; i++)
 			{
 				if (cube[i].Position.Y > 0) cube[i].Position.Y *= 15f / 16f;

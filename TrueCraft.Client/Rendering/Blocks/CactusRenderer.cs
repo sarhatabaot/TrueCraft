@@ -37,10 +37,10 @@ namespace TrueCraft.Client.Rendering.Blocks
 		}
 
 		public override VertexPositionNormalColorTexture[] Render(BlockDescriptor descriptor, Vector3 offset,
-			VisibleFaces faces, Tuple<int, int> textureMap, int indiciesOffset, out int[] indicies)
+			VisibleFaces faces, Tuple<int, int> textureMap, int indicesOffset, out int[] indices)
 		{
 			// This is similar to how wheat is rendered
-			indicies = new int[5 * 6];
+			indices = new int[5 * 6];
 			var verticies = new VertexPositionNormalColorTexture[5 * 6];
 			int[] _indicies;
 			var center = new Vector3(-0.5f, -0.5f, -0.5f);
@@ -49,7 +49,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 			for (var _side = 0; _side < 4; _side++)
 			{
 				side = (CubeFace) _side;
-				quad = CreateQuad(side, center, Texture, 0, indiciesOffset, out _indicies, Color.White);
+				quad = CreateQuad(side, center, Texture, 0, indicesOffset, out _indicies, Color.White);
 				if (side == CubeFace.NegativeX || side == CubeFace.PositiveX)
 					for (var i = 0; i < quad.Length; i++)
 					{
@@ -64,11 +64,11 @@ namespace TrueCraft.Client.Rendering.Blocks
 					}
 
 				Array.Copy(quad, 0, verticies, _side * 4, 4);
-				Array.Copy(_indicies, 0, indicies, _side * 6, 6);
+				Array.Copy(_indicies, 0, indices, _side * 6, 6);
 			}
 
 			side = CubeFace.PositiveY;
-			quad = CreateQuad(side, center, TopTexture, 0, indiciesOffset, out _indicies, Color.White);
+			quad = CreateQuad(side, center, TopTexture, 0, indicesOffset, out _indicies, Color.White);
 			if (side == CubeFace.NegativeX || side == CubeFace.PositiveX)
 				for (var i = 0; i < quad.Length; i++)
 				{
@@ -83,7 +83,7 @@ namespace TrueCraft.Client.Rendering.Blocks
 				}
 
 			Array.Copy(quad, 0, verticies, (int) side * 4, 4);
-			Array.Copy(_indicies, 0, indicies, (int) side * 6, 6);
+			Array.Copy(_indicies, 0, indices, (int) side * 6, 6);
 			for (var i = 0; i < verticies.Length; i++)
 			{
 				verticies[i].Position.Y -= 1 / 16f;
