@@ -3,7 +3,7 @@ using TrueCraft.TerrainGen.Noise;
 using TrueCraft.World;
 using TrueCraft._ADDON.Blocks;
 
-namespace TrueCraft._ADDON.Decorators
+namespace TrueCraft.Decorators
 {
 	public class PlantDecorator : IChunkDecorator
 	{

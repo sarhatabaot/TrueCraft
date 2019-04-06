@@ -4,7 +4,7 @@ using TrueCraft.World;
 using TrueCraft._ADDON.Blocks;
 using TrueCraft._ADDON.Decorations;
 
-namespace TrueCraft._ADDON.Decorators
+namespace TrueCraft.Decorators
 {
 	public class CactusDecorator : IChunkDecorator
 	{

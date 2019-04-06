@@ -3,7 +3,7 @@ using TrueCraft.Logic.Blocks;
 using TrueCraft.World;
 using TrueCraft._ADDON.Blocks;
 
-namespace TrueCraft._ADDON.Decorators
+namespace TrueCraft.Decorators
 {
 	internal class FreezeDecorator : IChunkDecorator
 	{

@@ -1,4 +1,4 @@
-﻿namespace TrueCraft._ADDON.Decorators
+﻿namespace TrueCraft.Decorators
 {
 	public struct OreData
 	{
