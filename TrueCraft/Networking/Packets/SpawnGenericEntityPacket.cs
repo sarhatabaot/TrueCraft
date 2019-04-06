@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Spawns entities that don't fit into any other bucket of entities.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct SpawnGenericEntityPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.SpawnGenericEntity;

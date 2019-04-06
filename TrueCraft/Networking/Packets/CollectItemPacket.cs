@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sent by servers to show the animation of an item entity being collected by a player.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct CollectItemPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.CollectItem;

@@ -4,6 +4,7 @@
 	///  Used to indicate that a certain "action" has happened to a block.
 	///  In practice this controls note blocks and pistons.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct BlockActionPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.BlockAction;

@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Updates the player on changes to or status of the environment.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct EnvironmentStatePacket : IPacket
 	{
 		public enum EnvironmentState

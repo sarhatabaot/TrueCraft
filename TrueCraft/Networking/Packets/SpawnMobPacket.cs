@@ -1,8 +1,6 @@
 ﻿namespace TrueCraft.Networking.Packets
 {
-	/// <summary>
-	///  Does what it says on the tin.
-	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct SpawnMobPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.SpawnMob;

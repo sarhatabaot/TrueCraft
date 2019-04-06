@@ -1,5 +1,6 @@
 ﻿namespace TrueCraft.Networking.Packets
 {
+	[MessageTarget(MessageTarget.Client)]
 	public struct DestroyEntityPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.DestroyEntity;

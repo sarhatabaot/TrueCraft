@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sent by the server to allow the player to spawn, with information about the world being spawned into.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct LoginResponsePacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.LoginResponse;

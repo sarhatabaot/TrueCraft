@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sent by clients after the handshake to request logging into the world.
 	/// </summary>
+	[MessageTarget(MessageTarget.Server)]
 	public struct LoginRequestPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.LoginRequest;

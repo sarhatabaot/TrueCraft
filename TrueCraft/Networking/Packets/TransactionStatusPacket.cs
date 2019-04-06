@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sent by the server to inform the client if an inventory transaction was successful.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct TransactionStatusPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.TransactionStatus;

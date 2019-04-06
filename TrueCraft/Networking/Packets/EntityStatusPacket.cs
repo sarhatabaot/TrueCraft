@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Gives updates to what entities are doing.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct EntityStatusPacket : IPacket
 	{
 		public enum EntityStatus

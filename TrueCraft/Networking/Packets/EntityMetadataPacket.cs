@@ -1,5 +1,6 @@
 ﻿namespace TrueCraft.Networking.Packets
 {
+	[MessageTarget(MessageTarget.Client)]
 	public struct EntityMetadataPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.EntityMetadata;

@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sent from servers to continue with a connection. A kick is sent instead if the connection is refused.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct HandshakeResponsePacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.HandshakeResponse;

@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Used to teleport entities to arbitrary locations.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct EntityTeleportPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.EntityTeleport;

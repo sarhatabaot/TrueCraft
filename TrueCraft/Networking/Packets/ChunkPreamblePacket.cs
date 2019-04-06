@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Used to allocate or unload chunks.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct ChunkPreamblePacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.ChunkPreamble;

@@ -1,5 +1,6 @@
 ﻿namespace TrueCraft.Networking.Packets
 {
+	[MessageTarget(MessageTarget.Client)]
 	public struct BulkBlockChangePacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.BulkBlockChange;

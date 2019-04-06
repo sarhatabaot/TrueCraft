@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Plays a sound effect (or special case: generates smoke particles)
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct SoundEffectPacket : IPacket
 	{
 		public enum EffectType

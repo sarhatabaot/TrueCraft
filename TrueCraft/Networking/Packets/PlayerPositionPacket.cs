@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sent by clients to inform the server of updates to their position.
 	/// </summary>
+	[MessageTarget(MessageTarget.Server)]
 	public struct PlayerPositionPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.PlayerPosition;

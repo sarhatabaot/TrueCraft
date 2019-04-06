@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Threading;
 using Microsoft.Xna.Framework;
 using TrueCraft.Extensions;
@@ -68,7 +69,7 @@ namespace TrueCraft.Server
 
 			AccessConfiguration = Configuration.LoadConfiguration<AccessConfiguration>(Bootstrap.ResolvePath("access.yaml"));
 
-			((PacketReader)PacketReader).RegisterCorePackets();
+			((PacketReader)PacketReader).RegisterCorePackets(typeof(KeepAlivePacket).Assembly);
 			Handlers.PacketHandlers.RegisterHandlers(this);
 		}
 

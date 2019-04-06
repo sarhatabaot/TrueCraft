@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Instructs the client to open an inventory window.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct OpenWindowPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.OpenWindow;

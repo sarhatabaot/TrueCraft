@@ -2,8 +2,8 @@
 {
 	/// <summary>
 	///  Sent by servers to inform players of changes to the velocity of entities.
-	///  Not sure exactly how all of that works.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct EntityVelocityPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.EntityVelocity;

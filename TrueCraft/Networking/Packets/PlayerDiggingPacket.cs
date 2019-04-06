@@ -4,6 +4,7 @@
 	///  Sent by clients when they start or stop digging. Also used to throw items.
 	///  Also sent with action set to StartDigging when clicking to open a door.
 	/// </summary>
+	[MessageTarget(MessageTarget.Server)]
 	public struct PlayerDiggingPacket : IPacket
 	{
 		public enum Action

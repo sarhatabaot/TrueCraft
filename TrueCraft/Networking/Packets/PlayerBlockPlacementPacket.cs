@@ -4,6 +4,7 @@
 	///  Sent when the player interacts with a block (generally via right clicking).
 	///  This is also used for items that don't interact with blocks (i.e. food) with the coordinates set to -1.
 	/// </summary>
+	[MessageTarget(MessageTarget.Server)]
 	public struct PlayerBlockPlacementPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.PlayerBlockPlacement;

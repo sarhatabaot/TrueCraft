@@ -4,6 +4,7 @@
 	///  Sent by the server to specify the coordinates of the spawn point. This only affects what the
 	///  compass item points to.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct SpawnPositionPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.SpawnPosition;

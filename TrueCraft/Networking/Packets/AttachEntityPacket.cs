@@ -1,8 +1,9 @@
 ﻿namespace TrueCraft.Networking.Packets
 {
 	/// <summary>
-	///  Used to attach entities to other entities, i.e. players to minecarts
+	///  Used to attach entities to other entities, i.e. players to carts
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct AttachEntityPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.AttachEntity;

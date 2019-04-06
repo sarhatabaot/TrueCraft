@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Updates the progress on the furnace UI.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct UpdateProgressPacket : IPacket
 	{
 		public enum ProgressTarget

@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sets the contents of an item slot on an inventory window.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct SetSlotPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.SetSlot;

@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sent by servers to inform clients of their current health.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct UpdateHealthPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.UpdateHealth;

@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sent by servers to update the direction an entity is looking in.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct EntityLookPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.EntityLook;

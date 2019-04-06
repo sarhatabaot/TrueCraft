@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sent by servers to indicate that a player is using a bed. More research required on this packet.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct UseBedPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.UseBed;

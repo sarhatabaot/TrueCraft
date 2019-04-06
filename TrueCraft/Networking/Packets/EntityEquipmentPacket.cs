@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sets the equipment visible on player entities (i.e. armor).
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct EntityEquipmentPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.EntityEquipment;

@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sent by clients when clicking on an inventory window.
 	/// </summary>
+	[MessageTarget(MessageTarget.Server)]
 	public struct ClickWindowPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.ClickWindow;

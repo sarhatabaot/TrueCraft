@@ -1,5 +1,6 @@
 ﻿namespace TrueCraft.Networking.Packets
 {
+	[MessageTarget(MessageTarget.Server)]
 	public struct PlayerActionPacket : IPacket
 	{
 		public enum PlayerAction

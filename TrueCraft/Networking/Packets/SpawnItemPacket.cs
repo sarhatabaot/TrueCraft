@@ -1,8 +1,9 @@
 ﻿namespace TrueCraft.Networking.Packets
 {
 	/// <summary>
-	///  Sent by servers to spawn item entities, I think.
+	///  Sent by servers to spawn item entities.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct SpawnItemPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.SpawnItem;

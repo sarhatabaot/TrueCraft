@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Threading;
 using Microsoft.Xna.Framework;
 using TrueCraft.Client.Events;
@@ -66,7 +67,7 @@ namespace TrueCraft.Client
 			User = user;
 			Client = new TcpClient();
 			PacketReader = new PacketReader(Trace);
-			PacketReader.RegisterCorePackets();
+			PacketReader.RegisterCorePackets(typeof(KeepAlivePacket).Assembly);
 			_packetHandlers = new PacketHandler[0x100];
 			Handlers.PacketHandlers.RegisterHandlers(this);
 			World = new ReadOnlyWorld();

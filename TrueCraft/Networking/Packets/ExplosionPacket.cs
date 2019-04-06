@@ -2,6 +2,7 @@
 
 namespace TrueCraft.Networking.Packets
 {
+	[MessageTarget(MessageTarget.Client)]
 	public struct ExplosionPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.Explosion;

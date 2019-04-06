@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sent by clients upon clicking an entity.
 	/// </summary>
+	[MessageTarget(MessageTarget.Server)]
 	public struct UseEntityPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.UseEntity;

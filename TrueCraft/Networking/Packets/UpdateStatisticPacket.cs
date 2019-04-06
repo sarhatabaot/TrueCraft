@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sent to update the client's list of player statistics.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct UpdateStatisticPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.UpdateStatistic;

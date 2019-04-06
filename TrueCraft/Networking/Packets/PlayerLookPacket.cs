@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sent to update the rotation of the player's head and body.
 	/// </summary>
+	[MessageTarget(MessageTarget.Server)]
 	public struct PlayerLookPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.PlayerLook;

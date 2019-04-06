@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sent by servers to set the position and look of the player. Can be used to teleport players.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct SetPlayerPositionPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.SetPlayerPosition;

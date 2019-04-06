@@ -4,6 +4,7 @@
 	///  Sent by clients to inform the server of updates to their position and look direction.
 	///  A combination of the PlayerPosition and PlayerLook packets.
 	/// </summary>
+	[MessageTarget(MessageTarget.Server)]
 	public struct PlayerPositionAndLookPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.PlayerPositionAndLook;

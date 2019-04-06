@@ -1,5 +1,6 @@
 ﻿namespace TrueCraft.Networking.Packets
 {
+	[MessageTarget(MessageTarget.Client)]
 	public struct EntityLookAndRelativeMovePacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.EntityLookAndRelativeMove;

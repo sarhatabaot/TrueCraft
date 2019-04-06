@@ -1,5 +1,6 @@
 ﻿namespace TrueCraft.Networking.Packets
 {
+	[MessageTarget(MessageTarget.Client)]
 	public struct SpawnPlayerPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.SpawnPlayer;

@@ -4,6 +4,7 @@
 	///  Sent from the server to inform the client of the in-game time of day.
 	///  The number sent is in 1/20th of a second increments, where 24000 ticks are in each day.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct TimeUpdatePacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.TimeUpdate;

@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Spawns lightning at the given coordinates.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct LightningPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.Lightning;

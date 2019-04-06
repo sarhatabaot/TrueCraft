@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sends actual blocks to populate chunks with.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct ChunkDataPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.ChunkData;

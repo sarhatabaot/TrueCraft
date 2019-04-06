@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sent from clients to begin a new connection.
 	/// </summary>
+	[MessageTarget(MessageTarget.Server)]
 	public struct HandshakePacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.Handshake;

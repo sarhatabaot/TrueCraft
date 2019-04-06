@@ -3,6 +3,7 @@
 	/// <summary>
 	///  Sets the items in an inventory window on the client.
 	/// </summary>
+	[MessageTarget(MessageTarget.Client)]
 	public struct WindowItemsPacket : IPacket
 	{
 		public byte Id => Constants.PacketIds.WindowItems;
