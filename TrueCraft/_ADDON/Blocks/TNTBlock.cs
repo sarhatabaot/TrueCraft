@@ -23,19 +23,19 @@ namespace TrueCraft.Logic.Blocks
 			new[,]
 			{
 				{
-					new ItemStack(GunpowderItem.ItemID),
+					new ItemStack(GunpowderItem.ItemId),
 					new ItemStack(SandBlock.BlockId),
-					new ItemStack(GunpowderItem.ItemID)
+					new ItemStack(GunpowderItem.ItemId)
 				},
 				{
 					new ItemStack(SandBlock.BlockId),
-					new ItemStack(GunpowderItem.ItemID),
+					new ItemStack(GunpowderItem.ItemId),
 					new ItemStack(SandBlock.BlockId)
 				},
 				{
-					new ItemStack(GunpowderItem.ItemID),
+					new ItemStack(GunpowderItem.ItemId),
 					new ItemStack(SandBlock.BlockId),
-					new ItemStack(GunpowderItem.ItemID)
+					new ItemStack(GunpowderItem.ItemId)
 				}
 			};
 

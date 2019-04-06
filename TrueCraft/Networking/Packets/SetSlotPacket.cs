@@ -12,14 +12,14 @@
 		{
 			WindowID = windowID;
 			SlotIndex = slotIndex;
-			ItemID = itemID;
+			ItemId = itemID;
 			Count = count;
 			Metadata = metadata;
 		}
 
 		public sbyte WindowID;
 		public short SlotIndex;
-		public short ItemID;
+		public short ItemId;
 		public sbyte Count;
 		public short Metadata;
 
@@ -27,8 +27,8 @@
 		{
 			WindowID = stream.ReadInt8();
 			SlotIndex = stream.ReadInt16();
-			ItemID = stream.ReadInt16();
-			if (ItemID != -1)
+			ItemId = stream.ReadInt16();
+			if (ItemId != -1)
 			{
 				Count = stream.ReadInt8();
 				Metadata = stream.ReadInt16();
@@ -39,8 +39,8 @@
 		{
 			stream.WriteInt8(WindowID);
 			stream.WriteInt16(SlotIndex);
-			stream.WriteInt16(ItemID);
-			if (ItemID != -1)
+			stream.WriteInt16(ItemId);
+			if (ItemId != -1)
 			{
 				stream.WriteInt8(Count);
 				stream.WriteInt16(Metadata);

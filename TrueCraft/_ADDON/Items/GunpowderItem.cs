@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class GunpowderItem : ItemProvider
 	{
-		public static readonly short ItemID = 0x121;
+		public static readonly short ItemId = 0x121;
 
 		public override short Id => 0x121;
 

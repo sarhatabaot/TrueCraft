@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class CookieItem : FoodItem, ICraftingRecipe
 	{
-		public static readonly short ItemID = 0x165;
+		public static readonly short ItemId = 0x165;
 
 		public override short Id => 0x165;
 
@@ -18,13 +18,13 @@ namespace TrueCraft.Logic.Items
 			new[,]
 			{
 				{
-					new ItemStack(WheatItem.ItemID),
-					new ItemStack(DyeItem.ItemID, 1, (short) DyeItem.DyeType.CocoaBeans),
-					new ItemStack(WheatItem.ItemID)
+					new ItemStack(WheatItem.ItemId),
+					new ItemStack(DyeItem.ItemId, 1, (short) DyeItem.DyeType.CocoaBeans),
+					new ItemStack(WheatItem.ItemId)
 				}
 			};
 
-		public ItemStack Output => new ItemStack(ItemID);
+		public ItemStack Output => new ItemStack(ItemId);
 
 		public bool SignificantMetadata => true;
 

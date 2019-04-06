@@ -1,9 +1,12 @@
 using System;
+using TrueCraft.Items;
+using TrueCraft.Logic;
+using TrueCraft.Logic.Blocks;
 using TrueCraft.Logic.Items;
 using TrueCraft.Networking;
 using TrueCraft.World;
 
-namespace TrueCraft.Logic.Blocks
+namespace TrueCraft.Blocks
 {
 	public class CakeBlock : BlockProvider, ICraftingRecipe
 	{
@@ -27,19 +30,19 @@ namespace TrueCraft.Logic.Blocks
 			new[,]
 			{
 				{
-					new ItemStack(MilkItem.ItemID),
-					new ItemStack(MilkItem.ItemID),
-					new ItemStack(MilkItem.ItemID)
+					new ItemStack(MilkItem.ItemId),
+					new ItemStack(MilkItem.ItemId),
+					new ItemStack(MilkItem.ItemId)
 				},
 				{
-					new ItemStack(SugarItem.ItemID),
-					new ItemStack(EggItem.ItemID),
-					new ItemStack(SugarItem.ItemID)
+					new ItemStack(SugarItem.ItemId),
+					new ItemStack(EggItem.ItemId),
+					new ItemStack(SugarItem.ItemId)
 				},
 				{
-					new ItemStack(WheatItem.ItemID),
-					new ItemStack(WheatItem.ItemID),
-					new ItemStack(WheatItem.ItemID)
+					new ItemStack(WheatItem.ItemId),
+					new ItemStack(WheatItem.ItemId),
+					new ItemStack(WheatItem.ItemId)
 				}
 			};
 

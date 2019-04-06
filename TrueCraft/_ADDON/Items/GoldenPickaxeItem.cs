@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class GoldenPickaxeItem : PickaxeItem
 	{
-		public static readonly short ItemID = 0x11D;
+		public static readonly short ItemId = 0x11D;
 
 		public override short Id => 0x11D;
 

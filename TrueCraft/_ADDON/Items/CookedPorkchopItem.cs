@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class CookedPorkchopItem : FoodItem
 	{
-		public static readonly short ItemID = 0x140;
+		public static readonly short ItemId = 0x140;
 
 		public override short Id => 0x140;
 

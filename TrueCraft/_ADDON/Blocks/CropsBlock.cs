@@ -40,9 +40,9 @@ namespace TrueCraft.Logic.Blocks
 			if (descriptor.Metadata >= 7)
 				return new[]
 				{
-					new ItemStack(WheatItem.ItemID), new ItemStack(SeedsItem.ItemID, (sbyte) MathHelper.Random.Next(3))
+					new ItemStack(WheatItem.ItemId), new ItemStack(SeedsItem.ItemId, (sbyte) MathHelper.Random.Next(3))
 				};
-			return new[] {new ItemStack(SeedsItem.ItemID)};
+			return new[] {new ItemStack(SeedsItem.ItemId)};
 		}
 
 		private void GrowBlock(IMultiPlayerServer server, IWorld world, Coordinates3D coords)

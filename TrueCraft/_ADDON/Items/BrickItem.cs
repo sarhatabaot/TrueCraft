@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class BrickItem : ItemProvider
 	{
-		public static readonly short ItemID = 0x150;
+		public static readonly short ItemId = 0x150;
 
 		public override short Id => 0x150;
 

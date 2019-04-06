@@ -22,7 +22,7 @@ namespace TrueCraft.Logic.Blocks
 
 		public override ToolType EffectiveTools => ToolType.Pickaxe;
 
-		public ItemStack SmeltingOutput => new ItemStack(IronIngotItem.ItemID);
+		public ItemStack SmeltingOutput => new ItemStack(IronIngotItem.ItemId);
 
 		public override Tuple<int, int> GetTextureMap(byte metadata)
 		{

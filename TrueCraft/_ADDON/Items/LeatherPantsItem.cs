@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class LeatherPantsItem : LeggingsItem
 	{
-		public static readonly short ItemID = 0x12C;
+		public static readonly short ItemId = 0x12C;
 
 		public override short Id => 0x12C;
 

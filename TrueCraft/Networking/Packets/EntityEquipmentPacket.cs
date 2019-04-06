@@ -12,7 +12,7 @@
 		{
 			EntityId = entityID;
 			Slot = slot;
-			ItemID = itemID;
+			ItemId = itemID;
 			Metadata = metadata;
 		}
 
@@ -22,7 +22,7 @@
 		/// <summary>
 		///  The Id of the item to show on this player. Set to -1 for nothing.
 		/// </summary>
-		public short ItemID;
+		public short ItemId;
 
 		public short Metadata;
 
@@ -30,7 +30,7 @@
 		{
 			EntityId = stream.ReadInt32();
 			Slot = stream.ReadInt16();
-			ItemID = stream.ReadInt16();
+			ItemId = stream.ReadInt16();
 			Metadata = stream.ReadInt16();
 		}
 
@@ -38,7 +38,7 @@
 		{
 			stream.WriteInt32(EntityId);
 			stream.WriteInt16(Slot);
-			stream.WriteInt16(ItemID);
+			stream.WriteInt16(ItemId);
 			stream.WriteInt16(Metadata);
 		}
 	}

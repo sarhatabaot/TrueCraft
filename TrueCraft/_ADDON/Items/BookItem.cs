@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class BookItem : ItemProvider, ICraftingRecipe
 	{
-		public static readonly short ItemID = 0x154;
+		public static readonly short ItemId = 0x154;
 
 		public override short Id => 0x154;
 
@@ -15,12 +15,12 @@ namespace TrueCraft.Logic.Items
 		public ItemStack[,] Pattern =>
 			new[,]
 			{
-				{new ItemStack(PaperItem.ItemID)},
-				{new ItemStack(PaperItem.ItemID)},
-				{new ItemStack(PaperItem.ItemID)}
+				{new ItemStack(PaperItem.ItemId)},
+				{new ItemStack(PaperItem.ItemId)},
+				{new ItemStack(PaperItem.ItemId)}
 			};
 
-		public ItemStack Output => new ItemStack(ItemID);
+		public ItemStack Output => new ItemStack(ItemId);
 
 		public bool SignificantMetadata => true;
 

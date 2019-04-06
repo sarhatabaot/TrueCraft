@@ -1,6 +1,7 @@
 using System;
+using TrueCraft.Logic.Items;
 
-namespace TrueCraft.Logic.Items
+namespace TrueCraft.Items
 {
 	public class AppleItem : FoodItem
 	{

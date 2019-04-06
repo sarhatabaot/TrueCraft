@@ -32,7 +32,7 @@ namespace TrueCraft.Logic.Blocks
 		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
 		{
 			return new[]
-				{new ItemStack(DyeItem.ItemID, (sbyte) new Random().Next(4, 8), (short) DyeItem.DyeType.LapisLazuli)};
+				{new ItemStack(DyeItem.ItemId, (sbyte) new Random().Next(4, 8), (short) DyeItem.DyeType.LapisLazuli)};
 		}
 	}
 }

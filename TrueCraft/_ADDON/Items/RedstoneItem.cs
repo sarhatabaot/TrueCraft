@@ -7,7 +7,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class RedstoneItem : ItemProvider
 	{
-		public static readonly short ItemID = 0x14B;
+		public static readonly short ItemId = 0x14B;
 
 		public override short Id => 0x14B;
 

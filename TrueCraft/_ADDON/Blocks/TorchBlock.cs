@@ -44,8 +44,8 @@ namespace TrueCraft.Logic.Blocks
 		public virtual ItemStack[,] Pattern =>
 			new[,]
 			{
-				{new ItemStack(CoalItem.ItemID)},
-				{new ItemStack(StickItem.ItemID)}
+				{new ItemStack(CoalItem.ItemId)},
+				{new ItemStack(StickItem.ItemId)}
 			};
 
 		public virtual ItemStack Output => new ItemStack(BlockId, 4);

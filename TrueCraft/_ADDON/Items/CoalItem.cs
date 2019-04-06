@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class CoalItem : ItemProvider, IBurnableItem
 	{
-		public static readonly short ItemID = 0x107;
+		public static readonly short ItemId = 0x107;
 
 		public override short Id => 0x107;
 

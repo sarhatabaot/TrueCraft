@@ -1,10 +1,12 @@
 using System;
+using TrueCraft.Logic;
+using TrueCraft.Logic.Items;
 
-namespace TrueCraft.Logic.Items
+namespace TrueCraft.Items
 {
 	public class ArrowItem : ItemProvider, ICraftingRecipe
 	{
-		public static readonly short ItemID = 0x106;
+		public static readonly short ItemId = 0x106;
 
 		public override short Id => 0x106;
 
@@ -13,12 +15,12 @@ namespace TrueCraft.Logic.Items
 		public ItemStack[,] Pattern =>
 			new[,]
 			{
-				{new ItemStack(FlintItem.ItemID)},
-				{new ItemStack(StickItem.ItemID)},
-				{new ItemStack(FeatherItem.ItemID)}
+				{new ItemStack(FlintItem.ItemId)},
+				{new ItemStack(StickItem.ItemId)},
+				{new ItemStack(FeatherItem.ItemId)}
 			};
 
-		public ItemStack Output => new ItemStack(ItemID);
+		public ItemStack Output => new ItemStack(ItemId);
 
 		public bool SignificantMetadata => false;
 

@@ -29,12 +29,12 @@ namespace TrueCraft.Logic.Blocks
 				},
 				{
 					new ItemStack(CobblestoneBlock.BlockId),
-					new ItemStack(BowItem.ItemID),
+					new ItemStack(BowItem.ItemId),
 					new ItemStack(CobblestoneBlock.BlockId)
 				},
 				{
 					new ItemStack(CobblestoneBlock.BlockId),
-					new ItemStack(RedstoneItem.ItemID),
+					new ItemStack(RedstoneItem.ItemId),
 					new ItemStack(CobblestoneBlock.BlockId)
 				}
 			};

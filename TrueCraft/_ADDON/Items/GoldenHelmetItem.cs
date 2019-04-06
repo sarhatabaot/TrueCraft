@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class GoldenHelmetItem : HelmentItem
 	{
-		public static readonly short ItemID = 0x13A;
+		public static readonly short ItemId = 0x13A;
 
 		public override short Id => 0x13A;
 

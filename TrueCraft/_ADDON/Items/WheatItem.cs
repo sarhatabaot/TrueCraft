@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class WheatItem : ItemProvider
 	{
-		public static readonly short ItemID = 0x128;
+		public static readonly short ItemId = 0x128;
 
 		public override short Id => 0x128;
 

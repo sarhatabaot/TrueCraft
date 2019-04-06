@@ -1,13 +1,15 @@
 using System;
-using TrueCraft.Logic.Blocks;
+using TrueCraft.Blocks;
+using TrueCraft.Logic;
+using TrueCraft.Logic.Items;
 using TrueCraft.Networking;
 using TrueCraft.World;
 
-namespace TrueCraft.Logic.Items
+namespace TrueCraft.Items
 {
 	public class CakeItem : FoodItem, ICraftingRecipe // TODO: This isn't really a FoodItem
 	{
-		public static readonly short ItemID = 0x162;
+		public static readonly short ItemId = 0x162;
 
 		public override short Id => 0x162;
 
@@ -19,12 +21,12 @@ namespace TrueCraft.Logic.Items
 		public ItemStack[,] Pattern =>
 			new[,]
 			{
-				{new ItemStack(MilkItem.ItemID), new ItemStack(MilkItem.ItemID), new ItemStack(MilkItem.ItemID)},
-				{new ItemStack(SugarItem.ItemID), new ItemStack(EggItem.ItemID), new ItemStack(SugarItem.ItemID)},
-				{new ItemStack(WheatItem.ItemID), new ItemStack(WheatItem.ItemID), new ItemStack(WheatItem.ItemID)}
+				{new ItemStack(MilkItem.ItemId), new ItemStack(MilkItem.ItemId), new ItemStack(MilkItem.ItemId)},
+				{new ItemStack(SugarItem.ItemId), new ItemStack(EggItem.ItemId), new ItemStack(SugarItem.ItemId)},
+				{new ItemStack(WheatItem.ItemId), new ItemStack(WheatItem.ItemId), new ItemStack(WheatItem.ItemId)}
 			};
 
-		public ItemStack Output => new ItemStack(ItemID);
+		public ItemStack Output => new ItemStack(ItemId);
 
 		public bool SignificantMetadata => false;
 

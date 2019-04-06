@@ -7,7 +7,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class SeedsItem : ItemProvider
 	{
-		public static readonly short ItemID = 0x127;
+		public static readonly short ItemId = 0x127;
 
 		public override short Id => 0x127;
 

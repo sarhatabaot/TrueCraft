@@ -5,7 +5,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class BowlItem : ItemProvider, ICraftingRecipe
 	{
-		public static readonly short ItemID = 0x119;
+		public static readonly short ItemId = 0x119;
 
 		public override short Id => 0x119;
 
@@ -21,7 +21,7 @@ namespace TrueCraft.Logic.Items
 				{ItemStack.EmptyStack, new ItemStack(WoodenPlanksBlock.BlockId), ItemStack.EmptyStack}
 			};
 
-		public ItemStack Output => new ItemStack(ItemID);
+		public ItemStack Output => new ItemStack(ItemId);
 
 		public bool SignificantMetadata => false;
 

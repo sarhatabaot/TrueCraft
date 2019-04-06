@@ -12,16 +12,16 @@
 				switch (Material)
 				{
 					case ArmorMaterial.Diamond:
-						baseMaterial = DiamondItem.ItemID;
+						baseMaterial = DiamondItem.ItemId;
 						break;
 					case ArmorMaterial.Gold:
-						baseMaterial = GoldIngotItem.ItemID;
+						baseMaterial = GoldIngotItem.ItemId;
 						break;
 					case ArmorMaterial.Iron:
-						baseMaterial = IronIngotItem.ItemID;
+						baseMaterial = IronIngotItem.ItemId;
 						break;
 					case ArmorMaterial.Leather:
-						baseMaterial = LeatherItem.ItemID;
+						baseMaterial = LeatherItem.ItemId;
 						break;
 				}
 

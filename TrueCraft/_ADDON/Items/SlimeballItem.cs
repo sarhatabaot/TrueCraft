@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class SlimeballItem : ItemProvider
 	{
-		public static readonly short ItemID = 0x155;
+		public static readonly short ItemId = 0x155;
 
 		public override short Id => 0x155;
 

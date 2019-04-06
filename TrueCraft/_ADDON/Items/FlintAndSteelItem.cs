@@ -7,7 +7,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class FlintAndSteelItem : ToolItem, ICraftingRecipe
 	{
-		public static readonly short ItemID = 0x103;
+		public static readonly short ItemId = 0x103;
 		public override short Id => 0x103;
 		public override sbyte MaximumStack => 1;
 		public override short BaseDurability => 65;
@@ -16,10 +16,10 @@ namespace TrueCraft.Logic.Items
 		public ItemStack[,] Pattern =>
 			new[,]
 			{
-				{new ItemStack(IronIngotItem.ItemID), new ItemStack(FlintItem.ItemID)}
+				{new ItemStack(IronIngotItem.ItemId), new ItemStack(FlintItem.ItemId)}
 			};
 
-		public ItemStack Output => new ItemStack(ItemID);
+		public ItemStack Output => new ItemStack(ItemId);
 
 		public bool SignificantMetadata => false;
 

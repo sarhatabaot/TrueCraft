@@ -32,9 +32,9 @@ namespace TrueCraft.Logic.Blocks
 					new ItemStack(WoodenPlanksBlock.BlockId)
 				},
 				{
-					new ItemStack(BookItem.ItemID),
-					new ItemStack(BookItem.ItemID),
-					new ItemStack(BookItem.ItemID)
+					new ItemStack(BookItem.ItemId),
+					new ItemStack(BookItem.ItemId),
+					new ItemStack(BookItem.ItemId)
 				},
 				{
 					new ItemStack(WoodenPlanksBlock.BlockId),

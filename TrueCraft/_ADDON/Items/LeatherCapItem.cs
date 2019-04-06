@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class LeatherCapItem : HelmentItem
 	{
-		public static readonly short ItemID = 0x12A;
+		public static readonly short ItemId = 0x12A;
 
 		public override short Id => 0x12A;
 

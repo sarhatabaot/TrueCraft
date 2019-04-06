@@ -16,7 +16,7 @@
 			RightClick = rightClick;
 			TransactionID = transactionID;
 			Shift = shift;
-			ItemID = itemID;
+			ItemId = itemID;
 			Count = count;
 			Metadata = metadata;
 		}
@@ -30,7 +30,7 @@
 		/// <summary>
 		///  You should probably ignore this.
 		/// </summary>
-		public short ItemID;
+		public short ItemId;
 
 		/// <summary>
 		///  You should probably ignore this.
@@ -49,8 +49,8 @@
 			RightClick = stream.ReadBoolean();
 			TransactionID = stream.ReadInt16();
 			Shift = stream.ReadBoolean();
-			ItemID = stream.ReadInt16();
-			if (ItemID != -1)
+			ItemId = stream.ReadInt16();
+			if (ItemId != -1)
 			{
 				Count = stream.ReadInt8();
 				Metadata = stream.ReadInt16();
@@ -64,8 +64,8 @@
 			stream.WriteBoolean(RightClick);
 			stream.WriteInt16(TransactionID);
 			stream.WriteBoolean(Shift);
-			stream.WriteInt16(ItemID);
-			if (ItemID != -1)
+			stream.WriteInt16(ItemId);
+			if (ItemId != -1)
 			{
 				stream.WriteInt8(Count);
 				stream.WriteInt16(Metadata);

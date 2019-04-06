@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class MusicDiscItem : ItemProvider
 	{
-		public static readonly short ItemID = 0x8D1;
+		public static readonly short ItemId = 0x8D1;
 
 		public override short Id => 0x8D1;
 

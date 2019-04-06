@@ -5,7 +5,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class IronIngotItem : ItemProvider, ICraftingRecipe
 	{
-		public static readonly short ItemID = 0x109;
+		public static readonly short ItemId = 0x109;
 
 		public override short Id => 0x109;
 
@@ -17,7 +17,7 @@ namespace TrueCraft.Logic.Items
 				{new ItemStack(IronBlock.BlockId)}
 			};
 
-		public ItemStack Output => new ItemStack(ItemID, 9);
+		public ItemStack Output => new ItemStack(ItemId, 9);
 
 		public bool SignificantMetadata => true;
 

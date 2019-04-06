@@ -9,7 +9,7 @@
 		public byte Id => Constants.PacketIds.SpawnItem;
 
 		public int EntityId;
-		public short ItemID;
+		public short ItemId;
 		public sbyte Count;
 		public short Metadata;
 		public int X, Y, Z;
@@ -21,7 +21,7 @@
 			sbyte pitch, sbyte roll)
 		{
 			EntityId = entityID;
-			ItemID = itemID;
+			ItemId = itemID;
 			Count = count;
 			Metadata = metadata;
 			X = x;
@@ -35,7 +35,7 @@
 		public void ReadPacket(IMcStream stream)
 		{
 			EntityId = stream.ReadInt32();
-			ItemID = stream.ReadInt16();
+			ItemId = stream.ReadInt16();
 			Count = stream.ReadInt8();
 			Metadata = stream.ReadInt16();
 			X = stream.ReadInt32();
@@ -49,7 +49,7 @@
 		public void WritePacket(IMcStream stream)
 		{
 			stream.WriteInt32(EntityId);
-			stream.WriteInt16(ItemID);
+			stream.WriteInt16(ItemId);
 			stream.WriteInt8(Count);
 			stream.WriteInt16(Metadata);
 			stream.WriteInt32(X);

@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class SnowballItem : ItemProvider
 	{
-		public static readonly short ItemID = 0x14C;
+		public static readonly short ItemId = 0x14C;
 
 		public override short Id => 0x14C;
 

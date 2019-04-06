@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class ClockItem : ToolItem, ICraftingRecipe
 	{
-		public static readonly short ItemID = 0x15B;
+		public static readonly short ItemId = 0x15B;
 
 		public override short Id => 0x15B;
 
@@ -13,15 +13,15 @@ namespace TrueCraft.Logic.Items
 		public ItemStack[,] Pattern =>
 			new[,]
 			{
-				{ItemStack.EmptyStack, new ItemStack(GoldIngotItem.ItemID), ItemStack.EmptyStack},
+				{ItemStack.EmptyStack, new ItemStack(GoldIngotItem.ItemId), ItemStack.EmptyStack},
 				{
-					new ItemStack(GoldIngotItem.ItemID), new ItemStack(RedstoneItem.ItemID),
-					new ItemStack(GoldIngotItem.ItemID)
+					new ItemStack(GoldIngotItem.ItemId), new ItemStack(RedstoneItem.ItemId),
+					new ItemStack(GoldIngotItem.ItemId)
 				},
-				{ItemStack.EmptyStack, new ItemStack(GoldIngotItem.ItemID), ItemStack.EmptyStack}
+				{ItemStack.EmptyStack, new ItemStack(GoldIngotItem.ItemId), ItemStack.EmptyStack}
 			};
 
-		public ItemStack Output => new ItemStack(ItemID);
+		public ItemStack Output => new ItemStack(ItemId);
 
 		public bool SignificantMetadata => false;
 

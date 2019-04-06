@@ -5,7 +5,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class MushroomStewItem : FoodItem, ICraftingRecipe
 	{
-		public static readonly short ItemID = 0x11A;
+		public static readonly short ItemId = 0x11A;
 
 		public override short Id => 0x11A;
 
@@ -20,10 +20,10 @@ namespace TrueCraft.Logic.Items
 			{
 				{new ItemStack(RedMushroomBlock.BlockId)},
 				{new ItemStack(BrownMushroomBlock.BlockId)},
-				{new ItemStack(BowlItem.ItemID)}
+				{new ItemStack(BowlItem.ItemId)}
 			};
 
-		public ItemStack Output => new ItemStack(ItemID);
+		public ItemStack Output => new ItemStack(ItemId);
 
 		public bool SignificantMetadata => false;
 

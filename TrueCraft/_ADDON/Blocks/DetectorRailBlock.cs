@@ -15,19 +15,19 @@ namespace TrueCraft.Logic.Blocks
 			new[,]
 			{
 				{
-					new ItemStack(IronIngotItem.ItemID),
+					new ItemStack(IronIngotItem.ItemId),
 					ItemStack.EmptyStack,
-					new ItemStack(IronIngotItem.ItemID)
+					new ItemStack(IronIngotItem.ItemId)
 				},
 				{
-					new ItemStack(IronIngotItem.ItemID),
+					new ItemStack(IronIngotItem.ItemId),
 					new ItemStack(StonePressurePlateBlock.BlockId),
-					new ItemStack(IronIngotItem.ItemID)
+					new ItemStack(IronIngotItem.ItemId)
 				},
 				{
-					new ItemStack(IronIngotItem.ItemID),
+					new ItemStack(IronIngotItem.ItemId),
 					new ItemStack(RedstoneDustBlock.BlockId),
-					new ItemStack(IronIngotItem.ItemID)
+					new ItemStack(IronIngotItem.ItemId)
 				}
 			};
 

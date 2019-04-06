@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class MinecartWithChestItem : MinecartItem, ICraftingRecipe
 	{
-		public new static readonly short ItemID = 0x156;
+		public new static readonly short ItemId = 0x156;
 
 		public override short Id => 0x156;
 
@@ -14,7 +14,7 @@ namespace TrueCraft.Logic.Items
 			new[,]
 			{
 				{new ItemStack(ChestBlock.BlockId)},
-				{new ItemStack(MinecartItem.ItemID)}
+				{new ItemStack(MinecartItem.ItemId)}
 			};
 	}
 }

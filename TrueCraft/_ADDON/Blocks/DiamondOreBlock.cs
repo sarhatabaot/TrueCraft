@@ -21,7 +21,7 @@ namespace TrueCraft.Logic.Blocks
 
 		public override ToolType EffectiveTools => ToolType.Pickaxe;
 
-		public ItemStack SmeltingOutput => new ItemStack(DiamondItem.ItemID);
+		public ItemStack SmeltingOutput => new ItemStack(DiamondItem.ItemId);
 
 		public override Tuple<int, int> GetTextureMap(byte metadata)
 		{
@@ -30,7 +30,7 @@ namespace TrueCraft.Logic.Blocks
 
 		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
 		{
-			return new[] {new ItemStack(DiamondItem.ItemID, 1, descriptor.Metadata)};
+			return new[] {new ItemStack(DiamondItem.ItemId, 1, descriptor.Metadata)};
 		}
 	}
 }

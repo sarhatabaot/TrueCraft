@@ -25,16 +25,16 @@ namespace TrueCraft.Logic.Blocks
 			new[,]
 			{
 				{
-					new ItemStack(DiamondItem.ItemID), new ItemStack(DiamondItem.ItemID),
-					new ItemStack(DiamondItem.ItemID)
+					new ItemStack(DiamondItem.ItemId), new ItemStack(DiamondItem.ItemId),
+					new ItemStack(DiamondItem.ItemId)
 				},
 				{
-					new ItemStack(DiamondItem.ItemID), new ItemStack(DiamondItem.ItemID),
-					new ItemStack(DiamondItem.ItemID)
+					new ItemStack(DiamondItem.ItemId), new ItemStack(DiamondItem.ItemId),
+					new ItemStack(DiamondItem.ItemId)
 				},
 				{
-					new ItemStack(DiamondItem.ItemID), new ItemStack(DiamondItem.ItemID),
-					new ItemStack(DiamondItem.ItemID)
+					new ItemStack(DiamondItem.ItemId), new ItemStack(DiamondItem.ItemId),
+					new ItemStack(DiamondItem.ItemId)
 				}
 			};
 

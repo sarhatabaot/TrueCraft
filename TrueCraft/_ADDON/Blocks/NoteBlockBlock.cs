@@ -29,7 +29,7 @@ namespace TrueCraft.Logic.Blocks
 				},
 				{
 					new ItemStack(WoodenPlanksBlock.BlockId),
-					new ItemStack(RedstoneItem.ItemID),
+					new ItemStack(RedstoneItem.ItemId),
 					new ItemStack(WoodenPlanksBlock.BlockId)
 				},
 				{

@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class ShearsItem : ToolItem, ICraftingRecipe
 	{
-		public static readonly short ItemID = 0x167;
+		public static readonly short ItemId = 0x167;
 
 		public override short Id => 0x167;
 
@@ -17,11 +17,11 @@ namespace TrueCraft.Logic.Items
 		public ItemStack[,] Pattern =>
 			new[,]
 			{
-				{ItemStack.EmptyStack, new ItemStack(IronIngotItem.ItemID)},
-				{new ItemStack(IronIngotItem.ItemID), ItemStack.EmptyStack}
+				{ItemStack.EmptyStack, new ItemStack(IronIngotItem.ItemId)},
+				{new ItemStack(IronIngotItem.ItemId), ItemStack.EmptyStack}
 			};
 
-		public ItemStack Output => new ItemStack(ItemID);
+		public ItemStack Output => new ItemStack(ItemId);
 
 		public bool SignificantMetadata => false;
 

@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class BowItem : ItemProvider, ICraftingRecipe
 	{
-		public static readonly short ItemID = 0x105;
+		public static readonly short ItemId = 0x105;
 
 		public override short Id => 0x105;
 
@@ -15,12 +15,12 @@ namespace TrueCraft.Logic.Items
 		public ItemStack[,] Pattern =>
 			new[,]
 			{
-				{ItemStack.EmptyStack, new ItemStack(StickItem.ItemID), new ItemStack(StringItem.ItemID)},
-				{new ItemStack(StickItem.ItemID), ItemStack.EmptyStack, new ItemStack(StringItem.ItemID)},
-				{ItemStack.EmptyStack, new ItemStack(StickItem.ItemID), new ItemStack(StringItem.ItemID)}
+				{ItemStack.EmptyStack, new ItemStack(StickItem.ItemId), new ItemStack(StringItem.ItemId)},
+				{new ItemStack(StickItem.ItemId), ItemStack.EmptyStack, new ItemStack(StringItem.ItemId)},
+				{ItemStack.EmptyStack, new ItemStack(StickItem.ItemId), new ItemStack(StringItem.ItemId)}
 			};
 
-		public ItemStack Output => new ItemStack(ItemID);
+		public ItemStack Output => new ItemStack(ItemId);
 
 		public bool SignificantMetadata => false;
 

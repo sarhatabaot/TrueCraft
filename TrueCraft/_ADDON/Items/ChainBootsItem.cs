@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class ChainBootsItem : ArmorItem // Not HelmentItem because it can't inherit the recipe
 	{
-		public static readonly short ItemID = 0x131;
+		public static readonly short ItemId = 0x131;
 
 		public override short Id => 0x131;
 

@@ -24,7 +24,7 @@ namespace TrueCraft.Logic.Items
 			BoneMeal = 14
 		}
 
-		public static readonly short ItemID = 0x15F;
+		public static readonly short ItemId = 0x15F;
 
 		public override short Id => 0x15F;
 
@@ -38,9 +38,9 @@ namespace TrueCraft.Logic.Items
 
 		public class BoneMealRecipe : ICraftingRecipe
 		{
-			public ItemStack[,] Pattern => new[,] {{new ItemStack(BoneItem.ItemID)}};
+			public ItemStack[,] Pattern => new[,] {{new ItemStack(BoneItem.ItemId)}};
 
-			public ItemStack Output => new ItemStack(ItemID, 1, (short) DyeType.BoneMeal);
+			public ItemStack Output => new ItemStack(ItemId, 1, (short) DyeType.BoneMeal);
 
 			public bool SignificantMetadata => false;
 		}
@@ -51,13 +51,13 @@ namespace TrueCraft.Logic.Items
 				new[,]
 				{
 					{
-						new ItemStack(ItemID, 1, (short) DyeType.InkSac),
-						new ItemStack(ItemID, 1, (short) DyeType.BoneMeal),
-						new ItemStack(ItemID, 1, (short) DyeType.BoneMeal)
+						new ItemStack(ItemId, 1, (short) DyeType.InkSac),
+						new ItemStack(ItemId, 1, (short) DyeType.BoneMeal),
+						new ItemStack(ItemId, 1, (short) DyeType.BoneMeal)
 					}
 				};
 
-			public ItemStack Output => new ItemStack(ItemID, 1, (short) DyeType.LightGrayDye);
+			public ItemStack Output => new ItemStack(ItemId, 1, (short) DyeType.LightGrayDye);
 
 			public bool SignificantMetadata => true;
 		}
@@ -68,13 +68,13 @@ namespace TrueCraft.Logic.Items
 				new[,]
 				{
 					{
-						new ItemStack(ItemID, 1, (short) DyeType.InkSac),
+						new ItemStack(ItemId, 1, (short) DyeType.InkSac),
 						ItemStack.EmptyStack,
-						new ItemStack(ItemID, 1, (short) DyeType.BoneMeal)
+						new ItemStack(ItemId, 1, (short) DyeType.BoneMeal)
 					}
 				};
 
-			public ItemStack Output => new ItemStack(ItemID, 1, (short) DyeType.GrayDye);
+			public ItemStack Output => new ItemStack(ItemId, 1, (short) DyeType.GrayDye);
 
 			public bool SignificantMetadata => true;
 		}
@@ -89,7 +89,7 @@ namespace TrueCraft.Logic.Items
 					}
 				};
 
-			public ItemStack Output => new ItemStack(ItemID, 1, (short) DyeType.RoseRed);
+			public ItemStack Output => new ItemStack(ItemId, 1, (short) DyeType.RoseRed);
 
 			public bool SignificantMetadata => false;
 		}
@@ -100,12 +100,12 @@ namespace TrueCraft.Logic.Items
 				new[,]
 				{
 					{
-						new ItemStack(ItemID, 1, (short) DyeType.DandelionYellow),
-						new ItemStack(ItemID, 1, (short) DyeType.RoseRed)
+						new ItemStack(ItemId, 1, (short) DyeType.DandelionYellow),
+						new ItemStack(ItemId, 1, (short) DyeType.RoseRed)
 					}
 				};
 
-			public ItemStack Output => new ItemStack(ItemID, 1, (short) DyeType.RoseRed);
+			public ItemStack Output => new ItemStack(ItemId, 1, (short) DyeType.RoseRed);
 
 			public bool SignificantMetadata => true;
 		}
@@ -120,7 +120,7 @@ namespace TrueCraft.Logic.Items
 					}
 				};
 
-			public ItemStack Output => new ItemStack(ItemID, 1, (short) DyeType.DandelionYellow);
+			public ItemStack Output => new ItemStack(ItemId, 1, (short) DyeType.DandelionYellow);
 
 			public bool SignificantMetadata => false;
 		}
@@ -131,13 +131,13 @@ namespace TrueCraft.Logic.Items
 				new[,]
 				{
 					{
-						new ItemStack(ItemID, 1, (short) DyeType.CactusGreen),
+						new ItemStack(ItemId, 1, (short) DyeType.CactusGreen),
 						ItemStack.EmptyStack,
-						new ItemStack(ItemID, 1, (short) DyeType.BoneMeal)
+						new ItemStack(ItemId, 1, (short) DyeType.BoneMeal)
 					}
 				};
 
-			public ItemStack Output => new ItemStack(ItemID, 1, (short) DyeType.LimeDye);
+			public ItemStack Output => new ItemStack(ItemId, 1, (short) DyeType.LimeDye);
 
 			public bool SignificantMetadata => true;
 		}
@@ -148,13 +148,13 @@ namespace TrueCraft.Logic.Items
 				new[,]
 				{
 					{
-						new ItemStack(ItemID, 1, (short) DyeType.LapisLazuli),
+						new ItemStack(ItemId, 1, (short) DyeType.LapisLazuli),
 						ItemStack.EmptyStack,
-						new ItemStack(ItemID, 1, (short) DyeType.BoneMeal)
+						new ItemStack(ItemId, 1, (short) DyeType.BoneMeal)
 					}
 				};
 
-			public ItemStack Output => new ItemStack(ItemID, 1, (short) DyeType.LightBlueDye);
+			public ItemStack Output => new ItemStack(ItemId, 1, (short) DyeType.LightBlueDye);
 
 			public bool SignificantMetadata => true;
 		}
@@ -165,13 +165,13 @@ namespace TrueCraft.Logic.Items
 				new[,]
 				{
 					{
-						new ItemStack(ItemID, 1, (short) DyeType.LapisLazuli),
+						new ItemStack(ItemId, 1, (short) DyeType.LapisLazuli),
 						ItemStack.EmptyStack,
-						new ItemStack(ItemID, 1, (short) DyeType.CactusGreen)
+						new ItemStack(ItemId, 1, (short) DyeType.CactusGreen)
 					}
 				};
 
-			public ItemStack Output => new ItemStack(ItemID, 1, (short) DyeType.CyanDye);
+			public ItemStack Output => new ItemStack(ItemId, 1, (short) DyeType.CyanDye);
 
 			public bool SignificantMetadata => true;
 		}
@@ -182,13 +182,13 @@ namespace TrueCraft.Logic.Items
 				new[,]
 				{
 					{
-						new ItemStack(ItemID, 1, (short) DyeType.LapisLazuli),
+						new ItemStack(ItemId, 1, (short) DyeType.LapisLazuli),
 						ItemStack.EmptyStack,
-						new ItemStack(ItemID, 1, (short) DyeType.RoseRed)
+						new ItemStack(ItemId, 1, (short) DyeType.RoseRed)
 					}
 				};
 
-			public ItemStack Output => new ItemStack(ItemID, 1, (short) DyeType.PurpleDye);
+			public ItemStack Output => new ItemStack(ItemId, 1, (short) DyeType.PurpleDye);
 
 			public bool SignificantMetadata => true;
 		}
@@ -199,12 +199,12 @@ namespace TrueCraft.Logic.Items
 				new[,]
 				{
 					{
-						new ItemStack(ItemID, 1, (short) DyeType.PurpleDye),
-						new ItemStack(ItemID, 1, (short) DyeType.PinkDye)
+						new ItemStack(ItemId, 1, (short) DyeType.PurpleDye),
+						new ItemStack(ItemId, 1, (short) DyeType.PinkDye)
 					}
 				};
 
-			public ItemStack Output => new ItemStack(ItemID, 1, (short) DyeType.MagentaDye);
+			public ItemStack Output => new ItemStack(ItemId, 1, (short) DyeType.MagentaDye);
 
 			public bool SignificantMetadata => true;
 		}
@@ -215,13 +215,13 @@ namespace TrueCraft.Logic.Items
 				new[,]
 				{
 					{
-						new ItemStack(ItemID, 1, (short) DyeType.LapisLazuli),
-						new ItemStack(ItemID, 1, (short) DyeType.BoneMeal),
-						new ItemStack(ItemID, 2, (short) DyeType.RoseRed)
+						new ItemStack(ItemId, 1, (short) DyeType.LapisLazuli),
+						new ItemStack(ItemId, 1, (short) DyeType.BoneMeal),
+						new ItemStack(ItemId, 2, (short) DyeType.RoseRed)
 					}
 				};
 
-			public ItemStack Output => new ItemStack(ItemID, 1, (short) DyeType.MagentaDye);
+			public ItemStack Output => new ItemStack(ItemId, 1, (short) DyeType.MagentaDye);
 
 			public bool SignificantMetadata => true;
 		}
@@ -232,13 +232,13 @@ namespace TrueCraft.Logic.Items
 				new[,]
 				{
 					{
-						new ItemStack(ItemID, 1, (short) DyeType.LapisLazuli),
-						new ItemStack(ItemID, 1, (short) DyeType.PinkDye),
-						new ItemStack(ItemID, 1, (short) DyeType.RoseRed)
+						new ItemStack(ItemId, 1, (short) DyeType.LapisLazuli),
+						new ItemStack(ItemId, 1, (short) DyeType.PinkDye),
+						new ItemStack(ItemId, 1, (short) DyeType.RoseRed)
 					}
 				};
 
-			public ItemStack Output => new ItemStack(ItemID, 1, (short) DyeType.MagentaDye);
+			public ItemStack Output => new ItemStack(ItemId, 1, (short) DyeType.MagentaDye);
 
 			public bool SignificantMetadata => true;
 		}
@@ -249,12 +249,12 @@ namespace TrueCraft.Logic.Items
 				new[,]
 				{
 					{
-						new ItemStack(ItemID, 1, (short) DyeType.BoneMeal),
-						new ItemStack(ItemID, 1, (short) DyeType.RoseRed)
+						new ItemStack(ItemId, 1, (short) DyeType.BoneMeal),
+						new ItemStack(ItemId, 1, (short) DyeType.RoseRed)
 					}
 				};
 
-			public ItemStack Output => new ItemStack(ItemID, 1, (short) DyeType.PinkDye);
+			public ItemStack Output => new ItemStack(ItemId, 1, (short) DyeType.PinkDye);
 
 			public bool SignificantMetadata => true;
 		}

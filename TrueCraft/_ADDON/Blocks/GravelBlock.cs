@@ -33,7 +33,7 @@ namespace TrueCraft.Logic.Blocks
 		{
 			//Gravel has a 10% chance of dropping flint.
 			if (MathHelper.Random.Next(10) == 0)
-				return new[] {new ItemStack(FlintItem.ItemID, 1, descriptor.Metadata)};
+				return new[] {new ItemStack(FlintItem.ItemId, 1, descriptor.Metadata)};
 			return new ItemStack[0];
 		}
 

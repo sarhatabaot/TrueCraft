@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class BoneItem : ItemProvider
 	{
-		public static readonly short ItemID = 0x160;
+		public static readonly short ItemId = 0x160;
 
 		public override short Id => 0x160;
 

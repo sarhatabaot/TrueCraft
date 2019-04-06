@@ -16,13 +16,13 @@ namespace TrueCraft.Logic.Items
 				switch (Material)
 				{
 					case ToolMaterial.Diamond:
-						baseMaterial = DiamondItem.ItemID;
+						baseMaterial = DiamondItem.ItemId;
 						break;
 					case ToolMaterial.Gold:
-						baseMaterial = GoldIngotItem.ItemID;
+						baseMaterial = GoldIngotItem.ItemId;
 						break;
 					case ToolMaterial.Iron:
-						baseMaterial = IronIngotItem.ItemID;
+						baseMaterial = IronIngotItem.ItemId;
 						break;
 					case ToolMaterial.Stone:
 						baseMaterial = CobblestoneBlock.BlockId;
@@ -35,8 +35,8 @@ namespace TrueCraft.Logic.Items
 				return new[,]
 				{
 					{new ItemStack(baseMaterial), new ItemStack(baseMaterial)},
-					{ItemStack.EmptyStack, new ItemStack(StickItem.ItemID)},
-					{ItemStack.EmptyStack, new ItemStack(StickItem.ItemID)}
+					{ItemStack.EmptyStack, new ItemStack(StickItem.ItemId)},
+					{ItemStack.EmptyStack, new ItemStack(StickItem.ItemId)}
 				};
 			}
 		}

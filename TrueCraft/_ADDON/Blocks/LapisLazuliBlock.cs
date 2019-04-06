@@ -26,19 +26,19 @@ namespace TrueCraft.Logic.Blocks
 			new[,]
 			{
 				{
-					new ItemStack(DyeItem.ItemID, 1, (short) DyeItem.DyeType.LapisLazuli),
-					new ItemStack(DyeItem.ItemID, 1, (short) DyeItem.DyeType.LapisLazuli),
-					new ItemStack(DyeItem.ItemID, 1, (short) DyeItem.DyeType.LapisLazuli)
+					new ItemStack(DyeItem.ItemId, 1, (short) DyeItem.DyeType.LapisLazuli),
+					new ItemStack(DyeItem.ItemId, 1, (short) DyeItem.DyeType.LapisLazuli),
+					new ItemStack(DyeItem.ItemId, 1, (short) DyeItem.DyeType.LapisLazuli)
 				},
 				{
-					new ItemStack(DyeItem.ItemID, 1, (short) DyeItem.DyeType.LapisLazuli),
-					new ItemStack(DyeItem.ItemID, 1, (short) DyeItem.DyeType.LapisLazuli),
-					new ItemStack(DyeItem.ItemID, 1, (short) DyeItem.DyeType.LapisLazuli)
+					new ItemStack(DyeItem.ItemId, 1, (short) DyeItem.DyeType.LapisLazuli),
+					new ItemStack(DyeItem.ItemId, 1, (short) DyeItem.DyeType.LapisLazuli),
+					new ItemStack(DyeItem.ItemId, 1, (short) DyeItem.DyeType.LapisLazuli)
 				},
 				{
-					new ItemStack(DyeItem.ItemID, 1, (short) DyeItem.DyeType.LapisLazuli),
-					new ItemStack(DyeItem.ItemID, 1, (short) DyeItem.DyeType.LapisLazuli),
-					new ItemStack(DyeItem.ItemID, 1, (short) DyeItem.DyeType.LapisLazuli)
+					new ItemStack(DyeItem.ItemId, 1, (short) DyeItem.DyeType.LapisLazuli),
+					new ItemStack(DyeItem.ItemId, 1, (short) DyeItem.DyeType.LapisLazuli),
+					new ItemStack(DyeItem.ItemId, 1, (short) DyeItem.DyeType.LapisLazuli)
 				}
 			};
 

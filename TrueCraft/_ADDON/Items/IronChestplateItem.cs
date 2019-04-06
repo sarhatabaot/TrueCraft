@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class IronChestplateItem : ChestplateItem
 	{
-		public static readonly short ItemID = 0x133;
+		public static readonly short ItemId = 0x133;
 
 		public override short Id => 0x133;
 

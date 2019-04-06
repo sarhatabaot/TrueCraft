@@ -22,8 +22,8 @@ namespace TrueCraft.Logic.Blocks
 		public ItemStack[,] Pattern =>
 			new[,]
 			{
-				{new ItemStack(ClayItem.ItemID), new ItemStack(ClayItem.ItemID)},
-				{new ItemStack(ClayItem.ItemID), new ItemStack(ClayItem.ItemID)}
+				{new ItemStack(ClayItem.ItemId), new ItemStack(ClayItem.ItemId)},
+				{new ItemStack(ClayItem.ItemId), new ItemStack(ClayItem.ItemId)}
 			};
 
 		public ItemStack Output => new ItemStack(BlockId);
@@ -37,7 +37,7 @@ namespace TrueCraft.Logic.Blocks
 
 		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
 		{
-			return new[] {new ItemStack(ClayItem.ItemID, 4)};
+			return new[] {new ItemStack(ClayItem.ItemId, 4)};
 		}
 	}
 }

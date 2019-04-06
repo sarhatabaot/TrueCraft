@@ -44,19 +44,19 @@ namespace TrueCraft.Logic.Blocks
 			new[,]
 			{
 				{
-					new ItemStack(StickItem.ItemID),
+					new ItemStack(StickItem.ItemId),
 					ItemStack.EmptyStack,
-					new ItemStack(StickItem.ItemID)
+					new ItemStack(StickItem.ItemId)
 				},
 				{
-					new ItemStack(StickItem.ItemID),
-					new ItemStack(StickItem.ItemID),
-					new ItemStack(StickItem.ItemID)
+					new ItemStack(StickItem.ItemId),
+					new ItemStack(StickItem.ItemId),
+					new ItemStack(StickItem.ItemId)
 				},
 				{
-					new ItemStack(StickItem.ItemID),
+					new ItemStack(StickItem.ItemId),
 					ItemStack.EmptyStack,
-					new ItemStack(StickItem.ItemID)
+					new ItemStack(StickItem.ItemId)
 				}
 			};
 

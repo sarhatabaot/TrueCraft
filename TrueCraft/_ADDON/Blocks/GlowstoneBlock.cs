@@ -25,12 +25,12 @@ namespace TrueCraft.Logic.Blocks
 			new[,]
 			{
 				{
-					new ItemStack(GlowstoneDustItem.ItemID),
-					new ItemStack(GlowstoneDustItem.ItemID)
+					new ItemStack(GlowstoneDustItem.ItemId),
+					new ItemStack(GlowstoneDustItem.ItemId)
 				},
 				{
-					new ItemStack(GlowstoneDustItem.ItemID),
-					new ItemStack(GlowstoneDustItem.ItemID)
+					new ItemStack(GlowstoneDustItem.ItemId),
+					new ItemStack(GlowstoneDustItem.ItemId)
 				}
 			};
 
@@ -46,7 +46,7 @@ namespace TrueCraft.Logic.Blocks
 		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
 		{
 			return new[]
-				{new ItemStack(GlowstoneDustItem.ItemID, (sbyte) new Random().Next(2, 4), descriptor.Metadata)};
+				{new ItemStack(GlowstoneDustItem.ItemId, (sbyte) new Random().Next(2, 4), descriptor.Metadata)};
 		}
 	}
 }

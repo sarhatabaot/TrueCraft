@@ -5,7 +5,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class RedstoneRepeaterItem : ItemProvider, ICraftingRecipe
 	{
-		public static readonly short ItemID = 0x164;
+		public static readonly short ItemId = 0x164;
 
 		public override short Id => 0x164;
 
@@ -24,7 +24,7 @@ namespace TrueCraft.Logic.Items
 				}
 			};
 
-		public ItemStack Output => new ItemStack(ItemID);
+		public ItemStack Output => new ItemStack(ItemId);
 
 		public bool SignificantMetadata => false;
 

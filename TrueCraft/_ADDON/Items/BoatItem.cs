@@ -5,7 +5,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class BoatItem : ItemProvider, ICraftingRecipe
 	{
-		public static readonly short ItemID = 0x14D;
+		public static readonly short ItemId = 0x14D;
 
 		public override short Id => 0x14D;
 
@@ -28,7 +28,7 @@ namespace TrueCraft.Logic.Items
 				}
 			};
 
-		public ItemStack Output => new ItemStack(ItemID);
+		public ItemStack Output => new ItemStack(ItemId);
 
 		public bool SignificantMetadata => false;
 

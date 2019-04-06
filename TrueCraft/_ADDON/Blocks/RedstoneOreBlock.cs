@@ -17,7 +17,7 @@ namespace TrueCraft.Logic.Blocks
 
 		public override string DisplayName => "Redstone Ore";
 
-		public ItemStack SmeltingOutput => new ItemStack(RedstoneItem.ItemID);
+		public ItemStack SmeltingOutput => new ItemStack(RedstoneItem.ItemId);
 
 		public override Tuple<int, int> GetTextureMap(byte metadata)
 		{
@@ -26,7 +26,7 @@ namespace TrueCraft.Logic.Blocks
 
 		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
 		{
-			return new[] {new ItemStack(RedstoneItem.ItemID, (sbyte) new Random().Next(4, 5), descriptor.Metadata)};
+			return new[] {new ItemStack(RedstoneItem.ItemId, (sbyte) new Random().Next(4, 5), descriptor.Metadata)};
 		}
 	}
 }

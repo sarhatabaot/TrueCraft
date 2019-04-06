@@ -46,7 +46,7 @@ namespace TrueCraft.Logic.Blocks
 
 		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
 		{
-			return new[] {new ItemStack(BedItem.ItemID)};
+			return new[] {new ItemStack(BedItem.ItemId)};
 		}
 
 		public bool ValidBedPosition(BlockDescriptor descriptor, IBlockRepository repository, IWorld world,

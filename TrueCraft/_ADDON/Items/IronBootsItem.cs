@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class IronBootsItem : BootsItem
 	{
-		public static readonly short ItemID = 0x135;
+		public static readonly short ItemId = 0x135;
 
 		public override short Id => 0x135;
 

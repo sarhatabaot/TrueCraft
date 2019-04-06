@@ -25,7 +25,7 @@ namespace TrueCraft.Client.Handlers
 				window = client.CurrentWindow;
 			if (window != null)
 				if (packet.SlotIndex >= 0 && packet.SlotIndex < window.Length)
-					window[packet.SlotIndex] = new ItemStack(packet.ItemID, packet.Count, packet.Metadata);
+					window[packet.SlotIndex] = new ItemStack(packet.ItemId, packet.Count, packet.Metadata);
 		}
 
 		public static void HandleOpenWindowPacket(IPacket _packet, MultiPlayerClient client)

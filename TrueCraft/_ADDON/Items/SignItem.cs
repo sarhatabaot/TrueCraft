@@ -7,7 +7,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class SignItem : ItemProvider, ICraftingRecipe
 	{
-		public static readonly short ItemID = 0x143;
+		public static readonly short ItemId = 0x143;
 
 		public override short Id => 0x143;
 
@@ -26,10 +26,10 @@ namespace TrueCraft.Logic.Items
 					new ItemStack(WoodenPlanksBlock.BlockId), new ItemStack(WoodenPlanksBlock.BlockId),
 					new ItemStack(WoodenPlanksBlock.BlockId)
 				},
-				{ItemStack.EmptyStack, new ItemStack(StickItem.ItemID), ItemStack.EmptyStack}
+				{ItemStack.EmptyStack, new ItemStack(StickItem.ItemId), ItemStack.EmptyStack}
 			};
 
-		public ItemStack Output => new ItemStack(ItemID);
+		public ItemStack Output => new ItemStack(ItemId);
 
 		public bool SignificantMetadata => true;
 

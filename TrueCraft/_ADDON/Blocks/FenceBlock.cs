@@ -29,14 +29,14 @@ namespace TrueCraft.Logic.Blocks
 			new[,]
 			{
 				{
-					new ItemStack(StickItem.ItemID),
+					new ItemStack(StickItem.ItemId),
 					new ItemStack(WoodenPlanksBlock.BlockId),
-					new ItemStack(StickItem.ItemID)
+					new ItemStack(StickItem.ItemId)
 				},
 				{
-					new ItemStack(StickItem.ItemID),
+					new ItemStack(StickItem.ItemId),
 					new ItemStack(WoodenPlanksBlock.BlockId),
-					new ItemStack(StickItem.ItemID)
+					new ItemStack(StickItem.ItemId)
 				}
 			};
 

@@ -1,10 +1,11 @@
 using System;
+using TrueCraft.Logic;
 
-namespace TrueCraft.Logic.Items
+namespace TrueCraft.Items
 {
 	public class FeatherItem : ItemProvider
 	{
-		public static readonly short ItemID = 0x120;
+		public static readonly short ItemId = 0x120;
 
 		public override short Id => 0x120;
 

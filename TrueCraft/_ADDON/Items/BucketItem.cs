@@ -7,7 +7,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class BucketItem : ToolItem
 	{
-		public static readonly short ItemID = 0x145;
+		public static readonly short ItemId = 0x145;
 
 		public override short Id => 0x145;
 
@@ -24,7 +24,7 @@ namespace TrueCraft.Logic.Items
 			IRemoteClient user)
 		{
 			coordinates += MathHelper.BlockFaceToCoordinates(face);
-			if (item.Id == ItemID) // Empty bucket
+			if (item.Id == ItemId) // Empty bucket
 			{
 				var block = world.GetBlockId(coordinates);
 				if (block == WaterBlock.BlockId || block == StationaryWaterBlock.BlockId)
@@ -32,7 +32,7 @@ namespace TrueCraft.Logic.Items
 					var meta = world.GetMetadata(coordinates);
 					if (meta == 0) // Is source block?
 					{
-						user.Inventory[user.SelectedSlot] = new ItemStack(WaterBucketItem.ItemID);
+						user.Inventory[user.SelectedSlot] = new ItemStack(WaterBucketItem.ItemId);
 						world.SetBlockId(coordinates, 0);
 					}
 				}
@@ -41,7 +41,7 @@ namespace TrueCraft.Logic.Items
 					var meta = world.GetMetadata(coordinates);
 					if (meta == 0) // Is source block?
 					{
-						user.Inventory[user.SelectedSlot] = new ItemStack(LavaBucketItem.ItemID);
+						user.Inventory[user.SelectedSlot] = new ItemStack(LavaBucketItem.ItemId);
 						world.SetBlockId(coordinates, 0);
 					}
 				}
@@ -62,7 +62,7 @@ namespace TrueCraft.Logic.Items
 						liquidProvider.BlockPlaced(new BlockDescriptor {Coordinates = coordinates}, face, world, user);
 					}
 
-					user.Inventory[user.SelectedSlot] = new ItemStack(ItemID);
+					user.Inventory[user.SelectedSlot] = new ItemStack(ItemId);
 				}
 			}
 		}

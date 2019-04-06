@@ -7,7 +7,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class BedItem : ItemProvider, ICraftingRecipe
 	{
-		public static readonly short ItemID = 0x163;
+		public static readonly short ItemId = 0x163;
 
 		public override short Id => 0x163;
 
@@ -30,7 +30,7 @@ namespace TrueCraft.Logic.Items
 				}
 			};
 
-		public ItemStack Output => new ItemStack(ItemID);
+		public ItemStack Output => new ItemStack(ItemId);
 
 		public bool SignificantMetadata => false;
 

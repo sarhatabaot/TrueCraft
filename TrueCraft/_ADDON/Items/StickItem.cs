@@ -5,7 +5,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class StickItem : ItemProvider, ICraftingRecipe, IBurnableItem
 	{
-		public static readonly short ItemID = 0x118;
+		public static readonly short ItemId = 0x118;
 
 		public override short Id => 0x118;
 
@@ -20,7 +20,7 @@ namespace TrueCraft.Logic.Items
 				{new ItemStack(WoodenPlanksBlock.BlockId)}
 			};
 
-		public ItemStack Output => new ItemStack(ItemID, 4);
+		public ItemStack Output => new ItemStack(ItemId, 4);
 
 		public bool SignificantMetadata => false;
 

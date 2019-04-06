@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class LeatherTunicItem : ChestplateItem
 	{
-		public static readonly short ItemID = 0x12B;
+		public static readonly short ItemId = 0x12B;
 
 		public override short Id => 0x12B;
 

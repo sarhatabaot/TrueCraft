@@ -28,7 +28,7 @@ namespace TrueCraft.Logic.Items
 		{
 			get
 			{
-				var baseMaterial = this is IronDoorItem ? IronIngotItem.ItemID : WoodenPlanksBlock.BlockId;
+				var baseMaterial = this is IronDoorItem ? IronIngotItem.ItemId : WoodenPlanksBlock.BlockId;
 				return new[,]
 				{
 					{new ItemStack(baseMaterial), new ItemStack(baseMaterial)},

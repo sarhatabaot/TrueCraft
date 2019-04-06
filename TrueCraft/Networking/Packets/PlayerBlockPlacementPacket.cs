@@ -16,7 +16,7 @@
 			Y = y;
 			Z = z;
 			Face = face;
-			ItemID = itemID;
+			ItemId = itemID;
 			Amount = amount;
 			Metadata = metadata;
 		}
@@ -29,7 +29,7 @@
 		/// <summary>
 		///  The block or item Id. You should probably ignore this and use a server-side inventory.
 		/// </summary>
-		public short ItemID;
+		public short ItemId;
 
 		/// <summary>
 		///  The amount in the player's hand. Who cares?
@@ -47,8 +47,8 @@
 			Y = stream.ReadInt8();
 			Z = stream.ReadInt32();
 			Face = (BlockFace) stream.ReadInt8();
-			ItemID = stream.ReadInt16();
-			if (ItemID != -1)
+			ItemId = stream.ReadInt16();
+			if (ItemId != -1)
 			{
 				Amount = stream.ReadInt8();
 				Metadata = stream.ReadInt16();
@@ -61,8 +61,8 @@
 			stream.WriteInt8(Y);
 			stream.WriteInt32(Z);
 			stream.WriteInt8((sbyte) Face);
-			stream.WriteInt16(ItemID);
-			if (ItemID != -1)
+			stream.WriteInt16(ItemId);
+			if (ItemId != -1)
 			{
 				stream.WriteInt8(Amount.Value);
 				stream.WriteInt16(Metadata.Value);

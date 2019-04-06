@@ -6,7 +6,7 @@ namespace TrueCraft.Logic.Blocks
 {
 	public abstract class DoorBlock : BlockProvider
 	{
-		public abstract short ItemID { get; }
+		public abstract short ItemId { get; }
 
 		public override void BlockUpdate(BlockDescriptor descriptor, BlockDescriptor source, IMultiPlayerServer server,
 			IWorld world)
@@ -20,7 +20,7 @@ namespace TrueCraft.Logic.Blocks
 
 		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
 		{
-			return new[] {new ItemStack(ItemID)};
+			return new[] {new ItemStack(ItemId)};
 		}
 	}
 }

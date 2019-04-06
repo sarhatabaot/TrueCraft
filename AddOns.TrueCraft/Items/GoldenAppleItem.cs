@@ -1,11 +1,13 @@
 using System;
+using TrueCraft.Logic;
 using TrueCraft.Logic.Blocks;
+using TrueCraft.Logic.Items;
 
-namespace TrueCraft.Logic.Items
+namespace TrueCraft.Items
 {
 	public class GoldenAppleItem : FoodItem, ICraftingRecipe
 	{
-		public static readonly short ItemID = 0x142;
+		public static readonly short ItemId = 0x142;
 
 		public override short Id => 0x142;
 
@@ -33,7 +35,7 @@ namespace TrueCraft.Logic.Items
 				}
 			};
 
-		public ItemStack Output => new ItemStack(ItemID);
+		public ItemStack Output => new ItemStack(ItemId);
 
 		public bool SignificantMetadata => true;
 

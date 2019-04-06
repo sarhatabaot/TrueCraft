@@ -30,7 +30,7 @@ namespace TrueCraft.Logic.Blocks
 
 		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
 		{
-			return new[] {new ItemStack(StringItem.ItemID, 1, descriptor.Metadata)};
+			return new[] {new ItemStack(StringItem.ItemId, 1, descriptor.Metadata)};
 		}
 	}
 }

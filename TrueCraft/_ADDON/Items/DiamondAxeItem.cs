@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class DiamondAxeItem : AxeItem
 	{
-		public static readonly short ItemID = 0x117;
+		public static readonly short ItemId = 0x117;
 
 		public override short Id => 0x117;
 

@@ -42,7 +42,7 @@ namespace TrueCraft.Logic.Blocks
 
 		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
 		{
-			return new[] {new ItemStack(SignItem.ItemID)};
+			return new[] {new ItemStack(SignItem.ItemId)};
 		}
 
 		public override void BlockMined(BlockDescriptor descriptor, BlockFace face, IWorld world, IRemoteClient user)

@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class WaterBucketItem : BucketItem
 	{
-		public new static readonly short ItemID = 0x146;
+		public new static readonly short ItemId = 0x146;
 
 		public override short Id => 0x146;
 

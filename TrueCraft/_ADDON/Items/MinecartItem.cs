@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class MinecartItem : ItemProvider, ICraftingRecipe
 	{
-		public static readonly short ItemID = 0x148;
+		public static readonly short ItemId = 0x148;
 
 		public override short Id => 0x148;
 
@@ -15,14 +15,14 @@ namespace TrueCraft.Logic.Items
 		public virtual ItemStack[,] Pattern =>
 			new[,]
 			{
-				{new ItemStack(IronIngotItem.ItemID), ItemStack.EmptyStack, new ItemStack(IronIngotItem.ItemID)},
+				{new ItemStack(IronIngotItem.ItemId), ItemStack.EmptyStack, new ItemStack(IronIngotItem.ItemId)},
 				{
-					new ItemStack(IronIngotItem.ItemID), new ItemStack(IronIngotItem.ItemID),
-					new ItemStack(IronIngotItem.ItemID)
+					new ItemStack(IronIngotItem.ItemId), new ItemStack(IronIngotItem.ItemId),
+					new ItemStack(IronIngotItem.ItemId)
 				}
 			};
 
-		public ItemStack Output => new ItemStack(ItemID);
+		public ItemStack Output => new ItemStack(ItemId);
 
 		public bool SignificantMetadata => false;
 

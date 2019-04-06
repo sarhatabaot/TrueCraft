@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class StoneShovelItem : ShovelItem
 	{
-		public static readonly short ItemID = 0x111;
+		public static readonly short ItemId = 0x111;
 
 		public override short Id => 0x111;
 

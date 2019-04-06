@@ -22,8 +22,8 @@ namespace TrueCraft.Logic.Blocks
 		public ItemStack[,] Pattern =>
 			new[,]
 			{
-				{new ItemStack(SnowballItem.ItemID), new ItemStack(SnowballItem.ItemID)},
-				{new ItemStack(SnowballItem.ItemID), new ItemStack(SnowballItem.ItemID)}
+				{new ItemStack(SnowballItem.ItemId), new ItemStack(SnowballItem.ItemId)},
+				{new ItemStack(SnowballItem.ItemId), new ItemStack(SnowballItem.ItemId)}
 			};
 
 		public ItemStack Output => new ItemStack(BlockId);

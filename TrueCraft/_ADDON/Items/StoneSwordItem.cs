@@ -4,7 +4,7 @@ namespace TrueCraft.Logic.Items
 {
 	public class StoneSwordItem : SwordItem
 	{
-		public static readonly short ItemID = 0x110;
+		public static readonly short ItemId = 0x110;
 
 		public override short Id => 0x110;
 

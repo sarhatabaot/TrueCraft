@@ -25,7 +25,7 @@ namespace TrueCraft.Logic.Blocks
 			new[,]
 			{
 				{new ItemStack(RedstoneDustBlock.BlockId)},
-				{new ItemStack(StickItem.ItemID)}
+				{new ItemStack(StickItem.ItemId)}
 			};
 
 		public override ItemStack Output => new ItemStack(BlockId);

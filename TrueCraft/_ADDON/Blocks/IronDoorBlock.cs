@@ -7,7 +7,7 @@ namespace TrueCraft.Logic.Blocks
 	{
 		public static readonly byte BlockId = 0x47;
 
-		public override short ItemID => IronDoorItem.ItemID;
+		public override short ItemId => IronDoorItem.ItemId;
 
 		public override byte Id => 0x47;
 

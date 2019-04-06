@@ -26,7 +26,7 @@ namespace TrueCraft.Logic.Blocks
 
 		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
 		{
-			return new[] {new ItemStack(RedstoneItem.ItemID, 1, descriptor.Metadata)};
+			return new[] {new ItemStack(RedstoneItem.ItemId, 1, descriptor.Metadata)};
 		}
 
 		public override Coordinates3D GetSupportDirection(BlockDescriptor descriptor)
