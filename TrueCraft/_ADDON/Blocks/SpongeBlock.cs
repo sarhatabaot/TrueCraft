@@ -1,6 +1,7 @@
 using System;
+using TrueCraft.Logic;
 
-namespace TrueCraft.Logic.Blocks
+namespace TrueCraft._ADDON.Blocks
 {
 	public class SpongeBlock : BlockProvider
 	{

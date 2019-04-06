@@ -1,7 +1,8 @@
 using System;
-using TrueCraft.Logic.Blocks;
+using TrueCraft.Logic;
+using TrueCraft._ADDON.Blocks;
 
-namespace TrueCraft.Logic.Items
+namespace TrueCraft._ADDON.Items
 {
 	public class PaintingItem : ItemProvider, ICraftingRecipe
 	{

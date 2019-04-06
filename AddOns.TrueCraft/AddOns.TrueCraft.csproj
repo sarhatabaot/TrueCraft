@@ -280,6 +280,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Decorations\" />
     <Folder Include="Handlers\" />
     <Folder Include="Packets\" />
   </ItemGroup>

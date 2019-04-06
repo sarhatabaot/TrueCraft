@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace TrueCraft.Entities
+namespace TrueCraft._ADDON.Entities
 {
 	public class FallingGravelEntity : FallingSandEntity
 	{

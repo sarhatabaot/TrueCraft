@@ -2,10 +2,10 @@ using System;
 using TrueCraft.Extensions;
 using TrueCraft.Items;
 using TrueCraft.Logic;
-using TrueCraft.Logic.Blocks;
-using TrueCraft.Logic.Items;
 using TrueCraft.Networking;
 using TrueCraft.World;
+using TrueCraft._ADDON.Blocks;
+using TrueCraft._ADDON.Items;
 
 namespace TrueCraft.Blocks
 {

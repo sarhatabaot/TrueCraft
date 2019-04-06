@@ -1,6 +1,6 @@
 using System;
 
-namespace TrueCraft.Logic.Blocks
+namespace TrueCraft._ADDON.Blocks
 {
 	public class RedMushroomBlock : MushroomBlock
 	{

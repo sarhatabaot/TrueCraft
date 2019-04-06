@@ -1,6 +1,6 @@
 using System;
 
-namespace TrueCraft.Logic.Items
+namespace TrueCraft._ADDON.Items
 {
 	public class RawPorkchopItem : FoodItem
 	{

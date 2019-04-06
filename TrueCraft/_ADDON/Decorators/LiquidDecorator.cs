@@ -1,8 +1,8 @@
 ﻿using System;
-using TrueCraft.Logic.Blocks;
 using TrueCraft.World;
+using TrueCraft._ADDON.Blocks;
 
-namespace TrueCraft.TerrainGen.Decorators
+namespace TrueCraft._ADDON.Decorators
 {
 	public class LiquidDecorator : IChunkDecorator
 	{

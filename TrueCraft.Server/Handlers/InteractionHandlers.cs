@@ -4,12 +4,12 @@ using Microsoft.Xna.Framework;
 using TrueCraft.Entities;
 using TrueCraft.Extensions;
 using TrueCraft.Logic;
-using TrueCraft.Logic.Blocks;
-using TrueCraft.Logic.Items;
 using TrueCraft.Networking;
 using TrueCraft.Networking.Packets;
 using TrueCraft.Serialization.Tags;
 using TrueCraft.Windows;
+using TrueCraft._ADDON.Blocks;
+using TrueCraft._ADDON.Items;
 
 namespace TrueCraft.Server.Handlers
 {

@@ -2,13 +2,14 @@ using System;
 using Microsoft.Xna.Framework;
 using TrueCraft.Entities;
 using TrueCraft.Extensions;
+using TrueCraft.Logic;
 using TrueCraft.Networking;
 using TrueCraft.Serialization;
 using TrueCraft.Serialization.Tags;
 using TrueCraft.Windows;
 using TrueCraft.World;
 
-namespace TrueCraft.Logic.Blocks
+namespace TrueCraft._ADDON.Blocks
 {
 	public class ChestBlock : BlockProvider, ICraftingRecipe, IBurnableItem
 	{

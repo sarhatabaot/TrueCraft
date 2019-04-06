@@ -1,7 +1,8 @@
+using TrueCraft.Logic;
 using TrueCraft.Networking;
 using TrueCraft.World;
 
-namespace TrueCraft.Logic.Blocks
+namespace TrueCraft._ADDON.Blocks
 {
 	public abstract class StairsBlock : BlockProvider
 	{

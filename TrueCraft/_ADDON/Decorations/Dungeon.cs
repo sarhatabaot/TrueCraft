@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using TrueCraft.Logic.Blocks;
 using TrueCraft.World;
+using TrueCraft._ADDON.Blocks;
 
-namespace TrueCraft.TerrainGen.Decorations
+namespace TrueCraft._ADDON.Decorations
 {
 	public class Dungeon : Decoration
 	{

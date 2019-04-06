@@ -1,4 +1,6 @@
-namespace TrueCraft.Logic.Blocks
+using TrueCraft.Logic;
+
+namespace TrueCraft._ADDON.Blocks
 {
 	public class WoodenPressurePlateBlock : PressurePlateBlock, ICraftingRecipe
 	{

@@ -4,12 +4,13 @@ using Microsoft.Xna.Framework;
 using TrueCraft.Entities;
 using TrueCraft.Extensions;
 using TrueCraft.Logic.Blocks;
-using TrueCraft.Logic.Items;
 using TrueCraft.Networking;
 using TrueCraft.Physics;
 using TrueCraft.Serialization.Tags;
 using TrueCraft.Server;
 using TrueCraft.World;
+using TrueCraft._ADDON.Blocks;
+using TrueCraft._ADDON.Items;
 
 namespace TrueCraft.Logic
 {
@@ -341,7 +342,7 @@ namespace TrueCraft.Logic
 				}
 				else if (tool == ToolType.Hoe)
 					damage = 0; // What? This doesn't seem right
-				else if (item is ShearsItem)
+				else if (item is IShearLeaves)
 				{
 					if (block is WoolBlock)
 						time /= 5;

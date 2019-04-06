@@ -1,4 +1,5 @@
 using TrueCraft.Logic;
+using TrueCraft.Logic.Blocks;
 
 namespace TrueCraft.Blocks
 {

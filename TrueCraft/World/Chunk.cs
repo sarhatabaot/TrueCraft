@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using TrueCraft.Logic.Blocks;
 using TrueCraft.Serialization;
 using TrueCraft.Serialization.Serialization;
 using TrueCraft.Serialization.Tags;
+using TrueCraft._ADDON.Blocks;
 
 namespace TrueCraft.World
 {

@@ -1,10 +1,11 @@
-﻿using TrueCraft.Logic;
-using TrueCraft.Logic.Blocks;
-using TrueCraft.Logic.Items;
+﻿using TrueCraft.Blocks;
+using TrueCraft.Logic;
+using TrueCraft._ADDON.Blocks;
+using TrueCraft._ADDON.Items;
 
 namespace TrueCraft.Items
 {
-	public abstract class PickaxeItem : ToolItem, ICraftingRecipe
+	public abstract class PickaxeItem : ToolItem, ICraftingRecipe, IBreakStone
 	{
 		public override ToolType ToolType => ToolType.Pickaxe;
 

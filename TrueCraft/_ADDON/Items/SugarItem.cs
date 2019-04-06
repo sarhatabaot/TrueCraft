@@ -1,6 +1,7 @@
 using System;
+using TrueCraft.Logic;
 
-namespace TrueCraft.Logic.Items
+namespace TrueCraft._ADDON.Items
 {
 	public class SugarItem : ItemProvider, ICraftingRecipe
 	{

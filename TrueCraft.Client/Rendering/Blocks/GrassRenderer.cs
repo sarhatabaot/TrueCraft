@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using TrueCraft.Logic;
-using TrueCraft.Logic.Blocks;
+using TrueCraft._ADDON.Blocks;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
 
 namespace TrueCraft.Client.Rendering.Blocks

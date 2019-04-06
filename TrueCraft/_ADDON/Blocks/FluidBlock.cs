@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using TrueCraft.Logic;
 using TrueCraft.Networking;
 using TrueCraft.Server;
 using TrueCraft.World;
 
-namespace TrueCraft.Logic.Blocks
+namespace TrueCraft._ADDON.Blocks
 {
 	public abstract class FluidBlock : BlockProvider
 	{

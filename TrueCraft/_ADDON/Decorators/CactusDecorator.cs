@@ -1,10 +1,10 @@
 ﻿using System.Linq;
-using TrueCraft.Logic.Blocks;
-using TrueCraft.TerrainGen.Decorations;
 using TrueCraft.TerrainGen.Noise;
 using TrueCraft.World;
+using TrueCraft._ADDON.Blocks;
+using TrueCraft._ADDON.Decorations;
 
-namespace TrueCraft.TerrainGen.Decorators
+namespace TrueCraft._ADDON.Decorators
 {
 	public class CactusDecorator : IChunkDecorator
 	{

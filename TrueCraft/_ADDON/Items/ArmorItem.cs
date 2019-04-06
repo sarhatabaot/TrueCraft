@@ -1,4 +1,6 @@
-﻿namespace TrueCraft.Logic.Items
+﻿using TrueCraft.Logic;
+
+namespace TrueCraft._ADDON.Items
 {
 	public abstract class ArmorItem : ItemProvider
 	{

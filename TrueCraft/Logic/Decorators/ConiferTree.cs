@@ -1,8 +1,9 @@
 ﻿using System;
 using TrueCraft.Logic.Blocks;
 using TrueCraft.World;
+using TrueCraft._ADDON.Blocks;
 
-namespace TrueCraft.TerrainGen.Decorations
+namespace TrueCraft.Logic.Decorators
 {
 	public class ConiferTree : PineTree
 	{

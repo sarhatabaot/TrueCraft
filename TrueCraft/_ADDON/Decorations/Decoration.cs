@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using TrueCraft.World;
 
-namespace TrueCraft.TerrainGen.Decorations
+namespace TrueCraft._ADDON.Decorations
 {
 	public abstract class Decoration : IDecoration
 	{

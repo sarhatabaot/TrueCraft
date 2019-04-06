@@ -1,7 +1,7 @@
-﻿using TrueCraft.Logic.Blocks;
-using TrueCraft.World;
+﻿using TrueCraft.World;
+using TrueCraft._ADDON.Blocks;
 
-namespace TrueCraft.TerrainGen.Biomes
+namespace TrueCraft._ADDON.Biomes
 {
 	public abstract class BiomeProvider : IBiomeProvider
 	{

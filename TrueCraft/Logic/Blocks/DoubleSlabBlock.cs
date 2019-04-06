@@ -1,7 +1,6 @@
 using System;
-using TrueCraft.Logic;
 
-namespace TrueCraft.Blocks
+namespace TrueCraft.Logic.Blocks
 {
 	public class DoubleSlabBlock : SlabBlock
 	{

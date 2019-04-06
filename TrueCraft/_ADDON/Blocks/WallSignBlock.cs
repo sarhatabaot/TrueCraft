@@ -1,12 +1,13 @@
 using System;
 using Microsoft.Xna.Framework;
-using TrueCraft.Logic.Items;
+using TrueCraft.Logic;
 using TrueCraft.Networking;
 using TrueCraft.Networking.Packets;
 using TrueCraft.Serialization.Tags;
 using TrueCraft.World;
+using TrueCraft._ADDON.Items;
 
-namespace TrueCraft.Logic.Blocks
+namespace TrueCraft._ADDON.Blocks
 {
 	public class WallSignBlock : BlockProvider
 	{

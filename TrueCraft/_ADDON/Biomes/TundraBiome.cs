@@ -1,6 +1,6 @@
-﻿using TrueCraft.Logic.Blocks;
+﻿using TrueCraft._ADDON.Blocks;
 
-namespace TrueCraft.TerrainGen.Biomes
+namespace TrueCraft._ADDON.Biomes
 {
 	public class TundraBiome : BiomeProvider
 	{

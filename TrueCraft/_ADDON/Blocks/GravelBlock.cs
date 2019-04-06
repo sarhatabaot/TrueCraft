@@ -1,12 +1,13 @@
 using System;
-using TrueCraft.Entities;
 using TrueCraft.Extensions;
-using TrueCraft.Logic.Items;
+using TrueCraft.Logic;
 using TrueCraft.Networking;
 using TrueCraft.Server;
 using TrueCraft.World;
+using TrueCraft._ADDON.Entities;
+using TrueCraft._ADDON.Items;
 
-namespace TrueCraft.Logic.Blocks
+namespace TrueCraft._ADDON.Blocks
 {
 	public class GravelBlock : BlockProvider
 	{

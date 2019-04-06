@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Microsoft.Xna.Framework;
 using TrueCraft.Logic.Blocks;
-using TrueCraft.TerrainGen.Decorators;
+using TrueCraft.TerrainGen;
 using TrueCraft.TerrainGen.Noise;
 using TrueCraft.World;
+using TrueCraft._ADDON.Blocks;
 
-namespace TrueCraft.TerrainGen
+namespace TrueCraft.Logic.Generators
 {
 	/// <summary>
 	///  This terrain generator is still under heavy development. Use at your own risk.
@@ -24,18 +28,19 @@ namespace TrueCraft.TerrainGen
 		private ClampNoise LowClamp;
 		private Perlin LowNoise;
 
-		public StandardGenerator()
+		public StandardGenerator(Assembly[] assemblies)
 		{
 			EnableCaves = true;
-			ChunkDecorators = new List<IChunkDecorator>();
-			ChunkDecorators.Add(new LiquidDecorator());
-			ChunkDecorators.Add(new OreDecorator());
-			ChunkDecorators.Add(new PlantDecorator());
-			ChunkDecorators.Add(new TreeDecorator());
-			ChunkDecorators.Add(new FreezeDecorator());
-			ChunkDecorators.Add(new CactusDecorator());
-			ChunkDecorators.Add(new SugarCaneDecorator());
-			ChunkDecorators.Add(new DungeonDecorator(GroundLevel));
+
+			var types = assemblies.SelectMany(x => x.GetTypes());
+			foreach (var type in types)
+			{
+				if (type.IsAbstract || type.IsInterface)
+					continue;
+				if (!type.GetTypeInfo().ImplementedInterfaces.Contains(typeof(IChunkDecorator)))
+					continue;
+				ChunkDecorators.Add((IChunkDecorator) Activator.CreateInstance(type));
+			}
 		}
 
 		public Vector3 SpawnPoint { get; private set; }

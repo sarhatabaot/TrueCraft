@@ -1,11 +1,12 @@
 using System;
 using TrueCraft.Entities;
 using TrueCraft.Extensions;
+using TrueCraft.Logic;
 using TrueCraft.Networking;
 using TrueCraft.Server;
 using TrueCraft.World;
 
-namespace TrueCraft.Logic.Blocks
+namespace TrueCraft._ADDON.Blocks
 {
 	public class CactusBlock : BlockProvider
 	{

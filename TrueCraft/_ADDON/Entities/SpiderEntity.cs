@@ -1,4 +1,6 @@
-﻿namespace TrueCraft.Entities
+﻿using TrueCraft.Entities;
+
+namespace TrueCraft._ADDON.Entities
 {
 	public class SpiderEntity : MobEntity
 	{

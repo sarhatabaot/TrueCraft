@@ -1,11 +1,12 @@
 using System;
-using TrueCraft.Entities;
 using TrueCraft.Extensions;
+using TrueCraft.Logic;
 using TrueCraft.Networking;
 using TrueCraft.Server;
 using TrueCraft.World;
+using TrueCraft._ADDON.Entities;
 
-namespace TrueCraft.Logic.Blocks
+namespace TrueCraft._ADDON.Blocks
 {
 	public class SandBlock : BlockProvider
 	{

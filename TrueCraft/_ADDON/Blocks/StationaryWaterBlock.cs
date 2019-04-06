@@ -1,4 +1,4 @@
-namespace TrueCraft.Logic.Blocks
+namespace TrueCraft._ADDON.Blocks
 {
 	public class StationaryWaterBlock : WaterBlock
 	{

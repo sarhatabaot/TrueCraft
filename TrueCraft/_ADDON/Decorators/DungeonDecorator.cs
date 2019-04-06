@@ -1,9 +1,9 @@
 ﻿using System;
-using TrueCraft.TerrainGen.Decorations;
 using TrueCraft.TerrainGen.Noise;
 using TrueCraft.World;
+using TrueCraft._ADDON.Decorations;
 
-namespace TrueCraft.TerrainGen.Decorators
+namespace TrueCraft._ADDON.Decorators
 {
 	public class DungeonDecorator : IChunkDecorator
 	{

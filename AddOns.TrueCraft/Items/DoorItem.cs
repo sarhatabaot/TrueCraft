@@ -1,8 +1,8 @@
 ﻿using System;
 using TrueCraft.Logic;
-using TrueCraft.Logic.Blocks;
 using TrueCraft.Networking;
 using TrueCraft.World;
+using TrueCraft._ADDON.Blocks;
 
 namespace TrueCraft.Items
 {

@@ -1,9 +1,7 @@
 using System;
-using TrueCraft.Items;
-using TrueCraft.Logic;
-using TrueCraft.Logic.Blocks;
+using TrueCraft._ADDON.Blocks;
 
-namespace TrueCraft.Blocks
+namespace TrueCraft.Logic.Blocks
 {
 	public class StoneBlock : BlockProvider
 	{
@@ -27,7 +25,7 @@ namespace TrueCraft.Blocks
 		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
 		{
 			var provider = ItemRepository.GetItemProvider(item.Id);
-			if (provider is PickaxeItem)
+			if (provider is IBreakStone)
 				return new[] {new ItemStack(CobblestoneBlock.BlockId, 1, descriptor.Metadata)};
 			return new ItemStack[0];
 		}

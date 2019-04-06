@@ -1,9 +1,10 @@
 using System;
+using TrueCraft.Logic;
 using TrueCraft.Networking;
 using TrueCraft.Server;
 using TrueCraft.World;
 
-namespace TrueCraft.Logic.Blocks
+namespace TrueCraft._ADDON.Blocks
 {
 	public class FireBlock : BlockProvider
 	{

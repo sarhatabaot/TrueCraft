@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 using NUnit.Framework;
+using TrueCraft.Logic.Generators;
 using TrueCraft.TerrainGen;
 
 namespace TrueCraft.Tests.World

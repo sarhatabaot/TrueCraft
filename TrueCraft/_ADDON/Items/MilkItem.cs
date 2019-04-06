@@ -1,4 +1,4 @@
-namespace TrueCraft.Logic.Items
+namespace TrueCraft._ADDON.Items
 {
 	public class MilkItem : BucketItem
 	{

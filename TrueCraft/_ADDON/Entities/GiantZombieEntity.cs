@@ -1,4 +1,4 @@
-﻿namespace TrueCraft.Entities
+﻿namespace TrueCraft._ADDON.Entities
 {
 	public class GiantZombieEntity : ZombieEntity
 	{

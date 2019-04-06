@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using TrueCraft.Entities;
 using TrueCraft.Extensions;
+using TrueCraft.Logic;
 using TrueCraft.Networking;
 using TrueCraft.Networking.Packets;
 using TrueCraft.Serialization;
@@ -11,7 +12,7 @@ using TrueCraft.Server;
 using TrueCraft.Windows;
 using TrueCraft.World;
 
-namespace TrueCraft.Logic.Blocks
+namespace TrueCraft._ADDON.Blocks
 {
 	public class FurnaceBlock : BlockProvider, ICraftingRecipe
 	{

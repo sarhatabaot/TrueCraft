@@ -1,7 +1,8 @@
 using System;
 using Microsoft.Xna.Framework;
+using TrueCraft.Logic;
 
-namespace TrueCraft.Logic.Blocks
+namespace TrueCraft._ADDON.Blocks
 {
 	public class RoseBlock : BlockProvider
 	{

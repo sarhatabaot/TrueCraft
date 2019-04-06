@@ -5,8 +5,8 @@ using Microsoft.Xna.Framework.Input;
 using TrueCraft.Client.Input;
 using TrueCraft.Extensions;
 using TrueCraft.Logic;
-using TrueCraft.Logic.Blocks;
 using TrueCraft.Networking.Packets;
+using TrueCraft._ADDON.Blocks;
 
 namespace TrueCraft.Client.Modules
 {

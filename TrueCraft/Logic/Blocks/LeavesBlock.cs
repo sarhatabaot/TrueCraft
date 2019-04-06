@@ -1,9 +1,7 @@
 using System;
-using TrueCraft.Items;
-using TrueCraft.Logic;
-using TrueCraft.Logic.Blocks;
+using TrueCraft._ADDON.Blocks;
 
-namespace TrueCraft.Blocks
+namespace TrueCraft.Logic.Blocks
 {
 	public class LeavesBlock : BlockProvider
 	{
@@ -37,8 +35,9 @@ namespace TrueCraft.Blocks
 		protected override ItemStack[] GetDrop(BlockDescriptor descriptor, ItemStack item)
 		{
 			var provider = ItemRepository.GetItemProvider(item.Id);
-			if (provider is ShearsItem)
+			if (provider is IShearLeaves)
 				return base.GetDrop(descriptor, item);
+
 			if (MathHelper.Random.Next(20) == 0) // 5% chance
 				return new[] {new ItemStack(SaplingBlock.BlockId, 1, descriptor.Metadata)};
 			return new ItemStack[0];

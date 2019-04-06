@@ -1,4 +1,4 @@
-﻿namespace TrueCraft.TerrainGen.Biomes
+﻿namespace TrueCraft._ADDON.Biomes
 {
 	public class SwamplandBiome : BiomeProvider
 	{

@@ -7,6 +7,7 @@ using TrueCraft.Logic;
 using TrueCraft.Logic.Blocks;
 using TrueCraft.Physics;
 using TrueCraft.TerrainGen;
+using TrueCraft._ADDON.Blocks;
 
 namespace TrueCraft.Tests.Physics
 {

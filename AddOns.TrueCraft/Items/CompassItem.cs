@@ -1,6 +1,6 @@
 using System;
 using TrueCraft.Logic;
-using TrueCraft.Logic.Items;
+using TrueCraft._ADDON.Items;
 
 namespace TrueCraft.Items
 {

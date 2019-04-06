@@ -1,5 +1,5 @@
 using TrueCraft.Logic;
-using TrueCraft.Logic.Blocks;
+using TrueCraft._ADDON.Blocks;
 
 namespace TrueCraft.Items
 {

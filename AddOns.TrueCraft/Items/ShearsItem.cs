@@ -1,10 +1,11 @@
 using System;
+using TrueCraft.Blocks;
 using TrueCraft.Logic;
-using TrueCraft.Logic.Items;
+using TrueCraft._ADDON.Items;
 
 namespace TrueCraft.Items
 {
-	public class ShearsItem : ToolItem, ICraftingRecipe
+	public class ShearsItem : ToolItem, ICraftingRecipe, IShearLeaves
 	{
 		public static readonly short ItemId = 0x167;
 
