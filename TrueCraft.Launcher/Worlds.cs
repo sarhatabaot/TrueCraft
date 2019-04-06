@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TrueCraft.Logic;
+using TrueCraft.Logic.Generators;
 using TrueCraft.TerrainGen;
 
 namespace TrueCraft.Launcher
@@ -41,7 +42,7 @@ namespace TrueCraft.Launcher
 		{
 			int s;
 			if (!int.TryParse(seed, out s)) s = MathHelper.Random.Next();
-			var world = new World.World(name, s, new StandardGenerator());
+			var world = new World.World(name, s, new FlatlandGenerator());
 			world.BlockRepository = BlockRepository;
 			var safeName = name;
 			foreach (var c in Path.GetInvalidFileNameChars())

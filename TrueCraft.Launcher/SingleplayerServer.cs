@@ -18,13 +18,13 @@ namespace TrueCraft.Launcher
 			};
 
 			World = world;
-			Server = new MultiplayerServer(_configuration);
+			Server = new MultiPlayerServer(_configuration);
 
 			world.BlockRepository = Server.BlockRepository;
 			Server.AddWorld(world);
 		}
 
-		public MultiplayerServer Server { get; set; }
+		public MultiPlayerServer Server { get; set; }
 		public World.World World { get; set; }
 
 		public void Initialize(ProgressNotification progressNotification = null)
@@ -52,7 +52,7 @@ namespace TrueCraft.Launcher
 					{
 						var coords = new Coordinates3D(x + _x, _y, z + _z);
 						var data = World.GetBlockData(coords);
-						var provider = World.BlockRepository.GetBlockProvider(data.ID);
+						var provider = World.BlockRepository.GetBlockProvider(data.Id);
 						provider.BlockUpdate(data, data, Server, World);
 					}
 				}

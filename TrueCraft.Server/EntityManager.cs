@@ -154,12 +154,12 @@ namespace TrueCraft.Server
 
 			switch (e.PropertyName)
 			{
-				case nameof(Entity.Position):
-				case nameof(Entity.Yaw):
-				case nameof(Entity.Pitch):
+				case nameof(TrueCraft.Entities.Entity.Position):
+				case nameof(TrueCraft.Entities.Entity.Yaw):
+				case nameof(TrueCraft.Entities.Entity.Pitch):
 					PropagateEntityPositionUpdates(entity);
 					break;
-				case nameof(Entity.Metadata):
+				case nameof(TrueCraft.Entities.Entity.Metadata):
 					PropagateEntityMetadataUpdates(entity);
 					break;
 			}
@@ -172,7 +172,7 @@ namespace TrueCraft.Server
 
 			switch (property)
 			{
-				case nameof(Entity.Position):
+				case nameof(TrueCraft.Entities.Entity.Position):
 
 					if ((int) entity.Position.X >> 4 != (int) entity.OldPosition.X >> 4 || (int) entity.Position.Z >> 4 != (int) entity.OldPosition.Z >> 4)
 					{

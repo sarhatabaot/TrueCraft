@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>TrueCraft.Launcher</RootNamespace>
     <AssemblyName>TrueCraft.Launcher</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -32,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -54,8 +56,119 @@
     <Reference Include="Xwt.WPF, Version=0.2.163.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\Xwt.WPF.0.2.163\lib\net40\Xwt.WPF.dll</HintPath>
     </Reference>
+    <Reference Include="YamlDotNet, Version=6.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.6.0.0\lib\net45\YamlDotNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\TrueCraft.Server\AccessConfiguration.cs">
+      <Link>Server\AccessConfiguration.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Bootstrap.cs">
+      <Link>Server\Bootstrap.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\Command.cs">
+      <Link>Server\Commands\Command.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\CommandManager.cs">
+      <Link>Server\Commands\CommandManager.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\DestroyCommand.cs">
+      <Link>Server\Commands\DestroyCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\DoNotAutoLoadAttribute.cs">
+      <Link>Server\Commands\DoNotAutoLoadAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\EntityInfoCommand.cs">
+      <Link>Server\Commands\EntityInfoCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\GiveCommand.cs">
+      <Link>Server\Commands\GiveCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\GiveMeCommand.cs">
+      <Link>Server\Commands\GiveMeCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\HelpCommand.cs">
+      <Link>Server\Commands\HelpCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\ListCommand.cs">
+      <Link>Server\Commands\ListCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\LogCommand.cs">
+      <Link>Server\Commands\LogCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\PingCommand.cs">
+      <Link>Server\Commands\PingCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\PositionCommand.cs">
+      <Link>Server\Commands\PositionCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\RelightCommand.cs">
+      <Link>Server\Commands\RelightCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\ResendInvCommand.cs">
+      <Link>Server\Commands\ResendInvCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\SaveCommand.cs">
+      <Link>Server\Commands\SaveCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\SkyLightCommand.cs">
+      <Link>Server\Commands\SkyLightCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\SpawnCommand.cs">
+      <Link>Server\Commands\SpawnCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\TellCommand.cs">
+      <Link>Server\Commands\TellCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\TimeCommand.cs">
+      <Link>Server\Commands\TimeCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\ToMeCommand.cs">
+      <Link>Server\Commands\ToMeCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\TrashCommand.cs">
+      <Link>Server\Commands\TrashCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Commands\WhatCommand.cs">
+      <Link>Server\Commands\WhatCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\EntityManager.cs">
+      <Link>Server\EntityManager.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Exceptions\PlayerDisconnectException.cs">
+      <Link>Server\Exceptions\PlayerDisconnectException.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Handlers\EntityHandlers.cs">
+      <Link>Server\Handlers\EntityHandlers.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Handlers\InteractionHandlers.cs">
+      <Link>Server\Handlers\InteractionHandlers.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Handlers\LoginHandlers.cs">
+      <Link>Server\Handlers\LoginHandlers.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Handlers\PacketHandlers.cs">
+      <Link>Server\Handlers\PacketHandlers.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\MobManager.cs">
+      <Link>Server\MobManager.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\MultiplayerServer.cs">
+      <Link>Server\MultiplayerServer.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\QueryProtocol.cs">
+      <Link>Server\QueryProtocol.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\RemoteClient.cs">
+      <Link>Server\RemoteClient.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\Rules\OverworldSpawnRules.cs">
+      <Link>Server\Rules\OverworldSpawnRules.cs</Link>
+    </Compile>
+    <Compile Include="..\TrueCraft.Server\ServerTraceWriter.cs">
+      <Link>Server\ServerTraceWriter.cs</Link>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LauncherWindow.cs" />
@@ -91,9 +204,9 @@
       <Project>{4ee7d6c8-13ee-4c3d-af8e-08773b59f87a}</Project>
       <Name>AddOns.TrueCraft</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TrueCraft.Server\TrueCraft.Server.csproj">
-      <Project>{05366ecd-ab34-4b68-a0dc-b444601bc7af}</Project>
-      <Name>TrueCraft.Server</Name>
+    <ProjectReference Include="..\externals\FNA\FNA.csproj">
+      <Project>{35253ce1-c864-4cd3-8249-4d1319748e8f}</Project>
+      <Name>FNA</Name>
     </ProjectReference>
     <ProjectReference Include="..\TrueCraft\TrueCraft.csproj">
       <Project>{77DE9B9B-CE8B-4039-9252-510A91076DEB}</Project>
@@ -108,6 +221,7 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugSymbols>true</DebugSymbols>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
