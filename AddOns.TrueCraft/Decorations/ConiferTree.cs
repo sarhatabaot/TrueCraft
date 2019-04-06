@@ -3,7 +3,7 @@ using TrueCraft.Logic.Blocks;
 using TrueCraft.World;
 using TrueCraft._ADDON.Blocks;
 
-namespace TrueCraft.Logic.Decorators
+namespace TrueCraft.Decorations
 {
 	public class ConiferTree : PineTree
 	{

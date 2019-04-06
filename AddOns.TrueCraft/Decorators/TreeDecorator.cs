@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
+using TrueCraft.Decorations;
 using TrueCraft.TerrainGen.Noise;
 using TrueCraft.World;
 using TrueCraft._ADDON.Blocks;
 using TrueCraft._ADDON.Decorations;
 
-namespace TrueCraft.Logic.Decorators
+namespace TrueCraft.Decorators
 {
 	public class TreeDecorator : IChunkDecorator
 	{
