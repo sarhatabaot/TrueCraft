@@ -4,7 +4,6 @@ using TrueCraft.Decorations;
 using TrueCraft.TerrainGen.Noise;
 using TrueCraft.World;
 using TrueCraft._ADDON.Blocks;
-using TrueCraft._ADDON.Decorations;
 
 namespace TrueCraft.Decorators
 {

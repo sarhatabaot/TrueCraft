@@ -1,7 +1,7 @@
 ﻿using System;
 using TrueCraft.Entities;
 
-namespace TrueCraft._ADDON.Entities
+namespace TrueCraft.Entity
 {
 	public class SlimeEntity : MobEntity
 	{

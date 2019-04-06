@@ -4,7 +4,7 @@ using TrueCraft.Logic;
 using TrueCraft.World;
 using TrueCraft._ADDON.Blocks;
 
-namespace TrueCraft._ADDON.Decorations
+namespace TrueCraft.Decorations
 {
 	public class Dungeon : Decoration
 	{
