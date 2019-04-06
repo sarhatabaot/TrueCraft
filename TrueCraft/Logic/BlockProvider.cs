@@ -16,7 +16,7 @@ namespace TrueCraft.Logic
 	/// <summary>
 	///  Provides common implementations of block logic.
 	/// </summary>
-	public abstract class BlockProvider : IItemProvider, IBlockProvider
+	public abstract class BlockProvider : IBlockProvider
 	{
 		public static readonly byte[] Overwritable =
 		{
