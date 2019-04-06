@@ -33,9 +33,9 @@ namespace TrueCraft.Networking
 			var packet = func();
 
 			if (clientBound)
-				ClientBoundPackets[packet.ID] = func;
+				ClientBoundPackets[packet.Id] = func;
 			if (serverBound)
-				ServerBoundPackets[packet.ID] = func;
+				ServerBoundPackets[packet.Id] = func;
 		}
 
 		public IEnumerable<IPacket> ReadPackets(object key, byte[] buffer, int offset, int length, bool serverBound = true)
@@ -69,7 +69,7 @@ namespace TrueCraft.Networking
 
 		public void WritePacket(IMcStream stream, IPacket packet)
 		{
-			stream.WriteUInt8(packet.ID);
+			stream.WriteUInt8(packet.Id);
 			packet.WritePacket(stream);
 			stream.BaseStream.Flush();
 		}

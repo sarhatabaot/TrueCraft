@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct UpdateHealthPacket : IPacket
 	{
-		public byte ID => 0x08;
+		public byte Id => Constants.PacketIds.UpdateHealth;
 
 		public UpdateHealthPacket(short health) => Health = health;
 

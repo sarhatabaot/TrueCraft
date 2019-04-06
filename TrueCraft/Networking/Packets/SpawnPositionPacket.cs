@@ -6,7 +6,7 @@
 	/// </summary>
 	public struct SpawnPositionPacket : IPacket
 	{
-		public byte ID => 0x06;
+		public byte Id => Constants.PacketIds.SpawnPosition;
 
 		public SpawnPositionPacket(int x, int y, int z)
 		{

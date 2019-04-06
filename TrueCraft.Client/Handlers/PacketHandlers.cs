@@ -11,22 +11,22 @@ namespace TrueCraft.Client.Handlers
 	{
 		public static void RegisterHandlers(MultiPlayerClient client)
 		{
-			client.RegisterPacketHandler(new KeepAlivePacket().ID, HandleKeepAlive);
-			client.RegisterPacketHandler(new HandshakeResponsePacket().ID, HandleHandshake);
-			client.RegisterPacketHandler(new ChatMessagePacket().ID, HandleChatMessage);
-			client.RegisterPacketHandler(new SetPlayerPositionPacket().ID, HandlePositionAndLook);
-			client.RegisterPacketHandler(new LoginResponsePacket().ID, HandleLoginResponse);
-			client.RegisterPacketHandler(new UpdateHealthPacket().ID, HandleUpdateHealth);
-			client.RegisterPacketHandler(new TimeUpdatePacket().ID, HandleTimeUpdate);
+			client.RegisterPacketHandler(Constants.PacketIds.KeepAlive, HandleKeepAlive);
+			client.RegisterPacketHandler(Constants.PacketIds.HandshakeResponse, HandleHandshake);
+			client.RegisterPacketHandler(Constants.PacketIds.ChatMessage, HandleChatMessage);
+			client.RegisterPacketHandler(Constants.PacketIds.SetPlayerPosition, HandlePositionAndLook);
+			client.RegisterPacketHandler(Constants.PacketIds.LoginResponse, HandleLoginResponse);
+			client.RegisterPacketHandler(Constants.PacketIds.UpdateHealth, HandleUpdateHealth);
+			client.RegisterPacketHandler(Constants.PacketIds.TimeUpdate, HandleTimeUpdate);
 			client.RegisterPacketHandler(Constants.PacketIds.EntityTeleport, HandleEntityTeleport);
 
-			client.RegisterPacketHandler(new ChunkPreamblePacket().ID, ChunkHandlers.HandleChunkPreamble);
-			client.RegisterPacketHandler(new ChunkDataPacket().ID, ChunkHandlers.HandleChunkData);
-			client.RegisterPacketHandler(new BlockChangePacket().ID, ChunkHandlers.HandleBlockChange);
-			client.RegisterPacketHandler(new WindowItemsPacket().ID, InventoryHandlers.HandleWindowItems);
-			client.RegisterPacketHandler(new SetSlotPacket().ID, InventoryHandlers.HandleSetSlot);
-			client.RegisterPacketHandler(new CloseWindowPacket().ID, InventoryHandlers.HandleCloseWindowPacket);
-			client.RegisterPacketHandler(new OpenWindowPacket().ID, InventoryHandlers.HandleOpenWindowPacket);
+			client.RegisterPacketHandler(Constants.PacketIds.ChunkPreamble, ChunkHandlers.HandleChunkPreamble);
+			client.RegisterPacketHandler(Constants.PacketIds.ChunkData, ChunkHandlers.HandleChunkData);
+			client.RegisterPacketHandler(Constants.PacketIds.BlockChange, ChunkHandlers.HandleBlockChange);
+			client.RegisterPacketHandler(Constants.PacketIds.WindowItems, InventoryHandlers.HandleWindowItems);
+			client.RegisterPacketHandler(Constants.PacketIds.SetSlot, InventoryHandlers.HandleSetSlot);
+			client.RegisterPacketHandler(Constants.PacketIds.CloseWindow, InventoryHandlers.HandleCloseWindowPacket);
+			client.RegisterPacketHandler(Constants.PacketIds.OpenWindow, InventoryHandlers.HandleOpenWindowPacket);
 		}
 
 		private static void HandleKeepAlive(IPacket packet, MultiPlayerClient client)

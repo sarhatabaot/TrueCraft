@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct EntityLookPacket : IPacket
 	{
-		public byte ID => 0x20;
+		public byte Id => Constants.PacketIds.EntityLook;
 
 		public int EntityID;
 		public sbyte Yaw, Pitch;

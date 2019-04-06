@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct ClickWindowPacket : IPacket
 	{
-		public byte ID => 0x66;
+		public byte Id => Constants.PacketIds.ClickWindow;
 
 		public ClickWindowPacket(sbyte windowID, short slotIndex, bool rightClick, short transactionID, bool shift,
 			short itemID, sbyte count, short metadata)

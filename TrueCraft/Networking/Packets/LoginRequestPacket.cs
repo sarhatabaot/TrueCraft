@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct LoginRequestPacket : IPacket
 	{
-		public byte ID => 0x01;
+		public byte Id => Constants.PacketIds.LoginRequest;
 
 		public LoginRequestPacket(int protocolVersion, string username)
 		{

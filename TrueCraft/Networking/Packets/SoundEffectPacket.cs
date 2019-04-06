@@ -17,7 +17,7 @@
 			BreakBlock = 1007
 		}
 
-		public byte ID => 0x3D;
+		public byte Id => Constants.PacketIds.SoundEffect;
 
 		public EffectType Effect;
 		public int X;

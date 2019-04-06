@@ -13,7 +13,7 @@
 			PositiveX = 3
 		}
 
-		public byte ID => 0x19;
+		public byte Id => Constants.PacketIds.SpawnPainting;
 
 		public int EntityID;
 		public string PaintingName;

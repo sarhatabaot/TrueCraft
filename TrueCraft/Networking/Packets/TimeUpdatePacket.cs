@@ -6,7 +6,7 @@
 	/// </summary>
 	public struct TimeUpdatePacket : IPacket
 	{
-		public byte ID => 0x04;
+		public byte Id => Constants.PacketIds.TimeUpdate;
 
 		public TimeUpdatePacket(long time) => Time = time;
 

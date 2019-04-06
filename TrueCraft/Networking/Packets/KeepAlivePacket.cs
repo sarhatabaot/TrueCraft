@@ -6,7 +6,7 @@
 	/// </summary>
 	public struct KeepAlivePacket : IPacket
 	{
-		public byte ID => 0x00;
+		public byte Id => Constants.PacketIds.KeepAlive;
 
 		public void ReadPacket(IMcStream stream)
 		{

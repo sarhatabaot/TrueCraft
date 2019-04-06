@@ -2,7 +2,7 @@
 {
 	public struct MapDataPacket : IPacket
 	{
-		public byte ID => 0x83;
+		public byte Id => Constants.PacketIds.MapData;
 
 		public short ItemID;
 		public short Metadata;

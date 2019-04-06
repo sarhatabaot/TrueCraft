@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct HandshakePacket : IPacket
 	{
-		public byte ID => 0x02;
+		public byte Id => Constants.PacketIds.Handshake;
 
 		public HandshakePacket(string username) => Username = username;
 

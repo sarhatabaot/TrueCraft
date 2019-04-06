@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct LoginResponsePacket : IPacket
 	{
-		public byte ID => 0x01;
+		public byte Id => Constants.PacketIds.LoginResponse;
 
 		public LoginResponsePacket(int entityID, long seed, Dimension dimension)
 		{

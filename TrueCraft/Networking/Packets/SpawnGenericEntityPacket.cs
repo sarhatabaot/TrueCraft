@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct SpawnGenericEntityPacket : IPacket
 	{
-		public byte ID => 0x17;
+		public byte Id => Constants.PacketIds.SpawnGenericEntity;
 
 		public SpawnGenericEntityPacket(int entityID, sbyte entityType, int x, int y, int z,
 			int data, short? xVelocity, short? yVelocity, short? zVelocity)

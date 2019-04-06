@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct AttachEntityPacket : IPacket
 	{
-		public byte ID => 0x27;
+		public byte Id => Constants.PacketIds.AttachEntity;
 
 		public int EntityID;
 		public int VehicleID;

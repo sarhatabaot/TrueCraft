@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct SetSlotPacket : IPacket
 	{
-		public byte ID => 0x67;
+		public byte Id => Constants.PacketIds.SetSlot;
 
 		public SetSlotPacket(sbyte windowID, short slotIndex, short itemID, sbyte count, short metadata)
 		{

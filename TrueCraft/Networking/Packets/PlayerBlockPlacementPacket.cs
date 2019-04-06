@@ -6,7 +6,7 @@
 	/// </summary>
 	public struct PlayerBlockPlacementPacket : IPacket
 	{
-		public byte ID => 0x0F;
+		public byte Id => Constants.PacketIds.PlayerBlockPlacement;
 
 		public PlayerBlockPlacementPacket(int x, sbyte y, int z, BlockFace face, short itemID,
 			sbyte? amount, short? metadata)

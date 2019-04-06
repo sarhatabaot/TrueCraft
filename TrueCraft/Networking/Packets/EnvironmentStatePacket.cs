@@ -12,7 +12,7 @@
 			EndRaining = 2
 		}
 
-		public byte ID => 0x46;
+		public byte Id => Constants.PacketIds.EnvironmentState;
 
 		public EnvironmentState State;
 

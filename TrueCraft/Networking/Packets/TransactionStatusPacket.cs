@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct TransactionStatusPacket : IPacket
 	{
-		public byte ID => 0x6A;
+		public byte Id => Constants.PacketIds.TransactionStatus;
 
 		public sbyte WindowID;
 		public short TransactionID;

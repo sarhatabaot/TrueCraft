@@ -6,7 +6,7 @@
 	/// </summary>
 	public struct BlockActionPacket : IPacket
 	{
-		public byte ID => 0x36;
+		public byte Id => Constants.PacketIds.BlockAction;
 
 		public int X;
 		public short Y;

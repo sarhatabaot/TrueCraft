@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct LightningPacket : IPacket
 	{
-		public byte ID => 0x47;
+		public byte Id => Constants.PacketIds.Lightning;
 
 		public int EntityID;
 		public int X, Y, Z;

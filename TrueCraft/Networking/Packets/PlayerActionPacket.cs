@@ -9,7 +9,7 @@
 			LeaveBed = 3
 		}
 
-		public byte ID => 0x13;
+		public byte Id => Constants.PacketIds.PlayerAction;
 
 		public int EntityID;
 		public PlayerAction Action;

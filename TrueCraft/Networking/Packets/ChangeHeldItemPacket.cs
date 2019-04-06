@@ -2,7 +2,7 @@
 {
 	public struct ChangeHeldItemPacket : IPacket
 	{
-		public byte ID => 0x10;
+		public byte Id => Constants.PacketIds.ChangeHeldItem;
 
 		public short Slot;
 

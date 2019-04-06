@@ -6,7 +6,7 @@
 	/// </summary>
 	public struct PlayerPositionAndLookPacket : IPacket
 	{
-		public byte ID => Constants.PacketIds.PlayerPositionAndLook;
+		public byte Id => Constants.PacketIds.PlayerPositionAndLook;
 
 		public PlayerPositionAndLookPacket(double x, double y, double stance, double z, float yaw, float pitch,
 			bool onGround)

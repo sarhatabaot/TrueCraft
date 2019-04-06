@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct UpdateStatisticPacket : IPacket
 	{
-		public byte ID => 0xC8;
+		public byte Id => Constants.PacketIds.UpdateStatistic;
 
 		public int StatisticID;
 		public sbyte Delta;

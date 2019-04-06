@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct UseBedPacket : IPacket
 	{
-		public byte ID => 0x11;
+		public byte Id => Constants.PacketIds.UseBed;
 
 		public int EntityID;
 		public bool InBed;

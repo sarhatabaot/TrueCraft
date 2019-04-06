@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct SpawnMobPacket : IPacket
 	{
-		public byte ID => 0x18;
+		public byte Id => Constants.PacketIds.SpawnMob;
 
 		public SpawnMobPacket(int entityId, sbyte type, int x, int y, int z, sbyte yaw, sbyte pitch,
 			MetadataDictionary metadata)

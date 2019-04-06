@@ -6,7 +6,7 @@
 	/// </summary>
 	public struct RespawnPacket : IPacket
 	{
-		public byte ID => 0x09;
+		public byte Id => Constants.PacketIds.Respawn;
 
 		public Dimension Dimension;
 

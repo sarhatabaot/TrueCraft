@@ -2,11 +2,11 @@
 {
 	/// <summary>
 	///  Sent by servers to inform players of changes to the velocity of entities.
-	///  Not sure exactly how all of that works, but I know it's going to be a pain in the ass.
+	///  Not sure exactly how all of that works.
 	/// </summary>
 	public struct EntityVelocityPacket : IPacket
 	{
-		public byte ID => 0x1C;
+		public byte Id => Constants.PacketIds.EntityVelocity;
 
 		public int EntityID;
 		public short XVelocity;

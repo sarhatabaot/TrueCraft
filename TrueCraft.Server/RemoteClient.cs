@@ -202,14 +202,14 @@ namespace TrueCraft.Server
 			if (Disconnected || Connection != null && !Connection.Connected)
 				return;
 
-			if(!Constants.IgnoredPacketIds.Contains(packet.ID))
-				Server.Trace.TraceData(TraceEventType.Verbose, 0, $"queuing packet #{packet.ID:X2} ({packet.GetType().Name})");
+			if(!Constants.IgnoredPacketIds.Contains(packet.Id))
+				Server.Trace.TraceData(TraceEventType.Verbose, 0, $"queuing packet #{packet.Id:X2} ({packet.GetType().Name})");
 
 			using (var writeStream = new MemoryStream())
 			{
 				using (var ms = new McStream(writeStream))
 				{
-					writeStream.WriteByte(packet.ID);
+					writeStream.WriteByte(packet.Id);
 					packet.WritePacket(ms);
 				}
 
@@ -329,14 +329,14 @@ namespace TrueCraft.Server
 					{
 						foreach (var packet in packets)
 						{
-							if(!Constants.IgnoredPacketIds.Contains(packet.ID))
-								Server.Trace.TraceData(TraceEventType.Verbose, 0, $"received packet {packet.ID:X2} ({packet.GetType().Name})");
+							if(!Constants.IgnoredPacketIds.Contains(packet.Id))
+								Server.Trace.TraceData(TraceEventType.Verbose, 0, $"received packet {packet.Id:X2} ({packet.GetType().Name})");
 
-							if (PacketHandlers[packet.ID] != null)
+							if (PacketHandlers[packet.Id] != null)
 							{
 								try
 								{
-									PacketHandlers[packet.ID](packet, this, Server);
+									PacketHandlers[packet.Id](packet, this, Server);
 								}
 								catch (PlayerDisconnectException)
 								{
@@ -350,7 +350,7 @@ namespace TrueCraft.Server
 							}
 							else
 							{
-								var message = $"unhandled packet {packet.ID:X2} ({packet.GetType().Name})";
+								var message = $"unhandled packet {packet.Id:X2} ({packet.GetType().Name})";
 								MaybeEchoToClient(message);
 								Server.Trace.TraceData(TraceEventType.Error, 0, message);
 							}

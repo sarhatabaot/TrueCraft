@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct PlayerPositionPacket : IPacket
 	{
-		public byte ID => 0x0B;
+		public byte Id => Constants.PacketIds.PlayerPosition;
 
 		public double X, Y, Z;
 

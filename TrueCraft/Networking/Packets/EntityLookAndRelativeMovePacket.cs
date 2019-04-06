@@ -2,7 +2,7 @@
 {
 	public struct EntityLookAndRelativeMovePacket : IPacket
 	{
-		public byte ID => 0x21;
+		public byte Id => Constants.PacketIds.EntityLookAndRelativeMove;
 
 		public int EntityID;
 		public sbyte DeltaX, DeltaY, DeltaZ;

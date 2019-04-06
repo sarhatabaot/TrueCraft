@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct ChunkDataPacket : IPacket
 	{
-		public byte ID => 0x33;
+		public byte Id => Constants.PacketIds.ChunkData;
 
 		public ChunkDataPacket(int x, short y, int z, short width, short height, short depth, byte[] compressedData)
 		{

@@ -4,7 +4,7 @@ namespace TrueCraft.Networking.Packets
 {
 	public struct ExplosionPacket : IPacket
 	{
-		public byte ID => 0x3C;
+		public byte Id => Constants.PacketIds.Explosion;
 
 		public double X, Y, Z;
 		public float Radius;

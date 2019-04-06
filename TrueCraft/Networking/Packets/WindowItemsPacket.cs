@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct WindowItemsPacket : IPacket
 	{
-		public byte ID => 0x68;
+		public byte Id => Constants.PacketIds.WindowItems;
 
 		public WindowItemsPacket(sbyte windowID, ItemStack[] items)
 		{

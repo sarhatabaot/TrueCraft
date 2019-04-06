@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct ChunkPreamblePacket : IPacket
 	{
-		public byte ID => 0x32;
+		public byte Id => Constants.PacketIds.ChunkPreamble;
 
 		public ChunkPreamblePacket(int x, int z, bool load = true)
 		{

@@ -2,7 +2,7 @@
 {
 	public struct SpawnPlayerPacket : IPacket
 	{
-		public byte ID => 0x14;
+		public byte Id => Constants.PacketIds.SpawnPlayer;
 
 		public int EntityID;
 		public string PlayerName;

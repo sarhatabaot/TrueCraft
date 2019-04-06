@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct PlayerLookPacket : IPacket
 	{
-		public byte ID => 0x0C;
+		public byte Id => Constants.PacketIds.PlayerLook;
 
 		public float Yaw, Pitch;
 		public bool OnGround;

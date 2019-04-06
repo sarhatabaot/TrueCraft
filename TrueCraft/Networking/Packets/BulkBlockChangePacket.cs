@@ -2,7 +2,7 @@
 {
 	public struct BulkBlockChangePacket : IPacket
 	{
-		public byte ID => 0x34;
+		public byte Id => Constants.PacketIds.BulkBlockChange;
 
 		public int ChunkX, ChunkZ;
 		public Coordinates3D[] Coordinates;

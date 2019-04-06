@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct OpenWindowPacket : IPacket
 	{
-		public byte ID => 0x64;
+		public byte Id => Constants.PacketIds.OpenWindow;
 
 		public OpenWindowPacket(sbyte windowID, sbyte type, string title, sbyte totalSlots)
 		{

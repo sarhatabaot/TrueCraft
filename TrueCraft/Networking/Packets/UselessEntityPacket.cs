@@ -2,7 +2,7 @@
 {
 	public struct UselessEntityPacket : IPacket
 	{
-		public byte ID => 0x1E;
+		public byte Id => Constants.PacketIds.UselessEntity;
 
 		public int EntityID;
 

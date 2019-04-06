@@ -9,7 +9,7 @@
 	/// </summary>
 	public struct ChatMessagePacket : IPacket
 	{
-		public byte ID => 0x03;
+		public byte Id => Constants.PacketIds.ChatMessage;
 
 		public ChatMessagePacket(string message) => Message = message;
 

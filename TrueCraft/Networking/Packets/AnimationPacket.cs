@@ -13,7 +13,7 @@
 			Uncrouch = 105
 		}
 
-		public byte ID => 0x12;
+		public byte Id => Constants.PacketIds.Animation;
 
 		public int EntityID;
 		public PlayerAnimation Animation;

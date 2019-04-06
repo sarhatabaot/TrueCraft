@@ -22,7 +22,7 @@
 			Face = face;
 		}
 
-		public byte ID => 0x0E;
+		public byte Id => Constants.PacketIds.PlayerDigging;
 
 		public Action PlayerAction;
 		public int X;

@@ -153,14 +153,14 @@ namespace TrueCraft.Client
 			if (!Connected || Client != null && !Client.Connected)
 				return;
 
-			if (!Constants.IgnoredPacketIds.Contains(packet.ID))
-				Trace.TraceData(TraceEventType.Verbose, 0, $"queuing packet #{packet.ID:X2} ({packet.GetType().Name})");
+			if (!Constants.IgnoredPacketIds.Contains(packet.Id))
+				Trace.TraceData(TraceEventType.Verbose, 0, $"queuing packet #{packet.Id:X2} ({packet.GetType().Name})");
 
 			using (var writeStream = new MemoryStream())
 			{
 				using (var ms = new McStream(writeStream))
 				{
-					ms.WriteUInt8(packet.ID);
+					ms.WriteUInt8(packet.Id);
 					packet.WritePacket(ms);
 				}
 
@@ -210,8 +210,8 @@ namespace TrueCraft.Client
 						break;
 					}
 
-					if (!Constants.IgnoredPacketIds.Contains(packet.ID))
-						Trace.TraceEvent(TraceEventType.Verbose, 0, $"sent packet #{packet.ID:X2}");
+					if (!Constants.IgnoredPacketIds.Contains(packet.Id))
+						Trace.TraceEvent(TraceEventType.Verbose, 0, $"sent packet #{packet.Id:X2}");
 
 					if (packet is DisconnectPacket)
 					{
@@ -240,12 +240,12 @@ namespace TrueCraft.Client
 
 					foreach (var packet in packets)
 					{
-						Trace.TraceEvent(TraceEventType.Verbose, 0, $"received packet #{packet.ID:X2} ({packet.GetType().Name})");
+						Trace.TraceEvent(TraceEventType.Verbose, 0, $"received packet #{packet.Id:X2} ({packet.GetType().Name})");
 
-						var handler = _packetHandlers[packet.ID];
+						var handler = _packetHandlers[packet.Id];
 						if (handler == null)
 						{
-							Trace.TraceEvent(TraceEventType.Error, 0, $"no handler found for packet #{packet.ID:X2} ({packet.GetType().Name})");
+							Trace.TraceEvent(TraceEventType.Error, 0, $"no handler found for packet #{packet.Id:X2} ({packet.GetType().Name})");
 							continue;
 						}
 

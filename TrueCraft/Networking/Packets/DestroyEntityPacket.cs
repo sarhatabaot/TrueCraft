@@ -2,7 +2,7 @@
 {
 	public struct DestroyEntityPacket : IPacket
 	{
-		public byte ID => 0x1D;
+		public byte Id => Constants.PacketIds.DestroyEntity;
 
 		public int EntityID;
 

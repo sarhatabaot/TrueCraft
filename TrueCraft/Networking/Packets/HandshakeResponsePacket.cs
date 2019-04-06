@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct HandshakeResponsePacket : IPacket
 	{
-		public byte ID => 0x02;
+		public byte Id => Constants.PacketIds.HandshakeResponse;
 
 		public HandshakeResponsePacket(string connectionHash) => ConnectionHash = connectionHash;
 

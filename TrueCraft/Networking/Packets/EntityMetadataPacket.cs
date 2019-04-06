@@ -2,7 +2,7 @@
 {
 	public struct EntityMetadataPacket : IPacket
 	{
-		public byte ID => 0x28;
+		public byte Id => Constants.PacketIds.EntityMetadata;
 
 		public int EntityID;
 		public MetadataDictionary Metadata;

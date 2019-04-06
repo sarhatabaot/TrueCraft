@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct UpdateSignPacket : IPacket
 	{
-		public byte ID => 0x82;
+		public byte Id => Constants.PacketIds.UpdateSign;
 
 		public int X;
 		public short Y;

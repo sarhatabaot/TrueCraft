@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct EntityEquipmentPacket : IPacket
 	{
-		public byte ID => 0x05;
+		public byte Id => Constants.PacketIds.EntityEquipment;
 
 		public EntityEquipmentPacket(int entityID, short slot, short itemID, short metadata)
 		{

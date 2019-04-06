@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct UseEntityPacket : IPacket
 	{
-		public byte ID => 0x07;
+		public byte Id => Constants.PacketIds.UseEntity;
 
 		public int UserID;
 		public int TargetID;

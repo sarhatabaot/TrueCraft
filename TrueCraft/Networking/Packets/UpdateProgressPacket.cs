@@ -11,7 +11,7 @@
 			AvailableHeat = 1
 		}
 
-		public byte ID => 0x69;
+		public byte Id => Constants.PacketIds.UpdateProgress;
 
 		public UpdateProgressPacket(sbyte windowID, ProgressTarget target, short value)
 		{

@@ -2,7 +2,7 @@
 {
 	public struct BlockChangePacket : IPacket
 	{
-		public byte ID => 0x35;
+		public byte Id => Constants.PacketIds.BlockChange;
 
 		public BlockChangePacket(int x, sbyte y, int z, sbyte blockID, sbyte metadata)
 		{

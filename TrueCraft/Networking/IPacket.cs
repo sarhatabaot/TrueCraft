@@ -2,7 +2,7 @@
 {
 	public interface IPacket
 	{
-		byte ID { get; }
+		byte Id { get; }
 		void ReadPacket(IMcStream stream);
 		void WritePacket(IMcStream stream);
 	}

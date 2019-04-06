@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct EntityTeleportPacket : IPacket
 	{
-		public byte ID => Constants.PacketIds.EntityTeleport;
+		public byte Id => Constants.PacketIds.EntityTeleport;
 
 		public int EntityID;
 		public int X, Y, Z;

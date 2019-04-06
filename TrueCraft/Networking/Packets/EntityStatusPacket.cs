@@ -15,7 +15,7 @@
 			EatingAccepted = 9 // what
 		}
 
-		public byte ID => 0x26;
+		public byte Id => Constants.PacketIds.EntityStatus;
 
 		public int EntityID;
 		public EntityStatus Status;

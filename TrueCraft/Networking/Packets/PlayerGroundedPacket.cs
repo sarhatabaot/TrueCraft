@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct PlayerGroundedPacket : IPacket
 	{
-		public byte ID => Constants.PacketIds.PlayerGrounded;
+		public byte Id => Constants.PacketIds.PlayerGrounded;
 
 		public bool OnGround;
 

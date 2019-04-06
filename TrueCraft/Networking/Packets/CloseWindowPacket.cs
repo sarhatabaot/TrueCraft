@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct CloseWindowPacket : IPacket
 	{
-		public byte ID => 0x65;
+		public byte Id => Constants.PacketIds.CloseWindow;
 
 		public CloseWindowPacket(sbyte windowID) => WindowID = windowID;
 

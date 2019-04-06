@@ -5,7 +5,7 @@
 	/// </summary>
 	public struct SpawnItemPacket : IPacket
 	{
-		public byte ID => 0x15;
+		public byte Id => Constants.PacketIds.SpawnItem;
 
 		public int EntityID;
 		public short ItemID;
