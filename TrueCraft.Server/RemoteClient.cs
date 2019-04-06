@@ -120,7 +120,7 @@ namespace TrueCraft.Server
 		{
 			try
 			{
-				var path = Bootstrap.ResolvePath(Path.Combine(Directory.GetCurrentDirectory(), "players", $"{Username}.nbt"));
+				var path = Bootstrap.ResolvePath(Path.Combine("players", $"{Username}.nbt"));
 				if (_configuration.Singleplayer)
 					path = Bootstrap.ResolvePath(Path.Combine(((World.World) World).BaseDirectory, "player.nbt"));
 
@@ -152,7 +152,7 @@ namespace TrueCraft.Server
 		{
 			string path = Bootstrap.ResolvePath(_configuration.Singleplayer
 				? Bootstrap.ResolvePath(Path.Combine(((World.World) World).BaseDirectory, "player.nbt"))
-				: Bootstrap.ResolvePath(Path.Combine(Directory.GetCurrentDirectory(), "players", Username + ".nbt")));
+				: Bootstrap.ResolvePath(Path.Combine("players", Username + ".nbt")));
 
 			Directory.CreateDirectory(Path.GetDirectoryName(path));
 
