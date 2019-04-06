@@ -21,9 +21,4 @@
     <ProjectReference Include="..\externals\FNA\FNA.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Logic\Decorators\" />
-    <Folder Include="_ADDON\Decorators\" />
-  </ItemGroup>
-
 </Project>

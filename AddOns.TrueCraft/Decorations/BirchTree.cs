@@ -1,11 +1,12 @@
 ﻿using System;
+using TrueCraft.Logic;
 using TrueCraft.Logic.Blocks;
 using TrueCraft.World;
 using TrueCraft._ADDON.Blocks;
 
 namespace TrueCraft._ADDON.Decorations
 {
-	public class BalloonOakTree : Decoration
+	public class BirchTree : Decoration
 	{
 		private const int LeafRadius = 2;
 
@@ -14,8 +15,7 @@ namespace TrueCraft._ADDON.Decorations
 			if (location.X - LeafRadius < 0
 			    || location.X + LeafRadius >= Chunk.Width
 			    || location.Z - LeafRadius < 0
-			    || location.Z + LeafRadius >= Chunk.Depth
-			    || location.Y + LeafRadius >= Chunk.Height)
+			    || location.Z + LeafRadius >= Chunk.Depth)
 				return false;
 			return true;
 		}
@@ -27,9 +27,9 @@ namespace TrueCraft._ADDON.Decorations
 
 			var random = new Random(world.Seed);
 			var height = random.Next(4, 5);
-			GenerateColumn(chunk, location, height, WoodBlock.BlockId, 0x0);
+			GenerateColumn(chunk, location, height, WoodBlock.BlockId, 0x2);
 			var leafLocation = location + new Coordinates3D(0, height, 0);
-			GenerateSphere(chunk, leafLocation, LeafRadius, LeavesBlock.BlockId, 0x0);
+			GenerateVanillaLeaves(chunk, leafLocation, LeafRadius, LeavesBlock.BlockId, 0x2);
 			return true;
 		}
 	}

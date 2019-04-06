@@ -7,11 +7,11 @@ namespace TrueCraft.Logic
 {
 	public class CraftingRepository : ICraftingRepository
 	{
-		private readonly List<ICraftingRecipe> Recipes = new List<ICraftingRecipe>();
+		private readonly List<ICraftingRecipe> _recipes = new List<ICraftingRecipe>();
 
 		public ICraftingRecipe GetRecipe(IWindowArea craftingArea)
 		{
-			foreach (var r in Recipes)
+			foreach (var r in _recipes)
 				if (MatchRecipe(r, craftingArea))
 					return r;
 			return null;
@@ -37,7 +37,7 @@ namespace TrueCraft.Logic
 
 		public void RegisterRecipe(ICraftingRecipe recipe)
 		{
-			Recipes.Add(recipe);
+			_recipes.Add(recipe);
 		}
 
 		public void DiscoverRecipes()
