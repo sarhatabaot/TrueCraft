@@ -2,8 +2,9 @@ using System;
 using TrueCraft.Logic;
 using TrueCraft.Networking;
 using TrueCraft.World;
+using TrueCraft._ADDON.Blocks;
 
-namespace TrueCraft._ADDON.Blocks
+namespace TrueCraft.Blocks
 {
 	public class JackoLanternBlock : BlockProvider, ICraftingRecipe
 	{

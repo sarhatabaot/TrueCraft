@@ -1,7 +1,8 @@
 using System;
 using TrueCraft.Logic;
+using TrueCraft._ADDON.Blocks;
 
-namespace TrueCraft._ADDON.Blocks
+namespace TrueCraft.Blocks
 {
 	public class WoodenStairsBlock : StairsBlock, ICraftingRecipe, IBurnableItem
 	{
